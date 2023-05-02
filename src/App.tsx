@@ -6,21 +6,23 @@ import { Auth } from './pages/auth';
 import { Analytics } from './pages/analytics';
 import { Products } from './pages/products';
 import { Showroom } from './pages/showroom';
-import { Manage } from './pages/manage';
-import { Signup } from './pages/signup';
+import { Manage } from "./pages/manage";
+import { Signup } from "./pages/signup";
+import EditorEngine from "./EditorEngine";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element = {<Dashboard />} />
-          <Route path="/auth" element = {<Auth />} />
-          <Route path="/analytics" element = {<Analytics />} />
-          <Route path="/products" element = {<Products/>} />
-          <Route path="/showroom" element = {<Showroom/>} />
-          <Route path="/manage" element = {<Manage/>} />
-          <Route path="/register" element = {<Signup/>} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/showroom" element={<Showroom />} />
+          <Route path="/manage" element={<Manage />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/editor" element={<EditorEngine />} />
         </Routes>
       </Router>
     </div>
