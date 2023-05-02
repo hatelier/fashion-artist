@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  background-color: #000000;
 }
 
 .App-logo {
@@ -36,3 +36,320 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+  font-size: 25px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+img {
+  width: 400px;
+}
+
+p {
+  max-width: 400px;
+  font-size: 12px;
+}
+/* Start login page */
+.logo {
+  position: relative;
+}
+
+.auth-container {
+  position: relative;
+  bottom: 50px;
+}
+.auth {
+  display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+    height: 100vh;
+    width: 98vw;
+    align-items: center;
+    justify-content: center;
+    
+}
+.logo-container {
+  position: relative;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.login-container {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  margin-left: 40px;
+}
+
+.image-container {
+  position: relative;
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  margin-left: 460px;
+  height: 400px;
+  width: 600px;
+  bottom: 150px;
+}
+.image-container img {
+  width: 700px;
+  height: 700px;
+}
+/* Start login page form */
+.form {
+  height: 400px;
+  width: 350px;
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  margin-top: 150px;
+  
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  color: #000000;
+}
+.title-text {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #1a202c;
+}
+
+.label {
+  color: rgb(0, 0, 0);
+  margin-bottom: 4px;
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  font-size: 1rem;
+  color: #4a5568;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.input:focus {
+  background-color: #fff;
+  box-shadow: 0 0 0 2px #cbd5e0;
+}
+
+.input:valid {
+  border: 1px solid rgb(205, 214, 205);
+}
+
+.input:invalid {
+  border: 1px solid rgba(14, 14, 14, 0.205);
+}
+
+.submit {
+  background-color: #bb3333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.forgot {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #1a202c;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.account-text {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 15px;
+}
+.to-register {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #ce3467;
+  text-decoration: underline;
+}
+/* End login page form */
+/* End login page */
+
+/* Start signup page */
+.sign {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 20px;
+  align-items: center;
+  height: 120vh;
+  width: 98vw;
+  grid-column-gap: 0;
+}
+
+.signuplogo-container {
+  grid-row: 1 / span 1;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.register-container {
+  position: relative;
+  grid-row: 2 / span 1;
+  margin-left: 100px;
+}
+
+.signupimage-cotainer {
+  grid-row: 1 / span 2;
+  height: 800px;
+  width: 600px;
+  margin-left: 250px;
+}
+.signupimage-cotainer img {
+  height: 800px;
+  width: 700px;
+}
+
+.signup {
+  position: relative;
+  height: 680px;
+  width: 500px;
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+.signup .title {
+  margin-bottom: 10px;
+}
+
+.signup .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns with equal width */
+  grid-template-rows: 1fr; /* one row */
+  gap: 1rem; /* add a gap between the columns */
+}
+.signup .name .firstname-container .input {
+  width: 90%;
+}
+.name.grid .firstname-container,
+.name.grid .lastname-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+.signup .grid .firstname-container input,
+.signup .grid .lastname-container input {
+  width: 80%;
+}
+.signup .input {
+  width: 90%;
+}
+/* Style the dropdown */
+.myDropdown {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 95%;
+  font-size: 1rem;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.myDropdown:focus {
+  outline: none;
+}
+
+.myDropdown option {
+  background-color: #fff;
+  color: #000;
+}
+.myDropdown option:hover {
+  color: white;
+}
+
+.signup .grid .companyname-container .input {
+  width: 80%;
+  height: 25%;
+}
+
+/* Style the labels */
+.label {
+  font-weight: bold;
+  margin-bottom: 8px; /* add more space below label */
+  display: block; /* make label a block element to take up full width */
+}
+
+/* Style the inputs */
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Style the dropdown on hover */
+#myDropdown:hover {
+  background-color: transparent;
+  border-color: #ccc;
+}
+
+.signup .signup-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* End sign up page */
