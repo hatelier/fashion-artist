@@ -12,7 +12,7 @@ const PreviewSection = (props: BasicControls) => {
         ...props.style,
       }}
     >
-      <CreateBanner />
+      {/*<CreateBanner />*/}
       <ModelPreview />
     </div>
   );
