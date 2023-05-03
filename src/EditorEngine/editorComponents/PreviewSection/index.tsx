@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.scss";
 import { BasicControls } from "../../PropsControls";
+import CreateBanner from "./Presets/CreateBanner";
+import ModelPreview from "./Presets/ModelPreview";
 
 const PreviewSection = (props: BasicControls) => {
   return (
@@ -10,7 +12,8 @@ const PreviewSection = (props: BasicControls) => {
         ...props.style,
       }}
     >
-      this here is the right section
+      <CreateBanner />
+      <ModelPreview />
     </div>
   );
 };

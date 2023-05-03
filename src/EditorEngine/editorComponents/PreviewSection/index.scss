@@ -1,3 +1,17 @@
+.createBanner {
+  grid-area: banner;
+}
+
+;
+.modelPreview {
+  grid-area: preview
+}
+
+;
 .previewSection {
-  background: red;
+  background: #ffffff;
+  display: grid;
+  grid-template-areas:
+  'banner'
+  'preview';
 }
