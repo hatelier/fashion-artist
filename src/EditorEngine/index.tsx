@@ -11,11 +11,21 @@ export interface ContextInterface {
 
 export const ContextParams = createContext<ContextInterface>({
   file: null,
+  dimensions: {
+    x: 0,
+    y: 0,
+    z: 0,
+  },
 });
 const EditorEngine = () => {
   //   here is the main created context
   const [defaultContext, setDefContext] = useState<ContextInterface>({
     file: null,
+    dimensions: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
   });
   return (
       <ContextParams.Provider value={defaultContext}>

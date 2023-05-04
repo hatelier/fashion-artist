@@ -1,23 +1,25 @@
 // @ts-nocheck
-import React from "react";
+import React, { useContext } from "react";
 import "./index.scss";
 import { FileUploader } from "react-drag-drop-files";
 
 const SectionOne = (props) => {
+  const { dimensions } = useContext(props.context);
   return (
     <div className={"sectionOne"}>
-      <div className={"assetBox"}>Select an asset or drop here</div>
       <FileUploader
         handleChange={(files: any) => {
           console.log(files);
+          const url = URL.createObjectURL(files);
           props.settings((state) => {
             return {
-              file: files,
+              file: url,
             };
           });
         }}
         name="file"
         types={["GLB"]}
+        width={50}
       />
       <input type={"file"} className={"uploadButton"} />
       <h3>Product Specification</h3>
@@ -60,12 +62,24 @@ const SectionOne = (props) => {
 
       {/*  dimensions detection center*/}
       <div className={"dimensionsDiv"}>
-        <h4>Dimensions:</h4>&nbsp;
-        <input type={"text"} placeholder={"W"} />
+        <h4>Dimensions(1%):</h4>&nbsp;
+        <input
+          type={"text"}
+          placeholder={"W"}
+          value={dimensions ? dimensions.x : 0}
+        />
         &nbsp;x&nbsp;
-        <input type={"text"} placeholder={"L"} />
+        <input
+          type={"text"}
+          placeholder={"L"}
+          value={dimensions ? dimensions.y : 0}
+        />
         &nbsp;x&nbsp;
-        <input type={"text"} placeholder={"H"} />
+        <input
+          type={"text"}
+          placeholder={"H"}
+          value={dimensions ? dimensions.z : 0}
+        />
         &nbsp;
       </div>
     </div>

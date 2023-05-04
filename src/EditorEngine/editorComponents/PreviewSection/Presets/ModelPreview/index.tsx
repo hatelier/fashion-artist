@@ -12,7 +12,7 @@ import {
 import UploadModel from "../UploadModel";
 
 const ModelPreview = (props) => {
-  const { file } = useContext(props.context);
+  const { file, dimensions } = useContext(props.context);
   useEffect(() => {
     console.log("filelog", file);
   }, [file]);
@@ -35,8 +35,8 @@ const ModelPreview = (props) => {
       <PresentationControls global rotation={[Math.PI / 8, Math.PI / 4, 0]}>
         <Stage environment={"city"} intensity={0.6} castShadow={false}>
           <Suspense fallback={null}>
-            <UploadModel />
-            <OrbitControls enableZoom={false} zoomSpeed={0.8} />
+            {file && <UploadModel model={file} settings={props.settings} />}
+            <OrbitControls enableZoom={true} zoomSpeed={0.8} />
           </Suspense>
         </Stage>
         <mesh rotation={[-Math.PI / 2, 0, 0]}>
