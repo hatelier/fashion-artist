@@ -25,10 +25,6 @@ const SetupControls = (props: BasicControls) => {
                 })
             }
             <hr/>
-            {currentTab}
-            <button onClick={() => dispatch(updateCurrConfigTab(32))}>
-                Click here
-            </button>
             <SectionOne context={props.context} settings={props.settings}/>
         </div>
     );

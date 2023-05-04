@@ -1,16 +1,37 @@
 // @ts-nocheck
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import "./index.scss";
-import { FileUploader } from "react-drag-drop-files";
+import {FileUploader} from "react-drag-drop-files";
+import {useDispatch} from "react-redux";
+import {
+  updateModelBlob,
+  updateProductDetails,
+} from "../../../../../redux/editorManagement";
 
 const SectionOne = (props) => {
   const { dimensions } = useContext(props.context);
+  const dispatch = useDispatch();
   return (
-    <div className={"sectionOne"}>
+    <form
+      className={"sectionOne"}
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch(
+          updateProductDetails({
+            productName: e.target.productName.value,
+            brandName: e.target.brandName.value,
+            previewImageBlog: " e.target.prevImage.files[0]",
+            selectedPipeline: e.target.pipeline.value,
+            tags: e.target.tags.value,
+          })
+        );
+      }}
+    >
       <FileUploader
         handleChange={(files: any) => {
-          console.log(files);
+          dispatch(updateModelBlob(files));
           const url = URL.createObjectURL(files);
+          console.log(url);
           props.settings((state) => {
             return {
               file: url,
@@ -25,25 +46,37 @@ const SectionOne = (props) => {
       <h3>Product Specification</h3>
       <div>
         <label htmlFor={"productName"}>Product Name</label>
-        <input id={"productName"} className={"productName"} />
+        <input
+          id={"productName"}
+          className={"productName"}
+          name={"productName"}
+        />
       </div>
       <br />
       <div>
         <label htmlFor={"brandName"}>Brand Name</label>
         <br />
-        <input id={"brandName"} className={"brandName"} />
+        <input id={"brandName"} className={"brandName"} name={"brandName"} />
       </div>
       <br />
       <div>
         <label htmlFor={"prevImage"}>Preview Image</label>
         <br />
-        <input id={"prevImage"} className={"prevImage"} />
+        <input
+          id={"prevImage"}
+          className={"prevImage"}
+          type={"file"}
+          name={"prevImage"}
+        />
       </div>
       <br />
       <div>
         <label htmlFor={"selPipeline"}>Select a Pipeline</label>
         <br />
         <select id={"selPipeline"} className={"selPipeline"} name="pipeline">
+          <option selected disabled>
+            Select your pipeline
+          </option>
           <option value="blender">Blender</option>
           <option value="maya">Maya</option>
         </select>
@@ -54,7 +87,10 @@ const SectionOne = (props) => {
       <div>
         <label htmlFor={"selTag"}>Tags</label>
         <br />
-        <select id={"selTag"} className={"selTag"} name="pipeline">
+        <select id={"selTag"} className={"selTag"} name="tags">
+          <option selected disabled>
+            Select your tags
+          </option>
           <option value="blender">Blender</option>
           <option value="maya">Maya</option>
         </select>
@@ -82,7 +118,8 @@ const SectionOne = (props) => {
         />
         &nbsp;
       </div>
-    </div>
+      <button type={"submit"}>Save Current State</button>
+    </form>
   );
 };
 export default SectionOne;
