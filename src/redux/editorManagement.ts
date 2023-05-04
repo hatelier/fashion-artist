@@ -15,11 +15,11 @@ export const editorManagement = createSlice({
       state.modelBlob = action.payload;
     },
     updateProductDetails: (state, action) => {
-      console.log("payload", action.payload);
-      return {
-        ...state,
-        ...action.payload,
-      };
+      state.productName = action.payload.productName;
+      state.brandName = action.payload.brandName;
+      state.previewImageBlog = action.payload.previewImageBlog;
+      state.selectedPipeline = action.payload.selectedPipeline;
+      state.tags = action.payload.tags;
     },
   },
 });

@@ -1,15 +1,17 @@
 // @ts-nocheck
-import React, {Suspense, useContext, useEffect} from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import "./index.scss";
-import {Canvas} from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
-  Environment, Grid,
+  Environment,
+  Grid,
   MeshReflectorMaterial,
   OrbitControls,
   PresentationControls,
   Stage,
 } from "@react-three/drei";
 import UploadModel from "../UploadModel";
+import { useSelector } from "react-redux";
 
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);

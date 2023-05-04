@@ -11,6 +11,20 @@ import { Signup } from "./pages/signup";
 import EditorEngine from "./EditorEngine";
 
 function App() {
+  async function requestStorageQuota() {
+    if (navigator.storage && navigator.storage.persist) {
+      const isPersisted = await navigator.storage.persist();
+      if (isPersisted) {
+        console.log("Storage is persisted and won't be cleared by the browser");
+      } else {
+        console.log("Storage may be cleared by the browser");
+      }
+    } else {
+      console.log("Storage persist API not supported");
+    }
+  }
+
+  requestStorageQuota();
   return (
     <div className="App">
       <Router>

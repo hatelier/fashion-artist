@@ -6,10 +6,10 @@ import {SimplifyModifier} from "three/examples/jsm/modifiers/SimplifyModifier";
 import {useGesture} from "react-use-gesture";
 import {useGLTF} from "@react-three/drei";
 import * as THREE from "three";
+import {useSelector} from "react-redux";
 
 const UploadModel = (props) => {
     const {scene} = useGLTF(props.model);
-    const [gltf, setGltf] = useState(null);
     useEffect(() => {
         let materialList = [];
         scene.traverse((obj) => {
@@ -36,16 +36,16 @@ const UploadModel = (props) => {
             };
         });
     }, []);
-  return (
-    <>
-      (
-      <primitive
-        object={scene}
-        scale={[0.01, 0.01, 0.01]}
-        position={[0, 0, 0]}
-      />
-      )
-    </>
+    return (
+        <>
+            (
+            <primitive
+                object={scene}
+                scale={[0.01, 0.01, 0.01]}
+                position={[0, 0, 0]}
+            />
+            )
+        </>
   );
 };
 export default UploadModel;

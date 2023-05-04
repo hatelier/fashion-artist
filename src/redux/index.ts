@@ -9,7 +9,8 @@ import {PersistConfig} from "redux-persist/es/types";
 //all redux files
 import routeManagement from "./routeManagement";
 import editorManagement from "./editorManagement";
-import {glbToBase64} from "../utils";
+import { glbToBase64 } from "../utils";
+import * as localforage from "localforage";
 
 const reducers = combineReducers({
   routeManagement,
@@ -18,39 +19,35 @@ const reducers = combineReducers({
 
 // a middleware to save binary files.
 const glbTransform = createTransform(
-    (inboundState, key) => {
-      if (key === "editorManagement" && inboundState.modelBlob) {
-        console.log("Inbound state:", {
-          ...inboundState,
-          modelBlob: glbToBase64(inboundState.modelBlob),
-        });
-        return {
-          ...inboundState,
-          modelBlob: glbToBase64(inboundState.modelBlob),
-        };
-      }
-      return inboundState;
-    },
-    (outboundState, key) => {
-      if (key === "editorManagement" && outboundState.modelBlob) {
-        console.log("Outbound state:", inboundState);
-        return {
-          ...outboundState,
-          modelBlob: new Blob([atob(outboundState.modelBlob)], {
-            type: "model/gltf-binary",
-          }),
-        };
-      }
-      return outboundState;
+  async (inboundState, key) => {
+    if (key === "editorManagement" && inboundState.modelBlob) {
+      const file = inboundState.modelBlob;
+      return {
+        ...inboundState,
+        modelBlob: file,
+      };
     }
+    return inboundState;
+  },
+  (outboundState, key) => {
+    if (key === "editorManagement" && outboundState.modelBlob) {
+      const file = outboundState.modelBlob;
+      return {
+        ...outboundState,
+        modelBlob: file,
+      };
+    }
+    return outboundState;
+  }
 );
+
 
 //redux persist configuration
 const persistConfig: PersistConfig<any> = {
   key: "root",
-  storage,
+  storage: localforage,
   whitelist: ["routeManagement", "editorManagement"],
-  transforms: [glbTransform],
+  // transforms: [glbTransform],
   timeout: null,
 };
 

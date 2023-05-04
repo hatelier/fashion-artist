@@ -2,15 +2,19 @@
 import React, {useContext} from "react";
 import "./index.scss";
 import {FileUploader} from "react-drag-drop-files";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
+  editorManagement,
   updateModelBlob,
   updateProductDetails,
 } from "../../../../../redux/editorManagement";
+import {glbToBase64} from "../../../../../utils";
 
 const SectionOne = (props) => {
-  const { dimensions } = useContext(props.context);
+  const {dimensions} = useContext(props.context);
   const dispatch = useDispatch();
+  const tempestData = useSelector((state) => state.routeManagement.currConfigTab);
+  console.log("tempestData", tempestData);
   return (
     <form
       className={"sectionOne"}
@@ -28,10 +32,9 @@ const SectionOne = (props) => {
       }}
     >
       <FileUploader
-        handleChange={(files: any) => {
-          dispatch(updateModelBlob(files));
+        handleChange={async (files: any) => {
+          // dispatch(updateModelBlob(files));
           const url = URL.createObjectURL(files);
-          console.log(url);
           props.settings((state) => {
             return {
               file: url,
