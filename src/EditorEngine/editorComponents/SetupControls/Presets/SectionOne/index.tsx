@@ -1,11 +1,25 @@
+// @ts-nocheck
 import React from "react";
 import "./index.scss";
+import { FileUploader } from "react-drag-drop-files";
 
-const SectionOne = () => {
+const SectionOne = (props) => {
   return (
     <div className={"sectionOne"}>
       <div className={"assetBox"}>Select an asset or drop here</div>
-      <button>UPLOAD ASSET</button>
+      <FileUploader
+        handleChange={(files: any) => {
+          console.log(files);
+          props.settings((state) => {
+            return {
+              file: files,
+            };
+          });
+        }}
+        name="file"
+        types={["GLB"]}
+      />
+      <input type={"file"} className={"uploadButton"} />
       <h3>Product Specification</h3>
       <div>
         <label htmlFor={"productName"}>Product Name</label>
