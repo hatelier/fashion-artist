@@ -1,5 +1,11 @@
 // @ts-nocheck
-import React, { Suspense, useContext, useEffect } from "react";
+import React, {
+  Suspense,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./index.scss";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -15,9 +21,7 @@ import { useSelector } from "react-redux";
 
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
-  useEffect(() => {
-    console.log("filelog", file);
-  }, [file]);
+
   return (
     <Canvas
       dpr={[1, 2]}
@@ -37,7 +41,10 @@ const ModelPreview = (props) => {
       <PresentationControls global rotation={[Math.PI / 8, Math.PI / 4, 0]}>
         <Stage environment={"city"} intensity={0.6} castShadow={false}>
           <Suspense fallback={null}>
-            {file && <UploadModel model={file} settings={props.settings} />}
+            {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
+
+            <UploadModel model={file} settings={props.settings} />
+
             <OrbitControls enableZoom={true} zoomSpeed={0.8} />
           </Suspense>
         </Stage>

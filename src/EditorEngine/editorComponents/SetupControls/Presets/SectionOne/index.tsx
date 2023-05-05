@@ -14,7 +14,6 @@ const SectionOne = (props) => {
   const {dimensions} = useContext(props.context);
   const dispatch = useDispatch();
   const tempestData = useSelector((state) => state.routeManagement.currConfigTab);
-  console.log("tempestData", tempestData);
   return (
     <form
       className={"sectionOne"}

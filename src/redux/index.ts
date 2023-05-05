@@ -9,12 +9,14 @@ import {PersistConfig} from "redux-persist/es/types";
 //all redux files
 import routeManagement from "./routeManagement";
 import editorManagement from "./editorManagement";
+import materialControl from "./materialControl";
 import { glbToBase64 } from "../utils";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
   routeManagement,
   editorManagement,
+  materialControl,
 });
 
 // a middleware to save binary files.
