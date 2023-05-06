@@ -16,6 +16,7 @@ export const ContextParams = createContext<ContextInterface>({
     y: 0,
     z: 0,
   },
+  modelObjects: [],
 });
 const EditorEngine = () => {
   //   here is the main created context
@@ -26,7 +27,9 @@ const EditorEngine = () => {
       y: 0,
       z: 0,
     },
+    modelObjects: [],
   });
+
   return (
       <ContextParams.Provider value={defaultContext}>
         <div className={"editorEngine"}>

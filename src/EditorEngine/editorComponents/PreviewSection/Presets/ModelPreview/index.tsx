@@ -26,7 +26,7 @@ const ModelPreview = (props) => {
     <Canvas
       dpr={[1, 2]}
       shadows
-      frameloop={"demand"}
+      frameloop={"always"}
       camera={{
         fov: 50,
         position: [0, 0, 10],

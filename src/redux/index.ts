@@ -10,6 +10,7 @@ import {PersistConfig} from "redux-persist/es/types";
 import routeManagement from "./routeManagement";
 import editorManagement from "./editorManagement";
 import materialControl from "./materialControl";
+import renderSlice from "./triggerRedux";
 import { glbToBase64 } from "../utils";
 import * as localforage from "localforage";
 
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   routeManagement,
   editorManagement,
   materialControl,
+  renderSlice,
 });
 
 // a middleware to save binary files.
