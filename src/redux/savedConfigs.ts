@@ -21,6 +21,17 @@ const savedConfigs = createSlice({
     setFirstLoad: (state, action) => {
       state.firstLoad = action.payload;
     },
+    toggleVisiblityPresets: (state, action) => {
+      const { presetName, matName, requiredState } = action.payload;
+      state.presets.map((preset: any) => {
+        if (preset.name === presetName) {
+          let materialIndex = preset.materialList.indexOf(matName);
+          preset.visibility[materialIndex] = requiredState;
+          return preset;
+        }
+        return preset;
+      });
+    },
   },
 });
 export const {
@@ -28,5 +39,6 @@ export const {
   updateUnUsedObjects,
   massUpdatePresets,
   setFirstLoad,
+  toggleVisiblityPresets,
 } = savedConfigs.actions;
 export default savedConfigs.reducer;

@@ -5,11 +5,12 @@ import { MaterialControlsProps } from "../../../../PropsControls";
 import {
   massUpdatePresets,
   setFirstLoad,
+  toggleVisiblityPresets,
   updatePresets,
   updateUnUsedObjects,
 } from "../../../../../redux/savedConfigs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
@@ -21,6 +22,23 @@ const SectionThree = () => {
   const [currentPreset, setCurrentPreset] = useState("");
   const [toggleAdd, setToggleAdd] = useState(false);
   const dispatch = useDispatch();
+
+  //this here is a sophisticated loading mechanism for the visibility factors
+  useEffect(() => {
+    if (materialArray.length && presets.length) {
+      presets.map((prVal, index) => {
+        console.log(prVal);
+        prVal.materialList.map((matName, matIndex) => {
+          //now toggle the visibility
+          materialArray.map((modMaterial, modIndex) => {
+            if (modMaterial.name === matName) {
+              modMaterial.visible = prVal.visibility[matIndex];
+            }
+          });
+        });
+      });
+    }
+  }, [materialArray]);
 
   useEffect(() => {
     if (firstLoad && materialArray.length) {
@@ -155,7 +173,7 @@ const SectionThree = () => {
                 </button>
               </div>
               <div>
-                {preset.materialList.map((matVal) => {
+                {preset.materialList.map((matVal, matInx) => {
                   return (
                     <div
                       style={{
@@ -167,8 +185,23 @@ const SectionThree = () => {
                     >
                       <p>{matVal}</p>
                       <FontAwesomeIcon
-                        icon={faEye}
+                        icon={preset.visibility[matInx] ? faEye : faEyeSlash}
                         style={{ fontSize: "14px", color: "darkgrey" }}
+                        onClick={() => {
+                          materialArray.map((matArr, arrIndex) => {
+                            if (matArr.name === matVal) {
+                              matArr.visible = !preset.visibility[matInx];
+                            }
+                          });
+                          //toggle the visibility across the component phase
+                          dispatch(
+                            toggleVisiblityPresets({
+                              presetName: preset.name,
+                              matName: matVal,
+                              requiredState: !preset.visibility[matInx],
+                            })
+                          );
+                        }}
                       />
                     </div>
                   );
