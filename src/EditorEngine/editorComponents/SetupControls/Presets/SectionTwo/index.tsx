@@ -42,6 +42,7 @@ const SectionTwo = () => {
                       materialList[indexs].material = new MeshStandardMaterial({
                         color: vls,
                         side: THREE.DoubleSide,
+                        name: `${materialList[indexs].name}${vls}`,
                       });
                     }}
                   >

@@ -1,4 +1,105 @@
 .sectionOne {
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+  font-family: NHreg;
+
+  .DupDelDiv {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+  }
+
+  .dimenClass {
+    width: 38px;
+    height: 30px;
+    padding: 0;
+    background: #F7F7F7;
+    border-radius: 5px;
+    text-align: center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+  }
+
+  .selPipeline {
+    height: 27px;
+    margin-top: 10px;
+    width: 100%;
+    background: #F7F7F7;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
+
+  .prevImageDev {
+    margin-top: 10px;
+    height: 64px;
+    background: #F7F7F7;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    width: 74px;
+  }
+
+  .productName {
+    height: 27px;
+    width: 100%;
+    background: #F7F7F7;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+  }
+
+  .prodNameTitle {
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    margin-top: 20px;
+  }
+
+  .productTitle {
+    font-family: NHmed;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin-top: 25px;
+  }
+
+  .uploadAsset {
+    font-family: NHmed;
+    height: 38px;
+    background: #E70A4E;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 20px;
+    appearance: none;
+    border: none;
+  }
+
+  .uploadBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    height: 87px;
+    justify-content: center;
+    border: 0.5px dashed #D6D6D6;
+    border-radius: 8px;
+    margin-top: 20px;
+
+    img {
+      width: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
   .assetBox {
     height: 140px;
     background: lightgrey;
@@ -7,12 +108,6 @@
   .dimensionsDiv {
     display: flex;
     align-items: center;
-
-    input {
-      width: 15px;
-      height: 13px;
-      padding: 5px;
-      font-size: 11px;
-    }
+    margin-top: 20px;
   }
 }

@@ -1,25 +1,26 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 @font-face {
-    font-family: "NHaasGroteskBold";
-    src: local("NHaasGroteskBold"),
+    font-family: "NHbold";
+    src: local("NHbold"),
     url("./fonts/NHaasGrotesk/NHaasGrotesk-Bold.ttf") format("truetype");
     font-weight: bold;
 }
 
 @font-face {
-    font-family: "NHaasGroteskMedium";
-    src: local("NHaasGroteskMedium"),
+    font-family: "NHmed";
+    src: local("NHmed"),
     url("./fonts/NHaasGrotesk/NHaasGrotesk-Medium.ttf") format("truetype");
     font-weight: 500;
 }
 
 @font-face {
-    font-family: "NHaasGroteskRegular";
-    src: local("NHaasGroteskRegular"),
+    font-family: "NHreg";
+    src: local("NHreg"),
     url("./fonts/NHaasGrotesk/NHaasGrotesk-Regular.ttf") format("truetype");
     font-weight: normal;
 }
