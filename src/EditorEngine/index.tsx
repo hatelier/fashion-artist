@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {createContext, useState} from "react";
+import React, { createContext, useState } from "react";
 import "./index.scss";
 import Banner from "./editorComponents/Banner";
 import SetupControls from "./editorComponents/SetupControls";
@@ -31,23 +31,23 @@ const EditorEngine = () => {
   });
 
   return (
-      <ContextParams.Provider value={defaultContext}>
-        <div className={"editorEngine"}>
-          <Banner/>
-          <div className={"editorSection"}>
-            <SetupControls
-                style={{width: "15vw", height: "calc(100vh - 70px)"}}
-                context={ContextParams}
-                settings={setDefContext}
-            />
-            <PreviewSection
-                style={{width: "85vw"}}
-                context={ContextParams}
-                settings={setDefContext}
-            />
-          </div>
+    <ContextParams.Provider value={defaultContext}>
+      <div className={"editorEngine"}>
+        <Banner />
+        <div className={"editorSection"}>
+          <SetupControls
+            style={{ width: "15vw", height: "calc(100vh - 50px)" }}
+            context={ContextParams}
+            settings={setDefContext}
+          />
+          <PreviewSection
+            style={{ width: "85vw" }}
+            context={ContextParams}
+            settings={setDefContext}
+          />
         </div>
-      </ContextParams.Provider>
+      </div>
+    </ContextParams.Provider>
   );
 };
 export default EditorEngine;

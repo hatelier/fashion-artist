@@ -1,4 +1,22 @@
 .setupControls {
   background: #ffffff;
   overflow-y: scroll;
+  width: 100%;
+
+  .buttonControl {
+    display: flex;
+    height: 45px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 5px;
+    border-bottom: 1px solid #DCDCDC;;
+
+    button {
+      background: none;
+      border: none;
+      width: 31px;
+      height: 31px;
+    }
+  }
+
 }

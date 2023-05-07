@@ -1,19 +1,32 @@
 // @ts-nocheck
-import React, { Suspense, useContext } from "react";
+//modelPreview/index.tsx
+import React, {Suspense, useContext,} from "react";
 import "./index.scss";
-import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  PerformanceMonitor,
-  PresentationControls,
-  Stage,
-} from "@react-three/drei";
+import {Canvas} from "@react-three/fiber";
+import {OrbitControls, PerformanceMonitor, PresentationControls, Stage,} from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import { Perf } from "r3f-perf";
+import {Perf} from "r3f-perf";
+import {useSelector} from "react-redux";
 
 const ModelPreview = (props) => {
-  const { file, dimensions } = useContext(props.context);
-
+  const {file, dimensions} = useContext(props.context);
+  const cameraPosition = useSelector(
+      (state) => state.materialControl.cameraPosition
+  );
+  const AmbientLightComponent = () => {
+    const ambientLight = useSelector(
+        (state) => state.materialControl.ambientLight
+    );
+    const directionalLight = useSelector(
+        (state) => state.materialControl.directionalLight
+    );
+    return (
+        <>
+          <ambientLight intensity={ambientLight}/>
+          <directionalLight position={[10, 10, 5]} intensity={directionalLight}/>
+        </>
+    );
+  };
   return (
     <div className={"canvas-container"}>
       <Canvas
@@ -22,12 +35,11 @@ const ModelPreview = (props) => {
         frameloop={"always"}
         camera={{
           fov: 50,
-          position: [0, 0, 13],
+          position: cameraPosition,
           zoom: 4,
         }}
       >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <AmbientLightComponent />
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />
         <color attach="background" args={["#f0f0f0"]} />

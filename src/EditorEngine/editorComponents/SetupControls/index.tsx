@@ -7,12 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrConfigTab } from "../../../redux/routeManagement";
 import SectionTwo from "./Presets/SectionTwo";
 import SectionThree from "./Presets/SectionThree";
+import SectionFour from "./Presets/SectionFour";
+
+//image imports
+import Image1 from "../../../assets/svgs/file (1).svg";
+import Image2 from "../../../assets/svgs/dashboard.svg";
+import Image3 from "../../../assets/svgs/dashboard-1.svg";
+import Image4 from "../../../assets/svgs/cube 1.svg";
+import Image5 from "../../../assets/svgs/note.svg";
+import Image6 from "../../../assets/svgs/play-button-arrowhead 1.svg";
+import Image7 from "../../../assets/svgs/download.svg";
 
 const SetupControls = (props: BasicControls) => {
   const currentTab = useSelector(
     (state: any) => state.routeManagement.currConfigTab
   );
   const dispatch = useDispatch();
+  const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
   return (
     <div
       className={"setupControls"}
@@ -20,18 +31,19 @@ const SetupControls = (props: BasicControls) => {
         ...props.style,
       }}
     >
-      {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
-        return (
-          <button
-            onClick={() => {
-              dispatch(updateCurrConfigTab(vls));
-            }}
-          >
-            {vls}
-          </button>
-        );
-      })}
-      <hr />
+      <div className={"buttonControl"}>
+        {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
+          return (
+            <button
+              onClick={() => {
+                dispatch(updateCurrConfigTab(vls));
+              }}
+            >
+              <img src={images[index]} />
+            </button>
+          );
+        })}
+      </div>
       <div style={{ display: currentTab === 0 ? "" : "none" }}>
         <SectionOne context={props.context} settings={props.settings} />
       </div>
@@ -40,6 +52,9 @@ const SetupControls = (props: BasicControls) => {
       </div>
       <div style={{ display: currentTab === 2 ? "" : "none" }}>
         <SectionThree />
+      </div>
+      <div style={{ display: currentTab === 3 ? "" : "none" }}>
+        <SectionFour />
       </div>
     </div>
   );

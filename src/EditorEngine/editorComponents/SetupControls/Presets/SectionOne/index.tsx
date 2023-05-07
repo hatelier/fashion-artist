@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React from "react";
 import "./index.scss";
-import { FileUploader } from "react-drag-drop-files";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProductDetails } from "../../../../../redux/editorManagement";
+import UploadImage from "../../../../../assets/svgs/upload (1) 1.svg";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -26,24 +26,32 @@ const SectionOne = (props) => {
         );
       }}
     >
-      <FileUploader
-        handleChange={async (files: any) => {
-          // dispatch(updateModelBlob(files));
-          const url = URL.createObjectURL(files);
-          props.settings((state) => {
-            return {
-              file: url,
-            };
-          });
-        }}
-        name="file"
-        types={["GLB"]}
-        width={50}
-      />
-      <input type={"file"} className={"uploadButton"} />
-      <h3>Product Specification</h3>
+      <div className={"uploadBox"}>
+        <img src={UploadImage} />
+        <p>Select an asset or drop here</p>
+      </div>
+      <button className={"uploadAsset"}>UPLOAD ASSET</button>
+
+      {/*enable this for upload*/}
+      {/*<FileUploader*/}
+      {/*  handleChange={async (files: any) => {*/}
+      {/*    // dispatch(updateModelBlob(files));*/}
+      {/*    const url = URL.createObjectURL(files);*/}
+      {/*    props.settings((state) => {*/}
+      {/*      return {*/}
+      {/*        file: url,*/}
+      {/*      };*/}
+      {/*    });*/}
+      {/*  }}*/}
+      {/*  name="file"*/}
+      {/*  types={["GLB"]}*/}
+      {/*  width={50}*/}
+      {/*/>*/}
+      {/*<input type={"file"} className={"uploadButton"} />*/}
+
+      <p className={"productTitle"}>Product Specification</p>
       <div>
-        <label htmlFor={"productName"}>Product Name</label>
+        <p className={"prodNameTitle"}>Product Name</p>
         <input
           id={"productName"}
           className={"productName"}
@@ -52,28 +60,29 @@ const SectionOne = (props) => {
       </div>
       <br />
       <div>
-        <label htmlFor={"brandName"}>Brand Name</label>
-        <br />
-        <input id={"brandName"} className={"brandName"} name={"brandName"} />
+        <p className={"prodNameTitle"}>Brand Name</p>
+        <input id={"brandName"} className={"productName"} name={"brandName"} />
       </div>
       <br />
       <div>
-        <label htmlFor={"prevImage"}>Preview Image</label>
-        <br />
-        <input
-          id={"prevImage"}
-          className={"prevImage"}
-          type={"file"}
-          name={"prevImage"}
-        />
+        <p className={"prodNameTitle"}>Preview Image</p>
+
+        <div className={"prevImageDev"}></div>
+
+        {/*add this code later*/}
+        {/*<input*/}
+        {/*    id={"prevImage"}*/}
+        {/*    className={"prevImage"}*/}
+        {/*    type={"file"}*/}
+        {/*    name={"prevImage"}*/}
+        {/*/>*/}
       </div>
       <br />
       <div>
-        <label htmlFor={"selPipeline"}>Select a Pipeline</label>
-        <br />
+        <p className={"prodNameTitle"}>Select a Pipeline</p>
         <select id={"selPipeline"} className={"selPipeline"} name="pipeline">
           <option selected disabled>
-            Select your pipeline
+            --Select--
           </option>
           <option value="blender">Blender</option>
           <option value="maya">Maya</option>
@@ -83,9 +92,8 @@ const SectionOne = (props) => {
       {/*select the required tags from the below dropdown*/}
       <br />
       <div>
-        <label htmlFor={"selTag"}>Tags</label>
-        <br />
-        <select id={"selTag"} className={"selTag"} name="tags">
+        <p className={"prodNameTitle"}>Tags</p>
+        <select id={"selTag"} className={"selPipeline"} name="tags">
           <option selected disabled>
             Select your tags
           </option>
@@ -96,27 +104,41 @@ const SectionOne = (props) => {
 
       {/*  dimensions detection center*/}
       <div className={"dimensionsDiv"}>
-        <h4>Dimensions(1%):</h4>&nbsp;
+        <p className={"prodNameTitle"} style={{ marginTop: 0 }}>
+          Dimensions:
+        </p>
+        &nbsp;
         <input
           type={"text"}
           placeholder={"W"}
+          className={"dimenClass"}
           value={materialData ? materialData.x : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"L"}
+          className={"dimenClass"}
           value={materialData ? materialData.y : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"H"}
+          className={"dimenClass"}
           value={materialData ? materialData.z : 0}
         />
         &nbsp;
       </div>
-      <button type={"submit"}>Save Current State</button>
+      {/*<button type={"submit"}>Save Current State</button>*/}
+      <div className={"DupDelDiv"}>
+        <button className={"uploadAsset"} style={{ width: "60%" }}>
+          Duplicate
+        </button>
+        <button className={"uploadAsset"} style={{ width: "40%" }}>
+          Delete
+        </button>
+      </div>
     </form>
   );
 };

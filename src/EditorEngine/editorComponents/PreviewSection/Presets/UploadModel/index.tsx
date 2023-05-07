@@ -1,13 +1,11 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
-import { useLoader, useThree } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+//uploadModel/index.tsx
+import React, {useEffect} from "react";
+import {useLoader, useThree} from "@react-three/fiber";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import { useDispatch } from "react-redux";
-import {
-  updateMaterialDimensions,
-  updateMaterialList,
-} from "../../../../../redux/materialControl";
+import {useDispatch} from "react-redux";
+import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
 
 const UploadModel = () => {
   //this has been disabled temporarily
