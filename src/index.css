@@ -15,7 +15,7 @@
     font-family: "NHmed";
     src: local("NHmed"),
     url("./fonts/NHaasGrotesk/NHaasGrotesk-Medium.ttf") format("truetype");
-    font-weight: 500;
+    font-weight: auto;
 }
 
 @font-face {

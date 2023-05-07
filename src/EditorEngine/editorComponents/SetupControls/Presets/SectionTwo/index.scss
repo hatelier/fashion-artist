@@ -1,0 +1,47 @@
+.sectionTwoDiv {
+  font-family: NHreg;
+  display: flex;
+  flex-direction: column;
+
+  .sectionTwoTitle {
+    font-family: NHmed;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+  }
+
+  .confName {
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+    font-family: NHmed;
+  }
+
+  .configHead {
+    font-family: NHmed;
+    font-size: 14px;
+    color: #000000;
+  }
+
+  .configBox {
+    height: max-content;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 12px 20px 0;
+    padding: 9px 0;
+  }
+
+  .uploadAsset {
+    font-family: NHmed;
+    height: 38px;
+    background: #E70A4E;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    appearance: none;
+    border: none;
+    margin: 20px 15px;
+  }
+
+}
