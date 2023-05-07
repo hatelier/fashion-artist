@@ -8,4 +8,7 @@ export interface BasicControls {
 export interface MaterialControlsProps {
   materialArray: [];
   materialDimensions: {};
+  cameraPosition: [];
+  ambientLight: number;
+  directionalLight: number;
 }

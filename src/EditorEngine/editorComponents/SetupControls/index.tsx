@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCurrConfigTab } from "../../../redux/routeManagement";
 import SectionTwo from "./Presets/SectionTwo";
 import SectionThree from "./Presets/SectionThree";
+import SectionFour from "./Presets/SectionFour";
 
 const SetupControls = (props: BasicControls) => {
   const currentTab = useSelector(
@@ -40,6 +41,9 @@ const SetupControls = (props: BasicControls) => {
       </div>
       <div style={{ display: currentTab === 2 ? "" : "none" }}>
         <SectionThree />
+      </div>
+      <div style={{ display: currentTab === 3 ? "" : "none" }}>
+        <SectionFour />
       </div>
     </div>
   );

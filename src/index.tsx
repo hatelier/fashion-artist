@@ -6,6 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
+//adding custom styling
+import "./fonts/NHaasGrotesk/NHaasGrotesk-Bold.ttf";
+import "./fonts/NHaasGrotesk/NHaasGrotesk-Regular.ttf";
+import "./fonts/NHaasGrotesk/NHaasGrotesk-Medium.ttf";
+
 //redux setup
 import store from "./redux";
 import { persistStore } from "redux-persist";
