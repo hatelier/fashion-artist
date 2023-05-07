@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialControlsProps } from "../../../../PropsControls";
+import "./index.scss";
+import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
+import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import {
   massUpdatePresets,
   setFirstLoad,
@@ -114,16 +117,18 @@ const SectionThree = () => {
   };
 
   return (
-    <div>
+    <div className={"sectionThreeDiv"}>
       <div
         style={{
           display: "flex",
+          alignItems: "center",
+          margin: "36px 0 6px 0",
           justifyContent: "space-between",
-          margin: "5px",
         }}
       >
-        <p>Preset controls</p>
-        <button
+        <p className={"sectionThreeTitle"}>Preset controls</p>
+        <img
+          src={AddConfig}
           onClick={() => {
             let name = window.prompt("Enter the name of the project");
             let innerObject = {
@@ -135,9 +140,8 @@ const SectionThree = () => {
             dispatch(updatePresets(innerObject));
             setToggleAdd((state) => !state);
           }}
-        >
-          Add+
-        </button>
+          style={{ width: "21.35px" }}
+        />
       </div>
       {/*here is the material selection section*/}
       {toggleAdd && (
@@ -149,28 +153,24 @@ const SectionThree = () => {
       <div>
         {presets.map((preset) => {
           return (
-            <div
-              style={{
-                border: "1px solid black",
-                margin: "4px",
-                padding: "4px",
-              }}
-            >
+            <div className={"configBox"}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
+                  margin: "0 15px 10px 15px",
+                  alignItems: "center",
                 }}
               >
-                <p>{preset.name}</p>
-                <button
+                <p className={"configHead"}>{preset.name}</p>
+                <img
                   onClick={() => {
                     setCurrentPreset(preset.name);
                     setToggleAdd((state) => !state);
                   }}
-                >
-                  +
-                </button>
+                  src={AddImage}
+                  style={{ width: "20px" }}
+                />
               </div>
               <div>
                 {preset.materialList.map((matVal, matInx) => {
@@ -179,14 +179,20 @@ const SectionThree = () => {
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
-                        margin: "5px 0",
                         alignItems: "center",
+                        cursor: "pointer",
+                        height: "22px",
+                        background: "#FFFFFF",
+                        border: "1px solid #EDEDED",
+                        borderRadius: "5px",
+                        margin: "0 15px 10px 15px",
+                        padding: "0 9px",
                       }}
                     >
-                      <p>{matVal}</p>
+                      <p className={"confName"}>{matVal}</p>
                       <FontAwesomeIcon
                         icon={preset.visibility[matInx] ? faEye : faEyeSlash}
-                        style={{ fontSize: "14px", color: "darkgrey" }}
+                        style={{ fontSize: "12px", color: "lightgrey" }}
                         onClick={() => {
                           materialArray.map((matArr, arrIndex) => {
                             if (matArr.name === matVal) {
@@ -210,6 +216,14 @@ const SectionThree = () => {
             </div>
           );
         })}
+      </div>
+      <div className={"DupDelDiv"}>
+        <button className={"uploadAsset"} style={{ width: "40%" }}>
+          Save
+        </button>
+        <button className={"uploadAsset"} style={{ width: "60%" }}>
+          Cancel
+        </button>
       </div>
     </div>
   );

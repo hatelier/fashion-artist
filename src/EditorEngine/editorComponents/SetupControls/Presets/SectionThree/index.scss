@@ -1,0 +1,53 @@
+.sectionThreeDiv {
+  font-family: NHreg;
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+
+  .uploadAsset {
+    font-family: NHmed;
+    height: 38px;
+    background: #E70A4E;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 20px;
+    appearance: none;
+    border: none;
+  }
+
+  .DupDelDiv {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+  }
+
+  .confName {
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+    font-family: NHmed;
+  }
+
+  .configHead {
+    font-family: NHmed;
+    font-size: 14px;
+    color: #000000;
+  }
+
+  .sectionThreeTitle {
+    font-family: NHmed;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+  }
+
+  .configBox {
+    height: max-content;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 12px 0;
+    padding: 9px 0;
+  }
+}

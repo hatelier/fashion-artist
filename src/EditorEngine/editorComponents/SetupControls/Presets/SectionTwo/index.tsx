@@ -87,7 +87,7 @@ const SectionTwo = () => {
                     </div>
                     <FontAwesomeIcon
                       icon={faEye}
-                      style={{ fontSize: "12px" }}
+                      style={{ fontSize: "12px", color: "lightgrey" }}
                     />
                   </div>
                 );
