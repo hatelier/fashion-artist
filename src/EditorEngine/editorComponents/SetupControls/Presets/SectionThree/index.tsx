@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MaterialControlsProps } from "../../../../PropsControls";
 import {
   massUpdatePresets,
+  setFirstLoad,
   updatePresets,
   updateUnUsedObjects,
 } from "../../../../../redux/savedConfigs";
@@ -14,16 +15,24 @@ const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
     (state: any) => state.materialControl
   );
-  const { presets, unUsedObjects } = useSelector((state) => state.savedConfigs);
+  const { presets, unUsedObjects, firstLoad } = useSelector(
+    (state) => state.savedConfigs
+  );
   const [currentPreset, setCurrentPreset] = useState("");
   const [toggleAdd, setToggleAdd] = useState(false);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    let materialNameList = [];
-    materialArray.map((vls) => {
-      materialNameList.push(vls.name);
-    });
-    dispatch(updateUnUsedObjects(materialNameList));
+    if (firstLoad && materialArray.length) {
+      console.log("fisrt trigger", firstLoad);
+
+      let materialNameList = [];
+      materialArray.map((vls) => {
+        materialNameList.push(vls.name);
+      });
+      dispatch(updateUnUsedObjects(materialNameList));
+      dispatch(setFirstLoad(false));
+    }
   }, [materialArray]);
 
   const MaterialSelection = ({ unSelectedObjects, current }) => {
@@ -112,7 +121,7 @@ const SectionThree = () => {
           Add+
         </button>
       </div>
-      ;{/*here is the material selection section*/}
+      {/*here is the material selection section*/}
       {toggleAdd && (
         <MaterialSelection
           unSelectedObjects={unUsedObjects}
@@ -169,7 +178,6 @@ const SectionThree = () => {
           );
         })}
       </div>
-      ;
     </div>
   );
 };

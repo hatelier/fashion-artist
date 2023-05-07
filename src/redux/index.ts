@@ -45,12 +45,11 @@ const glbTransform = createTransform(
   }
 );
 
-
 //redux persist configuration
 const persistConfig: PersistConfig<any> = {
   key: "root",
   storage: localforage,
-  whitelist: ["routeManagement", "editorManagement"],
+  whitelist: ["routeManagement", "editorManagement", "savedConfigs"],
   // transforms: [glbTransform],
   timeout: null,
 };

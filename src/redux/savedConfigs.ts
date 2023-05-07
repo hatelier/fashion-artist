@@ -5,6 +5,8 @@ const savedConfigs = createSlice({
   initialState: <any>{
     presets: [],
     unUsedObjects: [],
+    //check whether the material is being loaded for the first time.
+    firstLoad: true,
   },
   reducers: {
     updatePresets: (state, action) => {
@@ -16,8 +18,15 @@ const savedConfigs = createSlice({
     massUpdatePresets: (state, action) => {
       state.presets = action.payload;
     },
+    setFirstLoad: (state, action) => {
+      state.firstLoad = action.payload;
+    },
   },
 });
-export const { updatePresets, updateUnUsedObjects, massUpdatePresets } =
-  savedConfigs.actions;
+export const {
+  updatePresets,
+  updateUnUsedObjects,
+  massUpdatePresets,
+  setFirstLoad,
+} = savedConfigs.actions;
 export default savedConfigs.reducer;
