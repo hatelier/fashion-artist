@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import * as THREE from "three";
 import { MeshStandardMaterial } from "three";
 
 const SectionTwo = () => {
@@ -40,6 +41,7 @@ const SectionTwo = () => {
                     onClick={() => {
                       materialList[indexs].material = new MeshStandardMaterial({
                         color: vls,
+                        side: THREE.DoubleSide,
                       });
                     }}
                   >

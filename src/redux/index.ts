@@ -1,17 +1,16 @@
 // @ts-nocheck
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import {persistStore, persistReducer, createTransform} from "redux-persist";
-import {combineReducers} from "redux";
-import storage from "redux-persist/lib/storage";
-import {PersistConfig} from "redux-persist/es/types";
+import { createTransform, persistReducer } from "redux-persist";
+import { combineReducers } from "redux";
+import { PersistConfig } from "redux-persist/es/types";
 
 //all redux files
 import routeManagement from "./routeManagement";
 import editorManagement from "./editorManagement";
 import materialControl from "./materialControl";
 import renderSlice from "./triggerRedux";
-import { glbToBase64 } from "../utils";
+import savedConfigs from "./savedConfigs";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
@@ -19,6 +18,7 @@ const reducers = combineReducers({
   editorManagement,
   materialControl,
   renderSlice,
+  savedConfigs,
 });
 
 // a middleware to save binary files.

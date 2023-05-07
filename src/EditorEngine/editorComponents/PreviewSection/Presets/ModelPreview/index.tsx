@@ -22,7 +22,7 @@ const ModelPreview = (props) => {
         frameloop={"always"}
         camera={{
           fov: 50,
-          position: [0, 0, 10],
+          position: [0, 0, 13],
           zoom: 4,
         }}
       >
@@ -31,14 +31,23 @@ const ModelPreview = (props) => {
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />
         <color attach="background" args={["#f0f0f0"]} />
-        <PresentationControls global rotation={[Math.PI / 8, Math.PI / 4, 0]}>
+        <PresentationControls
+          global
+          rotation={[Math.PI / 8, Math.PI / 4, 0]}
+          // polar={[-0.1, Math.PI / 2]}
+        >
           <Stage environment={"city"} intensity={0.6} castShadow={false}>
             <Suspense fallback={null}>
               {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
 
               <UploadModel model={file} settings={props.settings} />
 
-              <OrbitControls enableZoom={true} zoomSpeed={0.8} />
+              <OrbitControls
+                enableZoom={true}
+                zoomSpeed={0.8}
+                panSpeed={1}
+                enableRotate={false}
+              />
             </Suspense>
           </Stage>
         </PresentationControls>

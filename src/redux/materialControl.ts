@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { MaterialControlsProps } from "../EditorEngine/PropsControls";
 
 export const materialControl = createSlice({
   name: "materialControl",
-  initialState: {
+  initialState: <MaterialControlsProps>{
     materialArray: [],
     materialDimensions: {},
   },
