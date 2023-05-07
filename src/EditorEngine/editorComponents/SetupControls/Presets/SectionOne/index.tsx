@@ -1,19 +1,15 @@
 // @ts-nocheck
-import React, {useContext} from "react";
+import React from "react";
 import "./index.scss";
-import {FileUploader} from "react-drag-drop-files";
-import {useDispatch, useSelector} from "react-redux";
-import {
-  editorManagement,
-  updateModelBlob,
-  updateProductDetails,
-} from "../../../../../redux/editorManagement";
-import {glbToBase64} from "../../../../../utils";
+import { FileUploader } from "react-drag-drop-files";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProductDetails } from "../../../../../redux/editorManagement";
 
 const SectionOne = (props) => {
-  const {dimensions} = useContext(props.context);
   const dispatch = useDispatch();
-  const tempestData = useSelector((state) => state.routeManagement.currConfigTab);
+  const materialData = useSelector(
+    (state) => state.materialControl.materialDimensions
+  );
   return (
     <form
       className={"sectionOne"}
@@ -104,19 +100,19 @@ const SectionOne = (props) => {
         <input
           type={"text"}
           placeholder={"W"}
-          value={dimensions ? dimensions.x : 0}
+          value={materialData ? materialData.x : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"L"}
-          value={dimensions ? dimensions.y : 0}
+          value={materialData ? materialData.y : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"H"}
-          value={dimensions ? dimensions.z : 0}
+          value={materialData ? materialData.z : 0}
         />
         &nbsp;
       </div>
