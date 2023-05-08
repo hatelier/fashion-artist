@@ -7,6 +7,7 @@ import {OrbitControls, PerformanceMonitor, PresentationControls, Stage,} from "@
 import UploadModel from "../UploadModel";
 import {Perf} from "r3f-perf";
 import {useSelector} from "react-redux";
+import OnPreviewControls from "../OnPreviewControls";
 
 const ModelPreview = (props) => {
   const {file, dimensions} = useContext(props.context);
@@ -28,7 +29,13 @@ const ModelPreview = (props) => {
     );
   };
   return (
-    <div className={"canvas-container"}>
+    <div
+      className={"canvas-container"}
+      style={{
+        height: "calc(100% - 129px)",
+      }}
+    >
+      <OnPreviewControls />
       <Canvas
         dpr={[1, 2]}
         shadows

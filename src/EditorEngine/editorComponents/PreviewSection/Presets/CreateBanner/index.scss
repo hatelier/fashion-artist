@@ -1,8 +1,25 @@
 .createBanner {
   display: flex;
   justify-content: space-between;
-  background: red;
+  background: #E70A4E;
+  height: 129px;
+  align-items: center;
+  padding: 0 25px;
+
   p {
     color: #ffffff;
+    font-size: 24px;
+    font-family: NHmed;
+  }
+
+  button {
+    height: 33px;
+    border: 1px solid #E70A4E;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: NHbold;
+    font-size: 18px;
+    color: #E70A4E;
+    padding: 0 15px;
   }
 }

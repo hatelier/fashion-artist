@@ -1,0 +1,26 @@
+.OnPreviewControlsDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+
+  .prevButtonControl {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  .prevRButtonControl {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #000000;
+    padding: 10px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
