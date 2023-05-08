@@ -2,110 +2,184 @@
 // @ts-nocheck
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {updateAmbientLight, updateDirLight,} from "../../../../../redux/materialControl";
 import * as THREE from "three";
 import {AmbientLight, DirectionalLight, Mesh, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
+import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png"
+import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
+import {updateProdMatState, updateProdMeshState,} from "../../../../../redux/savedConfigs";
+import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 const SectionFour = () => {
-  const materialArray = useSelector(
-    (state) => state.materialControl.materialArray
-  );
-  const ambientLight = useSelector(
-    (state) => state.materialControl.ambientLight
-  );
-  const directionalLight = useSelector(
-    (state) => state.materialControl.directionalLight
-  );
-  const dispatch = useDispatch();
-  // image preview
-  return (
-    <div>
-      <div className={"lightcontrols"}>
-        <div>Ambient Occlusion lighting</div>
-        <input
-          type={"range"}
-          min={0}
-          max={10}
-          value={ambientLight}
-          onChange={(e) => {
-            dispatch(updateAmbientLight(e.target.value));
-          }}
-        />
-        <div>Directional lighting</div>
-        <input
-          type={"range"}
-          min={0}
-          max={10}
-          value={directionalLight}
-          onChange={(e) => {
-            dispatch(updateDirLight(e.target.value));
-          }}
-        />
-      </div>
-      <div className={"productMeshes"}>
-        <h3>Product Meshes</h3>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-        }}
-      >
-        {materialArray.map((mesh, index) => (
-          <div
-            key={index}
-            className="mesh-preview"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "46px",
-              height: "70px",
-              overflow: "hidden",
-              background: "#000000",
-              margin: "5px",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-              borderRadius: "10px",
-            }}
-          >
-            <img
-              src={ObjectPng}
-              style={{
-                height: "33px",
-                width: "33px",
-              }}
-            />
-            <p
-              style={{
-                width: "30px",
-                overflow: "hidden",
-                color: "#ffffff",
-              }}
+    const materialArray = useSelector(
+        (state) => state.materialControl.materialArray
+    );
+    const ambientLight = useSelector(
+        (state) => state.materialControl.ambientLight
+    );
+    const directionalLight = useSelector(
+        (state) => state.materialControl.directionalLight
+    );
+    const dispatch = useDispatch();
+
+    const loadProductMeshes = useSelector(
+        (state) => state.savedConfigs.loadProductMeshes
+    );
+    const loadProuctMaterials = useSelector(
+        (state) => state.savedConfigs.loadProuctMaterials
+    );
+    return (
+        <div className={"sectionFourDiv"}>
+            {/*  enable this code post */}
+            {/*<div className={"lightcontrols"}>*/}
+            {/*  <div>Ambient Occlusion lighting</div>*/}
+            {/*  <input*/}
+            {/*    type={"range"}*/}
+            {/*    min={0}*/}
+            {/*    max={10}*/}
+            {/*    value={ambientLight}*/}
+            {/*    onChange={(e) => {*/}
+            {/*      dispatch(updateAmbientLight(e.target.value));*/}
+            {/*    }}*/}
+            {/*  />*/}
+            {/*  <div>Directional lighting</div>*/}
+            {/*  <input*/}
+            {/*    type={"range"}*/}
+            {/*    min={0}*/}
+            {/*    max={10}*/}
+            {/*    value={directionalLight}*/}
+            {/*    onChange={(e) => {*/}
+            {/*      dispatch(updateDirLight(e.target.value));*/}
+            {/*    }}*/}
+            {/*  />*/}
+            {/*</div>*/}
+
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "36px 0 6px 0",
+                    justifyContent: "space-between",
+                }}
             >
-              {mesh.name}
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className={"productMeshes"}>
-        <h3>Product Materials</h3>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        >
-          {materialArray.map((mesh, index) => {
-            return <HoverRender mesh={mesh} />;
-          })}
+                <p className={"sectionFourTitle"}>Assets</p>
+                <img src={AssetImage} style={{width: "21.35px"}}/>
+            </div>
+
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    margin: "18px 0 6px 0",
+                    justifyContent: "space-between",
+                }}
+            >
+                <p className={"sectionFourTitle"}>Products</p>
+                <img src={AddConfig} style={{width: "21.35px"}}/>
+            </div>
+
+            {/*input section to search for the required material*/}
+            <input
+                type={"text"}
+                className={"productName"}
+                placeholder={"Search product assets"}
+            />
+
+            {/*here is the product meshes section*/}
+            <div>
+                <div className={"productMeshes"}>
+                    <p>Product Meshes</p>
+                    <FontAwesomeIcon
+                        icon={loadProductMeshes ? faEye : faEyeSlash}
+                        className={"fimg"}
+                        onClick={() => {
+                            dispatch(updateProdMeshState());
+                        }}
+                    />
+                </div>
+                {loadProductMeshes && (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            marginTop: "10px",
+                        }}
+                    >
+                        {materialArray.map((mesh, index) => (
+                            <div key={index} className="meshPreview">
+                                <img
+                                    src={ObjectPng}
+                                    style={{
+                                        height: "31px",
+                                        width: "31px",
+                                    }}
+                                />
+                                <div>
+                                    <p
+                                        style={{
+                                            width: "20px",
+                                            overflow: "hidden",
+                                        }}
+                                        className={"matNameMesh"}
+                                    >
+                                        {mesh.name}
+                                    </p>
+                                    <p>⋮</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/*  here is the product material section*/}
+            <div>
+                <div className={"productMeshes"}>
+                    <p>Product Materials</p>
+                    <FontAwesomeIcon
+                        icon={loadProuctMaterials ? faEye : faEyeSlash}
+                        className={"fimg"}
+                        onClick={() => {
+                            dispatch(updateProdMatState());
+                        }}
+                    />
+                </div>
+                {loadProuctMaterials && (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            marginTop: "10px",
+                        }}
+                    >
+                        {materialArray.map((mesh, index) => {
+                            return <HoverRender mesh={mesh}/>;
+                        })}
+                    </div>
+                )}
+            </div>
+
+            {/*  here is the product textures section*/}
+            <div>
+                <div className={"productMeshes"}>
+                    <p>Product Textures</p>
+                    <FontAwesomeIcon icon={faEye} className={"fimg"}/>
+                </div>
+            </div>
+            {/*    here is the button control*/}
+            <div className={"DupDelDiv"}>
+                <button className={"uploadAsset"} style={{width: "40%"}}>
+                    + Mesh
+                </button>
+                <button className={"uploadAsset"} style={{width: "60%"}}>
+                    + Material
+                </button>
+            </div>
         </div>
-      </div>
-      <div>
-        <h3>Product Materials</h3>
-      </div>
-    </div>
   );
 };
 
@@ -143,28 +217,13 @@ const HoverRender = ({ mesh }) => {
   const [renderImage, setRenderImage] = useState(null);
 
   return (
-    <div
-      className="material-preview"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "46px",
-        height: "70px",
-        overflow: "hidden",
-        background: "#000000",
-        margin: "5px",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius: "10px",
-        padding: "3px 0",
-      }}
-    >
+    <div className="meshPreview">
       <img
-        src={renderImage ? renderImage : !hoverState ? ObjectPng : ""}
+        src={renderImage ? renderImage : !hoverState ? MaterialPreview : ""}
         alt={mesh.name}
         style={{
-          width: "32px",
-          height: "32px",
+          width: "31px",
+          height: "31px",
         }}
         onMouseEnter={(e) => {
           setHoverState(true);
@@ -178,16 +237,18 @@ const HoverRender = ({ mesh }) => {
           setHoverState(false);
         }}
       />
-
-      <p
-        style={{
-          width: "30px",
-          overflow: "hidden",
-          color: "#ffffff",
-        }}
-      >
-        {mesh.material.name}
-      </p>
+      <div>
+        <p
+          style={{
+            width: "20px",
+            overflow: "hidden",
+          }}
+          className={"matNameMesh"}
+        >
+          {mesh.material.name.substring(0, 4)}
+        </p>
+        <p>⋮</p>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,84 @@
+.sectionFourDiv {
+  margin: 0 15px;
+
+
+  .DupDelDiv {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+  }
+
+  .uploadAsset {
+    font-family: NHmed;
+    height: 38px;
+    background: #E70A4E;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 18px;
+    margin-top: 20px;
+    appearance: none;
+    border: none;
+  }
+
+  .meshPreview {
+    display: flex;
+    flex-direction: column;
+    width: 46px;
+    height: 57px;
+    overflow: hidden;
+    background: #000000;
+    margin: 5px 5px 5px 0;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 8px;
+    color: #ffffff;
+
+    .matNameMesh {
+      font-family: NHreg;
+      font-size: 10px;
+    }
+
+    div {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding: 0 5px;
+    }
+  }
+
+  .productMeshes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    p {
+      font-family: NHmed;
+      font-size: 16px;
+    }
+
+    .fimg {
+      width: 12px;
+    }
+  }
+
+  .productName {
+    height: 27px;
+    width: 100%;
+    background: #F7F7F7;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 10px;
+    font-size: 12px;
+    font-family: NHreg;
+  }
+
+  .sectionFourTitle {
+    font-family: NHmed;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+  }
+
+}

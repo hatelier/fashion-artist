@@ -7,8 +7,16 @@ const savedConfigs = createSlice({
     unUsedObjects: [],
     //check whether the material is being loaded for the first time.
     firstLoad: true,
+    loadProductMeshes: false,
+    loadProuctMaterials: false,
   },
   reducers: {
+    updateProdMeshState: (state, action) => {
+      state.loadProductMeshes = !state.loadProductMeshes;
+    },
+    updateProdMatState: (state, action) => {
+      state.loadProuctMaterials = !state.loadProuctMaterials;
+    },
     updatePresets: (state, action) => {
       state.presets = [...state.presets, action.payload];
     },
@@ -35,6 +43,8 @@ const savedConfigs = createSlice({
   },
 });
 export const {
+  updateProdMeshState,
+  updateProdMatState,
   updatePresets,
   updateUnUsedObjects,
   massUpdatePresets,

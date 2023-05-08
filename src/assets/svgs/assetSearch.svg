@@ -1,0 +1,35 @@
+<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_513_5524)">
+        <path d="M10.1719 15.5859H9.02344" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.0781 10.375H9.02344" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16.0781 5.45312H9.02344" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.74219 15.5859H4.92188" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.74219 10.375H4.92188" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.74219 5.45312H4.92188" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <mask id="mask0_513_5524" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="21"
+              height="21">
+            <path d="M0 1.90735e-06H21V21H0V1.90735e-06Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_513_5524)">
+            <path d="M16.3242 13.3281C14.7386 13.3281 13.4531 14.6136 13.4531 16.1992C13.4531 17.7849 14.7386 19.0703 16.3242 19.0703C17.9099 19.0703 19.1953 17.7849 19.1953 16.1992C19.1953 14.6136 17.9099 13.3281 16.3242 13.3281Z"
+                  fill="white" stroke="black" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+            <path d="M18.4141 18.416L20.1777 20.1797" stroke="black" stroke-width="1.8" stroke-miterlimit="10"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.7305 20.1797H3.28125C1.92212 20.1797 0.820312 19.0779 0.820312 17.7188V3.28125C0.820312 1.92212 1.92212 0.820314 3.28125 0.820314H17.7187C19.0779 0.820314 20.1797 1.92212 20.1797 3.28125V11.4023"
+                  stroke="black" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </g>
+    </g>
+    <defs>
+        <clipPath id="clip0_513_5524">
+            <rect width="21" height="21" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>
