@@ -13,6 +13,7 @@
 .editorEngine {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .editorSection {
     display: flex;
