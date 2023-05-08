@@ -44,16 +44,28 @@ const SetupControls = (props: BasicControls) => {
           );
         })}
       </div>
-      <div style={{ display: currentTab === 0 ? "" : "none" }}>
+      <div
+        className={"SectionControl"}
+        style={{ display: currentTab === 0 ? "" : "none" }}
+      >
         <SectionOne context={props.context} settings={props.settings} />
       </div>
-      <div style={{ display: currentTab === 1 ? "" : "none" }}>
+      <div
+        className={"SectionControl"}
+        style={{ display: currentTab === 1 ? "" : "none" }}
+      >
         <SectionTwo context={props.context} settings={props.settings} />
       </div>
-      <div style={{ display: currentTab === 2 ? "" : "none" }}>
+      <div
+        className={"SectionControl"}
+        style={{ display: currentTab === 2 ? "" : "none" }}
+      >
         <SectionThree />
       </div>
-      <div style={{ display: currentTab === 3 ? "" : "none" }}>
+      <div
+        className={"SectionControl"}
+        style={{ display: currentTab === 3 ? "" : "none" }}
+      >
         <SectionFour />
       </div>
     </div>

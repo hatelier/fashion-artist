@@ -3,6 +3,20 @@
   overflow-y: scroll;
   width: 100%;
 
+  display: grid;
+  grid-template-areas:
+  'buttonC'
+  'sectionC';
+  grid-template-rows: 45px 1fr;
+
+  .SectionControl {
+    grid-area: sectionC;
+  }
+
+  .buttonControl {
+    grid-area: buttonC;
+  }
+
   .buttonControl {
     display: flex;
     height: 45px;
