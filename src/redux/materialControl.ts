@@ -1,16 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MaterialControlsProps } from "../EditorEngine/PropsControls";
 
 export const materialControl = createSlice({
   name: "materialControl",
-  initialState: <MaterialControlsProps>(<unknown>{
+  initialState: <any>(<unknown>{
     materialArray: [],
     materialDimensions: {},
     cameraPosition: [0, 0, 13],
     ambientLight: 0.6,
     directionalLight: 1,
+    cameraProps: {
+      fov: 50,
+      x: 0,
+      y: 0,
+      z: 13,
+      zoom: 4,
+    },
   }),
   reducers: {
+    updateCameraProps: (state, action) => {
+      state.cameraProps = {
+        ...state.cameraProps,
+        ...action.payload,
+      };
+    },
     updateMaterialList: (state, action) => {
       state.materialArray = action.payload;
     },
@@ -30,6 +42,7 @@ export const materialControl = createSlice({
 });
 
 export const {
+  updateCameraProps,
   updateMaterialList,
   updateMaterialDimensions,
   updateCameraPostion,

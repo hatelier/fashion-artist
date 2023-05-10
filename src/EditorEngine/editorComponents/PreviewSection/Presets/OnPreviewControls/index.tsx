@@ -21,18 +21,22 @@ import { faBars, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateAmbientLight,
+  updateCameraProps,
   updateDirLight,
-} from "../../../../../redux/materialControl";
+} from "../../../../../redux/savedCameraControls";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
   const preRImages = [RImage1, RImage2, RImage3, RImage4];
   // redux states
   const ambientLight = useSelector(
-    (state: any) => state.materialControl.ambientLight
+    (state: any) => state.savedCameraControls.ambientLight
   );
   const directionalLight = useSelector(
-    (state: any) => state.materialControl.directionalLight
+    (state: any) => state.savedCameraControls.directionalLight
+  );
+  const { fov, x, y, z, zoom } = useSelector(
+    (state: any) => state.savedCameraControls.cameraProps
   );
   const dispatch = useDispatch();
   return (
@@ -54,15 +58,95 @@ const OnPreviewControls = () => {
             <FontAwesomeIcon icon={faXmarkCircle} />
           </div>
 
-          {/*here is the main lighting component*/}
+          {/*this here is the camera positon controls*/}
+
+          <div className={"dragControls"}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+            >
+              <p>Position controls FOV</p>
+              <input
+                type="range"
+                min={-100}
+                max={100}
+                defaultValue={x}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      x: e.target.value,
+                    })
+                  );
+                }}
+              />
+              <input
+                type="range"
+                min={-100}
+                max={100}
+                defaultValue={y}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      y: e.target.value,
+                    })
+                  );
+                }}
+              />
+              <input
+                type="range"
+                min={-100}
+                max={100}
+                defaultValue={z}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      z: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <input
+              type={"text"}
+              className={"inputDisplay"}
+              placeholder={`${x} ${y} ${z}`}
+            />
+          </div>
+
+          {/*camear FOV*/}
+          <div className={"dragControls"}>
+            <div>
+              <p>Camera FOV</p>
+              <input
+                type="range"
+                min={10}
+                max={100}
+                defaultValue={fov}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      fov: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <input
+              type={"text"}
+              className={"inputDisplay"}
+              placeholder={fov.toString()}
+            />
+          </div>
+
+          {/*  ambient occlusion settings*/}
           <div className={"dragControls"}>
             <div>
               <p>Ambient Occlusion</p>
               <input
                 type="range"
-                min={1}
+                min={0}
                 max={10}
-                defaultValue={ambientLight * 10}
+                step={0.2}
+                defaultValue={ambientLight}
                 onChange={(e) => {
                   dispatch(updateAmbientLight(e.target.value));
                 }}
@@ -71,9 +155,11 @@ const OnPreviewControls = () => {
             <input
               type={"text"}
               className={"inputDisplay"}
-              placeholder={(ambientLight / 10).toString()}
+              placeholder={ambientLight.toString()}
             />
           </div>
+
+          {/*  directional lighting settings*/}
           <div className={"dragControls"}>
             <div>
               <p>Directional light</p>
@@ -122,3 +208,50 @@ const OnPreviewControls = () => {
 };
 
 export default OnPreviewControls;
+
+// {/*range control component test*/}
+// {/*<RangeControls*/}
+// {/*  name={"Ambient Occlusion"}*/}
+// {/*  defValue={ambientLight}*/}
+// {/*  min={0}*/}
+// {/*  max={100}*/}
+// {/*  step={1}*/}
+// {/*  currentVal={ambientLight}*/}
+// {/*  dispatchFunc={updateAmbientLight}*/}
+// {/*/>*/}
+
+// const RangeControls = (props: {
+//   name: string;
+//   defValue: number;
+//   min: number;
+//   max: number;
+//   currentVal: number;
+//   dispatchFunc: any;
+//   step: number;
+// }) => {
+//   const [currentRefVal, setRefVal] = useState(props.defValue);
+//   const refDispatch = useDispatch();
+//   return (
+//     <div className={"dragControls"}>
+//       <div>
+//         <p>{props.name}</p>
+//         <input
+//           type="range"
+//           min={props.min}
+//           max={props.max}
+//           step={props.step}
+//           defaultValue={props.defValue}
+//           onChange={(e) => {
+//             setRefVal(Number(e.target.value));
+//             // refDispatch(props.dispatchFunc(e.target.value));
+//           }}
+//         />
+//       </div>
+//       <input
+//         type={"text"}
+//         className={"inputDisplay"}
+//         placeholder={currentRefVal.toString()}
+//       />
+//     </div>
+//   );
+// };

@@ -11,6 +11,7 @@ import editorManagement from "./editorManagement";
 import materialControl from "./materialControl";
 import renderSlice from "./triggerRedux";
 import savedConfigs from "./savedConfigs";
+import savedCameraControls from "./savedCameraControls";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   materialControl,
   renderSlice,
   savedConfigs,
+  savedCameraControls,
 });
 
 // a middleware to save binary files.
@@ -49,7 +51,12 @@ const glbTransform = createTransform(
 const persistConfig: PersistConfig<any> = {
   key: "root",
   storage: localforage,
-  whitelist: ["routeManagement", "editorManagement", "savedConfigs"],
+  whitelist: [
+    "routeManagement",
+    "editorManagement",
+    "savedConfigs",
+    "savedCameraControls",
+  ],
   // transforms: [glbTransform],
   timeout: null,
 };

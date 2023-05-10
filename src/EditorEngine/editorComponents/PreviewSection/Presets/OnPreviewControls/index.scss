@@ -7,12 +7,13 @@
 
   .draggableComp {
     background: #ffffff;
-    width: 300px;
-    height: 300px;
+    width: max-content;
+    height: max-content;
     position: absolute;
     top: 50px;
     left: 70px;
     border-radius: 20px;
+    padding-bottom: 25px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
     .dragControls {
@@ -25,7 +26,7 @@
       .inputDisplay {
         font-family: NHreg;
         font-size: 15px;
-        width: 60px;
+        width: 100px;
         text-align: center;
       }
 
@@ -112,6 +113,7 @@
       justify-content: space-between;
       padding: 20px;
       align-items: center;
+      cursor: grab;
 
       p {
         font-family: NHbold;
