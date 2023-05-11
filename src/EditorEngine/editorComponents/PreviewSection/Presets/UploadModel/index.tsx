@@ -1,6 +1,6 @@
 // @ts-nocheck
 //uploadModel/index.tsx
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {useLoader, useThree} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
@@ -11,11 +11,14 @@ const UploadModel = () => {
   //this has been disabled temporarily
   // const {scene} = useGLTF(props.model);
 
-  const { scene } = useThree();
+  const {scene} = useThree();
 
   const gltf = useLoader(GLTFLoader, "./models/MtumXfirstVarationTrial.glb");
 
   const dispatch = useDispatch();
+
+  //const useRef
+  const modelRef = useRef<THREE.Group>();
 
   useEffect(() => {
     let materialList = [];
@@ -26,7 +29,6 @@ const UploadModel = () => {
         }
       }
     });
-
     //   calculate the dimensions of the object
     // const bbox = new THREE.Box3().setFromObject(scene);
 
@@ -49,9 +51,11 @@ const UploadModel = () => {
   return (
     <>
       <primitive
+        ref={modelRef}
         object={gltf.scene}
         scale={[0.01, 0.01, 0.01]}
         position={[0, 0, 0]}
+        rotation={[0, 0, 0]}
       />
     </>
   );

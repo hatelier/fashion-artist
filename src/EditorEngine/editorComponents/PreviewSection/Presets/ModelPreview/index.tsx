@@ -8,6 +8,7 @@ import UploadModel from "../UploadModel";
 import {Perf} from "r3f-perf";
 import {useSelector} from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
+import {Vector3} from "three";
 
 const ModelPreview = (props) => {
   const {file, dimensions} = useContext(props.context);
@@ -18,15 +19,18 @@ const ModelPreview = (props) => {
     const {camera} = useThree();
 
     //here are the controllable camera properties
-    const {fov, x, y, z, zoom} = useSelector(
+    const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
         (state) => state.savedCameraControls.cameraProps
     );
-    console.log("logging fov,", fov);
-    camera.fov = fov;
+
+    // useEffect(() => {
+    camera.fov = 50;
     camera.position.set(x, y, z);
     camera.zoom = zoom;
-
     camera.updateProjectionMatrix();
+    // invalidate();
+    // }, [fov, x, y, z, zoom]);
+
     return (
         <OrbitControls
             enableZoom={true}
@@ -34,21 +38,22 @@ const ModelPreview = (props) => {
             panSpeed={1}
             enableRotate={false}
             camera={camera}
+            target={new Vector3(tx, ty, tz)}
         />
     );
   };
   const AmbientLightComponent = () => {
     const ambientLight = useSelector(
-        (state) => state.savedCameraControls.ambientLight
+      (state) => state.savedCameraControls.ambientLight
     );
     const directionalLight = useSelector(
-        (state) => state.savedCameraControls.directionalLight
+      (state) => state.savedCameraControls.directionalLight
     );
     return (
-        <>
-          <ambientLight intensity={ambientLight}/>
-          <directionalLight position={[10, 10, 5]} intensity={directionalLight}/>
-        </>
+      <>
+        <ambientLight intensity={ambientLight} />
+        <directionalLight position={[10, 10, 5]} intensity={directionalLight} />
+      </>
     );
   };
   return (
@@ -66,7 +71,7 @@ const ModelPreview = (props) => {
         <color attach="background" args={["#f0f0f0"]} />
         <PresentationControls
           global
-          // rotation={[Math.PI / 8, Math.PI / 4, 0]}
+          rotation={[Math.PI / 8, 0, 0]}
           // polar={[-0.1, Math.PI / 2]}
         >
           <Stage environment={"city"} intensity={0.6} castShadow={false}>

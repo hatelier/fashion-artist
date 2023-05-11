@@ -35,7 +35,7 @@ const OnPreviewControls = () => {
   const directionalLight = useSelector(
     (state: any) => state.savedCameraControls.directionalLight
   );
-  const { fov, x, y, z, zoom } = useSelector(
+  const { fov, x, y, z, zoom, tx, ty, tz } = useSelector(
     (state: any) => state.savedCameraControls.cameraProps
   );
   const dispatch = useDispatch();
@@ -58,8 +58,63 @@ const OnPreviewControls = () => {
             <FontAwesomeIcon icon={faXmarkCircle} />
           </div>
 
-          {/*this here is the camera positon controls*/}
+          {/*here is the target position */}
+          <div className={"dragControls"}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+            >
+              <p>Target controls FOV</p>
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.1}
+                defaultValue={tx}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      tx: e.target.value,
+                    })
+                  );
+                }}
+              />
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.1}
+                defaultValue={ty}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      ty: e.target.value,
+                    })
+                  );
+                }}
+              />
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.1}
+                defaultValue={tz}
+                onChange={(e) => {
+                  dispatch(
+                    updateCameraProps({
+                      tz: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <input
+              type={"text"}
+              className={"inputDisplay"}
+              placeholder={`${tx} ${ty} ${tz}`}
+            />
+          </div>
 
+          {/*this here is the camera positon controls*/}
           <div className={"dragControls"}>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "12px" }}
@@ -122,11 +177,11 @@ const OnPreviewControls = () => {
                 max={100}
                 defaultValue={fov}
                 onChange={(e) => {
-                  dispatch(
-                    updateCameraProps({
-                      fov: e.target.value,
-                    })
-                  );
+                  // dispatch(
+                  //   updateCameraProps({
+                  //     fov: e.target.value,
+                  //   })
+                  // );
                 }}
               />
             </div>
