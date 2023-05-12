@@ -23,6 +23,14 @@
     color: #000000;
   }
 
+  .configPopUp {
+    background: #e8e8e8;
+    height: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
   .configBox {
     height: max-content;
     background: #FFFFFF;
@@ -30,6 +38,9 @@
     border-radius: 10px;
     margin: 12px 20px 0;
     padding: 9px 0;
+
+    //  here are the ConfigBox configurations
+
   }
 
   .uploadAsset {

@@ -9,8 +9,17 @@ const savedConfigs = createSlice({
     firstLoad: true,
     loadProductMeshes: false,
     loadProuctMaterials: false,
+    //config controls
+    materialConfiguration: {},
   },
   reducers: {
+    //here the config controls object
+    updateMaterialConfig: (state, action) => {
+      state.materialConfiguration = {
+        ...state.materialConfiguration,
+        ...action.payload,
+      };
+    },
     updateProdMeshState: (state, action) => {
       state.loadProductMeshes = !state.loadProductMeshes;
     },
@@ -43,6 +52,7 @@ const savedConfigs = createSlice({
   },
 });
 export const {
+  updateMaterialConfig,
   updateProdMeshState,
   updateProdMatState,
   updatePresets,

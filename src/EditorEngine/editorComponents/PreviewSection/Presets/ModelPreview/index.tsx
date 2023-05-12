@@ -7,8 +7,6 @@ import {OrbitControls, PerformanceMonitor, PresentationControls, Stage,} from "@
 import UploadModel from "../UploadModel";
 import {Perf} from "r3f-perf";
 import {useSelector} from "react-redux";
-import OnPreviewControls from "../OnPreviewControls";
-import {Vector3} from "three";
 
 const ModelPreview = (props) => {
   const {file, dimensions} = useContext(props.context);
@@ -32,14 +30,14 @@ const ModelPreview = (props) => {
     // }, [fov, x, y, z, zoom]);
 
     return (
-        <OrbitControls
-            enableZoom={true}
-            zoomSpeed={0.8}
-            panSpeed={1}
-            enableRotate={false}
-            camera={camera}
-            target={new Vector3(tx, ty, tz)}
-        />
+      <OrbitControls
+        enableZoom={true}
+        zoomSpeed={0.8}
+        panSpeed={1}
+        enableRotate={false}
+        camera={camera}
+        // target={new Vector3(tx, ty, tz)}
+      />
     );
   };
   const AmbientLightComponent = () => {
@@ -63,7 +61,7 @@ const ModelPreview = (props) => {
         height: "calc(100% - 129px)",
       }}
     >
-      <OnPreviewControls />
+      {/*<OnPreviewControls />*/}
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         <AmbientLightComponent />
         <Perf position="top-right" />
