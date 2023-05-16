@@ -1,0 +1,16 @@
+.graphicControlPop {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 3px 25px;
+  position: absolute;
+  min-width: max-content;
+  left: 30px;
+  top: 0;
+  cursor: default;
+
+  .headerPop {
+    font-family: NHmed;
+    margin: 12px 0;
+    cursor: pointer;
+  }
+}

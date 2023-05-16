@@ -24,8 +24,12 @@ import {
   updateCameraProps,
   updateDirLight,
 } from "../../../../../redux/savedCameraControls";
-import CameraControls from "../../EditorControls/CameraControls";
+import CameraControls, {
+  CameraControlsDraggable,
+} from "../../EditorControls/CameraControls";
 import LightControls from "../../EditorControls/LightControls";
+import OrthographicControls from "../../EditorControls/OrthographicControls";
+import GraphicsControls from "../../EditorControls/GraphicsControls";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -41,7 +45,7 @@ const OnPreviewControls = () => {
     (state: any) => state.savedCameraControls.cameraProps
   );
   const dispatch = useDispatch();
-  const [currSelection, setCurrSelection] = useState(0);
+  const [currSelection, setCurrSelection] = useState(3);
   //here is the lighting controls
   const LightingControl = () => {
     return (
@@ -248,7 +252,7 @@ const OnPreviewControls = () => {
       {/*  here is the panel for lighting controls*/}
       {/*<LightingControl />*/}
       {/*<ConfigurationPopUp />*/}
-
+      <CameraControlsDraggable />
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {
@@ -263,6 +267,8 @@ const OnPreviewControls = () => {
               />
               {currSelection == 0 && index === 0 && <CameraControls />}
               {currSelection == 1 && index === 1 && <LightControls />}
+              {currSelection == 2 && index === 2 && <OrthographicControls />}
+              {currSelection == 3 && index === 3 && <GraphicsControls />}
             </div>
           );
         })}

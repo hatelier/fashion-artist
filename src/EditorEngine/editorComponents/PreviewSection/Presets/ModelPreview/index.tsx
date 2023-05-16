@@ -10,35 +10,35 @@ import {useSelector} from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
 
 const ModelPreview = (props) => {
-    const {file, dimensions} = useContext(props.context);
-    const cameraPosition = useSelector(
-        (state) => state.savedCameraControls.cameraPosition
+  const {file, dimensions} = useContext(props.context);
+  const cameraPosition = useSelector(
+      (state) => state.savedCameraControls.cameraPosition
+  );
+  const OrbitalController = () => {
+    const {camera} = useThree();
+
+    //here are the controllable camera properties
+    const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
+        (state) => state.savedCameraControls.cameraProps
     );
-    const OrbitalController = () => {
-        const {camera} = useThree();
 
-        //here are the controllable camera properties
-        const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
-            (state) => state.savedCameraControls.cameraProps
-        );
-
-        // useEffect(() => {
-        camera.fov = 50;
-        camera.position.set(x, y, z);
-        camera.zoom = zoom;
-        camera.updateProjectionMatrix();
-        // invalidate();
-        // }, [fov, x, y, z, zoom]);
+    // useEffect(() => {
+    camera.fov = 50;
+    camera.position.set(x, y, z);
+    camera.zoom = zoom;
+    camera.updateProjectionMatrix();
+    // invalidate();
+    // }, [fov, x, y, z, zoom]);
 
     return (
-      <OrbitControls
-        enableZoom={true}
-        zoomSpeed={0.8}
-        panSpeed={1}
-        enableRotate={false}
-        camera={camera}
-        // target={new Vector3(tx, ty, tz)}
-      />
+        <OrbitControls
+            enableZoom={true}
+            zoomSpeed={0.8}
+            panSpeed={1}
+            enableRotate={false}
+            camera={camera}
+            // target={new Vector3(tx, ty, tz)}
+        />
     );
   };
   const AmbientLightComponent = () => {

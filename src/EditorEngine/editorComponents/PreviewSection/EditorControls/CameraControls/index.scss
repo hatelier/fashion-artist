@@ -1,3 +1,66 @@
+.cameraControlsDraggable {
+  position: absolute;
+  top: 20px;
+  left: 230px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 302.4px;
+
+  .positionControls {
+    p {
+      margin-top: 10px;
+      font-family: NHbold;
+    }
+  }
+
+  .materialSection {
+    .materialSelector {
+      display: flex;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .redButtonClass {
+      padding: 9px 10px;
+      height: 31px;
+      background: #E70A4E;
+      border-radius: 8px;
+      font-size: 11px;
+      border: none;
+      color: #ffffff;
+    }
+
+    p {
+      margin-top: 10px;
+      font-family: NHbold;
+    }
+  }
+
+  .nameSection {
+    margin-top: 20px;
+
+    & > p:first-child {
+      font-family: NHbold;
+    }
+
+    & > p:nth-child(2) {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  }
+
+  .dragHeader {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-family: NHbold;
+      font-size: 12px;
+    }
+  }
+}
+
 .cameraControlsPop {
   background: #ffffff;
   border-radius: 10px;
