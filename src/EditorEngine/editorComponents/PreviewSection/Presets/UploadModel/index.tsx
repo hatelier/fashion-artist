@@ -8,14 +8,14 @@ import {useDispatch} from "react-redux";
 import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
 
 const UploadModel = () => {
-  //this has been disabled temporarily
-  // const {scene} = useGLTF(props.model);
+    //this has been disabled temporarily
+    // const {scene} = useGLTF(props.model);
 
-  const {scene} = useThree();
+    const {scene} = useThree();
 
-  const gltf = useLoader(GLTFLoader, "./models/MtumXfirstVarationTrial.glb");
+    const gltf = useLoader(GLTFLoader, "./models/MtumXfirstVarationTrial.glb");
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   //const useRef
   const modelRef = useRef<THREE.Group>();

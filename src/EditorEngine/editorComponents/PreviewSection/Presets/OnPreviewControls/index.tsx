@@ -26,6 +26,7 @@ import {
 } from "../../../../../redux/savedCameraControls";
 import CameraControls, {
   CameraControlsDraggable,
+  FusionControlComp,
 } from "../../EditorControls/CameraControls";
 import LightControls from "../../EditorControls/LightControls";
 import OrthographicControls from "../../EditorControls/OrthographicControls";
@@ -253,6 +254,7 @@ const OnPreviewControls = () => {
       {/*<LightingControl />*/}
       {/*<ConfigurationPopUp />*/}
       <CameraControlsDraggable />
+      <FusionControlComp />
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {

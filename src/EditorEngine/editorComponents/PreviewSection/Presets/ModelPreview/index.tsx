@@ -31,14 +31,14 @@ const ModelPreview = (props) => {
     // }, [fov, x, y, z, zoom]);
 
     return (
-        <OrbitControls
-            enableZoom={true}
-            zoomSpeed={0.8}
-            panSpeed={1}
-            enableRotate={false}
-            camera={camera}
-            // target={new Vector3(tx, ty, tz)}
-        />
+      <OrbitControls
+        enableZoom={true}
+        zoomSpeed={0.8}
+        panSpeed={1}
+        enableRotate={false}
+        camera={camera}
+        // target={new Vector3(tx, ty, tz)}
+      />
     );
   };
   const AmbientLightComponent = () => {
