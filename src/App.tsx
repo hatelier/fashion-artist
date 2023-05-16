@@ -8,6 +8,9 @@ import { Products } from "./pages/products";
 import { Showroom } from "./pages/showroom";
 import { Manage } from "./pages/manage";
 import { Signup } from "./pages/signup";
+import { Subscription } from "./pages/subscription";
+import { Payment } from "./pages/payment";
+import { Credit } from "./pages/credit";
 import EditorEngine from "./EditorEngine";
 
 function App() {
@@ -23,6 +26,9 @@ function App() {
           <Route path="/manage" element={<Manage />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/editor" element={<EditorEngine />} />
+          <Route path="/subscription" element={<Subscription />} />
+          <Route path="/payment" element={<Payment />} /> 
+          <Route path="/credit" element={<Credit />} />
         </Routes>
       </Router>
     </div>
