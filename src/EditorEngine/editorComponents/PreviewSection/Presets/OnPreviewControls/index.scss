@@ -127,6 +127,17 @@
     position: absolute;
     top: 15px;
     left: 15px;
+
+    .indiControls {
+      width: max-content;
+      cursor: pointer;
+      display: flex;
+      position: relative;
+
+      div {
+        margin-left: 10px;
+      }
+    }
   }
 
   .prevRButtonControl {

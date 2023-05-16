@@ -7,27 +7,28 @@ import {OrbitControls, PerformanceMonitor, PresentationControls, Stage,} from "@
 import UploadModel from "../UploadModel";
 import {Perf} from "r3f-perf";
 import {useSelector} from "react-redux";
+import OnPreviewControls from "../OnPreviewControls";
 
 const ModelPreview = (props) => {
-  const {file, dimensions} = useContext(props.context);
-  const cameraPosition = useSelector(
-      (state) => state.savedCameraControls.cameraPosition
-  );
-  const OrbitalController = () => {
-    const {camera} = useThree();
-
-    //here are the controllable camera properties
-    const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
-        (state) => state.savedCameraControls.cameraProps
+    const {file, dimensions} = useContext(props.context);
+    const cameraPosition = useSelector(
+        (state) => state.savedCameraControls.cameraPosition
     );
+    const OrbitalController = () => {
+        const {camera} = useThree();
 
-    // useEffect(() => {
-    camera.fov = 50;
-    camera.position.set(x, y, z);
-    camera.zoom = zoom;
-    camera.updateProjectionMatrix();
-    // invalidate();
-    // }, [fov, x, y, z, zoom]);
+        //here are the controllable camera properties
+        const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
+            (state) => state.savedCameraControls.cameraProps
+        );
+
+        // useEffect(() => {
+        camera.fov = 50;
+        camera.position.set(x, y, z);
+        camera.zoom = zoom;
+        camera.updateProjectionMatrix();
+        // invalidate();
+        // }, [fov, x, y, z, zoom]);
 
     return (
       <OrbitControls
@@ -61,7 +62,7 @@ const ModelPreview = (props) => {
         height: "calc(100% - 129px)",
       }}
     >
-      {/*<OnPreviewControls />*/}
+      <OnPreviewControls />
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         <AmbientLightComponent />
         <Perf position="top-right" />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.scss";
 // image imports
 import Image1 from "../../../../../assets/svgs/OnPreviewAssets/Frame 14012.svg";
@@ -24,6 +24,8 @@ import {
   updateCameraProps,
   updateDirLight,
 } from "../../../../../redux/savedCameraControls";
+import CameraControls from "../../EditorControls/CameraControls";
+import LightControls from "../../EditorControls/LightControls";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -39,17 +41,18 @@ const OnPreviewControls = () => {
     (state: any) => state.savedCameraControls.cameraProps
   );
   const dispatch = useDispatch();
-  return (
-    <div className={"OnPreviewControlsDiv"}>
-      {/*  here is the drag test*/}
+  const [currSelection, setCurrSelection] = useState(0);
+  //here is the lighting controls
+  const LightingControl = () => {
+    return (
       <Draggable
-        onStart={() => {
-          console.log("drag drag");
-        }}
-        onStop={() => {
-          console.log("drag stop");
-        }}
-        handle=".dragHeader"
+      // onStart={() => {
+      //   console.log("drag drag");
+      // }}
+      // onStop={() => {
+      //   console.log("drag stop");
+      // }}
+      // handle=".dragHeader"
       >
         <div className={"draggableComp"}>
           <div className={"dragHeader"}>
@@ -236,13 +239,30 @@ const OnPreviewControls = () => {
           </div>
         </div>
       </Draggable>
+    );
+  };
+  return (
+    <div className={"OnPreviewControlsDiv"}>
+      {/*  here is the drag test*/}
+
+      {/*  here is the panel for lighting controls*/}
+      {/*<LightingControl />*/}
+      {/*<ConfigurationPopUp />*/}
 
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {
           return (
-            <div style={{ width: "36px", cursor: "pointer" }}>
-              <img src={img} style={{ width: "100%" }} />
+            <div className={"indiControls"}>
+              <img
+                src={img}
+                style={{ width: "35px" }}
+                onClick={() => {
+                  setCurrSelection(index);
+                }}
+              />
+              {currSelection == 0 && index === 0 && <CameraControls />}
+              {currSelection == 1 && index === 1 && <LightControls />}
             </div>
           );
         })}

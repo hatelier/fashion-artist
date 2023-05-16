@@ -1,0 +1,22 @@
+.cameraControlsPop {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 3px 25px;
+  position: absolute;
+  min-width: 150px;
+  left: 30px;
+  top: 0;
+  cursor: default;
+
+  .hybridList {
+    p {
+      font-size: 11px;
+      margin-top: 10px;
+    }
+  }
+
+  .mainPropControl {
+    font-family: NHmed;
+    margin: 12px 0;
+  }
+}
