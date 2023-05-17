@@ -90,9 +90,13 @@ p {
   max-width: 400px;
   font-size: 12px;
 }
+
 /* Start login page */
+
 .logo {
   position: relative;
+  max-width: 100%;
+  height: auto;
 }
 
 .auth-container {
@@ -125,18 +129,18 @@ p {
   position: relative;
   grid-column: 2 / 3;
   grid-row: 1 / 3;
-  margin-left: 460px;
+  margin-left: 320px;
   height: 400px;
   width: 600px;
   bottom: 150px;
 }
-.image-container img {
+.image-container .main-image {
   width: 700px;
   height: 700px;
 }
 /* Start login page form */
 .form {
-  height: 400px;
+  height: 450px;
   width: 350px;
   background-color: #fff;
   padding: 30px;
@@ -228,21 +232,23 @@ p {
   grid-template-columns: auto 1fr;
   grid-gap: 20px;
   align-items: center;
-  height: 120vh;
+  height: 140vh;
   width: 98vw;
   grid-column-gap: 0;
 }
 
 .signuplogo-container {
   grid-row: 1 / span 1;
-  margin-bottom: 20px;
-  margin-top: 20px;
+}
+.signuplogo-container .signup-logo {
+  width: 75%;
+  height: auto;
 }
 
 .register-container {
   position: relative;
   grid-row: 2 / span 1;
-  margin-left: 100px;
+  margin-left: 40px;
 }
 
 .signupimage-cotainer {
@@ -252,13 +258,13 @@ p {
   margin-left: 250px;
 }
 .signupimage-cotainer img {
-  height: 800px;
-  width: 700px;
+  height: 700px;
+  width: 600px;
 }
 
 .signup {
   position: relative;
-  height: 680px;
+  height: 750px;
   width: 500px;
   background-color: #fff;
   padding: 30px;
@@ -292,6 +298,9 @@ p {
 .signup .input {
   width: 90%;
 }
+
+/* End Signup page */
+
 /* Style the dropdown */
 .myDropdown {
   background-color: #fff;

@@ -27,7 +27,7 @@ export const Signup = () => {
     return (
         <div className="sign">
             <div className="signuplogo-container">
-                <img className="logo" src={"/mxlogo.png"} alt="logo" />
+                <img className="signup-logo" src={"/mxlogo.png"} alt="logo" />
             </div>
             <div className="register-container">
               <Register />  
@@ -89,22 +89,22 @@ const Form = ({
             
             <div className="name grid">
                 <div className="firstname-container">
-                <label htmlFor="firstname" className="label">First Name *</label>
-                <input type="text" id="firstname" className="input" value={firstname} onChange={(event) => setFirstname(event.target.value)}/>
+                <label htmlFor="firstname" className="label">First Name</label>
+                <input type="text" id="firstname" className="input" value={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
                 </div>
                 <div className="lastname-container">
-                <label htmlFor="lastname" className="label">Last Name *</label>
-                <input type="text" id="lastname" className="input" value={lastname} onChange={(event) => setLastname(event.target.value)}/>
+                <label htmlFor="lastname" className="label">Last Name</label>
+                <input type="text" id="lastname" className="input" value={lastname} onChange={(event) => setLastname(event.target.value)} required/>
                 </div>
             </div>
 
-            <label htmlFor="email" className="label">Email *</label>
-            <input type="email" id="email" className="input" value={email} onChange={(event) => setEmail(event.target.value)}/>
+            <label htmlFor="email" className="label">Email</label>
+            <input type="email" id="email" className="input" value={email} onChange={(event) => setEmail(event.target.value)} required/>
             
             <div className="grid">
                 <div className="occupation-container dropdown">
-                <label htmlFor="occupation" className="label">Occupation *</label>
-                <select className="myDropdown" id="occupation" onChange={(event) => setOccupation(event.target.value)}>
+                <label htmlFor="occupation" className="label">Occupation</label>
+                <select className="myDropdown" id="occupation" onChange={(event) => setOccupation(event.target.value)} required>
                     <option value="">Select an option</option>
                     <option value="3D Generalist">3D Generalist</option>
                     <option value="3D Environment Artist">3D Environment Artist</option>
@@ -115,22 +115,22 @@ const Form = ({
                 </select>             
                 </div>
                 <div className="companyname-container">
-                <label htmlFor="cpompanyname" className="label">Company Name *</label>
-                <input type="text" id="companyname" className="input" onChange={(event) => setCompanyname(event.target.value)}/>
+                <label htmlFor="cpompanyname" className="label">Company Name</label>
+                <input type="text" id="companyname" className="input" onChange={(event) => setCompanyname(event.target.value)} required/>
                 </div>
             </div>
 
-            <label htmlFor="password" className="label">Password *</label>
-            <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)}/>
+            <label htmlFor="password" className="label">Password</label>
+            <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
             
-            <label htmlFor="cpassword" className="label">Confirm Password *</label>
-            <input type="password" id="cpassword" className="input" />
+            <label htmlFor="cpassword" className="label">Confirm Password</label>
+            <input type="password" id="cpassword" className="input" required/>
             
             <label><input type="checkbox" id="updates" checked={updates} onChange={(event) => setUpdates(event.target.checked)}/>I will like to receive emails on future updates</label>
             <label><input type="checkbox" checked />I agree to the<Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
             
             <button type="submit" className="submit signup-button">{label}</button>
-            <span className="title-text">Already have an account?<Link to="/auth" className="to-register">Login</Link></span>
+            <span className="title-text">Already have an account? <Link to="/auth" className="to-register">Login</Link></span>
             </form>
      </div> 
      )}

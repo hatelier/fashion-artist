@@ -24,7 +24,7 @@ export const Auth = () => {
           <Login />  
         </div>
         <div className="image-container">
-            <img src = "mq.png" alt = "mq" />
+            <img className="main-image" src = "mq.png" alt = "mq" />
          </div>
         </div>
     ); 
@@ -61,15 +61,15 @@ const Form = ({email, setEmail, password, setPassword, label, onSubmit }: FormPr
             <span className= "title-text">Your exploration starts here</span>
 
             <label htmlFor="email" className="label">Email</label>
-            <input type="text" id="email" className="input" value={email} onChange={(event) => setEmail(event.target.value)}/>
+            <input type="text" id="email" className="input" value={email} onChange={(event) => setEmail(event.target.value)} required/>
             
             <label htmlFor="password" className="label">Password</label>
-            <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)}/>
+            <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
             
             <Link to = "/auth/register" className="forgot">Forgot Password?</Link>
             <button type="submit" className="submit">{label}</button>
 
-            <span className= "account-text">No account?<Link to="/auth/register" className="to-register">Sign up</Link></span>
+            <span className= "account-text">No account? <Link to="/register" className="to-register">Sign up</Link></span>
          </form>
          
      </div> 
