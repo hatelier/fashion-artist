@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./index.scss";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleDown, faAngleUp, faX} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp, faX } from "@fortawesome/free-solid-svg-icons";
 import Draggable from "react-draggable";
-import {MenuItem, Select, TextField} from "@mui/material";
+import { MenuItem, Select, TextField } from "@mui/material";
 
 const HybridLists = () => {
   return (
@@ -76,7 +76,9 @@ export const CameraControlsDraggable = () => {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
 
-            <button className={"redButtonClass"}>Open Material</button>
+            <button className={"redButtonClass"} style={{ fontSize: "10px" }}>
+              Open Material
+            </button>
           </div>
         </div>
 
@@ -84,9 +86,9 @@ export const CameraControlsDraggable = () => {
         <div className={"positionControls"}>
           <p>Position</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -95,9 +97,9 @@ export const CameraControlsDraggable = () => {
         <div className={"positionControls"}>
           <p>Rotation</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -106,9 +108,9 @@ export const CameraControlsDraggable = () => {
         <div className={"positionControls"}>
           <p>Scale</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -170,9 +172,9 @@ export const FusionControlComp = () => {
         <div className={"positionControls"}>
           <p>Position</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -181,9 +183,9 @@ export const FusionControlComp = () => {
         <div className={"positionControls"}>
           <p>Rotation</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -192,9 +194,9 @@ export const FusionControlComp = () => {
         <div className={"positionControls"}>
           <p>Scale</p>
           <div className={"positionSelector"}>
-            <LabelledInputMui label={"X"} width={"63px"}/>
-            <LabelledInputMui label={"Y"} width={"63px"}/>
-            <LabelledInputMui label={"Z"} width={"63px"}/>
+            <LabelledInputMui label={"X"} width={"63px"} />
+            <LabelledInputMui label={"Y"} width={"63px"} />
+            <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
           </div>
         </div>
@@ -215,19 +217,25 @@ export const FusionControlComp = () => {
   );
 };
 
-export const LabelledInputMui = ({label, width}: { label: string, width: string }) => {
+export const LabelledInputMui = ({
+  label,
+  width,
+}: {
+  label: string;
+  width: string;
+}) => {
   return (
-      <TextField
-          label={`${label}`}
-          id="filled-size-small"
-          variant="outlined"
-          size="small"
-          style={{width: `${width}`}}
-          inputProps={{
-            style: {
-              fontSize: "11px",
-            },
-          }}
+    <TextField
+      label={`${label}`}
+      id="filled-size-small"
+      variant="outlined"
+      size="small"
+      style={{ width: `${width}` }}
+      inputProps={{
+        style: {
+          fontSize: "11px",
+        },
+      }}
       InputLabelProps={{
         style: {
           fontSize: "11px",

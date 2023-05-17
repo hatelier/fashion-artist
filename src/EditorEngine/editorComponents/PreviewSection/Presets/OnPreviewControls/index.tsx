@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./index.scss";
 // image imports
 import Image1 from "../../../../../assets/svgs/OnPreviewAssets/Frame 14012.svg";
@@ -16,14 +16,29 @@ import RImage4 from "../../../../../assets/svgs/OnPreviewAssets/settings.svg";
 
 //dragables
 import Draggable from "react-draggable";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faXmarkCircle} from "@fortawesome/free-solid-svg-icons";
-import {useDispatch, useSelector} from "react-redux";
-import {updateAmbientLight, updateCameraProps, updateDirLight,} from "../../../../../redux/savedCameraControls";
-import CameraControls, {CameraControlsDraggable, FusionControlComp,} from "../../EditorControls/CameraControls";
-import LightControls, {LightControlDrag,} from "../../EditorControls/LightControls";
-import OrthographicControls, {OrthographicCameraDrag} from "../../EditorControls/OrthographicControls";
-import GraphicsControls from "../../EditorControls/GraphicsControls";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateAmbientLight,
+  updateCameraProps,
+  updateDirLight,
+} from "../../../../../redux/savedCameraControls";
+import CameraControls, {
+  CameraControlsDraggable,
+  FusionControlComp,
+} from "../../EditorControls/CameraControls";
+import LightControls, {
+  LightControlDrag,
+} from "../../EditorControls/LightControls";
+import OrthographicControls, {
+  OrthographicCameraDrag,
+} from "../../EditorControls/OrthographicControls";
+import GraphicsControls, {
+  GraphicsControlsDrag,
+} from "../../EditorControls/GraphicsControls";
+import { PerformanceControlsDrag } from "../../EditorControls/PerformanceControls";
+import { SceneControlsDrag } from "../../EditorControls/SceneControls";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -246,10 +261,15 @@ const OnPreviewControls = () => {
       {/*  here is the panel for lighting controls*/}
       {/*<LightingControl />*/}
       {/*<ConfigurationPopUp />*/}
+
       <CameraControlsDraggable />
-        <FusionControlComp/>
-        <LightControlDrag/>
-        <OrthographicCameraDrag/>
+      <FusionControlComp />
+      <LightControlDrag />
+      <OrthographicCameraDrag />
+      <GraphicsControlsDrag />
+      <PerformanceControlsDrag />
+      <SceneControlsDrag />
+
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {
