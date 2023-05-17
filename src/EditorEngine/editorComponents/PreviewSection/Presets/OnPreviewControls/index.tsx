@@ -22,7 +22,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateAmbientLight, updateCameraProps, updateDirLight,} from "../../../../../redux/savedCameraControls";
 import CameraControls, {CameraControlsDraggable, FusionControlComp,} from "../../EditorControls/CameraControls";
 import LightControls, {LightControlDrag,} from "../../EditorControls/LightControls";
-import OrthographicControls from "../../EditorControls/OrthographicControls";
+import OrthographicControls, {OrthographicCameraDrag} from "../../EditorControls/OrthographicControls";
 import GraphicsControls from "../../EditorControls/GraphicsControls";
 
 const OnPreviewControls = () => {
@@ -249,6 +249,7 @@ const OnPreviewControls = () => {
       <CameraControlsDraggable />
         <FusionControlComp/>
         <LightControlDrag/>
+        <OrthographicCameraDrag/>
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {

@@ -1,3 +1,17 @@
+p {
+  font-family: NHreg;
+}
+
+.orthoCameraDrag {
+  position: absolute;
+  top: 20px;
+  left: 1120px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 205px;
+}
+
 .orthoControlPop {
   background: #ffffff;
   border-radius: 10px;
