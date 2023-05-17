@@ -17,8 +17,8 @@ const UploadModel = () => {
 
     const dispatch = useDispatch();
 
-  //const useRef
-  const modelRef = useRef<THREE.Group>();
+    //const useRef
+    const modelRef = useRef<THREE.Group>();
 
   useEffect(() => {
     let materialList = [];

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./index.scss";
 // image imports
 import Image1 from "../../../../../assets/svgs/OnPreviewAssets/Frame 14012.svg";
@@ -16,19 +16,12 @@ import RImage4 from "../../../../../assets/svgs/OnPreviewAssets/settings.svg";
 
 //dragables
 import Draggable from "react-draggable";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateAmbientLight,
-  updateCameraProps,
-  updateDirLight,
-} from "../../../../../redux/savedCameraControls";
-import CameraControls, {
-  CameraControlsDraggable,
-  FusionControlComp,
-} from "../../EditorControls/CameraControls";
-import LightControls from "../../EditorControls/LightControls";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars, faXmarkCircle} from "@fortawesome/free-solid-svg-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {updateAmbientLight, updateCameraProps, updateDirLight,} from "../../../../../redux/savedCameraControls";
+import CameraControls, {CameraControlsDraggable, FusionControlComp,} from "../../EditorControls/CameraControls";
+import LightControls, {LightControlDrag,} from "../../EditorControls/LightControls";
 import OrthographicControls from "../../EditorControls/OrthographicControls";
 import GraphicsControls from "../../EditorControls/GraphicsControls";
 
@@ -254,7 +247,8 @@ const OnPreviewControls = () => {
       {/*<LightingControl />*/}
       {/*<ConfigurationPopUp />*/}
       <CameraControlsDraggable />
-      <FusionControlComp />
+        <FusionControlComp/>
+        <LightControlDrag/>
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
         {preImages.map((img: any, index) => {
