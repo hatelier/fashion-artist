@@ -1,4 +1,4 @@
-export const Payment = () => {
+export const Credit = () => {
     return ( 
     <div className='home-container'>
     <section >
@@ -24,7 +24,7 @@ export const Payment = () => {
               <img
                src={require('../assets/pngs/account-icon.png')}
                alt="account-icon"
-              /> Account
+              /> Profile
             </a>
             <a  href="/teams">
               <img
@@ -76,16 +76,16 @@ export const Payment = () => {
             </div>
             <div className='submenu'>
               <div className='item'>
-              <a href="/">Dashboard</a>
+              <a href="#">Dashboard</a>
               </div>
               <div className='item'>
-              <a href="/product">Products</a>
+              <a href="#">Products</a>
               </div>
               <div className='item'>
               <a href="#">Analytics</a>
               </div>
               <div className='item'>
-              <a href="/showroom">Showroom</a>
+              <a href="#">Showroom</a>
               </div>
               <div className='item'>
               <a href="/3d-fashion-lab">3D Fashion Lab</a>
@@ -107,12 +107,12 @@ export const Payment = () => {
            <div className='main'>
              <div className='text'>
                <div className='dashboard'>
-               Payment
+                 Credit
                </div>
              </div>
              <div className="subscription">
              <div className="choose-plan">
-               Payment
+               Buy Credit
              </div>
              <div className="payment">
                <div className="payment-details">
@@ -135,7 +135,7 @@ export const Payment = () => {
                       <div className="payment-info-item"><span className="alignleft">Total after trial</span><span className="alignright">$117.01</span></div>
                       <div className="payment-info-item bold"><span className="alignleft">Total after today</span><span className="alignright">$0.00</span></div>
                     </div>
-                    <a className="payment-back-button" href="/subscription"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+                    <div className="payment-back-button"><img src={require('../assets/pngs/left.png')} alt="back" /> Back</div>
                   </div>
                 </div>
                 <div className="payment-details-input">
