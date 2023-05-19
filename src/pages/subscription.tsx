@@ -20,12 +20,12 @@ export const Subscription = () => {
         className="small-avatar-icon dropbtn"
       />
        <div className="dropdown-top-content">
-       <a href="#">
+       <a href="/account">
        <img
         src={require('../assets/pngs/account-icon.png')}
         alt="account-icon"
-      /> Profile</a>
-       <a href="#">
+      /> Account</a>
+       <a href="/teams">
        <img
         src={require('../assets/pngs/teams-icon.png')}
         alt="teams-icon"
@@ -72,19 +72,19 @@ export const Subscription = () => {
             </div>
             <div className='submenu'>
               <div className='item'>
-              <a href="#">Dashboard</a>
+              <a href="/">Dashboard</a>
               </div>
               <div className='item'>
-              <a href="#">Products</a>
+              <a href="/products">Products</a>
               </div>
               <div className='item'>
               <a href="#">Analytics</a>
               </div>
               <div className='item'>
-              <a href="#">Showroom</a>
+              <a href="/showroom">Showroom</a>
               </div>
               <div className='item'>
-              <a href="#">3D Fashion Lab</a>
+              <a href="/3d-fashion-lab">3D Fashion Lab</a>
               </div>
             </div>
           </div>  
@@ -135,7 +135,7 @@ export const Subscription = () => {
                 <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
             </div>
             </div>
-            <div className="buy-button">Buy Plan</div>
+            <a className="buy-button" href="/payment">Buy Plan</a>
         </div>
         <div className="premium plan-card">
             <div className="details">
@@ -155,7 +155,7 @@ export const Subscription = () => {
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                 </div>
             </div>
-            <div className="buy-button">Buy Plan</div>
+            <a className="buy-button" href="/payment">Buy Plan</a>
         </div>
         <div className="business plan-card">
             <div className="details">
@@ -175,7 +175,7 @@ export const Subscription = () => {
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                 </div>
             </div>
-            <div className="buy-button">Buy Plan</div>
+            <a className="buy-button" href="/payment">Buy Plan</a>
         </div>
       </div>
      </div>

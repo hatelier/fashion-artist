@@ -20,12 +20,12 @@ export const Dashboard = () => {
         className="small-avatar-icon dropbtn"
       />
        <div className="dropdown-top-content">
-       <a href="#">
+       <a href="/account">
        <img
         src={require('../assets/pngs/account-icon.png')}
         alt="account-icon"
-      /> Profile</a>
-       <a href="#">
+      /> Account</a>
+       <a href="/teams">
        <img
         src={require('../assets/pngs/teams-icon.png')}
         alt="teams-icon"
@@ -81,10 +81,10 @@ export const Dashboard = () => {
               <a href="#">Analytics</a>
               </div>
               <div className='item'>
-              <a href="#">Showroom</a>
+              <a href="/showroom">Showroom</a>
               </div>
               <div className='item'>
-              <a href="#">3D Fashion Lab</a>
+              <a href="/3d-fashion-lab">3D Fashion Lab</a>
               </div>
             </div>
           </div>  

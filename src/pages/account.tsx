@@ -1,4 +1,4 @@
-export const Payment = () => {
+export const Account = () => {
     return ( 
     <div className='home-container'>
     <section >
@@ -79,7 +79,7 @@ export const Payment = () => {
               <a href="/">Dashboard</a>
               </div>
               <div className='item'>
-              <a href="/product">Products</a>
+              <a href="/products">Products</a>
               </div>
               <div className='item'>
               <a href="#">Analytics</a>
@@ -107,71 +107,96 @@ export const Payment = () => {
            <div className='main'>
              <div className='text'>
                <div className='dashboard'>
-               Payment
+                 Account
                </div>
              </div>
              <div className="subscription">
              <div className="choose-plan">
-               Payment
+                <div className="profile-header">
+                    <div className="profile-header-text">Profile</div>
+                    <div className="profile-save-button">Save<img src={require('../assets/pngs/save.png')} alt="" /></div>
+                </div>
              </div>
-             <div className="payment">
-               <div className="payment-details">
-                  <div className="payment-details-block">
-                    <div className="payment-details-brief">
-                      <div className="try-momentumx">Try MomentumX Platform</div>
-                      <div className="days-free">14 days free</div>
-                      <div className="per-month">Then $ 99 per month</div>
-                    </div>
-                    <div className="payment-details-again">
-                      <div className="try-momentumx-again">MomentumX Platform</div>
-                      <div className="days-months">
-                        <div className="days-free-again">14 days free</div>
-                        <div className="per-month-again">$99.00 / month after</div>
-                      </div>
-                    </div>
-                    <div className="payment-details-info">
-                      <div className="payment-info-item bold"><span className="alignleft">Subtotal</span><span className="alignright">$99.00</span></div>
-                      <div className="payment-info-item"><span className="alignleft">VAT (19%)</span><span className="alignright">$18.01</span></div>
-                      <div className="payment-info-item"><span className="alignleft">Total after trial</span><span className="alignright">$117.01</span></div>
-                      <div className="payment-info-item bold"><span className="alignleft">Total after today</span><span className="alignright">$0.00</span></div>
-                    </div>
-                    <a className="payment-back-button" href="/subscription"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+             <div className="profile-info-block">
+              <div className="profile-info-horizontal">
+                <div className="profile-info-item">
+                  <img src={require('../assets/pngs/username.png')} alt="" />
+                  <div>
+                    <div className="profile-info-item-heading">User Name</div>
+                    <div>Name</div>
                   </div>
                 </div>
-                <div className="payment-details-input">
-                  <div className="enter-details">Enter payment details</div>
-                  <div className="payment-input-block">
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Email address</label>
-                      <input type="text" className="payment-input-item" placeholder="Enter email address"/>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Credit card number</label>
-                      <input type="text" className="payment-input-item" placeholder="xxxx xxxx xxxx xxxx"/>
-                    </div>
-                    <div className="payment-block-item-horizontal">
-                      <div>
-                        <label htmlFor="" className="payment-item-label">Expiry date</label>
-                        <input type="text" className="payment-input-item" placeholder="mm/yy"/>
-                      </div>
-                      <div>
-                        <label htmlFor="" className="payment-item-label">CVV</label>
-                        <input type="text" className="payment-input-item" placeholder="xxx"/>
-                      </div>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Name on card</label>
-                      <input type="text" className="payment-input-item" placeholder="enter your name" />
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Billing address</label>
-                      <input type="text" className="payment-input-item" placeholder="eg: floor no., flat no., colony"/>
-                    </div>
-                    <div className="save-details"><input type="checkbox" name="save-detail" id="save-details"/> Save my card's details</div>
+                <div className="profile-info-item">
+                  <img src={require('../assets/pngs/email.png')} alt="" />
+                  <div>
+                    <div className="profile-info-item-heading">Email</div>
+                    <div>Mtumxprojects@gmail.com</div>
                   </div>
-                  <div className="start-trial-button">Start Trial</div>
                 </div>
               </div>
+              <div className="profile-info-horizontal">
+                <div className="profile-info-item">
+                  <img src={require('../assets/pngs/occupation.png')} alt="" />
+                  <div>
+                    <div className="profile-info-item-heading">Occupation</div>
+                    <div>3D Fashion Designer</div>
+                  </div>
+                </div>
+                <div className="profile-info-item">
+                  <img src={require('../assets/pngs/company.png')} alt="" />
+                  <div>
+                    <div className="profile-info-item-heading">Company</div>
+                    <div>MomentumX</div>
+                  </div>
+                </div>
+              </div>
+             </div>
+             <div className="choose-plan">Subscription</div>
+             <div className="account-subscription-details">
+              <div className="account-current-details">
+                <div className="account-current-plan">
+                  <div className="account-item-heading">Current Plan</div>
+                  <div className="account-item-text">Current Plan (Active)</div>
+                </div>
+                <div className="account-current-billing">
+                  <div className="account-item-heading">Current billing period</div>
+                  <div className="account-item-text">21/02/2023 - 21/02/2024</div>
+                </div>
+              </div>
+              <div className="account-monthly-credits">
+                <div className="account-item-heading">Rendering monthly credits </div>
+                <div className="account-item-text">98/100</div>
+              </div>
+              <div className="account-buy-extra">
+                <div className="account-extra-credit">
+                  <div className="account-item-heading">Rendering extra credits</div>
+                  <div className="account-item-text">10000</div>
+                </div>
+                <div className="account-buy-credit">
+                  <div className="account-credit-quantity">
+                    <div className="account-credit-quantity-text">Quantity</div>
+                    <div className="account-credit-quantity-number">
+                      <div>1</div>
+                    </div> 
+                  </div>
+                  <a className="account-buy-button">Buy More</a>
+                </div>
+              </div>
+              <div className="account-products-viewer">
+                <div className="account-products">
+                  <div className="account-item-heading">Products</div>
+                  <div className="account-item-text">98/100</div>
+                </div>
+                <div className="account-viewer">
+                  <div className="account-item-heading">Viewer page views</div>
+                  <div className="account-item-text">100000/100000</div>
+                </div>
+              </div>
+              <div className="account-cancel-upgrade">
+                <div className="account-cancel-button">Cancel Plan</div>
+                <a className="account-upgrade-button" href="/subscription">Upgrade</a>
+              </div>
+             </div>
             </div>
           </div>
         </div>

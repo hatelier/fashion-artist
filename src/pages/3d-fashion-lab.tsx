@@ -1,4 +1,4 @@
-export const Analytics = () => {
+export const FashionLab = () => {
     return ( 
     <div className='home-container'>
     <section >
@@ -82,7 +82,7 @@ export const Analytics = () => {
               <a href="/product">Products</a>
               </div>
               <div className='item'>
-              <a href="/analytics">Analytics</a>
+              <a href="#">Analytics</a>
               </div>
               <div className='item'>
               <a href="/showroom">Showroom</a>
@@ -107,55 +107,13 @@ export const Analytics = () => {
            <div className='main'>
              <div className='text'>
                <div className='dashboard'>
-                 <div className="analytics-header">
-                    <span>Analytics</span>
-                    <a href="" className="analytics-download-button">Download</a>
-                 </div>
+               3D Fashion Lab
                </div>
              </div>
              <div className="subscription">
-               <div className="analytics-block">
-                 <div className="analytics-report-block">
-                   <div className="analytics-report">
-                     <div className="analytics-report-header">
-                        <div className="analytics-report-header-text">Report</div>
-                        <div className="analytics-report-header-buttons">
-                            <a href="">Product Report</a><a href="">Reset</a>
-                        </div>
-                     </div>
-                   </div>
-                   <div className="analytics-report-pagination">
-
-                   </div>
-                 </div>
-                 <div className="analytics-secondary-block">
-                  <div className="analytics-secondary-top">
-                    <div className="analytics-3d-views"></div>
-                    <div className="analytics-stats">
-                        <div className="analytics-user-engagement">
-                            <div className="analytics-user-engagement-text">All User Engagement</div>
-                            <div>
-                                <img src="" alt="" />
-                                <span>70%</span>
-                            </div>
-                        </div>
-                        <div className="analytics-average-interaction">
-                            <div className="analytics-average-interacttion-text">No. of Average Interaction</div>
-                            <div>
-                                <img src="" alt="" />
-                                <span>70</span>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div className="analytics-secondary-bottom">
-                    <div className="analytics-most-viewed"></div>
-                    <div className="analytics-ar-views"></div>
-                  </div>
-                 </div>
-               </div>
-
-
+             <div className="choose-plan">
+               Fashion Lab
+             </div>
              <div className="fashion-block">
                <div className="fashion-details-block">
                  <div className="fashion-welcome-text">
