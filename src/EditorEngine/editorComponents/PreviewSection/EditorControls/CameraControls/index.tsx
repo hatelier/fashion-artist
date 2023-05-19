@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp, faX } from "@fortawesome/free-solid-svg-icons";
 import Draggable from "react-draggable";
 import { MenuItem, Select, TextField } from "@mui/material";
+import { useSelector } from "react-redux";
+import { materialControl } from "../../../../../redux/materialControl";
 
 const HybridLists = () => {
   return (
@@ -41,6 +43,11 @@ const CameraControls = () => {
 };
 // here are all the configs for camera drag component
 export const CameraControlsDraggable = () => {
+  //here is the material list
+  const materialList = useSelector(
+    (state: any) => state.materialControl.materialArray
+  );
+  console.log("COpy of mat list", materialList);
   return (
     <Draggable>
       <div className={"cameraControlsDraggable"}>
@@ -50,7 +57,16 @@ export const CameraControlsDraggable = () => {
         </div>
         <div className={"nameSection"}>
           <p>Name</p>
-          <p>Long Sleeve</p>
+          <input
+            type={"text"}
+            placeholder={"New name"}
+            style={{
+              border: "none",
+              fontSize: "11px",
+              fontFamily: "NHreg",
+              height: "20px",
+            }}
+          />
         </div>
 
         {/*  material section*/}
@@ -60,7 +76,7 @@ export const CameraControlsDraggable = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={10}
+              defaultValue={10}
               // onChange={handleChange}
               style={{
                 borderRadius: "8px",
@@ -72,8 +88,9 @@ export const CameraControlsDraggable = () => {
               <MenuItem value={10} disabled>
                 Choose individual mesh
               </MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {materialList.map((matItem: any, index: number) => {
+                return <MenuItem value={matItem.name}>{matItem.name}</MenuItem>;
+              })}
             </Select>
 
             <button className={"redButtonClass"} style={{ fontSize: "10px" }}>

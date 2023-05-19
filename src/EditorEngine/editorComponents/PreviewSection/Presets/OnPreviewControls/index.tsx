@@ -263,12 +263,12 @@ const OnPreviewControls = () => {
       {/*<ConfigurationPopUp />*/}
 
       <CameraControlsDraggable />
-      <FusionControlComp />
-      <LightControlDrag />
-      <OrthographicCameraDrag />
-      <GraphicsControlsDrag />
-      <PerformanceControlsDrag />
-      <SceneControlsDrag />
+      {/*<FusionControlComp />*/}
+      {/*<LightControlDrag />*/}
+      {/*<OrthographicCameraDrag />*/}
+      {/*<GraphicsControlsDrag />*/}
+      {/*<PerformanceControlsDrag />*/}
+      {/*<SceneControlsDrag />*/}
 
       {/*these are the left side controls*/}
       <div className={"prevButtonControl"}>
