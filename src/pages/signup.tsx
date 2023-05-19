@@ -116,7 +116,7 @@ const Form = ({
                 </div>
                 <div className="companyname-container">
                 <label htmlFor="cpompanyname" className="label">Company Name</label>
-                <input type="text" id="companyname" className="input" onChange={(event) => setCompanyname(event.target.value)} required/>
+                <input type="text" id="companyname" className="companyname-input" onChange={(event) => setCompanyname(event.target.value)} required/>
                 </div>
             </div>
 
@@ -127,7 +127,7 @@ const Form = ({
             <input type="password" id="cpassword" className="input" required/>
             
             <label><input type="checkbox" id="updates" checked={updates} onChange={(event) => setUpdates(event.target.checked)}/>I will like to receive emails on future updates</label>
-            <label><input type="checkbox" checked />I agree to the<Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
+            <label><input type="checkbox" checked />I agree to the <Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
             
             <button type="submit" className="submit signup-button">{label}</button>
             <span className="title-text">Already have an account? <Link to="/auth" className="to-register">Login</Link></span>

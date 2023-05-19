@@ -1,4 +1,15 @@
+import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+
 export const Dashboard = () => {
+    const [cookies, setCookie] = useCookies(['access_token']);
+    const navigate = useNavigate()
+    const logout = () => {
+      setCookie('access_token',"")
+      window.localStorage.removeItem("userID");
+      navigate("/auth");
+    }
     return ( 
     <div className='home-container'>
     <section >
@@ -35,11 +46,7 @@ export const Dashboard = () => {
         src={require('../assets/pngs/headset-help-icon.png')}
         alt="help-icon"
       />Help Desk</a>
-       <a href="#">
-       <img
-        src={require('../assets/pngs/logout-icon.png')}
-        alt="help-icon"
-      />Logout</a>
+       {!cookies.access_token ? (<Link to ="/auth"> Login/Register</Link>) : <button onClick={logout}>Logout</button>}
        </div>
       </div>
       </header>
