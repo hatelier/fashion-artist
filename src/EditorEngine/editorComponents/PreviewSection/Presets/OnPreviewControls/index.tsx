@@ -262,9 +262,9 @@ const OnPreviewControls = () => {
       {/*<LightingControl />*/}
       {/*<ConfigurationPopUp />*/}
 
-      <CameraControlsDraggable />
+      {/*<CameraControlsDraggable />*/}
       {/*<FusionControlComp />*/}
-      {/*<LightControlDrag />*/}
+      <LightControlDrag />
       {/*<OrthographicCameraDrag />*/}
       {/*<GraphicsControlsDrag />*/}
       {/*<PerformanceControlsDrag />*/}

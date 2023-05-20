@@ -1,3 +1,5 @@
+// @ts-nocheck
+//EditorEngine/editorComponents/PreviewSection/EditorControls/CameraControls/index.tsx
 import React, { useState } from "react";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,6 +50,7 @@ export const CameraControlsDraggable = () => {
     (state: any) => state.materialControl.materialArray
   );
   console.log("COpy of mat list", materialList);
+  const [currentMaterial, setCurrentMaterial] = useState(null);
   return (
     <Draggable>
       <div className={"cameraControlsDraggable"}>
@@ -89,7 +92,16 @@ export const CameraControlsDraggable = () => {
                 Choose individual mesh
               </MenuItem>
               {materialList.map((matItem: any, index: number) => {
-                return <MenuItem value={matItem.name}>{matItem.name}</MenuItem>;
+                return (
+                  <MenuItem
+                    value={matItem.name}
+                    onClick={() => {
+                      setCurrentMaterial(matItem);
+                    }}
+                  >
+                    {matItem.name}
+                  </MenuItem>
+                );
               })}
             </Select>
 
@@ -102,34 +114,70 @@ export const CameraControlsDraggable = () => {
         {/*  position controls*/}
         <div className={"positionControls"}>
           <p>Position</p>
-          <div className={"positionSelector"}>
+          <form
+            className={"positionSelector"}
+            onSubmit={(e: any) => {
+              e.preventDefault();
+              if (currentMaterial) {
+                currentMaterial.position.set(
+                  e.target.X.value,
+                  e.target.Y.value,
+                  e.target.Z.value
+                );
+              }
+            }}
+          >
             <LabelledInputMui label={"X"} width={"63px"} />
             <LabelledInputMui label={"Y"} width={"63px"} />
             <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
-          </div>
+          </form>
         </div>
 
         {/*rotation controls*/}
         <div className={"positionControls"}>
           <p>Rotation</p>
-          <div className={"positionSelector"}>
+          <form
+            className={"positionSelector"}
+            onSubmit={(e: any) => {
+              e.preventDefault();
+              if (currentMaterial) {
+                currentMaterial.rotation.set(
+                  e.target.X.value,
+                  e.target.Y.value,
+                  e.target.Z.value
+                );
+              }
+            }}
+          >
             <LabelledInputMui label={"X"} width={"63px"} />
             <LabelledInputMui label={"Y"} width={"63px"} />
             <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
-          </div>
+          </form>
         </div>
 
         {/*  scale controls*/}
         <div className={"positionControls"}>
           <p>Scale</p>
-          <div className={"positionSelector"}>
+          <form
+            className={"positionSelector"}
+            onSubmit={(e: any) => {
+              e.preventDefault();
+              if (currentMaterial) {
+                currentMaterial.scale.set(
+                  e.target.X.value,
+                  e.target.Y.value,
+                  e.target.Z.value
+                );
+              }
+            }}
+          >
             <LabelledInputMui label={"X"} width={"63px"} />
             <LabelledInputMui label={"Y"} width={"63px"} />
             <LabelledInputMui label={"Z"} width={"63px"} />
             <button className={"saveButton"}>save</button>
-          </div>
+          </form>
         </div>
 
         {/*  rest of part*/}
@@ -234,31 +282,36 @@ export const FusionControlComp = () => {
   );
 };
 
-export const LabelledInputMui = ({
-  label,
-  width,
-}: {
-  label: string;
-  width: string;
-}) => {
-  return (
-    <TextField
-      label={`${label}`}
-      id="filled-size-small"
-      variant="outlined"
-      size="small"
-      style={{ width: `${width}` }}
-      inputProps={{
-        style: {
-          fontSize: "11px",
-        },
-      }}
-      InputLabelProps={{
-        style: {
-          fontSize: "11px",
-        },
-      }}
-    />
-  );
-};
+export const LabelledInputMui = React.forwardRef(
+  (
+    props: {
+      label: string;
+      width: string;
+    },
+    ref
+  ) => {
+    const { label, width } = props;
+    return (
+      <TextField
+        label={`${label}`}
+        id="filled-size-small"
+        variant="outlined"
+        size="small"
+        ref={ref}
+        name={`${label}`}
+        style={{ width: `${width}` }}
+        inputProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+        InputLabelProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+      />
+    );
+  }
+);
 export default CameraControls;

@@ -6,6 +6,7 @@ import Draggable from "react-draggable";
 import { MenuItem, Select, Slider } from "@mui/material";
 import { SketchPicker } from "react-color";
 import { LabelledInputMui } from "../CameraControls";
+import { useSelector } from "react-redux";
 
 const LightControls = () => {
   let lightTypes = ["Directional", "Spot", "Point", "Ambient", "Rect Area"];
@@ -31,10 +32,22 @@ const LightControls = () => {
   );
 };
 export const LightControlDrag = () => {
+  const [lightDetails, setLightDetails] = useState({
+    lightType: "directional",
+  });
+  const { lightType, lightColor, lightIntensity, distance, x, y, z } =
+    useSelector((state: any) => state.materialControl.currentLight);
+  const xRef: any = React.createRef();
+  const yRef: any = React.createRef();
+  const zRef: any = React.createRef();
+
   return (
-    <Draggable>
+    <Draggable handle={".dragClassLight"}>
       <div className={"lightControlDrag"}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{ display: "flex", justifyContent: "space-between" }}
+          className={"dragClassLight"}
+        >
           <p style={{ fontFamily: "NHbold" }}>Light</p>
           <FontAwesomeIcon icon={faX} />
         </div>
@@ -58,7 +71,7 @@ export const LightControlDrag = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={10}
+            defaultValue={"directional"}
             // onChange={handleChange}
             style={{
               borderRadius: "8px",
@@ -67,14 +80,20 @@ export const LightControlDrag = () => {
               fontSize: "11px",
               width: "100%",
             }}
+            onChange={(e) => {
+              setLightDetails((state) => {
+                return {
+                  ...state,
+                  lightType: e.target.value,
+                };
+              });
+            }}
           >
-            <MenuItem value={10} disabled>
-              Directional
-            </MenuItem>
-            <MenuItem value={20}>Spot</MenuItem>
-            <MenuItem value={30}>Point</MenuItem>
-            <MenuItem value={40}>Ambient</MenuItem>
-            <MenuItem value={50}>Rect Area</MenuItem>
+            <MenuItem value={"directional"}>Directional</MenuItem>
+            <MenuItem value={"spot"}>Spot</MenuItem>
+            <MenuItem value={"point"}>Point</MenuItem>
+            <MenuItem value={"ambient"}>Ambient</MenuItem>
+            <MenuItem value={"rectArea"}>Rect Area</MenuItem>
           </Select>
           <div style={{ display: "flex", gap: "5px", marginTop: "12px" }}>
             <input type={"checkbox"} />
@@ -92,7 +111,18 @@ export const LightControlDrag = () => {
 
         <div>
           <p style={{ margin: "10px 0 10px 0" }}>Color</p>
-          <SketchPicker width={"178px"} disableAlpha={true} />
+          <SketchPicker
+            width={"178px"}
+            color={"#ffffff"}
+            onChangeComplete={(e) => {
+              setLightDetails((state) => {
+                return {
+                  ...state,
+                  lightColor: e.hex,
+                };
+              });
+            }}
+          />
         </div>
 
         <div style={{ marginTop: "15px" }}>
@@ -100,12 +130,25 @@ export const LightControlDrag = () => {
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={lightIntensity}
               aria-label="Small"
               valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              onChange={(e: any) => {
+                if (e) {
+                  setLightDetails((state) => {
+                    return {
+                      ...state,
+                      lightIntensity: e.target.value,
+                    };
+                  });
+                }
+              }}
             />
             <input
-              type={"text"}
+              type={"number"}
+              value={lightIntensity}
               style={{
                 height: "29px",
                 width: "49px",
@@ -124,12 +167,25 @@ export const LightControlDrag = () => {
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={distance}
               aria-label="Small"
               valueLabelDisplay="auto"
+              min={0}
+              max={100}
+              onChange={(e: any) => {
+                if (e) {
+                  setLightDetails((state) => {
+                    return {
+                      ...state,
+                      distance: e.target.value,
+                    };
+                  });
+                }
+              }}
             />
             <input
-              type={"text"}
+              type={"number"}
+              value={distance}
               style={{
                 height: "29px",
                 width: "49px",
@@ -145,11 +201,11 @@ export const LightControlDrag = () => {
 
         <div>
           <p>Position</p>
-          <div style={{ display: "flex", gap: "6px", marginTop: "6px" }}>
-            <LabelledInputMui label={"X"} width={"63px"} />
-            <LabelledInputMui label={"Y"} width={"63px"} />
-            <LabelledInputMui label={"Z"} width={"63px"} />
-          </div>
+          <form style={{ display: "flex", gap: "6px", marginTop: "6px" }}>
+            <LabelledInputMui label={"X"} width={"63px"} ref={xRef} />
+            <LabelledInputMui label={"Y"} width={"63px"} ref={yRef} />
+            <LabelledInputMui label={"Z"} width={"63px"} ref={zRef} />
+          </form>
         </div>
 
         {/*  button controls*/}
@@ -160,7 +216,14 @@ export const LightControlDrag = () => {
             marginTop: "13px",
           }}
         >
-          <button className={"redButtonClass"}>Save</button>
+          <button
+            onClick={() => {
+              console.log(xRef.current.querySelector("input").value);
+            }}
+            className={"redButtonClass"}
+          >
+            Save
+          </button>
           <button className={"saveButton"}>Delete</button>
         </div>
       </div>

@@ -3,11 +3,17 @@
 import React, {Suspense, useContext} from "react";
 import "./index.scss";
 import {Canvas, useThree} from "@react-three/fiber";
-import {OrbitControls, PerformanceMonitor, PresentationControls, Stage,} from "@react-three/drei";
+import {
+  OrbitControls,
+  PerformanceMonitor,
+  PresentationControls,
+  Stage,
+} from "@react-three/drei";
 import UploadModel from "../UploadModel";
 import {Perf} from "r3f-perf";
 import {useSelector} from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
+import {DynamicLight} from "../SceneControls";
 
 const ModelPreview = (props) => {
   const {file, dimensions} = useContext(props.context);
@@ -50,8 +56,8 @@ const ModelPreview = (props) => {
     );
     return (
       <>
-        <ambientLight intensity={ambientLight} />
-        <directionalLight position={[10, 10, 5]} intensity={directionalLight} />
+        {/*<ambientLight intensity={ambientLight} />*/}
+        {/*<directionalLight position={[10, 10, 5]} intensity={directionalLight} />*/}
       </>
     );
   };
@@ -64,13 +70,14 @@ const ModelPreview = (props) => {
     >
       <OnPreviewControls />
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
+        <DynamicLight />
         <AmbientLightComponent />
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />
         <color attach="background" args={["#f0f0f0"]} />
         <PresentationControls
           global
-          rotation={[Math.PI / 8, 0, 0]}
+          // rotation={[Math.PI / 8, 0, 0]}
           // polar={[-0.1, Math.PI / 2]}
         >
           <Stage environment={"city"} intensity={0.6} castShadow={false}>

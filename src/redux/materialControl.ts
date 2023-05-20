@@ -15,6 +15,16 @@ export const materialControl = createSlice({
       z: 13,
       zoom: 4,
     },
+    //   here are the on-editor configs
+    currentLight: {
+      lightType: null,
+      lightColor: "",
+      lightIntensity: 0,
+      distance: 0,
+      x: 0,
+      y: 0,
+      z: 0,
+    },
   }),
   reducers: {
     updateCameraProps: (state, action) => {
