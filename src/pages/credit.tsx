@@ -76,16 +76,16 @@ export const Credit = () => {
             </div>
             <div className='submenu'>
               <div className='item'>
-              <a href="#">Dashboard</a>
+              <a href="/">Dashboard</a>
               </div>
               <div className='item'>
-              <a href="#">Products</a>
+              <a href="/products">Products</a>
               </div>
               <div className='item'>
-              <a href="#">Analytics</a>
+              <a href="/analytics">Analytics</a>
               </div>
               <div className='item'>
-              <a href="#">Showroom</a>
+              <a href="/showroom">Showroom</a>
               </div>
               <div className='item'>
               <a href="/3d-fashion-lab">3D Fashion Lab</a>
@@ -114,64 +114,76 @@ export const Credit = () => {
              <div className="choose-plan">
                Buy Credit
              </div>
-             <div className="payment">
-               <div className="payment-details">
-                  <div className="payment-details-block">
-                    <div className="payment-details-brief">
-                      <div className="try-momentumx">Try MomentumX Platform</div>
-                      <div className="days-free">14 days free</div>
-                      <div className="per-month">Then $ 99 per month</div>
+             <div className="credit-block">
+               <div className="credit-input-block">
+                 <div className="credit-input">
+                   <div className="credit-amount-heading">
+                      Credit Amount
+                   </div>
+                   <div className="credit-input-unit">
+                    <div className="credit-unit-buttons">
+                      <button className="credit-minus-button">-</button>
+                      <button className="credit-current-button">99</button>
+                      <button className="credit-plus-button">+</button>
                     </div>
-                    <div className="payment-details-again">
-                      <div className="try-momentumx-again">MomentumX Platform</div>
-                      <div className="days-months">
-                        <div className="days-free-again">14 days free</div>
-                        <div className="per-month-again">$99.00 / month after</div>
+                    <div className="credit-unit-cost-block">
+                      <div className="unit-cost">Unit Cost</div>
+                      <div className="unit-price">$99</div>
+                      <div className="coupon-code-block">
+                        <input type="text" placeholder="enter coupon code" className="enter-code"/>
+                        <button className="credit-coupon-apply">Apply</button>
                       </div>
                     </div>
-                    <div className="payment-details-info">
-                      <div className="payment-info-item bold"><span className="alignleft">Subtotal</span><span className="alignright">$99.00</span></div>
-                      <div className="payment-info-item"><span className="alignleft">VAT (19%)</span><span className="alignright">$18.01</span></div>
-                      <div className="payment-info-item"><span className="alignleft">Total after trial</span><span className="alignright">$117.01</span></div>
-                      <div className="payment-info-item bold"><span className="alignleft">Total after today</span><span className="alignright">$0.00</span></div>
+                    <a href="" className="credit-unit-payment">Proceed to payment</a>
+                   </div>
+                 </div>
+                 <a className="payment-back-button" href="/account"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+               </div>
+               <div className="credit-details-block">
+                 <div className="credit-details-heading">Credit Breakdown</div>
+                 <div className="credit-details">
+                  <div className="credit-details-price">
+                    <div className="credit-details-item">
+                      <div className="credit-price-heading">Price</div>
+                      <div className="credit-price-text">$1 = 5 Credits</div>
                     </div>
-                    <div className="payment-back-button"><img src={require('../assets/pngs/left.png')} alt="back" /> Back</div>
+                    <div className="credit-details-item">
+                      <div className="credit-price-heading">First time publishing</div>
+                      <div className="credit-price-text">1 Credit/Mb</div>
+                    </div>
+                    <div className="credit-details-item">
+                      <div className="credit-price-heading">Updating your project</div>
+                      <div className="credit-price-text">1 Credit/MB for increase in bundle size (1 Credit minimum)</div>
+                    </div>
+                    <div className="credit-details-item">
+                      <div className="credit-price-heading">Publish views</div>
+                      <div className="credit-price-text">2,000 (Renewed at original publish cost after 2,000 views)</div>
+                    </div>
                   </div>
-                </div>
-                <div className="payment-details-input">
-                  <div className="enter-details">Enter payment details</div>
-                  <div className="payment-input-block">
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Email address</label>
-                      <input type="text" className="payment-input-item" placeholder="Enter email address"/>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Credit card number</label>
-                      <input type="text" className="payment-input-item" placeholder="xxxx xxxx xxxx xxxx"/>
-                    </div>
-                    <div className="payment-block-item-horizontal">
-                      <div>
-                        <label htmlFor="" className="payment-item-label">Expiry date</label>
-                        <input type="text" className="payment-input-item" placeholder="mm/yy"/>
-                      </div>
-                      <div>
-                        <label htmlFor="" className="payment-item-label">CVV</label>
-                        <input type="text" className="payment-input-item" placeholder="xxx"/>
-                      </div>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Name on card</label>
-                      <input type="text" className="payment-input-item" placeholder="enter your name" />
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Billing address</label>
-                      <input type="text" className="payment-input-item" placeholder="eg: floor no., flat no., colony"/>
-                    </div>
-                    <div className="save-details"><input type="checkbox" name="save-detail" id="save-details"/> Save my card's details</div>
+                  <div className="credit-details-separator"></div>
+                  <div className="credit-details-general">
+                     <div className="credit-general-item">
+                       <div className="credit-general-heading">Bandwidth</div>
+                       <div className="credit-general-text">Outbound data transfer shared between your published websites to a user</div>
+                     </div>
+                     <div className="credit-general-item">
+                       <div className="credit-general-heading">Exporting project</div>
+                       <div className="credit-general-text credit-general-text-list">
+                        <ul className="credit-general-list">
+                          <li className="credit-list-item">(1 - 10MB) - 1 Credit</li>
+                          <li className="credit-list-item">(11 - 50MB) - 5 Credits</li>
+                          <li className="credit-list-item">(51 - 100MB) - 10 Credits</li>
+                          <li className="credit-list-item">(101 - 500MB) - 15 Credits</li>
+                          <li className="credit-list-item">(501 - 1000MB) - 20 Credits</li>
+                          <li className="credit-list-item">(above 1000MB) - 25 Credits</li>
+                        </ul>
+                       </div>
+                     </div>
                   </div>
-                  <div className="start-trial-button">Start Trial</div>
-                </div>
-              </div>
+                  <div></div>
+                 </div>
+               </div>
+             </div>
             </div>
           </div>
         </div>
