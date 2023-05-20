@@ -46,8 +46,18 @@ export const Dashboard = () => {
         src={require('../assets/pngs/headset-help-icon.png')}
         alt="help-icon"
       />Help Desk</a>
-       {!cookies.access_token ? (<Link to ="/auth"> Login/Register</Link>) : <button onClick={logout}>Logout</button>}
-       </div>
+      {!cookies.access_token ? (
+        <a href="/auth">
+        <img src={require('../assets/pngs/logout-icon.png')} alt="login-icon" />
+        Login/Register
+        </a>
+        ) : (
+        <a href="#" onClick={logout}>
+        <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />
+        Logout
+        </a>
+        )}
+      </div>
       </div>
       </header>
       <div className='content'>
