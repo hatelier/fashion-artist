@@ -39,6 +39,7 @@ import GraphicsControls, {
 } from "../../EditorControls/GraphicsControls";
 import { PerformanceControlsDrag } from "../../EditorControls/PerformanceControls";
 import { SceneControlsDrag } from "../../EditorControls/SceneControls";
+import ConfigurationPopUp from "../PopUpPanels/ConfigurationPopUp";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];

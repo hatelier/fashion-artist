@@ -1,8 +1,8 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, {Suspense, useContext} from "react";
+import React, { Suspense, useContext } from "react";
 import "./index.scss";
-import {Canvas, useThree} from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import {
   OrbitControls,
   PerformanceMonitor,
@@ -10,22 +10,22 @@ import {
   Stage,
 } from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import {Perf} from "r3f-perf";
-import {useSelector} from "react-redux";
+import { Perf } from "r3f-perf";
+import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import {DynamicLight} from "../SceneControls";
+import { DynamicLight } from "../SceneControls";
 
 const ModelPreview = (props) => {
-  const {file, dimensions} = useContext(props.context);
+  const { file, dimensions } = useContext(props.context);
   const cameraPosition = useSelector(
-      (state) => state.savedCameraControls.cameraPosition
+    (state) => state.savedCameraControls.cameraPosition
   );
   const OrbitalController = () => {
-    const {camera} = useThree();
+    const { camera } = useThree();
 
     //here are the controllable camera properties
-    const {fov, x, y, z, zoom, tx, ty, tz} = useSelector(
-        (state) => state.savedCameraControls.cameraProps
+    const { fov, x, y, z, zoom, tx, ty, tz } = useSelector(
+      (state) => state.savedCameraControls.cameraProps
     );
 
     // useEffect(() => {

@@ -27,6 +27,9 @@ export const materialControl = createSlice({
     },
   }),
   reducers: {
+    updateCurrentLight: (state, action) => {
+      state.currentLight = action.payload;
+    },
     updateCameraProps: (state, action) => {
       state.cameraProps = {
         ...state.cameraProps,
@@ -52,6 +55,7 @@ export const materialControl = createSlice({
 });
 
 export const {
+  updateCurrentLight,
   updateCameraProps,
   updateMaterialList,
   updateMaterialDimensions,

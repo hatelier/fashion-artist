@@ -6,7 +6,8 @@ import Draggable from "react-draggable";
 import { MenuItem, Select, Slider } from "@mui/material";
 import { SketchPicker } from "react-color";
 import { LabelledInputMui } from "../CameraControls";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentLight } from "../../../../../redux/materialControl";
 
 const LightControls = () => {
   let lightTypes = ["Directional", "Spot", "Point", "Ambient", "Rect Area"];
@@ -40,7 +41,8 @@ export const LightControlDrag = () => {
   const xRef: any = React.createRef();
   const yRef: any = React.createRef();
   const zRef: any = React.createRef();
-
+  const dispatch = useDispatch();
+  const [currColor, setColor] = useState("#ffffff");
   return (
     <Draggable handle={".dragClassLight"}>
       <div className={"lightControlDrag"}>
@@ -113,7 +115,7 @@ export const LightControlDrag = () => {
           <p style={{ margin: "10px 0 10px 0" }}>Color</p>
           <SketchPicker
             width={"178px"}
-            color={"#ffffff"}
+            color={currColor}
             onChangeComplete={(e) => {
               setLightDetails((state) => {
                 return {
@@ -121,6 +123,7 @@ export const LightControlDrag = () => {
                   lightColor: e.hex,
                 };
               });
+              setColor(e.hex);
             }}
           />
         </div>
@@ -219,6 +222,14 @@ export const LightControlDrag = () => {
           <button
             onClick={() => {
               console.log(xRef.current.querySelector("input").value);
+              dispatch(
+                updateCurrentLight({
+                  ...lightDetails,
+                  x: Number(xRef.current.querySelector("input").value),
+                  y: Number(yRef.current.querySelector("input").value),
+                  z: Number(zRef.current.querySelector("input").value),
+                })
+              );
             }}
             className={"redButtonClass"}
           >
