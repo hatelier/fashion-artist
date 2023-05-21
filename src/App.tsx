@@ -15,6 +15,7 @@ import { Account } from "./pages/account";
 import { FashionLab } from "./pages/3d-fashion-lab";
 import { Teams } from "./pages/teams";
 import EditorEngine from "./EditorEngine";
+import { UploadPage } from "./pages/upload";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/credit" element={<Credit />} />
           <Route path="/account" element={<Account />} />
           <Route path="/teams" element={<Teams />} />
+          <Route path="/products/upload/" element={<UploadPage />} />
         </Routes>
       </Router>
     </div>
