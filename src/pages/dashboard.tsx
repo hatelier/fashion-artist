@@ -1,10 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const Dashboard = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [firstName, setFirstName] = useState("");
+    const [occupation, setOccupation] = useState("");
+
+    useEffect(() => {
+      fetchUserData();
+    }, []);
+
+    const fetchUserData = async () => {
+      try {
+      const userID = window.localStorage.getItem('userID');
+      const response = await axios.get("http://localhost:3001/user/profile", { 
+        params: {
+          userID: userID
+        },
+      });
+      const userData = response.data;
+
+      setFirstName(userData.firstname);
+      setOccupation(userData.occupation);
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
     const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
@@ -69,8 +93,8 @@ export const Dashboard = () => {
                   <img src={require('../assets/pngs/user-icon.png')} alt="user-icon" />
                 </div>
                 <div className="user-details">
-                  <div className="username">User Name</div>
-                  <div className="occupation">Occupation</div>
+                  <div className="username">{firstName}</div>
+                  <div className="occupation">{occupation}</div>
                 </div>
                 <div className="arrow">
                   <img src={require('../assets/pngs/down.png')} alt="" />
@@ -120,7 +144,7 @@ export const Dashboard = () => {
         <div className='main'>
           <div className='text'>
             <div className='welcome'>
-               Hello, welcome back!
+               Hello, welcome back! {firstName}
             </div>
             <div className='dashboard'>
             Dashboard

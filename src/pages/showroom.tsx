@@ -1,4 +1,31 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 export const Showroom = () => {
+  const [firstName, setFirstName] = useState("");
+  const [occupation, setOccupation] = useState("");
+  
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+    const userID = window.localStorage.getItem('userID');
+    const response = await axios.get("http://localhost:3001/user/profile", { 
+      params: {
+        userID: userID
+      },
+    });
+    const userData = response.data;
+
+    setFirstName(userData.firstname);
+    setOccupation(userData.occupation);
+    } catch (error) {
+      console.error("Error fetching user data: ", error);
+    }
+  };
+
     return ( 
     <div className='home-container'>
     <section >
@@ -56,8 +83,8 @@ export const Showroom = () => {
                   <img src={require('../assets/pngs/user-icon.png')} alt="user-icon" />
                 </div>
                 <div className="user-details">
-                  <div className="username">User Name</div>
-                  <div className="occupation">Occupation</div>
+                  <div className="username">{firstName}</div>
+                  <div className="occupation">{occupation}</div>
                 </div>
                 <div className="arrow">
                   <img src={require('../assets/pngs/down.png')} alt="" />

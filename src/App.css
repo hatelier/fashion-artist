@@ -197,7 +197,7 @@ p {
 }
 
 .submit {
-  background-color: #bb3333;
+  background-color: #E70A4E;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -223,7 +223,7 @@ p {
   text-align: center;
   font-size: 1rem;
   margin-bottom: 20px;
-  color: #ce3467;
+  color: #E70A4E;
   text-decoration: underline;
 }
 /* End login page form */
@@ -306,6 +306,9 @@ p {
   border: 1px solid rgb(205, 214, 205);
 } 
 
+.signup .grid .signup-button {
+  background-color: #E70A4E;
+}
 /* End Signup page */
 
 /* Style the dropdown */
