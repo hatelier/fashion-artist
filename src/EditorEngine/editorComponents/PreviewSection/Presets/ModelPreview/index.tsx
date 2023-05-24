@@ -1,50 +1,58 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useRef } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
 import {
   OrbitControls,
   PerformanceMonitor,
   PresentationControls,
+  Reflector,
   Stage,
+  TransformControls,
 } from "@react-three/drei";
 import UploadModel from "../UploadModel";
 import { Perf } from "r3f-perf";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
 import { DynamicLight } from "../SceneControls";
+import { Vector3 } from "three";
+import { useControls } from "leva";
 
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
-  const cameraPosition = useSelector(
-    (state) => state.savedCameraControls.cameraPosition
-  );
+  const ref = useRef();
   const OrbitalController = () => {
     const { camera } = useThree();
 
     //here are the controllable camera properties
-    const { fov, x, y, z, zoom, tx, ty, tz } = useSelector(
+    const { x, y, z } = useSelector(
       (state) => state.savedCameraControls.cameraProps
     );
-
     // useEffect(() => {
     camera.fov = 50;
+    console.log("first load", x, y, z);
     camera.position.set(x, y, z);
-    camera.zoom = zoom;
+    camera.zoom = 3;
     camera.updateProjectionMatrix();
     // invalidate();
     // }, [fov, x, y, z, zoom]);
-
     return (
       <OrbitControls
         enableZoom={true}
+        enablePan={false}
+        enableRotate={false}
         zoomSpeed={0.8}
         panSpeed={1}
-        enableRotate={false}
+        // enableRotate={false}
         camera={camera}
-        // target={new Vector3(tx, ty, tz)}
       />
+      // <OrbitControls makeDefault minPolarAngle={Math.PI/2} maxPolarAngle={Math.PI/2} enableZoom={true}
+      //                enablePan={true}
+      //                zoomSpeed={0.3}
+      //                minAzimuthAngle={0}
+      //                maxAzimuthAngle={Math.PI / 2}
+      // />
     );
   };
   const AmbientLightComponent = () => {
@@ -87,6 +95,22 @@ const ModelPreview = (props) => {
               <UploadModel model={file} settings={props.settings} />
 
               <OrbitalController />
+
+              {/*<Reflector*/}
+              {/*  resolution={1024}*/}
+              {/*  blur={[800, 50]}*/}
+              {/*  mirror={0.4}*/}
+              {/*  mixBlur={1}*/}
+              {/*  mixStrength={0.5}*/}
+              {/*  depthScale={1}*/}
+              {/*  minDepthThreshold={0.7}*/}
+              {/*  maxDepthThreshold={1}*/}
+              {/*  rotation-x={-Math.PI / 2}*/}
+              {/*  args={[100, 100]}*/}
+              {/*  color="#d0d0d0"*/}
+              {/*  metalness={1}*/}
+              {/*  roughness={0.75}*/}
+              {/*/>*/}
             </Suspense>
           </Stage>
         </PresentationControls>
