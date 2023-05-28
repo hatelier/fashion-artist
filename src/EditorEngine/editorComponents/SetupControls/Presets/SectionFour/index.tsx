@@ -3,13 +3,23 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import * as THREE from "three";
-import {AmbientLight, DirectionalLight, Mesh, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import {
+    AmbientLight,
+    DirectionalLight,
+    Mesh,
+    PerspectiveCamera,
+    Scene,
+    WebGLRenderer,
+} from "three";
 import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
-import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png"
+import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
-import {updateProdMatState, updateProdMeshState,} from "../../../../../redux/savedConfigs";
+import {
+    updateProdMatState,
+    updateProdMeshState,
+} from "../../../../../redux/savedConfigs";
 import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
@@ -134,6 +144,9 @@ const SectionFour = () => {
                         ))}
                     </div>
                 )}
+                <button className={"uploadAsset"} style={{width: "100%"}}>
+                    + Mesh
+                </button>
             </div>
 
             {/*  here is the product material section*/}
@@ -161,6 +174,9 @@ const SectionFour = () => {
                         })}
                     </div>
                 )}
+                <button className={"uploadAsset"} style={{width: "100%"}}>
+                    + Material
+                </button>
             </div>
 
             {/*  here is the product textures section*/}
@@ -171,14 +187,7 @@ const SectionFour = () => {
                 </div>
             </div>
             {/*    here is the button control*/}
-            <div className={"DupDelDiv"}>
-                <button className={"uploadAsset"} style={{width: "40%"}}>
-                    + Mesh
-                </button>
-                <button className={"uploadAsset"} style={{width: "60%"}}>
-                    + Material
-                </button>
-            </div>
+            <div className={"DupDelDiv"}></div>
         </div>
   );
 };
@@ -225,17 +234,17 @@ const HoverRender = ({ mesh }) => {
           width: "31px",
           height: "31px",
         }}
-        onMouseEnter={(e) => {
-          setHoverState(true);
-          if (!renderImage) {
-            let renderSource = createMaterialThumbnail(renderer, mesh.material);
-            e.target.src = renderSource;
-            setRenderImage(renderSource);
-          }
-        }}
-        onMouseLeave={() => {
-          setHoverState(false);
-        }}
+        // onMouseEnter={(e) => {
+        //   setHoverState(true);
+        //   if (!renderImage) {
+        //     let renderSource = createMaterialThumbnail(renderer, mesh.material);
+        //     e.target.src = renderSource;
+        //     setRenderImage(renderSource);
+        //   }
+        // }}
+        // onMouseLeave={() => {
+        //   setHoverState(false);
+        // }}
       />
       <div>
         <p

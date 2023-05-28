@@ -41,7 +41,7 @@ const ModelPreview = (props) => {
       <OrbitControls
         enableZoom={true}
         enablePan={false}
-        enableRotate={false}
+        // enableRotate={false}
         zoomSpeed={0.8}
         panSpeed={1}
         // enableRotate={false}

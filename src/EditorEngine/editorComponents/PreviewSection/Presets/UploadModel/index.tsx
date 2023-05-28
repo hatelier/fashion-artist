@@ -25,7 +25,7 @@ const UploadModel = () => {
   //const useRef
   const modelRef = useRef<THREE.Group>();
   const materialListed = useSelector(
-      (state) => state.materialControl.materialArray
+    (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];
@@ -66,20 +66,6 @@ const UploadModel = () => {
         position={[0, 0, 0]}
         rotation={[0, 0, 0]}
       />
-      {/*{materialListed.map((mesh, index) => {*/}
-      {/*  console.log("here is mesh", mesh);*/}
-      {/*  return (*/}
-      {/*    <TransformControls key={index} mode={mode} object={mesh}>*/}
-      {/*      <primitive*/}
-      {/*        ref={modelRef}*/}
-      {/*        object={mesh}*/}
-      {/*        scale={[0.8, 0.8, 0.8]}*/}
-      {/*        position={[0, 0, 0]}*/}
-      {/*        rotation={[0, 0, 0]}*/}
-      {/*      />*/}
-      {/*    </TransformControls>*/}
-      {/*  );*/}
-      {/*})}*/}
     </>
   );
 };
