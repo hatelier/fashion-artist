@@ -23,6 +23,7 @@ import {
 import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import AddMaterialPopUp from "./components/AddMaterialPopUp";
 
 const SectionFour = () => {
     const materialArray = useSelector(
@@ -67,7 +68,7 @@ const SectionFour = () => {
             {/*    }}*/}
             {/*  />*/}
             {/*</div>*/}
-
+            <AddMaterialPopUp/>
             <div
                 style={{
                     display: "flex",
