@@ -1,7 +1,4 @@
 //fushion drags
-p {
-  font-family: NHreg;
-}
 
 .fusionDragComp {
   position: absolute;
@@ -17,7 +14,6 @@ p {
   margin-top: 20px;
 
   & > p:first-child {
-    font-family: NHbold;
   }
 
   & > p:nth-child(2) {
@@ -37,7 +33,6 @@ p {
 
   p {
     margin-top: 10px;
-    font-family: NHbold;
   }
 }
 
@@ -80,7 +75,6 @@ p {
 
     p {
       margin-top: 10px;
-      font-family: NHbold;
     }
   }
 
@@ -89,7 +83,6 @@ p {
     justify-content: space-between;
 
     p {
-      font-family: NHbold;
       font-size: 12px;
     }
   }
@@ -113,7 +106,6 @@ p {
   }
 
   .mainPropControl {
-    font-family: NHmed;
     margin: 12px 0;
   }
 }

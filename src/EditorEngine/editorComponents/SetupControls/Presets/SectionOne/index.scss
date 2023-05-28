@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   margin: 0 16px;
-  font-family: NHreg;
   position: relative;
   height: 100%;
 
@@ -65,7 +64,6 @@
   }
 
   .productTitle {
-    font-family: NHmed;
     font-size: 18px;
     line-height: 22px;
     color: #000000;
@@ -73,7 +71,6 @@
   }
 
   .uploadAsset {
-    font-family: NHmed;
     height: 38px;
     background: #E70A4E;
     border-radius: 10px;
