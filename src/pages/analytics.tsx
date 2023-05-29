@@ -154,51 +154,6 @@ export const Analytics = () => {
                   </div>
                  </div>
                </div>
-
-
-             <div className="fashion-block">
-               <div className="fashion-details-block">
-                 <div className="fashion-welcome-text">
-                   Welcome to our fashion lab where you get all your 3D fashion items you need
-                 </div>
-                 <div className="fashion-details">
-                   <div className="fashion-details-item">
-                      <label htmlFor="" className="fashion-item-label">Contact Name</label>
-                      <input type="text" className="fashion-item-input" placeholder="Enter contact name"/>
-                   </div>
-                   <div className="fashion-details-item">
-                      <label htmlFor="" className="fashion-item-label">Contact Email</label>
-                      <input type="text" className="fashion-item-input" placeholder="Enter contact email address"/>
-                   </div>
-                   <div className="fashion-details-item">
-                      <label htmlFor="" className="fashion-item-label">Design Name</label>
-                      <input type="text" className="fashion-item-input" placeholder="Enter your design name"/>
-                   </div>
-                   <div className="fashion-details-item">
-                      <label htmlFor="" className="fashion-item-label">Tell us about your design</label>
-                      <textarea rows={4} className="fashion-item-input about-design" placeholder="Tell us more about your design like the idea, the inspiration, the story board and all we need to know"/>
-                   </div>
-                 </div>
-                 <div className="fashion-need-cad"><input type="checkbox" name="save-detail" id="save-details"/>Need the CAD or pattern files for production?</div>
-               </div>
-               <div className="fashion-upload-block">
-                  <div className="fashion-upload-heading">
-                    To bring your fashion designs to life in 3D
-                  </div>
-                  <div className="fashion-upload-text">
-                    Upload sketches, technical drawings, and mood boards to help us understand your vision and create an accurate 3D model of your fashion items. Thank you!
-                  </div>
-                  <div className="fashion-upload-area">
-                    <div>
-                        <img src={require('../assets/pngs/fashionlab-upload.png')} alt="" />
-                    </div>
-                    <div>
-                      Upload your design here
-                    </div>
-                  </div>
-                  <a href="" className="fashion-upload-button">Upload Design</a>
-               </div>
-              </div>
             </div>
           </div>
         </div>

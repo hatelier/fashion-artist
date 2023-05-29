@@ -14,6 +14,8 @@ import { Credit } from "./pages/credit";
 import { Account } from "./pages/account";
 import { FashionLab } from "./pages/3d-fashion-lab";
 import { Teams } from "./pages/teams";
+import { Assets } from "./pages/asset-library";
+import { AddShowroom } from "./pages/add-showroom";
 import EditorEngine from "./EditorEngine";
 import { UploadPage } from "./pages/upload";
 
@@ -37,6 +39,8 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/products/upload/" element={<UploadPage />} />
+          <Route path="/assets" element={<Assets />} />
+          <Route path="/add-showroom" element={<AddShowroom />} />
         </Routes>
       </Router>
     </div>

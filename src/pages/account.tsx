@@ -212,7 +212,7 @@ export const Account = () => {
                       <div>1</div>
                     </div> 
                   </div>
-                  <a className="account-buy-button">Buy More</a>
+                  <a className="account-buy-button" href="/credit">Buy More</a>
                 </div>
               </div>
               <div className="account-products-viewer">

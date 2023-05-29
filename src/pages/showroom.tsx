@@ -143,10 +143,10 @@ export const Showroom = () => {
              </div>
              <div className="showroom-search-add">
                 <input type="text" className="showroom-search" placeholder="search by showroom"/>
-                <button className="add-product">
+                <a href="/add-showroom" className="add-product">
                     <img src={require('../assets/pngs/plus.png')} alt="add new showroom" />
                     Show room
-                </button>
+                </a>
              </div>
                <table className="showroom-block">
                 <tr className="showroom-heading-row">
