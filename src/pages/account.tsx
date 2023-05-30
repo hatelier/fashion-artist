@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export const Account = () => {
+    const [cookies, setCookie] = useCookies(['access_token']);
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -31,6 +35,11 @@ export const Account = () => {
         console.error("Error fetching user data: ", error);
       }
     };
+    const logout = () => {
+      setCookie('access_token',"")
+      window.localStorage.removeItem("userID");
+      navigate("/auth");
+    }
 
     return ( 
     <div className='home-container'>
@@ -71,12 +80,17 @@ export const Account = () => {
                alt="help-icon"
               />Help Desk
             </a>
-            <a href="#">
-              <img
-               src={require('../assets/pngs/logout-icon.png')}
-               alt="help-icon"
-              />Logout
+            {!cookies.access_token ? (
+            <a href="/auth">
+            <img src={require('../assets/pngs/logout-icon.png')} alt="login-icon" />
+            Login/Register
             </a>
+            ) : (
+            <a href="#" onClick={logout}>
+            <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />
+            Logout
+            </a>
+            )}
           </div>
         </div>
       </header>

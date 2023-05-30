@@ -267,7 +267,7 @@ p {
 
 .signup {
   position: relative;
-  height: 750px;
+  height: 765px;
   width: 500px;
   background-color: #fff;
   padding: 30px;
@@ -308,6 +308,11 @@ p {
 
 .signup .grid .signup-button {
   background-color: #E70A4E;
+}
+.signup .error {
+  font-size: medium;
+  color: red;
+  margin-bottom: 10px;
 }
 /* End Signup page */
 
