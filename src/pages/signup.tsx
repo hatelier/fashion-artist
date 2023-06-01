@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FormEvent } from 'react';
+import { FormEvent, ChangeEvent } from 'react';
 
 interface FormProps {
     firstname: string;
@@ -19,7 +19,13 @@ interface FormProps {
     password: string;
     setPassword: (email: string) => void;
     label: string;
+    confirmPassword: string;
+    setConfirmPassword: (password: string) => void;
     onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    passwordMatchError: boolean;
+    handlePasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handleConfirmPasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
+
   }
 
 
@@ -49,10 +55,26 @@ const Register = () => {
     const [companyname, setCompanyname] = useState("")
     const [password, setPassword] = useState("")
     const [updates, setUpdates] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [passwordMatchError, setPasswordMatchError] = useState(false)
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value);
+        setPasswordMatchError(false); // Reset the password match error when the password changes
+      };
+    
+      const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(event.target.value);
+        setPasswordMatchError(false); // Reset the password match error when the confirm password changes
+      };
     
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
+            if(password !==  confirmPassword)
+            {
+                setPasswordMatchError(true);
+                return;
+            }
             await axios.post("http://localhost:3001/auth/register", {
                 firstname, lastname, email, occupation, companyname, password, updates,
             });
@@ -69,7 +91,10 @@ const Register = () => {
     companyname={companyname} setCompanyname={setCompanyname}
     password={password} setPassword={setPassword} 
     updates={updates} setUpdates={setUpdates}
-    label="Sign Up" onSubmit={onSubmit}/>;
+    confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
+    passwordMatchError = {passwordMatchError}
+    label="Sign Up" onSubmit={onSubmit} handlePasswordChange={handlePasswordChange}
+    handleConfirmPasswordChange = {handleConfirmPasswordChange}/>;
 };
 
 const Form = ({
@@ -80,7 +105,10 @@ const Form = ({
     companyname, setCompanyname,
     password, setPassword, 
     updates, setUpdates,
-    label, onSubmit }: FormProps) => {
+    confirmPassword, setConfirmPassword,
+    handlePasswordChange, handleConfirmPasswordChange,
+    label, onSubmit, passwordMatchError }: FormProps) => {
+        
     return (
         <div className="signup-container main-grid">
          <form className="signup" onSubmit={onSubmit}>
@@ -121,11 +149,12 @@ const Form = ({
             </div>
 
             <label htmlFor="password" className="label">Password</label>
-            <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
+            <input type="password" id="password" className="input" value={password} onChange={handlePasswordChange} required/>
             
             <label htmlFor="cpassword" className="label">Confirm Password</label>
-            <input type="password" id="cpassword" className="input" required/>
-            
+            <input type="password" id="cpassword" className="input" value={confirmPassword} onChange={handleConfirmPasswordChange} required/>
+            {passwordMatchError && <p className="error">Passwords do not match</p>}
+
             <label><input type="checkbox" id="updates" checked={updates} onChange={(event) => setUpdates(event.target.checked)}/>I will like to receive emails on future updates</label>
             <label><input type="checkbox" checked />I agree to the <Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
             

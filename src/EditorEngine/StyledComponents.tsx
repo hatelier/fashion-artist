@@ -26,3 +26,16 @@ export const WhiteButtonClass = styled.button`
     background: #ffffff;
     color: #E70A4E;
 `
+export const LabelCentered = styled.label`
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 11px;
+    align-items: center;
+    cursor: pointer;
+`
+
+export const InvisibleFileUploader = styled.input`
+    display: none;
+`
