@@ -66,7 +66,7 @@ const Form = ({email, setEmail, password, setPassword, label, onSubmit }: FormPr
             <label htmlFor="password" className="label">Password</label>
             <input type="password" id="password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
             
-            <Link to = "/auth/register" className="forgot">Forgot Password?</Link>
+            <Link to = "/forgot-password" className="forgot">Forgot Password?</Link>
             <button type="submit" className="submit">{label}</button>
 
             <span className= "account-text">No account? <Link to="/register" className="to-register">Sign up</Link></span>

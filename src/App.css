@@ -2698,3 +2698,31 @@ width: 100%;
   border-radius: 10px;
   color: #ffffff;
 }
+
+.forgot-password {
+  height: auto;
+  width: auto;
+}
+
+.submit a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.forgot-password .inputfield {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.forgot-password .input-otp {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #dad9df;
+  outline: none;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 0.3em;
+  background-color: #ffffff;
+  outline: none;
+}

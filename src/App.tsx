@@ -8,6 +8,9 @@ import { Products } from "./pages/products";
 import { Showroom } from "./pages/showroom";
 import { Manage } from "./pages/manage";
 import { Signup } from "./pages/signup";
+import { ForgotPassword } from "./pages/forgot-password";
+import { NewPassword } from "./pages/new-password"
+import { ResetPassword } from "./pages/reset-password"
 import { Subscription } from "./pages/subscription";
 import { Payment } from "./pages/payment";
 import { Credit } from "./pages/credit";
@@ -32,6 +35,9 @@ function App() {
           <Route path="/3d-fashion-lab" element={<FashionLab />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/register" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/new-password" element={<NewPassword />} />
           <Route path="/editor" element={<EditorEngine />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/payment" element={<Payment />} /> 
