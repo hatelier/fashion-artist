@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
-import { useThree } from "@react-three/fiber";
+//SceneControls.tsx
+import React, {useEffect} from "react";
+import {useThree} from "@react-three/fiber";
 import * as THREE from "three";
-import { useSelector } from "react-redux";
-import { materialControl } from "../../../../redux/materialControl";
+import {useSelector} from "react-redux";
+import {materialControl} from "../../../../redux/materialControl";
+import {materialApplication} from "../../../../redux/materialApplication";
+import {useTexture} from "@react-three/drei";
 
 export const DynamicLight = () => {
   const { scene } = useThree();
@@ -41,5 +44,28 @@ export const DynamicLight = () => {
       };
     }
   }, [lightType, lightColor, lightIntensity, distance, x, y, z]);
+  return null;
+};
+
+// here is the material control component
+export const MaterialControl = () => {
+  const materialReq = useSelector(
+    (state: any) => state.materialApplication.materialReqs
+  );
+  const currentPart = useSelector(
+    (state: any) => state.materialApplication.currentPart
+  );
+
+  function testFunc() {
+    // const newMaterial = useTexture({
+    //   ...materialReq,
+    // });
+  }
+
+  useEffect(() => {
+    if (!currentPart) {
+      // testFunc();
+    }
+  }, []);
   return null;
 };

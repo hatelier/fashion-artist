@@ -15,7 +15,7 @@ import UploadModel from "../UploadModel";
 import { Perf } from "r3f-perf";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import { DynamicLight } from "../SceneControls";
+import { DynamicLight, MaterialControl } from "../SceneControls";
 import { Vector3 } from "three";
 import { useControls } from "leva";
 
@@ -79,6 +79,7 @@ const ModelPreview = (props) => {
       <OnPreviewControls />
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         <DynamicLight />
+        <MaterialControl />
         <AmbientLightComponent />
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />

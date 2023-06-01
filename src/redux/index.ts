@@ -12,6 +12,7 @@ import materialControl from "./materialControl";
 import renderSlice from "./triggerRedux";
 import savedConfigs from "./savedConfigs";
 import savedCameraControls from "./savedCameraControls";
+import materialApplication from "./materialApplication";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   renderSlice,
   savedConfigs,
   savedCameraControls,
+  materialApplication,
 });
 
 // a middleware to save binary files.
