@@ -8,9 +8,9 @@ import {materialApplication} from "../../../../redux/materialApplication";
 import {useTexture} from "@react-three/drei";
 
 export const DynamicLight = () => {
-  const { scene } = useThree();
-  const { lightType, lightColor, lightIntensity, distance, x, y, z } =
-    useSelector((state: any) => state.materialControl.currentLight);
+  const {scene} = useThree();
+  const {lightType, lightColor, lightIntensity, distance, x, y, z} =
+      useSelector((state: any) => state.materialControl.currentLight);
   useEffect(() => {
     if (lightType) {
       let newLight: any;
