@@ -1,15 +1,15 @@
 //sectionFour/index.tsx
 // @ts-nocheck
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
 import {
-    AmbientLight,
-    DirectionalLight,
-    Mesh,
-    PerspectiveCamera,
-    Scene,
-    WebGLRenderer,
+  AmbientLight,
+  DirectionalLight,
+  Mesh,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
 } from "three";
 import "./index.scss";
 //image imports
@@ -17,179 +17,179 @@ import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
 import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import {
-    updateProdMatState,
-    updateProdMeshState,
+  updateProdMatState,
+  updateProdMeshState,
 } from "../../../../../redux/savedConfigs";
 import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "./components/AddMaterialPopUp";
 
 const SectionFour = () => {
-    const materialArray = useSelector(
-        (state) => state.materialControl.materialArray
-    );
-    const ambientLight = useSelector(
-        (state) => state.materialControl.ambientLight
-    );
-    const directionalLight = useSelector(
-        (state) => state.materialControl.directionalLight
-    );
-    const dispatch = useDispatch();
+  const materialArray = useSelector(
+    (state) => state.materialControl.materialArray
+  );
+  const ambientLight = useSelector(
+    (state) => state.materialControl.ambientLight
+  );
+  const directionalLight = useSelector(
+    (state) => state.materialControl.directionalLight
+  );
+  const dispatch = useDispatch();
 
-    const loadProductMeshes = useSelector(
-        (state) => state.savedConfigs.loadProductMeshes
-    );
-    const loadProuctMaterials = useSelector(
-        (state) => state.savedConfigs.loadProuctMaterials
-    );
-    return (
-        <div className={"sectionFourDiv"}>
-            {/*  enable this code post */}
-            {/*<div className={"lightcontrols"}>*/}
-            {/*  <div>Ambient Occlusion lighting</div>*/}
-            {/*  <input*/}
-            {/*    type={"range"}*/}
-            {/*    min={0}*/}
-            {/*    max={10}*/}
-            {/*    value={ambientLight}*/}
-            {/*    onChange={(e) => {*/}
-            {/*      dispatch(updateAmbientLight(e.target.value));*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*  <div>Directional lighting</div>*/}
-            {/*  <input*/}
-            {/*    type={"range"}*/}
-            {/*    min={0}*/}
-            {/*    max={10}*/}
-            {/*    value={directionalLight}*/}
-            {/*    onChange={(e) => {*/}
-            {/*      dispatch(updateDirLight(e.target.value));*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            <AddMaterialPopUp/>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    margin: "36px 0 6px 0",
-                    justifyContent: "space-between",
-                }}
-            >
-                <p className={"sectionFourTitle"}>Assets</p>
-                <img src={AssetImage} style={{width: "21.35px"}}/>
-            </div>
+  const loadProductMeshes = useSelector(
+    (state) => state.savedConfigs.loadProductMeshes
+  );
+  const loadProuctMaterials = useSelector(
+    (state) => state.savedConfigs.loadProuctMaterials
+  );
+  return (
+    <div className={"sectionFourDiv"}>
+      {/*  enable this code post */}
+      {/*<div className={"lightcontrols"}>*/}
+      {/*  <div>Ambient Occlusion lighting</div>*/}
+      {/*  <input*/}
+      {/*    type={"range"}*/}
+      {/*    min={0}*/}
+      {/*    max={10}*/}
+      {/*    value={ambientLight}*/}
+      {/*    onChange={(e) => {*/}
+      {/*      dispatch(updateAmbientLight(e.target.value));*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*  <div>Directional lighting</div>*/}
+      {/*  <input*/}
+      {/*    type={"range"}*/}
+      {/*    min={0}*/}
+      {/*    max={10}*/}
+      {/*    value={directionalLight}*/}
+      {/*    onChange={(e) => {*/}
+      {/*      dispatch(updateDirLight(e.target.value));*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*</div>*/}
+      <AddMaterialPopUp />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          margin: "36px 0 6px 0",
+          justifyContent: "space-between",
+        }}
+      >
+        <p className={"sectionFourTitle"}>Assets</p>
+        <img src={AssetImage} style={{ width: "21.35px" }} />
+      </div>
 
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    margin: "18px 0 6px 0",
-                    justifyContent: "space-between",
-                }}
-            >
-                <p className={"sectionFourTitle"}>Products</p>
-                <img src={AddConfig} style={{width: "21.35px"}}/>
-            </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          margin: "18px 0 6px 0",
+          justifyContent: "space-between",
+        }}
+      >
+        <p className={"sectionFourTitle"}>Products</p>
+        <img src={AddConfig} style={{ width: "21.35px" }} />
+      </div>
 
-            {/*input section to search for the required material*/}
-            <input
-                type={"text"}
-                className={"productName"}
-                placeholder={"Search product assets"}
-            />
+      {/*input section to search for the required material*/}
+      <input
+        type={"text"}
+        className={"productName"}
+        placeholder={"Search product assets"}
+      />
 
-            {/*here is the product meshes section*/}
-            <div>
-                <div className={"productMeshes"}>
-                    <p>Product Meshes</p>
-                    <FontAwesomeIcon
-                        icon={loadProductMeshes ? faEye : faEyeSlash}
-                        className={"fimg"}
-                        onClick={() => {
-                            dispatch(updateProdMeshState());
-                        }}
-                    />
-                </div>
-                {loadProductMeshes && (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            marginTop: "10px",
-                        }}
-                    >
-                        {materialArray.map((mesh, index) => (
-                            <div key={index} className="meshPreview">
-                                <img
-                                    src={ObjectPng}
-                                    style={{
-                                        height: "31px",
-                                        width: "31px",
-                                    }}
-                                />
-                                <div>
-                                    <p
-                                        style={{
-                                            width: "20px",
-                                            overflow: "hidden",
-                                        }}
-                                        className={"matNameMesh"}
-                                    >
-                                        {mesh.name}
-                                    </p>
-                                    <p>⋮</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-                <button className={"uploadAsset"} style={{width: "100%"}}>
-                    + Mesh
-                </button>
-            </div>
-
-            {/*  here is the product material section*/}
-            <div>
-                <div className={"productMeshes"}>
-                    <p>Product Materials</p>
-                    <FontAwesomeIcon
-                        icon={loadProuctMaterials ? faEye : faEyeSlash}
-                        className={"fimg"}
-                        onClick={() => {
-                            dispatch(updateProdMatState());
-                        }}
-                    />
-                </div>
-                {loadProuctMaterials && (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            marginTop: "10px",
-                        }}
-                    >
-                        {materialArray.map((mesh, index) => {
-                            return <HoverRender mesh={mesh}/>;
-                        })}
-                    </div>
-                )}
-                <button className={"uploadAsset"} style={{width: "100%"}}>
-                    + Material
-                </button>
-            </div>
-
-            {/*  here is the product textures section*/}
-            <div>
-                <div className={"productMeshes"}>
-                    <p>Product Textures</p>
-                    <FontAwesomeIcon icon={faEye} className={"fimg"}/>
-                </div>
-            </div>
-            {/*    here is the button control*/}
-            <div className={"DupDelDiv"}></div>
+      {/*here is the product meshes section*/}
+      <div>
+        <div className={"productMeshes"}>
+          <p>Product Meshes</p>
+          <FontAwesomeIcon
+            icon={loadProductMeshes ? faEye : faEyeSlash}
+            className={"fimg"}
+            onClick={() => {
+              dispatch(updateProdMeshState());
+            }}
+          />
         </div>
+        {loadProductMeshes && (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              marginTop: "10px",
+            }}
+          >
+            {materialArray.map((mesh, index) => (
+              <div key={index} className="meshPreview">
+                <img
+                  src={ObjectPng}
+                  style={{
+                    height: "31px",
+                    width: "31px",
+                  }}
+                />
+                <div>
+                  <p
+                    style={{
+                      width: "20px",
+                      overflow: "hidden",
+                    }}
+                    className={"matNameMesh"}
+                  >
+                    {mesh.name}
+                  </p>
+                  <p>⋮</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <button className={"uploadAsset"} style={{ width: "100%" }}>
+          + Mesh
+        </button>
+      </div>
+
+      {/*  here is the product material section*/}
+      <div>
+        <div className={"productMeshes"}>
+          <p>Product Materials</p>
+          <FontAwesomeIcon
+            icon={loadProuctMaterials ? faEye : faEyeSlash}
+            className={"fimg"}
+            onClick={() => {
+              dispatch(updateProdMatState());
+            }}
+          />
+        </div>
+        {loadProuctMaterials && (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              marginTop: "10px",
+            }}
+          >
+            {materialArray.map((mesh, index) => {
+              return <HoverRender mesh={mesh} />;
+            })}
+          </div>
+        )}
+        <button className={"uploadAsset"} style={{ width: "100%" }}>
+          + Material
+        </button>
+      </div>
+
+      {/*  here is the product textures section*/}
+      <div>
+        <div className={"productMeshes"}>
+          <p>Product Textures</p>
+          <FontAwesomeIcon icon={faEye} className={"fimg"} />
+        </div>
+      </div>
+      {/*    here is the button control*/}
+      <div className={"DupDelDiv"}></div>
+    </div>
   );
 };
 
@@ -234,6 +234,9 @@ const HoverRender = ({ mesh }) => {
         style={{
           width: "31px",
           height: "31px",
+        }}
+        onClick={() => {
+          console.log(mesh.material);
         }}
         // onMouseEnter={(e) => {
         //   setHoverState(true);

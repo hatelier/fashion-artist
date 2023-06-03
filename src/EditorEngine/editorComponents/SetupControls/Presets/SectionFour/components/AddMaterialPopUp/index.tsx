@@ -2,9 +2,9 @@
 import "./index.scss";
 // image imports
 import addPic from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
-import {Slider} from "@mui/material";
-import React, {useState} from "react";
-import {LabelledInputMui} from "../../../../../PreviewSection/EditorControls/CameraControls";
+import { Slider } from "@mui/material";
+import React, { useState } from "react";
+import { LabelledInputMui } from "../../../../../PreviewSection/EditorControls/CameraControls";
 import ReactImageMagnify from "react-image-magnify";
 import {
   InvisibleFileUploader,
@@ -14,14 +14,14 @@ import {
   WhiteButtonClass,
 } from "../../../../../../StyledComponents";
 import Draggable from "react-draggable";
-import {useTexture} from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 import {
   MeshPhysicalMaterial,
   MeshStandardMaterial,
   TextureLoader,
 } from "three";
-import {useSelector} from "react-redux";
-import {materialControl} from "../../../../../../../redux/materialControl";
+import { useSelector } from "react-redux";
+import { materialControl } from "../../../../../../../redux/materialControl";
 import * as THREE from "three";
 
 const AddMaterialPopUp = () => {
@@ -362,6 +362,8 @@ const AddMaterialPopUp = () => {
         >
           <RedButtonClass
             onClick={() => {
+              // console.log("tyset", materialArray[4].material.normalMap.image);
+
               materialStatus.map.repeat.set(30, 30);
               materialStatus.normalMap.repeat.set(30, 30);
               materialStatus.roughnessMap.repeat.set(30, 30);
@@ -391,6 +393,7 @@ const AddMaterialPopUp = () => {
                 roughness: 1,
                 metalness: 0,
                 color: "",
+                name: "New Material",
                 clearcoat: 0, //float
                 ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
                 transmission: 0, //float
