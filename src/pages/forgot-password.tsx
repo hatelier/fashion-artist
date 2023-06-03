@@ -1,26 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FormEvent } from 'react';
+import { FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from "react-router-dom";
 
 interface FormProps {
-    firstname: string;
-    setFirstname: (value: string) => void;
-    lastname: string;
-    setLastname: (value: string) => void;
-    occupation: string;
-    setOccupation: (value: string) => void;
-    companyname: string;
-    setCompanyname: (value: string) => void;
-    updates: boolean;
-    setUpdates: (value: boolean) => void;
     email: string;
     setEmail: (email: string) => void;
-    password: string;
-    setPassword: (email: string) => void;
-    label: string;
-    onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  }
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    message: string;
+}
 
 
 export const ForgotPassword = () => {
@@ -42,58 +31,46 @@ export const ForgotPassword = () => {
 
 
 const Register = () => {
-    const [firstname, setFirstname] = useState("")
-    const [lastname, setLastname] = useState("")
     const [email, setEmail] = useState("")
-    const [occupation, setOccupation] = useState("")
-    const [companyname, setCompanyname] = useState("")
-    const [password, setPassword] = useState("")
-    const [updates, setUpdates] = useState(false)
-    
-    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+
+    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+    };
+
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:3001/auth/register", {
-                firstname, lastname, email, occupation, companyname, password, updates,
-            });
-            alert("Registration Completed")
+            const response = await axios.post("http://localhost:3001/password/forgot", {email});
+            setMessage(response.data.message);
+            navigate("/reset-password");
         } catch (error) {
-            console.error(error);
+            console.error('Forgot Password Error', error);
+            setMessage('Error occurred while sending password reset email');
         }
     }
     return <Form 
-    firstname={firstname} setFirstname={setFirstname} 
-    lastname={lastname} setLastname={setLastname}
-    email={email} setEmail={setEmail}
-    occupation={occupation} setOccupation={setOccupation}
-    companyname={companyname} setCompanyname={setCompanyname}
-    password={password} setPassword={setPassword} 
-    updates={updates} setUpdates={setUpdates}
-    label="Sign Up" onSubmit={onSubmit}/>;
+    email={email} setEmail={setEmail} handleSubmit={handleSubmit} message={message}
+    />;
 };
 
 const Form = ({
-    firstname, setFirstname,
-    lastname, setLastname,
-    email, setEmail,
-    occupation, setOccupation,
-    companyname, setCompanyname,
-    password, setPassword, 
-    updates, setUpdates,
-    label, onSubmit }: FormProps) => {
+    email, setEmail,handleSubmit, message
+     }: FormProps) => {
     return (
         <div className="auth-container">
-         <form className="form forgot-password" onSubmit={onSubmit}>
+         <form className="form forgot-password" onSubmit={handleSubmit}>
             <span className="title">Forgot Password?</span>
             <span className= "title-text">No worries, we will send you reset instructions</span>
 
             <label htmlFor="email" className="label">Email</label>
-            <input type="text" id="email" placeholder="abc123as@mtumx.com" className="input" value={email} onChange={(event) => setEmail(event.target.value)} required/>
+            <input type="text" id="email" value={email} placeholder="abc123as@mtumx.com" className="input" onChange={(event) => setEmail(event.target.value)} required/>
             
-            <button type="submit" className="submit"><a href="/reset-password"> Reset Password </a></button>
+            <button type="submit" className="submit">Reset Password</button>
 
-            <span className= "account-text">Back to <Link to="/register" className="to-register">Login</Link></span>
+            <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
-         
+         {message && <p>{message}</p>}
      </div> 
      )}
