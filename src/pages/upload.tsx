@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const UploadPage = () => {
   const [file, setFiles] = useState<File []>([]);
   const [folderName, setFolderName] = useState("");
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -46,6 +47,23 @@ export const UploadPage = () => {
     }
   };
 
+  const retreiveImageUrls = async (folderName: string) => {
+    try {
+      const response = await axios.get("http://localhost:3001/products/images", {
+        params: {
+          folderName: folderName
+        }
+      });
+      setImageUrls(response.data);
+    } catch (error) {
+      console.error('Error retreiving image Urls:', error);
+      setImageUrls([])
+    }
+  };
+
+  useEffect(() => {
+    retreiveImageUrls(folderName);
+  }, [folderName]);
   return (
     <div>
       <h2>Upload Page</h2>
@@ -60,6 +78,16 @@ export const UploadPage = () => {
         </div>
         <button type="submit">Upload</button>
       </form>
+      <h3>Retreived Images</h3>
+      {imageUrls.length > 0 ? (
+        <div>
+          {imageUrls.map((imageUrl, index) => (
+            <img key={index} src={imageUrl} alt={`Image ${index}`} />
+          ))}
+        </div>
+      ) : (
+        <p>No images found</p>
+      )}
     </div>
   );
 };

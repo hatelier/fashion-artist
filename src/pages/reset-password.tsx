@@ -1,26 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
 
 interface FormProps {
-    firstname: string;
-    setFirstname: (value: string) => void;
-    lastname: string;
-    setLastname: (value: string) => void;
-    occupation: string;
-    setOccupation: (value: string) => void;
-    companyname: string;
-    setCompanyname: (value: string) => void;
-    updates: boolean;
-    setUpdates: (value: boolean) => void;
-    email: string;
-    setEmail: (email: string) => void;
-    password: string;
-    setPassword: (email: string) => void;
-    label: string;
+    otp: string[];
+    setOTP: (otp: string[]) => void;
     onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  }
+}
 
 
 export const ResetPassword = () => {
@@ -42,64 +29,64 @@ export const ResetPassword = () => {
 
 
 const Register = () => {
-    const [firstname, setFirstname] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [email, setEmail] = useState("")
-    const [occupation, setOccupation] = useState("")
-    const [companyname, setCompanyname] = useState("")
-    const [password, setPassword] = useState("")
-    const [updates, setUpdates] = useState(false)
+    const [otp, setOTP] = useState(["", "", "", "", "", ""]);
+    const navigate = useNavigate();
+
+    const handleOTPChange = (index: number, value: string) => {
+        const newOtpValues = [...otp];
+        newOtpValues[index] = value;
+        setOTP(newOtpValues);
+      };
     
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:3001/auth/register", {
-                firstname, lastname, email, occupation, companyname, password, updates,
-            });
-            alert("Registration Completed")
+            const otpValue = otp.join("");
+            const response = await axios.post("http://localhost:3001/password/reset", {otp: otpValue});
+            if(response.data.valid) {
+                navigate('/new-password');
+            }
+            else {
+                alert("Invalid OTP");
+            }
         } catch (error) {
             console.error(error);
         }
     }
-    return <Form 
-    firstname={firstname} setFirstname={setFirstname} 
-    lastname={lastname} setLastname={setLastname}
-    email={email} setEmail={setEmail}
-    occupation={occupation} setOccupation={setOccupation}
-    companyname={companyname} setCompanyname={setCompanyname}
-    password={password} setPassword={setPassword} 
-    updates={updates} setUpdates={setUpdates}
-    label="Sign Up" onSubmit={onSubmit}/>;
+    return <Form otp={otp} setOTP={setOTP} onSubmit={onSubmit}/>;
 };
 
 const Form = ({
-    firstname, setFirstname,
-    lastname, setLastname,
-    email, setEmail,
-    occupation, setOccupation,
-    companyname, setCompanyname,
-    password, setPassword, 
-    updates, setUpdates,
-    label, onSubmit }: FormProps) => {
+    otp, setOTP, onSubmit }: FormProps) => {
+        const handleOTPChange = (index: number, value: string) => {
+            const newOtpValues = [...otp];
+            newOtpValues[index] = value;
+            setOTP(newOtpValues);
+          };   
+
     return (
         <div className="auth-container">
          <form className="form forgot-password" onSubmit={onSubmit}>
             <span className="title">Password Reset</span>
             <span className= "title-text">We sent a code to abc12_wf@gmail.com</span>
             <div className="inputfield">
-              <input type="number" maxLength={1} className="input-otp" disabled />
-              <input type="number" maxLength={1} className="input-otp" disabled />
-              <input type="number" maxLength={1} className="input-otp" disabled />
-              <input type="number" maxLength={1} className="input-otp" disabled />
-              <input type="number" maxLength={1} className="input-otp" disabled />
-              <input type="number" maxLength={1} className="input-otp" disabled />
+            {otp.map((value, index) => (
+            <input
+              key={index}
+              type="number"
+              maxLength={1}
+              className="input-otp"
+              value={value}
+              onChange={(e) => handleOTPChange(index, e.target.value)}
+              required
+            />
+          ))}
             </div>
             
-            <button type="submit" className="submit"><a href="/new-password">Continue</a></button>
+            <button type="submit" className="submit">Continue</button>
 
-            <span className= "account-text">Didn't recieve the email? <Link to="/register" className="to-register">Click to resend</Link></span>
-            <span className= "account-text">Back to <Link to="/register" className="to-register">Login</Link></span>
+            <span className= "account-text">Didn't recieve the email? <Link to="/forgot-password" className="to-register">Click to resend</Link></span>
+            <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
-         
      </div> 
      )}
