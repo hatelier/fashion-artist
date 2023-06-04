@@ -42,7 +42,7 @@ const Register = () => {
         event.preventDefault();
         try {
             const otpValue = otp.join("");
-            const response = await axios.post("http://localhost:3001/password/reset", {otp: otpValue});
+            const response = await axios.post("http://localhost:3001/password/validate-otp", {otp: otpValue});
             if(response.data.valid) {
                 navigate('/new-password');
             }

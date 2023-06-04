@@ -4,23 +4,13 @@ import { Link } from "react-router-dom";
 import { FormEvent } from 'react';
 
 interface FormProps {
-    firstname: string;
-    setFirstname: (value: string) => void;
-    lastname: string;
-    setLastname: (value: string) => void;
-    occupation: string;
-    setOccupation: (value: string) => void;
-    companyname: string;
-    setCompanyname: (value: string) => void;
-    updates: boolean;
-    setUpdates: (value: boolean) => void;
-    email: string;
-    setEmail: (email: string) => void;
     password: string;
-    setPassword: (email: string) => void;
-    label: string;
+    setPassword: (value: string) => void;
+    confirmPassword: string;
+    setConfirmPassword: (confirmPassword: string) => void;
     onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  }
+    errorMessage: string;
+}
 
 
 export const NewPassword = () => {
@@ -30,7 +20,7 @@ export const NewPassword = () => {
           <img className="logo" src={"/mxlogo.png"} alt="logo" />  
         </div>
         <div className="login-container">
-          <Register />  
+          <NewPasswordForm />  
         </div>
         <div className="image-container">
             <img className="main-image" src = "mq.png" alt = "mq" />
@@ -41,60 +31,59 @@ export const NewPassword = () => {
 
 
 
-const Register = () => {
-    const [firstname, setFirstname] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [email, setEmail] = useState("")
-    const [occupation, setOccupation] = useState("")
-    const [companyname, setCompanyname] = useState("")
-    const [password, setPassword] = useState("")
-    const [updates, setUpdates] = useState(false)
+const NewPasswordForm = () => {
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if(password !== confirmPassword) {
+            setErrorMessage("Passwords do not match");
+            return;
+        }
+
         try {
-            await axios.post("http://localhost:3001/auth/register", {
-                firstname, lastname, email, occupation, companyname, password, updates,
-            });
-            alert("Registration Completed")
+            await axios.post("http://localhost:3001/password/reset", {password});
+            alert("Password Reset Successful");
+            
         } catch (error) {
             console.error(error);
         }
     }
     return <Form 
-    firstname={firstname} setFirstname={setFirstname} 
-    lastname={lastname} setLastname={setLastname}
-    email={email} setEmail={setEmail}
-    occupation={occupation} setOccupation={setOccupation}
-    companyname={companyname} setCompanyname={setCompanyname}
-    password={password} setPassword={setPassword} 
-    updates={updates} setUpdates={setUpdates}
-    label="Sign Up" onSubmit={onSubmit}/>;
+    password={password}
+    setPassword={setPassword}
+    confirmPassword={confirmPassword}
+    setConfirmPassword={setConfirmPassword} 
+    onSubmit={onSubmit}
+    errorMessage={errorMessage}
+    />;
 };
 
 const Form = ({
-    firstname, setFirstname,
-    lastname, setLastname,
-    email, setEmail,
-    occupation, setOccupation,
-    companyname, setCompanyname,
-    password, setPassword, 
-    updates, setUpdates,
-    label, onSubmit }: FormProps) => {
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    onSubmit,
+    errorMessage }: FormProps) => {
     return (
         <div className="auth-container">
          <form className="form forgot-password" onSubmit={onSubmit}>
             <span className="title">Set new password</span>
             <span className= "title-text">Must be at least 8 characters </span>
 
-            <label htmlFor="email" className="label">Password</label>
-            <input type="password" id="new-password" className="input" onChange={(event) => setEmail(event.target.value)} required/>
+            <label htmlFor="password" className="label">Password</label>
+            <input type="password" id="new-password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
             
-            <label htmlFor="password" className="label">Confirm Password</label>
-            <input type="password" id="confirm-password" className="input" value={password} onChange={(event) => setPassword(event.target.value)} required/>
+            <label htmlFor="confirm-password" className="label">Confirm Password</label>
+            <input type="password" id="confirm-password" className="input" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required/>
             
+            {errorMessage && <span className="error-message">{errorMessage}</span>}
+
             <button type="submit" className="submit">Reset Password</button>
-            <span className= "account-text">Back to <Link to="/register" className="to-register">Login</Link></span>
+            <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
          
      </div> 
