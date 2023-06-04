@@ -1,16 +1,16 @@
 //SceneControls.tsx
-import React, {useEffect} from "react";
-import {useThree} from "@react-three/fiber";
+import React, { useEffect } from "react";
+import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import {useSelector} from "react-redux";
-import {materialControl} from "../../../../redux/materialControl";
-import {materialApplication} from "../../../../redux/materialApplication";
-import {useTexture} from "@react-three/drei";
+import { useSelector } from "react-redux";
+import { materialControl } from "../../../../redux/materialControl";
+import { materialApplication } from "../../../../redux/materialApplication";
+import { useTexture } from "@react-three/drei";
 
 export const DynamicLight = () => {
-  const {scene} = useThree();
-  const {lightType, lightColor, lightIntensity, distance, x, y, z} =
-      useSelector((state: any) => state.materialControl.currentLight);
+  const { scene } = useThree();
+  const { lightType, lightColor, lightIntensity, distance, x, y, z } =
+    useSelector((state: any) => state.materialControl.currentLight);
   useEffect(() => {
     if (lightType) {
       let newLight: any;

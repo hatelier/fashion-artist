@@ -14,13 +14,14 @@ import "./fonts/NHaasGrotesk/NHaasGrotesk-Medium.ttf";
 //redux setup
 import store from "./redux";
 import { persistStore } from "redux-persist";
+import axios from "axios";
 
 let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-
+axios.defaults.baseURL = "http://3.93.236.132:3001"
 root.render(
   <React.StrictMode>
     <Provider store={store}>
