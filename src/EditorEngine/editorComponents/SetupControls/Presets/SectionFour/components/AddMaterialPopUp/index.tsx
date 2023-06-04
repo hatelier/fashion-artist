@@ -23,6 +23,7 @@ import {
 import { useSelector } from "react-redux";
 import { materialControl } from "../../../../../../../redux/materialControl";
 import * as THREE from "three";
+import axios from "axios";
 
 const AddMaterialPopUp = () => {
   const [imageStatus, setImageStatus] = useState({
@@ -61,6 +62,30 @@ const AddMaterialPopUp = () => {
       });
     };
   };
+
+  function getImageDataURL(image) {
+    let canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(image, 0, 0);
+
+    return canvas.toDataURL();
+  }
+
+  function dataURLtoBlob(dataurl) {
+    let arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+  }
+
   return (
     <Draggable handle={".addHeader"}>
       <form
@@ -362,42 +387,110 @@ const AddMaterialPopUp = () => {
         >
           <RedButtonClass
             onClick={() => {
-              // console.log("tyset", materialArray[4].material.normalMap.image);
-
-              materialStatus.map.repeat.set(30, 30);
-              materialStatus.normalMap.repeat.set(30, 30);
-              materialStatus.roughnessMap.repeat.set(30, 30);
-              materialStatus.aoMap.repeat.set(30, 30);
-
-              //offset test
-              //ranges from 0 to 1, along U and V
-              materialStatus.normalMap.offset.set(0, 0);
-              materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
-
-              //   material wrapping
-              materialStatus.map.wrapS =
-                materialStatus.map.wrapT =
-                materialStatus.normalMap.wrapS =
-                materialStatus.normalMap.wrapT =
-                materialStatus.roughnessMap.wrapS =
-                materialStatus.roughnessMap.wrapT =
-                materialStatus.aoMap.wrapS =
-                materialStatus.aoMap.wrapT =
-                  THREE.RepeatWrapping;
-
-              materialArray[4].material = new MeshPhysicalMaterial({
-                ...materialStatus,
-                side: THREE.DoubleSide,
-                //other paramters
-                aoMapIntensity: 1,
-                roughness: 1,
-                metalness: 0,
-                color: "",
-                name: "New Material",
-                clearcoat: 0, //float
-                ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
-                transmission: 0, //float
+              const formData = new FormData();
+              ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
+                if (materialArray[4].material[`${vls}`]) {
+                  console.log(materialArray[4].material[`${vls}`].image);
+                  const normalMapDataURL = getImageDataURL(
+                    materialArray[4].material[`${vls}`].image
+                  );
+                  const blob = dataURLtoBlob(normalMapDataURL);
+                  formData.append("files", blob, `${vls}-map.png`);
+                }
+                return 0;
               });
+
+              axios
+                .post(
+                  "/products/upload?userID=64676633c6ad11d84b234b1d&folderName=testset",
+                  formData
+                )
+                .then((response) => {
+                  console.log("success", response);
+                })
+                .catch((error) => {
+                  console.log("error", error);
+                });
+
+              // axios
+              //   .post("/materials/add", {
+              //     userId: "64676633c6ad11d84b234b1d",
+              //     projectId: 12345678,
+              //     materialName: "Sample 3453 4Demo",
+              //     baseMap: {
+              //       imgName: "base.jpg",
+              //       useTransparent: false,
+              //     },
+              //     metalMap: {
+              //       imgName: "metal.jpg",
+              //       factor: 0.9,
+              //     },
+              //     roughnessMap: {
+              //       imgName: "roughness.jpg",
+              //       factor: 0.5,
+              //     },
+              //     normalMap: {
+              //       imgName: "normal.jpg",
+              //       factor: 1.2,
+              //     },
+              //     emissionMap: {
+              //       imgName: "emission.jpg",
+              //       factor: 0.6,
+              //     },
+              //     occlusionMap: {
+              //       imgName: "occlusion.jpg",
+              //       factor: 0.3,
+              //     },
+              //     ior: true,
+              //     clearcoat: false,
+              //     transmission: true,
+              //     transform: false,
+              //     tiling: [1, 1],
+              //     tilingOffset: [45, 0],
+              //     tilingRotation: 0,
+              //   })
+              //   .then((response) => {
+              //     console.log(response);
+              //   })
+              //   .catch((error) => {
+              //     console.log(error);
+              //   });
+              // console.log("tyset", materialArray[4].material.normalMap.image);
+              //
+              // materialStatus.map.repeat.set(30, 30);
+              // materialStatus.normalMap.repeat.set(30, 30);
+              // materialStatus.roughnessMap.repeat.set(30, 30);
+              // materialStatus.aoMap.repeat.set(30, 30);
+              //
+              // //offset test
+              // //ranges from 0 to 1, along U and V
+              // materialStatus.normalMap.offset.set(0, 0);
+              // materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
+              //
+              // //   material wrapping
+              // materialStatus.map.wrapS =
+              //   materialStatus.map.wrapT =
+              //   materialStatus.normalMap.wrapS =
+              //   materialStatus.normalMap.wrapT =
+              //   materialStatus.roughnessMap.wrapS =
+              //   materialStatus.roughnessMap.wrapT =
+              //   materialStatus.aoMap.wrapS =
+              //   materialStatus.aoMap.wrapT =
+              //     THREE.RepeatWrapping;
+              //
+              // materialArray[4].material = new MeshPhysicalMaterial({
+              //   ...materialStatus,
+              //   side: THREE.DoubleSide,
+              //   //other paramters
+              //   aoMapIntensity: 1,
+              //   roughness: 1,
+              //   metalness: 0,
+              //   color: "",
+              //   name: "New Material",
+              //   clearcoat: 0, //float
+              //   ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
+              //   transmission: 0, //float
+              // });
             }}
           >
             Create
