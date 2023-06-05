@@ -3,21 +3,12 @@
 import React, { Suspense, useContext, useRef } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
-import {
-  OrbitControls,
-  PerformanceMonitor,
-  PresentationControls,
-  Reflector,
-  Stage,
-  TransformControls,
-} from "@react-three/drei";
+import { OrbitControls, PerformanceMonitor, PresentationControls, Stage } from "@react-three/drei";
 import UploadModel from "../UploadModel";
 import { Perf } from "r3f-perf";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import { DynamicLight, MaterialControl } from "../SceneControls";
-import { Vector3 } from "three";
-import { useControls } from "leva";
+import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
 
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
@@ -69,17 +60,23 @@ const ModelPreview = (props) => {
       </>
     );
   };
+
+  // material related
+
   return (
     <div
       className={"canvas-container"}
       style={{
-        height: "calc(100% - 129px)",
+        height: "calc(100% - 129px)"
       }}
     >
       <OnPreviewControls />
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
+        {/*all these are external components*/}
         <DynamicLight />
         <MaterialControl />
+        <NewMeshAdder />
+
         <AmbientLightComponent />
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />

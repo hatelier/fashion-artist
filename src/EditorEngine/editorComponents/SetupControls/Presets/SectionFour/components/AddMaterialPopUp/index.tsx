@@ -5,32 +5,26 @@ import addPic from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
 import { Slider } from "@mui/material";
 import React, { useState } from "react";
 import { LabelledInputMui } from "../../../../../PreviewSection/EditorControls/CameraControls";
-import ReactImageMagnify from "react-image-magnify";
 import {
   InvisibleFileUploader,
   LabelCentered,
   MedFontText11,
   RedButtonClass,
-  WhiteButtonClass,
+  WhiteButtonClass
 } from "../../../../../../StyledComponents";
 import Draggable from "react-draggable";
-import { useTexture } from "@react-three/drei";
-import {
-  MeshPhysicalMaterial,
-  MeshStandardMaterial,
-  TextureLoader,
-} from "three";
+import { TextureLoader } from "three";
 import { useSelector } from "react-redux";
-import { materialControl } from "../../../../../../../redux/materialControl";
-import * as THREE from "three";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const AddMaterialPopUp = () => {
   const [imageStatus, setImageStatus] = useState({
     map: addPic,
     roughnessMap: addPic,
     normalMap: addPic,
-    aoMap: addPic,
+    aoMap: addPic
   });
   const [materialStatus, setMaterialStatus] = useState({
     map: null,
@@ -120,12 +114,15 @@ const AddMaterialPopUp = () => {
           onChange={FileToURL}
         />
 
-        <p
-          style={{ fontSize: "11px", fontWeight: 600 }}
-          className={"addHeader"}
-        >
-          Material
-        </p>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <p
+            style={{ fontSize: "11px", fontWeight: 600 }}
+            className={"addHeader"}
+          >
+            Material
+          </p>
+          <FontAwesomeIcon icon={faXmark} />
+        </div>
         <div style={{ marginTop: "10px" }}>
           <p style={{ fontSize: "11px", fontWeight: 600 }}>Name</p>
           <p style={{ marginLeft: "10px" }}>Material 1</p>
@@ -349,7 +346,7 @@ const AddMaterialPopUp = () => {
         <div style={{ marginTop: "14px" }}>
           <MedFontText11>Tiling offset</MedFontText11>
           <div style={{ width: "247px", marginTop: "9px" }}>
-            <p>X</p>
+            <p>U</p>
             <Slider
               size="small"
               defaultValue={70}
@@ -359,7 +356,7 @@ const AddMaterialPopUp = () => {
           </div>
 
           <div style={{ width: "247px" }}>
-            <p>Y</p>
+            <p>V</p>
             <Slider
               size="small"
               defaultValue={70}

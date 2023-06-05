@@ -1,11 +1,9 @@
+// @ts-nocheck
 //SceneControls.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useSelector } from "react-redux";
-import { materialControl } from "../../../../redux/materialControl";
-import { materialApplication } from "../../../../redux/materialApplication";
-import { useTexture } from "@react-three/drei";
 
 export const DynamicLight = () => {
   const { scene } = useThree();
@@ -67,5 +65,36 @@ export const MaterialControl = () => {
       // testFunc();
     }
   }, []);
+  return null;
+};
+
+// const ModelLoader = ({ url }) => {
+//   const { scene } = useThree();
+//   // const { scene: loadedScene } = useGLTF(url);
+//   //
+//   // useEffect(() => {
+//   //   console.log("here is a url",url)
+//   //   // scene.add(loadedScene);
+//   //   // return () => {
+//   //   //   scene.remove(loadedScene);
+//   //   // };
+//   // }, [scene, loadedScene]);
+//
+//   return null;
+// };
+
+export const NewMeshAdder = () => {
+  const gltfLoader = useRef(null);
+  const modelFile = useSelector((state: any) => state.meshControls.modelGLB);
+  console.log("here is the model file", modelFile);
+  const { scene: loadedScene } = useThree();
+
+  if (modelFile) {
+    const file = modelFile;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const data = reader.result;
+    };
+  }
   return null;
 };

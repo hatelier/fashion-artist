@@ -3,27 +3,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
-import {
-  AmbientLight,
-  DirectionalLight,
-  Mesh,
-  PerspectiveCamera,
-  Scene,
-  WebGLRenderer,
-} from "three";
+import { AmbientLight, DirectionalLight, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
 import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
-import {
-  updateProdMatState,
-  updateProdMeshState,
-} from "../../../../../redux/savedConfigs";
+import { updateProdMatState, updateProdMeshState } from "../../../../../redux/savedConfigs";
 import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "./components/AddMaterialPopUp";
+import AddMeshPopUp from "./components/AddMeshPopUp";
 
 const SectionFour = () => {
   const materialArray = useSelector(
@@ -69,12 +60,13 @@ const SectionFour = () => {
       {/*  />*/}
       {/*</div>*/}
       <AddMaterialPopUp />
+      <AddMeshPopUp />
       <div
         style={{
           display: "flex",
           alignItems: "center",
           margin: "36px 0 6px 0",
-          justifyContent: "space-between",
+          justifyContent: "space-between"
         }}
       >
         <p className={"sectionFourTitle"}>Assets</p>
