@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FormEvent, ChangeEvent } from 'react';
@@ -43,13 +43,20 @@ const Register = () => {
         event.preventDefault();
         try {
             const response = await axios.post("http://localhost:3001/password/forgot", {email});
-            setMessage(response.data.message);
-            navigate("/reset-password");
+            // setMessage(response.data.message);
+            if(response.data.message === "User not found") {
+                window.alert("User not found");
+            } else {
+                navigate("/reset-password");  
+            }
+            
         } catch (error) {
             console.error('Forgot Password Error', error);
             setMessage('Error occurred while sending password reset email');
         }
-    }
+    };
+
+
     return <Form 
     email={email} setEmail={setEmail} handleSubmit={handleSubmit} message={message}
     />;

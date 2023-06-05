@@ -316,6 +316,22 @@ p {
 }
 /* End Signup page */
 
+/* Start New Password Page */
+.forgot-password .error {
+  font-size: medium;
+  color: red;
+  margin-bottom: 10px;
+}
+/* End New Password Page */
+
+/* Start Reset Password Page */
+.reset-password .account-text .to-register {
+  border: none;
+  background-color: transparent;
+  margin-bottom: 0;
+}
+/* End Reset Password Page */
+
 /* Style the dropdown */
 .myDropdown {
   background-color: #fff;

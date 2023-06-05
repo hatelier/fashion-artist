@@ -40,9 +40,17 @@ const Login = () => {
         event.preventDefault();
         try {
             const response = await axios.post("http://localhost:3001/auth/login", {email, password});
-            setCookies("access_token", response.data.token);
-            window.localStorage.setItem("userID", response.data.userID);
-            navigate("/")
+            
+            if(response.data.message === 'User not found!') {
+                window.alert("User not found!");
+            } else if(response.data.message === 'Username or Password incorrect!') {
+                window.alert("Username or Password incorrect!");
+            } else {
+                setCookies("access_token", response.data.token);
+                window.localStorage.setItem("userID", response.data.userID);
+                navigate("/")
+            }
+
         } catch (error) {
             console.error(error);
         }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
@@ -7,6 +7,8 @@ interface FormProps {
     otp: string[];
     setOTP: (otp: string[]) => void;
     onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    onResend: () => void;
+    email: string;
 }
 
 
@@ -31,6 +33,7 @@ export const ResetPassword = () => {
 const Register = () => {
     const [otp, setOTP] = useState(["", "", "", "", "", ""]);
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
 
     const handleOTPChange = (index: number, value: string) => {
         const newOtpValues = [...otp];
@@ -45,19 +48,41 @@ const Register = () => {
             const response = await axios.post("http://localhost:3001/password/validate-otp", {otp: otpValue});
             if(response.data.valid) {
                 navigate('/new-password');
-            }
-            else {
-                alert("Invalid OTP");
+            } else if(response.data.message === 'Invalid or expired OTP') {
+                window.alert("Invalid OTP");
             }
         } catch (error) {
             console.error(error);
         }
-    }
-    return <Form otp={otp} setOTP={setOTP} onSubmit={onSubmit}/>;
+    };
+
+    const onResend = async () => {
+        try {
+            await axios.post("http://localhost:3001/password/forgot/resend");
+            window.alert("Email sent successfully");
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchEmail = async () => {
+        try {
+            const response = await axios.get("http://localhost:3001/password/email");
+            setEmail(response.data);
+            // console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchEmail();
+    }, []);
+    return <Form otp={otp} setOTP={setOTP} onSubmit={onSubmit} onResend={onResend} email={email}/>;
 };
 
 const Form = ({
-    otp, setOTP, onSubmit }: FormProps) => {
+    otp, setOTP, onSubmit, onResend, email }: FormProps) => {
         const handleOTPChange = (index: number, value: string) => {
             const newOtpValues = [...otp];
             newOtpValues[index] = value;
@@ -66,9 +91,9 @@ const Form = ({
 
     return (
         <div className="auth-container">
-         <form className="form forgot-password" onSubmit={onSubmit}>
+         <form className="form forgot-password reset-password" onSubmit={onSubmit}>
             <span className="title">Password Reset</span>
-            <span className= "title-text">We sent a code to abc12_wf@gmail.com</span>
+            <span className= "title-text">We sent a code to {email}</span>
             <div className="inputfield">
             {otp.map((value, index) => (
             <input
@@ -85,7 +110,9 @@ const Form = ({
             
             <button type="submit" className="submit">Continue</button>
 
-            <span className= "account-text">Didn't recieve the email? <Link to="/forgot-password" className="to-register">Click to resend</Link></span>
+            <span className= "account-text">Didn't recieve the email?{ " "}
+                <button onClick={onResend} className="to-register">Click to resend</button>
+            </span>
             <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
      </div> 
