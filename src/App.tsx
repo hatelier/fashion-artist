@@ -21,6 +21,7 @@ import { Assets } from "./pages/asset-library";
 import { AddShowroom } from "./pages/add-showroom";
 import EditorEngine from "./EditorEngine";
 import { UploadPage } from "./pages/upload";
+import { NewPasswordToken } from "./pages/new-password-token";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/products/upload/" element={<UploadPage />} />
           <Route path="/assets" element={<Assets />} />
           <Route path="/add-showroom" element={<AddShowroom />} />
+          <Route path="/password/reset" element={<NewPasswordToken />} />
         </Routes>
       </Router>
     </div>
