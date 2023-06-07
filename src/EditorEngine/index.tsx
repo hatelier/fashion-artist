@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 import "./index.scss";
 import Banner from "./editorComponents/Banner";
 import SetupControls from "./editorComponents/SetupControls";
+import PreviewSection from "./editorComponents/PreviewSection";
 
 export interface ContextInterface {
   file: any;
@@ -39,11 +40,11 @@ const EditorEngine = () => {
             context={ContextParams}
             settings={setDefContext}
           />
-          {/*<PreviewSection*/}
-          {/*  style={{ width: "85vw" }}*/}
-          {/*  context={ContextParams}*/}
-          {/*  settings={setDefContext}*/}
-          {/*/>*/}
+          <PreviewSection
+            style={{ width: "85vw" }}
+            context={ContextParams}
+            settings={setDefContext}
+          />
         </div>
       </div>
     </ContextParams.Provider>
