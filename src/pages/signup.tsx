@@ -75,7 +75,7 @@ const Register = () => {
                 setPasswordMatchError(true);
                 return;
             }
-            await axios.post("http://localhost:3001/auth/register", {
+            await axios.post(`${process.env.REACT_APP_SERVER_IP}/auth/register`, {
                 firstname, lastname, email, occupation, companyname, password, updates,
             });
             alert("Registration Completed")

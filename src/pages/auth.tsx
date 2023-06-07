@@ -39,7 +39,7 @@ const Login = () => {
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_SERVER_IP}`, {email, password});
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_IP}/auth/login`, {email, password});
             
             if(response.data.message === 'User not found!') {
                 window.alert("User not found!");
