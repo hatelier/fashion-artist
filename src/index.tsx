@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import "react-toastify/dist/ReactToastify.css";
 
 //adding custom styling
 import "./fonts/NHaasGrotesk/NHaasGrotesk-Bold.ttf";
@@ -15,18 +16,20 @@ import "./fonts/NHaasGrotesk/NHaasGrotesk-Medium.ttf";
 import store from "./redux";
 import { persistStore } from "redux-persist";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-axios.defaults.baseURL = "http://3.93.236.132:3001"
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_IP;
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
         <App />
+        <ToastContainer />
       </PersistGate>
     </Provider>
   </React.StrictMode>

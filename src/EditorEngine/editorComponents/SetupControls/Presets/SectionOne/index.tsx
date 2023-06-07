@@ -1,36 +1,43 @@
 // @ts-nocheck
-import React from "react";
+import React, { useRef } from "react";
 import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductDetails } from "../../../../../redux/editorManagement";
 import UploadImage from "../../../../../assets/svgs/upload (1) 1.svg";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
   const materialData = useSelector(
     (state) => state.materialControl.materialDimensions
   );
+  const formRef = useRef();
+  const inputClicker = useRef();
+  const prevImageClicker = useRef();
+  const productRef = useRef();
+  const brandRef = useRef();
+  const pipelineRef = useRef();
+  const tagsRef = useRef();
   return (
     <form
       className={"sectionOne"}
-      onSubmit={(e) => {
-        e.preventDefault();
-        dispatch(
-          updateProductDetails({
-            productName: e.target.productName.value,
-            brandName: e.target.brandName.value,
-            previewImageBlog: " e.target.prevImage.files[0]",
-            selectedPipeline: e.target.pipeline.value,
-            tags: e.target.tags.value,
-          })
-        );
-      }}
     >
       <div className={"uploadBox"}>
         <img src={UploadImage} />
         <p>Select an asset or drop here</p>
       </div>
-      <button className={"uploadAsset"}>UPLOAD ASSET</button>
+      <input type={"file"} ref={inputClicker} style={{ display: "none" }}
+             onChange={() => {
+               toast.success("File uploaded.");
+             }}
+             required={true}
+      />
+      <button className={"uploadAsset"}
+              onClick={() => {
+                inputClicker.current.click();
+              }}
+      >UPLOAD ASSET
+      </button>
 
       {/*enable this for upload*/}
       {/*<FileUploader*/}
@@ -56,18 +63,24 @@ const SectionOne = (props) => {
           id={"productName"}
           className={"productName"}
           name={"productName"}
+          required={true}
+          ref={productRef}
         />
       </div>
       <br />
       <div>
         <p className={"prodNameTitle"}>Brand Name</p>
-        <input id={"brandName"} className={"productName"} name={"brandName"} />
+        <input id={"brandName"} className={"productName"} name={"brandName"} required={true} ref={brandRef} />
       </div>
       <br />
       <div>
         <p className={"prodNameTitle"}>Preview Image</p>
-
-        <div className={"prevImageDev"}></div>
+        <input type={"file"} className={"previewImageFile"} ref={prevImageClicker} style={{ display: "none" }} />
+        <div className={"prevImageDev"}
+             onClick={() => {
+               prevImageClicker.current.click();
+             }}
+        ></div>
 
         {/*add this code later*/}
         {/*<input*/}
@@ -80,7 +93,7 @@ const SectionOne = (props) => {
       <br />
       <div>
         <p className={"prodNameTitle"}>Select a Pipeline</p>
-        <select id={"selPipeline"} className={"selPipeline"} name="pipeline">
+        <select id={"selPipeline"} className={"selPipeline"} name="pipeline" required={true} ref={pipelineRef}>
           <option selected disabled>
             --Select--
           </option>
@@ -93,7 +106,7 @@ const SectionOne = (props) => {
       <br />
       <div>
         <p className={"prodNameTitle"}>Tags</p>
-        <select id={"selTag"} className={"selPipeline"} name="tags">
+        <select id={"selTag"} className={"selPipeline"} name="tags" required={true} ref={tagsRef}>
           <option selected disabled>
             Select your tags
           </option>
@@ -132,7 +145,26 @@ const SectionOne = (props) => {
       </div>
       {/*<button type={"submit"}>Save Current State</button>*/}
       <div className={"DupDelDiv"}>
-        <button className={"uploadAsset"} style={{ width: "60%" }}>
+        <button className={"uploadAsset"} style={{ width: "60%" }} type={"button"} onClick={() => {
+          const formData = new FormData();
+          console.log();
+          formData.append("userid", "61234abcd567890efgh123456");
+          formData.append("foldername", Math.floor(Math.random() * 100000000));
+          formData.append("productname", productRef.current.value);
+          formData.append("brandname", brandRef.current.value);
+          formData.append("pipeline", pipelineRef.current.value);
+          formData.append("tags", tagsRef.current.value);
+          formData.append("asset", inputClicker.current.files[0]);
+          formData.append("previewImage", prevImageClicker.current.files[0]);
+
+          axios.post("/product/add", formData)
+            .then((res) => {
+              toast.success("Product has been created!");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}>
           Duplicate
         </button>
         <button className={"uploadAsset"} style={{ width: "40%" }}>
