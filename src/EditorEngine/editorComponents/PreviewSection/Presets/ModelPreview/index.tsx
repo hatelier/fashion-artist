@@ -86,7 +86,7 @@ const ModelPreview = (props) => {
           // rotation={[Math.PI / 8, 0, 0]}
           // polar={[-0.1, Math.PI / 2]}
         >
-          <Stage environment={"city"} intensity={0.6} castShadow={false}>
+          <Stage intensity={0.6} castShadow={false}>
             <Suspense fallback={null}>
               {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
 
