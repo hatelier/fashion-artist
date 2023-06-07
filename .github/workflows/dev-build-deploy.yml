@@ -19,7 +19,7 @@ jobs:
       - name: Installing yarn
         run: npm install -g yarn
       - name: Installing dependencies
-        run: yarn add
+        run: yarn install
       - name: Building project
         run: yarn run build
       - name: Configure AWS Credentials
