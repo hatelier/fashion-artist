@@ -19,6 +19,7 @@ import { FashionLab } from "./pages/3d-fashion-lab";
 import { Teams } from "./pages/teams";
 import { Assets } from "./pages/asset-library";
 import { AddShowroom } from "./pages/add-showroom";
+import { PreviewProduct } from "./pages/preview";
 import EditorEngine from "./EditorEngine";
 import { UploadPage } from "./pages/upload";
 import { NewPasswordToken } from "./pages/new-password-token";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/assets" element={<Assets />} />
           <Route path="/add-showroom" element={<AddShowroom />} />
           <Route path="/password/reset" element={<NewPasswordToken />} />
+          <Route path="/preview" element={<PreviewProduct />} />
         </Routes>
       </Router>
     </div>
