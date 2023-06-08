@@ -3,7 +3,7 @@
 import React, { Suspense, useContext, useRef } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls, PerformanceMonitor, PresentationControls, Stage } from "@react-three/drei";
+import { OrbitControls, PerformanceMonitor } from "@react-three/drei";
 import UploadModel from "../UploadModel";
 import { Perf } from "r3f-perf";
 import { useSelector } from "react-redux";
@@ -81,37 +81,25 @@ const ModelPreview = (props) => {
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />
         <color attach="background" args={["#f0f0f0"]} />
-        <PresentationControls
-          global
-          // rotation={[Math.PI / 8, 0, 0]}
-          // polar={[-0.1, Math.PI / 2]}
-        >
-          <Stage intensity={0.6} castShadow={false}>
-            <Suspense fallback={null}>
-              {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
+        <ambientLight intensity={1} />
+        <directionalLight position={[10, 10, 10]} intensity={1} />
+        {/*<PresentationControls*/}
+        {/*  global*/}
+        {/*  // rotation={[Math.PI / 8, 0, 0]}*/}
+        {/*  // polar={[-0.1, Math.PI / 2]}*/}
+        {/*>*/}
+        {/*  <Stage intensity={0.6} castShadow={false}>*/}
 
-              <UploadModel model={file} settings={props.settings} />
 
-              <OrbitalController />
+        <Suspense fallback={null}>
+          {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
+          <UploadModel model={file} settings={props.settings} />
+          <OrbitalController />
+        </Suspense>
 
-              {/*<Reflector*/}
-              {/*  resolution={1024}*/}
-              {/*  blur={[800, 50]}*/}
-              {/*  mirror={0.4}*/}
-              {/*  mixBlur={1}*/}
-              {/*  mixStrength={0.5}*/}
-              {/*  depthScale={1}*/}
-              {/*  minDepthThreshold={0.7}*/}
-              {/*  maxDepthThreshold={1}*/}
-              {/*  rotation-x={-Math.PI / 2}*/}
-              {/*  args={[100, 100]}*/}
-              {/*  color="#d0d0d0"*/}
-              {/*  metalness={1}*/}
-              {/*  roughness={0.75}*/}
-              {/*/>*/}
-            </Suspense>
-          </Stage>
-        </PresentationControls>
+
+        {/*  </Stage>*/}
+        {/*</PresentationControls>*/}
       </Canvas>
     </div>
   );
