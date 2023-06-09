@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FormEvent, ChangeEvent } from 'react';
+import { toast } from "react-toastify";
 
 interface FormProps {
     firstname: string;
@@ -78,7 +79,7 @@ const Register = () => {
             await axios.post('/auth/register', {
                 firstname, lastname, email, occupation, companyname, password, updates,
             });
-            alert("Registration Completed")
+            toast.success("Registration Completed")
         } catch (error) {
             console.error(error);
         }

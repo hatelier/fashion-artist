@@ -69,7 +69,7 @@ const Register = () => {
             if(response.data.valid) {
                 navigate('/new-password');
             } else if(response.data.message === 'Invalid or expired OTP') {
-                window.alert("Invalid OTP");
+                toast.error("Invalid OTP");
             }
         } catch (error) {
             console.error(error);

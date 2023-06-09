@@ -65,8 +65,9 @@ const Register = () => {
             const response = await axios.post("/password/forgot", {email});
             // setMessage(response.data.message);
             if(response.data.message === "User not found") {
-                window.alert("User not found");
+                toast.error("User not found");
             } else {
+                displayMsg();
                 navigate("/reset-password");  
             }
             
@@ -94,7 +95,7 @@ const Form = ({
             <label htmlFor="email" className="label">Email</label>
             <input type="text" id="email" value={email} placeholder="abc123as@mtumx.com" className="input" onChange={(event) => setEmail(event.target.value)} required/>
 
-            <button type="submit" className="submit" onClick={displayMsg}>Reset Password</button>
+            <button type="submit" className="submit">Reset Password</button>
 
             <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
