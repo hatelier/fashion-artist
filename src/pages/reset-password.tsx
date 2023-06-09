@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
+import { toast } from "react-toastify";
 
 interface FormProps {
     otp: string[];
@@ -28,6 +29,25 @@ export const ResetPassword = () => {
     ); 
 };
 
+const Msg = () => (
+    <div className="login-popup">
+      <div><img src={require('../assets/pngs/tick.png')} alt="" /></div>
+      <div>A new verification code has been resent. Please check you Email</div>
+    </div> 
+  )
+
+    const displayMsg = () => {
+      toast(<Msg />, {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }) 
+    }
 
 
 const Register = () => {
@@ -59,7 +79,7 @@ const Register = () => {
     const onResend = async () => {
         try {
             await axios.post("/password/forgot/resend");
-            window.alert("Email sent successfully");
+            displayMsg()
         } catch (error) {
             console.error(error);
         }

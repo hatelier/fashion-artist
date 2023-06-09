@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface FormProps {
     email: string;
@@ -28,7 +29,26 @@ export const ForgotPassword = () => {
     ); 
 };
 
+const Msg = () => (
+    <div className="login-popup">
+    <div><img src={require('../assets/pngs/tick.png')} alt="" /></div>
+    <div>A reset code has been sent to your email address. Please check you Email</div>
+    </div>
+    
+  )
 
+    const displayMsg = () => {
+      toast(<Msg />, {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }) 
+    }
 
 const Register = () => {
     const [email, setEmail] = useState("")
@@ -73,8 +93,8 @@ const Form = ({
 
             <label htmlFor="email" className="label">Email</label>
             <input type="text" id="email" value={email} placeholder="abc123as@mtumx.com" className="input" onChange={(event) => setEmail(event.target.value)} required/>
-            
-            <button type="submit" className="submit">Reset Password</button>
+
+            <button type="submit" className="submit" onClick={displayMsg}>Reset Password</button>
 
             <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>

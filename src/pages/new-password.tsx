@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
+import { toast } from "react-toastify";
 
 interface FormProps {
     password: string;
@@ -31,6 +32,26 @@ export const NewPassword = () => {
 };
 
 
+const Msg = () => (
+    <div className="login-popup">
+      <div className="reset-popup-done">All Done!</div>
+      <div className="reset-popup-text">Your password has been reset</div>
+      <div><a href="/auth" className="reset-popup-login">Login</a></div>
+    </div> 
+  )
+
+    const displayMsg = () => {
+      toast(<Msg />, {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }) 
+    }
 
 const NewPasswordForm = () => {
     const [password, setPassword] = useState("");
@@ -91,7 +112,7 @@ const Form = ({
             
             {errorMessage && <p className="error">{errorMessage}</p>}
 
-            <button type="submit" className="submit">Reset Password</button>
+            <button type="submit" className="submit" onClick={displayMsg}>Reset Password</button>
             <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
          
