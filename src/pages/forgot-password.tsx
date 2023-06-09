@@ -42,7 +42,7 @@ const Register = () => {
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/password/forgot", {email});
+            const response = await axios.post("/password/forgot", {email});
             // setMessage(response.data.message);
             if(response.data.message === "User not found") {
                 window.alert("User not found");

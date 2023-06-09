@@ -45,7 +45,7 @@ const Register = () => {
         event.preventDefault();
         try {
             const otpValue = otp.join("");
-            const response = await axios.post("http://localhost:3001/password/validate-otp", {otp: otpValue});
+            const response = await axios.post("/password/validate-otp", {otp: otpValue});
             if(response.data.valid) {
                 navigate('/new-password');
             } else if(response.data.message === 'Invalid or expired OTP') {
@@ -58,7 +58,7 @@ const Register = () => {
 
     const onResend = async () => {
         try {
-            await axios.post("http://localhost:3001/password/forgot/resend");
+            await axios.post("/password/forgot/resend");
             window.alert("Email sent successfully");
         } catch (error) {
             console.error(error);
@@ -67,7 +67,7 @@ const Register = () => {
 
     const fetchEmail = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/password/email");
+            const response = await axios.get("/password/email");
             setEmail(response.data);
             // console.log(response.data);
         } catch (error) {

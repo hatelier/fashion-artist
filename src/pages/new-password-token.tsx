@@ -57,7 +57,7 @@ const NewPasswordForm = () => {
         }
 
         try {
-            await axios.post("http://localhost:3001/password/resettoken", {email, token, password});
+            await axios.post("/password/resettoken", {email, token, password});
             alert("Password Reset Successful");
             navigate('/auth');
         } catch (error) {

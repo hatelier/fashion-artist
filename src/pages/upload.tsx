@@ -34,7 +34,7 @@ export const UploadPage = () => {
       //   formData,
       //   userID: userID,
       // };
-      const response = await axios.post("http://localhost:3001/products/upload", formData, {
+      const response = await axios.post("/products/upload", formData, {
         headers: {},
         params: {
           userID: userID,
@@ -49,7 +49,7 @@ export const UploadPage = () => {
 
   const retreiveImageUrls = async (folderName: string) => {
     try {
-      const response = await axios.get("http://localhost:3001/products/images", {
+      const response = await axios.get("/products/images", {
         params: {
           folderName: folderName
         }

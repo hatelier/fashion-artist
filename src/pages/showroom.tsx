@@ -12,7 +12,7 @@ export const Showroom = () => {
   const fetchUserData = async () => {
     try {
     const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("http://localhost:3001/user/profile", { 
+    const response = await axios.get("/user/profile", { 
       params: {
         userID: userID
       },
