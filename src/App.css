@@ -233,42 +233,43 @@ p {
 .sign {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-gap: 20px;
   align-items: center;
-  height: 140vh;
+  height: 120vh;
   width: 98vw;
   grid-column-gap: 0;
 }
 
 .signuplogo-container {
+  position: relative;
   grid-row: 1 / span 1;
 }
 .signuplogo-container .signup-logo {
-  width: 75%;
+  width: 40%;
   height: auto;
 }
 
 .register-container {
   position: relative;
   grid-row: 2 / span 1;
-  margin-left: 40px;
+  margin-left: 60px;
+  bottom: 10px;
 }
 
 .signupimage-cotainer {
   grid-row: 1 / span 2;
-  height: 800px;
-  width: 600px;
-  margin-left: 250px;
+  height: 900px;
+  width: 700px;
+  margin-left: 150px;
 }
 .signupimage-cotainer img {
-  height: 700px;
-  width: 600px;
+  height: 900px;
+  width: 700px;
 }
 
 .signup {
   position: relative;
-  height: 765px;
-  width: 500px;
+  height: 770px;
+  width: 650px;
   background-color: #fff;
   padding: 30px;
   display: flex;
@@ -283,7 +284,7 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr; /* two columns with equal width */
   grid-template-rows: 1fr; /* one row */
-  gap: 1rem; /* add a gap between the columns */
+  gap: 0.9rem; /* add a gap between the columns */
 }
 .signup .name .firstname-container .input {
   width: 90%;
@@ -292,7 +293,7 @@ p {
 .name.grid .lastname-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.5rem;
+  gap: 0.1rem;
 }
 .signup .grid .firstname-container input,
 .signup .grid .lastname-container input {
@@ -308,6 +309,10 @@ p {
 
 .signup .grid .signup-button {
   background-color: #E70A4E;
+  width: 60%;
+}
+.signup .signup-button {
+  width: 90%;
 }
 .signup .error {
   font-size: medium;
