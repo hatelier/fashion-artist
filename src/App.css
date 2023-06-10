@@ -235,13 +235,14 @@ p {
   grid-template-columns: auto 1fr;
   align-items: center;
   height: 120vh;
-  width: 98vw;
+  width: 100vw;
   grid-column-gap: 0;
 }
 
 .signuplogo-container {
   position: relative;
   grid-row: 1 / span 1;
+  left: 50px;
 }
 .signuplogo-container .signup-logo {
   width: 40%;
@@ -259,7 +260,7 @@ p {
   grid-row: 1 / span 2;
   height: 900px;
   width: 700px;
-  margin-left: 120px;
+  margin-left: 110px;
 }
 .signupimage-cotainer img {
   height: 900px;
