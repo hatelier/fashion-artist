@@ -4,6 +4,7 @@ import {useCookies} from 'react-cookie'
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FormEvent } from 'react';
+import { toast } from "react-toastify";
 
 interface FormProps {
     email: string;
@@ -42,9 +43,9 @@ const Login = () => {
             const response = await axios.post('/auth/login', {email, password});
             
             if(response.data.message === 'User not found!') {
-                window.alert("User not found!");
+                toast.error("User not found!");
             } else if(response.data.message === 'Username or Password incorrect!') {
-                window.alert("Username or Password incorrect!");
+                toast.error("Username or Password incorrect!");
             } else {
                 setCookies("access_token", response.data.token);
                 window.localStorage.setItem("userID", response.data.userID);

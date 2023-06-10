@@ -68,8 +68,7 @@ const NewPasswordForm = () => {
 
         try {
             await axios.post("/password/reset", {password});
-            alert("Password Reset Successful");
-            navigate('/auth');
+            displayMsg();
         } catch (error) {
             console.error(error);
         }
@@ -112,7 +111,7 @@ const Form = ({
             
             {errorMessage && <p className="error">{errorMessage}</p>}
 
-            <button type="submit" className="submit" onClick={displayMsg}>Reset Password</button>
+            <button type="submit" className="submit">Reset Password</button>
             <span className= "account-text">Back to <Link to="/auth" className="to-register">Login</Link></span>
          </form>
          
