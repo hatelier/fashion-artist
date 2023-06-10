@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
+import { updateTopBar } from "../../../../../redux/materialApplication";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -20,10 +21,20 @@ const SectionOne = (props) => {
   const brandRef = useRef();
   const pipelineRef = useRef();
   const tagsRef = useRef();
+
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
   const { id } = useParams();
   const baseReactUrl = window.location.origin.toString();
+
+  //here is the object url
+  const [jsonData, setJsonData] = useState({
+    productName: null,
+    brandName: null,
+    previewImage: null,
+    pipeLine: null,
+    tags: null,
+  });
   useEffect(() => {
     if (id !== "new") {
       axios
@@ -34,13 +45,20 @@ const SectionOne = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          setJsonData({
+            productName: res.data.productName,
+            brandName: res.data.brandName,
+            previewImage: res.data.previewImage.location,
+            pipeLine: res.data.pipeline,
+            tags: res.data.tags[0],
+          });
+          dispatch(updateTopBar());
         })
         .catch((err) => {
           toast.error("Failed to load the data.");
         });
     }
-  });
+  }, []);
   return (
     <form
       className={"sectionOne"}
@@ -96,6 +114,7 @@ const SectionOne = (props) => {
           name={"productName"}
           required={true}
           ref={productRef}
+          defaultValue={jsonData.productName ? jsonData.productName : ""}
         />
       </div>
       <br />
@@ -107,6 +126,7 @@ const SectionOne = (props) => {
           name={"brandName"}
           required={true}
           ref={brandRef}
+          defaultValue={jsonData.brandName ? jsonData.brandName : ""}
         />
       </div>
       <br />
@@ -123,7 +143,7 @@ const SectionOne = (props) => {
         />
         <img
           className={"prevImageDev"}
-          src={currPrevImage}
+          src={jsonData.previewImage ? jsonData.previewImage : currPrevImage}
           onClick={() => {
             prevImageClicker.current.click();
           }}
@@ -138,6 +158,7 @@ const SectionOne = (props) => {
           name="pipeline"
           required={true}
           ref={pipelineRef}
+          value={jsonData.pipeLine ? jsonData.pipeLine : null}
         >
           <option selected disabled>
             --Select--
@@ -157,6 +178,7 @@ const SectionOne = (props) => {
           name="tags"
           required={true}
           ref={tagsRef}
+          value={jsonData.tags ? jsonData.tags : null}
         >
           <option selected disabled>
             Select your tags
@@ -202,7 +224,6 @@ const SectionOne = (props) => {
           type={"button"}
           onClick={() => {
             const formData = new FormData();
-            console.log();
             formData.append("userid", "64676633c6ad11d84b234b1d");
             formData.append(
               "foldername",
@@ -214,8 +235,6 @@ const SectionOne = (props) => {
             formData.append("tags", tagsRef.current.value);
             formData.append("asset", inputClicker.current.files[0]);
             formData.append("previewImage", prevImageClicker.current.files[0]);
-
-            console.log(formData);
 
             axios
               .post("/product/add", formData)
