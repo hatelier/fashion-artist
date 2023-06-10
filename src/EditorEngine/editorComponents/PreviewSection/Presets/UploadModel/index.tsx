@@ -7,28 +7,34 @@ import * as THREE from "three";
 import {useDispatch, useSelector} from "react-redux";
 import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
 import {useControls} from "leva";
+import {updateUnUsedObjects} from "../../../../../redux/savedConfigs";
 
 const UploadModel = () => {
   //this has been disabled temporarily
   // const {scene} = useGLTF(props.model);
-
+  const modelURL = useSelector(
+      (state: any) => state.materialApplication.modelUrl
+  );
+  console.log("tesstestset", modelURL);
   const {scene} = useThree();
 
-  const gltf = useLoader(GLTFLoader, "/models/defaultCude.glb");
+  const gltf = useLoader(GLTFLoader, modelURL);
 
   const dispatch = useDispatch();
 
   //const useRef
   const modelRef = useRef<THREE.Group>();
   const materialListed = useSelector(
-    (state) => state.materialControl.materialArray
+      (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];
+    let materialNameList = [];
     gltf.scene.traverse((obj) => {
       if (obj.type === "Mesh") {
         if (obj.name !== "") {
           materialList.push(obj);
+          materialNameList.push(obj.name);
         }
       }
     });
@@ -36,7 +42,7 @@ const UploadModel = () => {
     // const bbox = new THREE.Box3().setFromObject(scene);
 
     dispatch(updateMaterialList(materialList));
-
+    dispatch(updateUnUsedObjects(materialNameList));
     const bbox = new THREE.Box3().setFromObject(gltf.scene);
 
     // dimensions calculations
@@ -49,7 +55,7 @@ const UploadModel = () => {
         z: dimensions.z,
       })
     );
-  }, []);
+  }, [gltf]);
   const { mode } = useControls({
     mode: { value: "translate", options: ["translate", "rotate", "scale"] },
   });

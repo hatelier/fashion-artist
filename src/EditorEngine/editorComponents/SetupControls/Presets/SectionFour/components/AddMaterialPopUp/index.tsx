@@ -10,12 +10,12 @@ import {
   LabelCentered,
   MedFontText11,
   RedButtonClass,
-  WhiteButtonClass
+  WhiteButtonClass,
 } from "../../../../../../StyledComponents";
 import Draggable from "react-draggable";
-import { TextureLoader } from "three";
+import * as THREE from "three";
+import { MeshPhysicalMaterial, TextureLoader } from "three";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,7 +24,7 @@ const AddMaterialPopUp = () => {
     map: addPic,
     roughnessMap: addPic,
     normalMap: addPic,
-    aoMap: addPic
+    aoMap: addPic,
   });
   const [materialStatus, setMaterialStatus] = useState({
     map: null,
@@ -114,7 +114,13 @@ const AddMaterialPopUp = () => {
           onChange={FileToURL}
         />
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <p
             style={{ fontSize: "11px", fontWeight: 600 }}
             className={"addHeader"}
@@ -384,6 +390,8 @@ const AddMaterialPopUp = () => {
         >
           <RedButtonClass
             onClick={() => {
+              console.log(materialArray[4]);
+
               const formData = new FormData();
               ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
                 if (materialArray[4].material[`${vls}`]) {
@@ -397,17 +405,17 @@ const AddMaterialPopUp = () => {
                 return 0;
               });
 
-              axios
-                .post(
-                  "/products/upload?userID=64676633c6ad11d84b234b1d&folderName=testset",
-                  formData
-                )
-                .then((response) => {
-                  console.log("success", response);
-                })
-                .catch((error) => {
-                  console.log("error", error);
-                });
+              // axios
+              //   .post(
+              //     "/products/upload?userID=64676633c6ad11d84b234b1d&folderName=testset",
+              //     formData
+              //   )
+              //   .then((response) => {
+              //     console.log("success", response);
+              //   })
+              //   .catch((error) => {
+              //     console.log("error", error);
+              //   });
 
               // axios
               //   .post("/materials/add", {
@@ -454,40 +462,40 @@ const AddMaterialPopUp = () => {
               //   });
               // console.log("tyset", materialArray[4].material.normalMap.image);
               //
-              // materialStatus.map.repeat.set(30, 30);
-              // materialStatus.normalMap.repeat.set(30, 30);
-              // materialStatus.roughnessMap.repeat.set(30, 30);
-              // materialStatus.aoMap.repeat.set(30, 30);
-              //
-              // //offset test
-              // //ranges from 0 to 1, along U and V
-              // materialStatus.normalMap.offset.set(0, 0);
-              // materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
-              //
-              // //   material wrapping
-              // materialStatus.map.wrapS =
-              //   materialStatus.map.wrapT =
-              //   materialStatus.normalMap.wrapS =
-              //   materialStatus.normalMap.wrapT =
-              //   materialStatus.roughnessMap.wrapS =
-              //   materialStatus.roughnessMap.wrapT =
-              //   materialStatus.aoMap.wrapS =
-              //   materialStatus.aoMap.wrapT =
-              //     THREE.RepeatWrapping;
-              //
-              // materialArray[4].material = new MeshPhysicalMaterial({
-              //   ...materialStatus,
-              //   side: THREE.DoubleSide,
-              //   //other paramters
-              //   aoMapIntensity: 1,
-              //   roughness: 1,
-              //   metalness: 0,
-              //   color: "",
-              //   name: "New Material",
-              //   clearcoat: 0, //float
-              //   ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
-              //   transmission: 0, //float
-              // });
+              materialStatus.map.repeat.set(30, 30);
+              materialStatus.normalMap.repeat.set(30, 30);
+              materialStatus.roughnessMap.repeat.set(30, 30);
+              materialStatus.aoMap.repeat.set(30, 30);
+
+              //offset test
+              //ranges from 0 to 1, along U and V
+              materialStatus.normalMap.offset.set(0, 0);
+              materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
+
+              //   material wrapping
+              materialStatus.map.wrapS =
+                materialStatus.map.wrapT =
+                materialStatus.normalMap.wrapS =
+                materialStatus.normalMap.wrapT =
+                materialStatus.roughnessMap.wrapS =
+                materialStatus.roughnessMap.wrapT =
+                materialStatus.aoMap.wrapS =
+                materialStatus.aoMap.wrapT =
+                  THREE.RepeatWrapping;
+
+              materialArray[4].material = new MeshPhysicalMaterial({
+                ...materialStatus,
+                side: THREE.DoubleSide,
+                //other paramters
+                aoMapIntensity: 1,
+                roughness: 1,
+                metalness: 0,
+                color: "",
+                name: "New Material",
+                clearcoat: 0, //float
+                ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
+                transmission: 0, //float
+              });
             }}
           >
             Create

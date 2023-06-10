@@ -14,6 +14,7 @@ import {
 } from "../../../../../redux/savedConfigs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
@@ -21,6 +22,9 @@ const SectionThree = () => {
   );
   const { presets, unUsedObjects, firstLoad } = useSelector(
     (state) => state.savedConfigs
+  );
+  const modelURL = useSelector(
+    (state: any) => state.materialApplication.modelUrl
   );
   const [currentPreset, setCurrentPreset] = useState("");
   const [toggleAdd, setToggleAdd] = useState(false);
@@ -112,9 +116,14 @@ const SectionThree = () => {
         >
           Save
         </button>
+        ;
       </div>
     );
   };
+  //here are the states of the of the userID and projectID
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
 
   return (
     <div className={"sectionThreeDiv"}>
@@ -218,7 +227,23 @@ const SectionThree = () => {
         })}
       </div>
       <div className={"DupDelDiv"}>
-        <button className={"uploadAsset"} style={{ width: "40%" }}>
+        <button
+          className={"uploadAsset"}
+          style={{ width: "40%" }}
+          onClick={() => {
+            axios
+              .get("/materials/getpreset", {
+                params: {
+                  projectId: projectID,
+                  presetName: "Preset",
+                  userId: userID,
+                },
+              })
+              .then((res) => {
+                console.log(res.data);
+              });
+          }}
+        >
           Save
         </button>
         <button className={"uploadAsset"} style={{ width: "60%" }}>

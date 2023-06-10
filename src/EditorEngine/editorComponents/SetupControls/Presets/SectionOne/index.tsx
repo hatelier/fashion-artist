@@ -7,7 +7,14 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
-import { updateTopBar } from "../../../../../redux/materialApplication";
+import {
+  updateModelUrl,
+  updateTopBar,
+} from "../../../../../redux/materialApplication";
+import {
+  updateProjectId,
+  updateUserId,
+} from "../../../../../redux/accountManagement";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -52,7 +59,12 @@ const SectionOne = (props) => {
             pipeLine: res.data.pipeline,
             tags: res.data.tags[0],
           });
+
           dispatch(updateTopBar());
+          dispatch(updateUserId(res.data.userId));
+          dispatch(updateProjectId(res.data.productID));
+          dispatch(updateModelUrl(res.data.asset.location));
+          toast.success("Project loaded!");
         })
         .catch((err) => {
           toast.error("Failed to load the data.");
@@ -239,11 +251,21 @@ const SectionOne = (props) => {
             axios
               .post("/product/add", formData)
               .then((res) => {
-                toast.success("Product has been created!");
-                window.open(
-                  `${baseReactUrl}/editor/${res.data.productName}`,
-                  "_self"
-                );
+                let dataStruct = {
+                  presetName: "Preset",
+                  configuration: {
+                    preset: [],
+                  },
+                  projectId: `${res.data.productID}`,
+                  userId: res.data.userId,
+                };
+                axios.post("/materials/preset", dataStruct).then(() => {
+                  toast.success("Product has been created!");
+                  window.open(
+                    `${baseReactUrl}/editor/${res.data.productName}`,
+                    "_self"
+                  );
+                });
               })
               .catch((error) => {
                 toast.error("Model upload has failed.");

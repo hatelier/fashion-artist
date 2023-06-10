@@ -14,6 +14,7 @@ import savedConfigs from "./savedConfigs";
 import savedCameraControls from "./savedCameraControls";
 import materialApplication from "./materialApplication";
 import meshControls from "./meshControls";
+import accountManagement from "./accountManagement";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
@@ -24,7 +25,8 @@ const reducers = combineReducers({
   savedConfigs,
   savedCameraControls,
   materialApplication,
-  meshControls
+  meshControls,
+  accountManagement,
 });
 
 // a middleware to save binary files.
@@ -56,9 +58,9 @@ const persistConfig: PersistConfig<any> = {
   key: "root",
   storage: localforage,
   whitelist: [
-    "routeManagement",
+    // "routeManagement",
     "editorManagement",
-    "savedConfigs",
+    // "savedConfigs",
     "savedCameraControls",
   ],
   // transforms: [glbTransform],

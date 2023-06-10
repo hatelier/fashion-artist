@@ -11,6 +11,7 @@ export const materialApplication = createSlice({
     },
     currentPart: null,
     blockTopBar: true,
+    modelUrl: "/models/defaultCude.glb",
   }),
   reducers: {
     updateMaterialReqs: (state, action) => {
@@ -19,8 +20,12 @@ export const materialApplication = createSlice({
     updateTopBar: (state) => {
       state.blockTopBar = !state.blockTopBar;
     },
+    updateModelUrl: (state, action) => {
+      state.modelUrl = action.payload;
+    },
   },
 });
 
-export const { updateMaterialReqs, updateTopBar } = materialApplication.actions;
+export const { updateModelUrl, updateMaterialReqs, updateTopBar } =
+  materialApplication.actions;
 export default materialApplication.reducer;

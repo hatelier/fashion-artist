@@ -1,14 +1,14 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext, useRef } from "react";
+import React, {Suspense, useContext, useRef} from "react";
 import "./index.scss";
-import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls, PerformanceMonitor } from "@react-three/drei";
+import {Canvas, useThree} from "@react-three/fiber";
+import {Html, OrbitControls, PerformanceMonitor} from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import { Perf } from "r3f-perf";
-import { useSelector } from "react-redux";
+import {Perf} from "r3f-perf";
+import {useSelector} from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
+import {DynamicLight, MaterialControl, NewMeshAdder} from "../SceneControls";
 
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
@@ -67,7 +67,7 @@ const ModelPreview = (props) => {
     <div
       className={"canvas-container"}
       style={{
-        height: "calc(100% - 129px)"
+        height: "calc(100% - 129px)",
       }}
     >
       <OnPreviewControls />
@@ -76,30 +76,16 @@ const ModelPreview = (props) => {
         <DynamicLight />
         <MaterialControl />
         <NewMeshAdder />
-
         <AmbientLightComponent />
         <Perf position="top-right" />
         <PerformanceMonitor onDecline={() => set(true)} />
         <color attach="background" args={["#f0f0f0"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
-        {/*<PresentationControls*/}
-        {/*  global*/}
-        {/*  // rotation={[Math.PI / 8, 0, 0]}*/}
-        {/*  // polar={[-0.1, Math.PI / 2]}*/}
-        {/*>*/}
-        {/*  <Stage intensity={0.6} castShadow={false}>*/}
-
-
-        <Suspense fallback={null}>
-          {/*{file && <UploadModel model={file} settings={props.settings} />}*/}
+        <Suspense fallback={<Html>Loading...</Html>}>
           <UploadModel model={file} settings={props.settings} />
           <OrbitalController />
         </Suspense>
-
-
-        {/*  </Stage>*/}
-        {/*</PresentationControls>*/}
       </Canvas>
     </div>
   );
