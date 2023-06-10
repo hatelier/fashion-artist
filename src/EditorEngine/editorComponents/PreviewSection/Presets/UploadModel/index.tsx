@@ -1,15 +1,11 @@
 // @ts-nocheck
 //uploadModel/index.tsx
 import React, {useEffect, useRef} from "react";
-import {useFrame, useLoader, useThree} from "@react-three/fiber";
+import {useLoader, useThree} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  updateMaterialDimensions,
-  updateMaterialList,
-} from "../../../../../redux/materialControl";
-import {TransformControls} from "@react-three/drei";
+import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
 import {useControls} from "leva";
 
 const UploadModel = () => {
@@ -18,7 +14,7 @@ const UploadModel = () => {
 
   const {scene} = useThree();
 
-  const gltf = useLoader(GLTFLoader, "./models/mtumxBlnd2.glb");
+  const gltf = useLoader(GLTFLoader, "/models/defaultCude.glb");
 
   const dispatch = useDispatch();
 
@@ -62,7 +58,7 @@ const UploadModel = () => {
     <>
       <primitive
         object={gltf.scene}
-        scale={[0.8, 0.8, 0.8]}
+        scale={[1, 1, 1]}
         position={[0, 0, 0]}
         rotation={[0, 0, 0]}
       />

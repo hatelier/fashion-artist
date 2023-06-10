@@ -1,10 +1,12 @@
 // @ts-nocheck
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImage from "../../../../../assets/svgs/upload (1) 1.svg";
 import { toast } from "react-toastify";
 import axios from "axios";
+import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
+import { useParams } from "react-router-dom";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -18,25 +20,54 @@ const SectionOne = (props) => {
   const brandRef = useRef();
   const pipelineRef = useRef();
   const tagsRef = useRef();
+  // background Image
+  const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
+  const { id } = useParams();
+  const baseReactUrl = window.location.origin.toString();
+  useEffect(() => {
+    if (id !== "new") {
+      axios
+        .get("/product/get", {
+          params: {
+            userid: "64676633c6ad11d84b234b1d",
+            productName: id,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          toast.error("Failed to load the data.");
+        });
+    }
+  });
   return (
     <form
       className={"sectionOne"}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
     >
       <div className={"uploadBox"}>
         <img src={UploadImage} />
         <p>Select an asset or drop here</p>
       </div>
-      <input type={"file"} ref={inputClicker} style={{ display: "none" }}
-             onChange={() => {
-               toast.success("File uploaded.");
-             }}
-             required={true}
+      <input
+        type={"file"}
+        ref={inputClicker}
+        style={{ display: "none" }}
+        onChange={() => {
+          toast.success("File uploaded.");
+        }}
+        required={true}
       />
-      <button className={"uploadAsset"}
-              onClick={() => {
-                inputClicker.current.click();
-              }}
-      >UPLOAD ASSET
+      <button
+        className={"uploadAsset"}
+        onClick={() => {
+          inputClicker.current.click();
+        }}
+      >
+        UPLOAD ASSET
       </button>
 
       {/*enable this for upload*/}
@@ -70,30 +101,44 @@ const SectionOne = (props) => {
       <br />
       <div>
         <p className={"prodNameTitle"}>Brand Name</p>
-        <input id={"brandName"} className={"productName"} name={"brandName"} required={true} ref={brandRef} />
+        <input
+          id={"brandName"}
+          className={"productName"}
+          name={"brandName"}
+          required={true}
+          ref={brandRef}
+        />
       </div>
       <br />
       <div>
         <p className={"prodNameTitle"}>Preview Image</p>
-        <input type={"file"} className={"previewImageFile"} ref={prevImageClicker} style={{ display: "none" }} />
-        <div className={"prevImageDev"}
-             onClick={() => {
-               prevImageClicker.current.click();
-             }}
-        ></div>
-
-        {/*add this code later*/}
-        {/*<input*/}
-        {/*    id={"prevImage"}*/}
-        {/*    className={"prevImage"}*/}
-        {/*    type={"file"}*/}
-        {/*    name={"prevImage"}*/}
-        {/*/>*/}
+        <input
+          type={"file"}
+          className={"previewImageFile"}
+          ref={prevImageClicker}
+          style={{ display: "none" }}
+          onChange={(e) => {
+            setCurrPrevImage(URL.createObjectURL(e.target.files[0]));
+          }}
+        />
+        <img
+          className={"prevImageDev"}
+          src={currPrevImage}
+          onClick={() => {
+            prevImageClicker.current.click();
+          }}
+        />
       </div>
       <br />
       <div>
         <p className={"prodNameTitle"}>Select a Pipeline</p>
-        <select id={"selPipeline"} className={"selPipeline"} name="pipeline" required={true} ref={pipelineRef}>
+        <select
+          id={"selPipeline"}
+          className={"selPipeline"}
+          name="pipeline"
+          required={true}
+          ref={pipelineRef}
+        >
           <option selected disabled>
             --Select--
           </option>
@@ -106,7 +151,13 @@ const SectionOne = (props) => {
       <br />
       <div>
         <p className={"prodNameTitle"}>Tags</p>
-        <select id={"selTag"} className={"selPipeline"} name="tags" required={true} ref={tagsRef}>
+        <select
+          id={"selTag"}
+          className={"selPipeline"}
+          name="tags"
+          required={true}
+          ref={tagsRef}
+        >
           <option selected disabled>
             Select your tags
           </option>
@@ -145,29 +196,48 @@ const SectionOne = (props) => {
       </div>
       {/*<button type={"submit"}>Save Current State</button>*/}
       <div className={"DupDelDiv"}>
-        <button className={"uploadAsset"} style={{ width: "60%" }} type={"button"} onClick={() => {
-          const formData = new FormData();
-          console.log();
-          formData.append("userid", "61234abcd567890efgh123456");
-          formData.append("foldername", Math.floor(Math.random() * 100000000));
-          formData.append("productname", productRef.current.value);
-          formData.append("brandname", brandRef.current.value);
-          formData.append("pipeline", pipelineRef.current.value);
-          formData.append("tags", tagsRef.current.value);
-          formData.append("asset", inputClicker.current.files[0]);
-          formData.append("previewImage", prevImageClicker.current.files[0]);
+        <button
+          className={"uploadAsset"}
+          style={{ width: "60%" }}
+          type={"button"}
+          onClick={() => {
+            const formData = new FormData();
+            console.log();
+            formData.append("userid", "64676633c6ad11d84b234b1d");
+            formData.append(
+              "foldername",
+              Math.floor(Math.random() * 100000000)
+            );
+            formData.append("productname", productRef.current.value);
+            formData.append("brandname", brandRef.current.value);
+            formData.append("pipeline", pipelineRef.current.value);
+            formData.append("tags", tagsRef.current.value);
+            formData.append("asset", inputClicker.current.files[0]);
+            formData.append("previewImage", prevImageClicker.current.files[0]);
 
-          axios.post("/product/add", formData)
-            .then((res) => {
-              toast.success("Product has been created!");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }}>
+            console.log(formData);
+
+            axios
+              .post("/product/add", formData)
+              .then((res) => {
+                toast.success("Product has been created!");
+                window.open(
+                  `${baseReactUrl}/editor/${res.data.productName}`,
+                  "_self"
+                );
+              })
+              .catch((error) => {
+                toast.error("Model upload has failed.");
+              });
+          }}
+        >
           Duplicate
         </button>
-        <button className={"uploadAsset"} style={{ width: "40%" }}>
+        <button
+          className={"uploadAsset"}
+          style={{ width: "40%" }}
+          type={"reset"}
+        >
           Delete
         </button>
       </div>
