@@ -65,12 +65,14 @@ const SetupControls = (props: BasicControls) => {
       >
         <SectionTwo context={props.context} settings={props.settings} />
       </div>
-      <div
-        className={"SectionControl"}
-        style={{ display: currentTab === 2 ? "" : "none" }}
-      >
-        <SectionThree />
-      </div>
+      {currentTab === 2 && (
+        <div
+          className={"SectionControl"}
+          style={{ display: currentTab === 2 ? "" : "none" }}
+        >
+          <SectionThree />
+        </div>
+      )}
       <div
         className={"SectionControl"}
         style={{ display: currentTab === 3 ? "" : "none" }}
