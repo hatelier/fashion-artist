@@ -24,6 +24,10 @@ const SetupControls = (props: BasicControls) => {
   );
   const dispatch = useDispatch();
   const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
+  const blockTopBar = useSelector(
+    (state: any) => state.materialApplication.blockTopBar
+  );
+  console.log("selesllfsefse", blockTopBar);
   return (
     <div
       className={"setupControls"}
@@ -31,7 +35,12 @@ const SetupControls = (props: BasicControls) => {
         ...props.style,
       }}
     >
-      <div className={"buttonControl"}>
+      <div
+        className={"buttonControl"}
+        style={{
+          display: blockTopBar ? "none" : "",
+        }}
+      >
         {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
           return (
             <button

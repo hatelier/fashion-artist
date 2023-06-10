@@ -10,13 +10,17 @@ export const materialApplication = createSlice({
       roughnessMap: null,
     },
     currentPart: null,
+    blockTopBar: true,
   }),
   reducers: {
     updateMaterialReqs: (state, action) => {
       state.materialReqs = action.payload;
     },
+    updateTopBar: (state) => {
+      state.blockTopBar = !state.blockTopBar;
+    },
   },
 });
 
-export const { updateMaterialReqs } = materialApplication.actions;
+export const { updateMaterialReqs, updateTopBar } = materialApplication.actions;
 export default materialApplication.reducer;

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
 import { Analytics } from "./pages/analytics";
@@ -9,8 +9,8 @@ import { Showroom } from "./pages/showroom";
 import { Manage } from "./pages/manage";
 import { Signup } from "./pages/signup";
 import { ForgotPassword } from "./pages/forgot-password";
-import { NewPassword } from "./pages/new-password"
-import { ResetPassword } from "./pages/reset-password"
+import { NewPassword } from "./pages/new-password";
+import { ResetPassword } from "./pages/reset-password";
 import { Subscription } from "./pages/subscription";
 import { Payment } from "./pages/payment";
 import { Credit } from "./pages/credit";
@@ -40,9 +40,9 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/new-password" element={<NewPassword />} />
-          <Route path="/editor" element={<EditorEngine />} />
+          <Route path="/editor/:id" element={<EditorEngine />} />
           <Route path="/subscription" element={<Subscription />} />
-          <Route path="/payment" element={<Payment />} /> 
+          <Route path="/payment" element={<Payment />} />
           <Route path="/credit" element={<Credit />} />
           <Route path="/account" element={<Account />} />
           <Route path="/teams" element={<Teams />} />

@@ -25,14 +25,12 @@ const root = ReactDOM.createRoot(
 );
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_IP;
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor} loading={null}>
-        <App />
-        <ToastContainer />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor} loading={null}>
+      <App />
+      <ToastContainer />
+    </PersistGate>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
