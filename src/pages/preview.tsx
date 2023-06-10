@@ -60,7 +60,7 @@ export const PreviewProduct = () => {
                 <div className='preview-sidemenu-label'><span>Accesories</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
               </div>
             </div>
-            <div>
+            <div className='preview-area'>
               <div className='preview-view-ar'>View in AR</div>
               <div className='preview-model'></div>
             </div>
