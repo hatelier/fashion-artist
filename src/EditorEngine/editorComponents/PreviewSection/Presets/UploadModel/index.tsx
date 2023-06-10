@@ -25,7 +25,7 @@ const UploadModel = () => {
   //const useRef
   const modelRef = useRef<THREE.Group>();
   const materialListed = useSelector(
-      (state) => state.materialControl.materialArray
+    (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];

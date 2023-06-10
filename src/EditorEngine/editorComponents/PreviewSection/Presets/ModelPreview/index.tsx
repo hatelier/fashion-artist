@@ -11,10 +11,10 @@ import OnPreviewControls from "../OnPreviewControls";
 import {DynamicLight, MaterialControl, NewMeshAdder} from "../SceneControls";
 
 const ModelPreview = (props) => {
-  const { file, dimensions } = useContext(props.context);
+  const {file, dimensions} = useContext(props.context);
   const ref = useRef();
   const OrbitalController = () => {
-    const { camera } = useThree();
+    const {camera} = useThree();
 
     //here are the controllable camera properties
     const { x, y, z } = useSelector(

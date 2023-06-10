@@ -15,6 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
@@ -67,7 +68,7 @@ const SectionThree = () => {
         <h3>{current}</h3>
         {unSelectedObjects.map((objectConfig) => {
           return (
-            <div style={{ display: "flex", gap: "5px", margin: "3px" }}>
+            <label style={{ display: "flex", gap: "5px", margin: "3px" }}>
               <input
                 type={"checkbox"}
                 onChange={(e) => {
@@ -84,7 +85,7 @@ const SectionThree = () => {
                 }}
               />
               <p>{objectConfig}</p>
-            </div>
+            </label>
           );
         })}
         <button
@@ -232,15 +233,16 @@ const SectionThree = () => {
           style={{ width: "40%" }}
           onClick={() => {
             axios
-              .get("/materials/getpreset", {
-                params: {
-                  projectId: projectID,
-                  presetName: "Preset",
-                  userId: userID,
+              .put("/materials/preset", {
+                presetName: "Preset",
+                configuration: {
+                  preset: presets,
                 },
+                projectId: projectID,
+                userId: userID,
               })
               .then((res) => {
-                console.log(res.data);
+                toast.success("Successfully updated the preset.");
               });
           }}
         >
