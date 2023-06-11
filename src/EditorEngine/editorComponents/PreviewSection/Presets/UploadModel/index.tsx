@@ -18,14 +18,22 @@ const UploadModel = () => {
   console.log("tesstestset", modelURL);
   const {scene} = useThree();
 
-  const gltf = useLoader(GLTFLoader, modelURL);
+  const gltf = useLoader(
+      GLTFLoader,
+      modelURL,
+      () => {
+      },
+      (e) => {
+        console.log("presofgesfsef", e);
+      }
+  );
 
   const dispatch = useDispatch();
 
   //const useRef
   const modelRef = useRef<THREE.Group>();
   const materialListed = useSelector(
-    (state) => state.materialControl.materialArray
+      (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];
