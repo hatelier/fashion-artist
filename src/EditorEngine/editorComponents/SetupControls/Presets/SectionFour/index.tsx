@@ -68,7 +68,9 @@ const SectionFour = () => {
       });
   }
   useEffect(() => {
-    loadMaterialFunc();
+    if (userId && projectId) {
+      loadMaterialFunc();
+    }
   }, []);
   return (
     <div className={"sectionFourDiv"}>

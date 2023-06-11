@@ -109,7 +109,9 @@ const SectionTwo = () => {
       });
   }
   useEffect(() => {
-    getConfig();
+    if (projectId && userID) {
+      getConfig();
+    }
   }, []);
 
   const IndiConfig = ({ indiMaterial, vls, appliDetails, changeAppli }) => {
