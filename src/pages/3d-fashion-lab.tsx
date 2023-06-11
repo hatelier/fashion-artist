@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 export const FashionLab = () => {
   const [cookies, setCookie] = useCookies(['access_token']);
@@ -34,6 +35,26 @@ export const FashionLab = () => {
     window.localStorage.removeItem("userID");
     navigate("/auth");
   }
+  const Msg = () => (
+    <div className="fashionlab-popup">
+    <div className='fashionlab-popup-heading'>Thank you for your interest in our 3D Fashion Lab!</div>
+    <div className='fashionlab-popup-text'>We have recieved your request and will review it as soon as possible. We will get back to you shortly with our response</div>
+    </div>
+    
+  )
+
+    const displayMsg = () => {
+      toast(<Msg />, {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }) 
+    }
 
     return ( 
     <div className='home-container'>
@@ -200,7 +221,7 @@ export const FashionLab = () => {
                       Upload your design here
                     </div>
                   </div>
-                  <a href="" className="fashion-upload-button">Upload Design</a>
+                  <button className="fashion-upload-button" onClick={displayMsg}>Upload Design</button>
                </div>
               </div>
             </div>
