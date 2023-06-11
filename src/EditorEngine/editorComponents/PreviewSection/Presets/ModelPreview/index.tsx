@@ -1,20 +1,20 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, {Suspense, useContext, useRef} from "react";
+import React, { Suspense, useContext, useRef } from "react";
 import "./index.scss";
-import {Canvas, useThree} from "@react-three/fiber";
-import {Html, OrbitControls, PerformanceMonitor} from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Html, OrbitControls, PerformanceMonitor } from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import {Perf} from "r3f-perf";
-import {useSelector} from "react-redux";
+import { Perf } from "r3f-perf";
+import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import {DynamicLight, MaterialControl, NewMeshAdder} from "../SceneControls";
+import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
 
 const ModelPreview = (props) => {
-  const {file, dimensions} = useContext(props.context);
+  const { file, dimensions } = useContext(props.context);
   const ref = useRef();
   const OrbitalController = () => {
-    const {camera} = useThree();
+    const { camera } = useThree();
 
     //here are the controllable camera properties
     const { x, y, z } = useSelector(
@@ -62,6 +62,9 @@ const ModelPreview = (props) => {
   };
 
   // material related
+  const modelLoadRate = useSelector(
+    (state: any) => state.materialApplication.modelLoadRate
+  );
 
   return (
     <div
@@ -82,7 +85,13 @@ const ModelPreview = (props) => {
         <color attach="background" args={["#f0f0f0"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
-        <Suspense fallback={<Html>Loading...</Html>}>
+        <Suspense
+          fallback={
+            <Html>
+              <h1>{modelLoadRate}%</h1>
+            </Html>
+          }
+        >
           <UploadModel model={file} settings={props.settings} />
           <OrbitalController />
         </Suspense>

@@ -25,7 +25,7 @@ export const materialApplication = createSlice({
       state.modelUrl = action.payload;
     },
     updateModelLoadRate: (state, action) => {
-      state.modelLoadRate = action.payload;
+      state.modelLoadRate = Math.floor(action.payload * 100);
     },
   },
 });

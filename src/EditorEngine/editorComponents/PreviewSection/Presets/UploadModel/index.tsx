@@ -1,39 +1,40 @@
 // @ts-nocheck
 //uploadModel/index.tsx
-import React, {useEffect, useRef} from "react";
-import {useLoader, useThree} from "@react-three/fiber";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import React, { useEffect, useRef } from "react";
+import { useLoader, useThree } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import {useDispatch, useSelector} from "react-redux";
-import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
-import {useControls} from "leva";
-import {updateUnUsedObjects} from "../../../../../redux/savedConfigs";
+import { useDispatch, useSelector } from "react-redux";
+import { updateMaterialDimensions, updateMaterialList } from "../../../../../redux/materialControl";
+import { useControls } from "leva";
+import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
+import { updateModelLoadRate } from "../../../../../redux/materialApplication";
 
 const UploadModel = () => {
   //this has been disabled temporarily
   // const {scene} = useGLTF(props.model);
-  const modelURL = useSelector(
-      (state: any) => state.materialApplication.modelUrl
-  );
-  console.log("tesstestset", modelURL);
-  const {scene} = useThree();
-
-  const gltf = useLoader(
-      GLTFLoader,
-      modelURL,
-      () => {
-      },
-      (e) => {
-        console.log("presofgesfsef", e);
-      }
-  );
 
   const dispatch = useDispatch();
 
+  const modelURL = useSelector(
+    (state: any) => state.materialApplication.modelUrl
+  );
+  console.log("tesstestset", modelURL);
+  const { scene } = useThree();
+
+  const gltf = useLoader(
+    GLTFLoader,
+    modelURL,
+    () => {
+    },
+    (e) => {
+      dispatch(updateModelLoadRate(e.loaded / e.total));
+    }
+  );
   //const useRef
   const modelRef = useRef<THREE.Group>();
   const materialListed = useSelector(
-      (state) => state.materialControl.materialArray
+    (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];

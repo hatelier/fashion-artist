@@ -27,7 +27,9 @@ const SetupControls = (props: BasicControls) => {
   const blockTopBar = useSelector(
     (state: any) => state.materialApplication.blockTopBar
   );
-  console.log("selesllfsefse", blockTopBar);
+  const modelLoadRate = useSelector(
+    (state: any) => state.materialApplication.modelLoadRate
+  );
   return (
     <div
       className={"setupControls"}
@@ -59,26 +61,28 @@ const SetupControls = (props: BasicControls) => {
       >
         <SectionOne context={props.context} settings={props.settings} />
       </div>
-      <div
-        className={"SectionControl"}
-        style={{ display: currentTab === 1 ? "" : "none" }}
-      >
-        <SectionTwo context={props.context} settings={props.settings} />
-      </div>
-      {currentTab === 2 && (
-        <div
-          className={"SectionControl"}
-          style={{ display: currentTab === 2 ? "" : "none" }}
-        >
-          <SectionThree />
-        </div>
+      {modelLoadRate === 100 && (
+        <>
+          <div
+            className={"SectionControl"}
+            style={{ display: currentTab === 1 ? "" : "none" }}
+          >
+            <SectionTwo context={props.context} settings={props.settings} />
+          </div>
+          <div
+            className={"SectionControl"}
+            style={{ display: currentTab === 2 ? "" : "none" }}
+          >
+            <SectionThree />
+          </div>
+          <div
+            className={"SectionControl"}
+            style={{ display: currentTab === 3 ? "" : "none" }}
+          >
+            <SectionFour />
+          </div>
+        </>
       )}
-      <div
-        className={"SectionControl"}
-        style={{ display: currentTab === 3 ? "" : "none" }}
-      >
-        <SectionFour />
-      </div>
     </div>
   );
 };

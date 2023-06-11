@@ -6,9 +6,7 @@ import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import {
-  massUpdatePresets,
   setFirstLoad,
-  updatePresets,
   updateUnUsedObjects,
 } from "../../../../../redux/savedConfigs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,9 +32,7 @@ const SectionThree = () => {
   //this here is a sophisticated loading mechanism for the visibility factors
   useEffect(() => {
     if (materialArray.length && reqPreset) {
-      // dispatch(massUpdatePresets(reqPreset));
       reqPreset.map((prVal, index) => {
-        console.log(prVal);
         prVal.materialList.map((matName, matIndex) => {
           //now toggle the visibility
           materialArray.map((modMaterial, modIndex) => {
@@ -51,8 +47,6 @@ const SectionThree = () => {
 
   useEffect(() => {
     if (firstLoad && materialArray.length) {
-      console.log("fisrt trigger", firstLoad);
-
       let materialNameList = [];
       materialArray.map((vls) => {
         materialNameList.push(vls.name);
@@ -92,7 +86,7 @@ const SectionThree = () => {
         <button
           onClick={() => {
             //selected the objects of the preset
-            let presetObject = presets.map((prVakl) => {
+            let presetObject = reqPreset.map((prVakl) => {
               if (prVakl.name == current) {
                 return {
                   ...prVakl,
@@ -112,7 +106,7 @@ const SectionThree = () => {
                 )
               )
             );
-            dispatch(massUpdatePresets(presetObject));
+            setReqPreset(presetObject);
             setToggleAdd((state) => !state);
           }}
         >
@@ -137,7 +131,6 @@ const SectionThree = () => {
           },
         })
         .then((res) => {
-          console.log("icomign data", res.data.preset.configuration.preset);
           setReqPreset(res.data.preset.configuration.preset);
         })
         .catch((err) => {
@@ -166,7 +159,7 @@ const SectionThree = () => {
               visibility: [],
             };
             setCurrentPreset(name);
-            dispatch(updatePresets(innerObject));
+            setReqPreset((stateReq) => [...stateReq, innerObject]);
             setToggleAdd((state) => !state);
           }}
           style={{ width: "21.35px" }}
@@ -229,14 +222,19 @@ const SectionThree = () => {
                               matArr.visible = !preset.visibility[matInx];
                             }
                           });
-                          //toggle the visibility across the component phase
-                          // dispatch(
-                          //   toggleVisiblityPresets({
-                          //     presetName: preset.name,
-                          //     matName: matVal,
-                          //     requiredState: !preset.visibility[matInx],
-                          //   })
-                          // );
+
+                          setReqPreset((presState) =>
+                            presState.map((presetChng) => {
+                              if (presetChng.name === preset.name) {
+                                let materialIndex =
+                                  presetChng.materialList.indexOf(matVal);
+                                presetChng.visibility[materialIndex] =
+                                  !preset.visibility[matInx];
+                                return presetChng;
+                              }
+                              return presetChng;
+                            })
+                          );
                         }}
                       />
                     </div>
@@ -256,7 +254,7 @@ const SectionThree = () => {
               .put("/materials/preset", {
                 presetName: "Preset",
                 configuration: {
-                  preset: presets,
+                  preset: reqPreset,
                 },
                 projectId: projectID,
                 userId: userID,

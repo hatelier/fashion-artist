@@ -71,6 +71,10 @@ const SectionOne = (props) => {
         });
     }
   }, []);
+  // here is the model loading rate.
+  const modelLoadRate = useSelector(
+    (state: any) => state.materialApplication.modelLoadRate
+  );
   return (
     <form
       className={"sectionOne"}
@@ -228,6 +232,7 @@ const SectionOne = (props) => {
         />
         &nbsp;
       </div>
+      <div></div>
       {/*<button type={"submit"}>Save Current State</button>*/}
       <div className={"DupDelDiv"}>
         <button
