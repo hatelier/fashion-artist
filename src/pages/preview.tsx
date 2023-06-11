@@ -29,7 +29,31 @@ export const PreviewProduct = () => {
         console.error("Error fetching user data: ", error);
       }
     };
-
+    
+    const [isOpen1, setIsOpen1] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
+    const [isOpen3, setIsOpen3] = useState(false);
+    const [isOpen4, setIsOpen4] = useState(false);
+    const [isOpen5, setIsOpen5] = useState(false);
+    const [isOpen6, setIsOpen6] = useState(false);
+    const toggleDropdown1 = () => {
+      setIsOpen1(!isOpen1);
+    };
+    const toggleDropdown2 = () => {
+      setIsOpen2(!isOpen2);
+    };
+    const toggleDropdown3 = () => {
+      setIsOpen3(!isOpen3);
+    };
+    const toggleDropdown4 = () => {
+      setIsOpen4(!isOpen4);
+    };
+    const toggleDropdown5 = () => {
+      setIsOpen5(!isOpen5);
+    };
+    const toggleDropdown6 = () => {
+      setIsOpen6(!isOpen6);
+    };
     const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
@@ -41,23 +65,65 @@ export const PreviewProduct = () => {
         <div className='preview-block'>
             <div className='preview-main'>
             <div className='preview-sidemenu'>
-              <div>
-                <div className='preview-sidemenu-label'><span>Sleeves</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown1}>
+                 <span>Sleeves</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen1 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
-              <div>
-                <div className='preview-sidemenu-label'><span>Bottom Styles</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown2}>
+                 <span>Bottom Styles</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen2 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
-              <div>
-                <div className='preview-sidemenu-label'><span>Body</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown3}>
+                 <span>Body</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen3 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
-              <div>
-                <div className='preview-sidemenu-label'><span>Neckline</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown4}>
+                 <span>Neckline</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen4 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
-              <div>
-                <div className='preview-sidemenu-label'><span>Capes</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown5}>
+                 <span>Capes</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen5 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
-              <div>
-                <div className='preview-sidemenu-label'><span>Accesories</span><img src={require('../assets/pngs/plus-white.png')} alt="" /></div>
+              <div className="dropdown">
+                 <button className='preview-sidemenu-label' onClick={toggleDropdown6}>
+                 <span>Accesories</span><img src={require('../assets/pngs/plus-white.png')} alt="" />
+                 </button>
+                 {isOpen6 && (
+                  <div className="dropdown-menu">
+                    <div>here</div>
+                  </div>
+                )}
               </div>
             </div>
             <div className='preview-area'>

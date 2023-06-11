@@ -710,6 +710,9 @@ font-size: 30px;
 line-height: 136.3%;
 }
 
+.info-view-link {
+  color: black;
+}
 .recent-products {
   font-weight: 400;
   font-size: 24px;
@@ -2765,19 +2768,20 @@ width: 100%;
   margin-left: 60px;
   margin-bottom: 60px;
   padding: 20px;
-  width: 90%;
+  width: 75%;
+  height: 90vh;
 }
 
 .preview-main {
   display: flex;
   flex-direction: row;
   width: 100%;
+  position: relative;
 }
 
-.preview-model {
-  min-width: 654px;
-  min-height: 818.35px;
-}
+/* .preview-model {
+
+} */
 
 .preview-sidemenu {
   display: flex;
@@ -2785,6 +2789,7 @@ width: 100%;
   align-items: flex-start;
   padding: 0px;
   gap: 12px;  
+  width: 25%;
 }
 .preview-sidemenu-label {
   display: flex;
@@ -2804,6 +2809,7 @@ width: 100%;
   line-height: 159%;
   text-align: center;
   color: #FFFFFF;
+  border: none;
 }
 
 .preview-view-ar {
@@ -2824,7 +2830,8 @@ width: 100%;
   font-size: 12px;
   line-height: 15px;
   text-align: center;
-  
+  position: absolute;
+  right: 0px;
   color: #FFFFFF;
 }
 
@@ -2834,7 +2841,7 @@ width: 100%;
   align-items: center;
   padding: 0px;
   gap: 10px;
-  position: relative;
+  position: absolute;
   right: 0px;
 }
 .preview-details-name {
@@ -2869,8 +2876,8 @@ padding: 20px;
 gap: 20px;
 background: #FFFFFF;
 border-radius: 10px;
+margin: auto;
 margin-top: 120px;
-margin-left: 30px;
 }
 
 .preview-details-buttons {
@@ -2925,6 +2932,11 @@ margin-left: 30px;
   font-weight: 400;
   font-size: 12px;
   line-height: 26px;
+}
+
+.preview-mtum-logo {
+  position: absolute;
+  bottom: 0px;
 }
 
 .login-popup {

@@ -119,7 +119,7 @@ export const Dashboard = () => {
               <a href="/products">Products</a>
               </div>
               <div className='item'>
-              <a href="#">Analytics</a>
+              <a href="/analytics">Analytics</a>
               </div>
               <div className='item'>
               <a href="/showroom">Showroom</a>
@@ -154,17 +154,17 @@ export const Dashboard = () => {
             <div className='info'>
               <div className='info-name'>Total Products</div>
               <div className='info-value'>290</div>
-              <div className='info-view'><a href="/products">See all Products</a></div>
+              <div className='info-view'><a className='info-view-link' href="/products">See all Products</a></div>
             </div>
             <div className='info'>
               <div className='info-name'>Total 3d view</div>
               <div className='info-value'>500</div>
-              <div className='info-view'><a href="/products">View analytics</a></div>
+              <div className='info-view'><a className='info-view-link' href="/analytics">View analytics</a></div>
             </div>
             <div className='info'>
               <div className='info-name'>Total AR view</div>
               <div className='info-value'>870</div>
-              <div className='info-view'><a href="/products">See analytics report</a></div>
+              <div className='info-view'><a className='info-view-link' href="/analytics">See analytics report</a></div>
             </div>
           </div>
           <div className='products'>

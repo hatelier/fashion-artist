@@ -122,7 +122,7 @@ export const AddShowroom = () => {
               <a href="/products">Products</a>
               </div>
               <div className='item'>
-              <a href="#">Analytics</a>
+              <a href="/analytics">Analytics</a>
               </div>
               <div className='item'>
               <a href="/showroom">Showroom</a>
