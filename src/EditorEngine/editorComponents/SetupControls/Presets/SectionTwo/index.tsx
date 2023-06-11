@@ -38,13 +38,14 @@ const SectionTwo = () => {
     (state: any) => state.accountManagement
   );
   // the coolest function. For applying the materials.
-  function ApplyMaterials({ configData, mattmatt }) {
-    for (let i = 0; i < mattmatt.length; i++) {
-      if (configData.hasOwnProperty(mattmatt[i].name)) {
-        if (configData[mattmatt[i].name].selected !== null) {
+  const [status, setStatus] = useState(true);
+  function ApplyMaterials({ configData }) {
+    for (let i = 0; i < materialList.length; i++) {
+      if (configData.hasOwnProperty(materialList[i].name)) {
+        if (configData[materialList[i].name].selected !== null) {
           let requi_material = allCustomMaterials.filter(
             (query) =>
-              query.materialName === configData[mattmatt[i].name].selected
+              query.materialName === configData[materialList[i].name].selected
           );
           let main_mat = requi_material[0];
           let openMaterial = {};
@@ -79,11 +80,15 @@ const SectionTwo = () => {
             openMaterial.aoMap.wrapT =
               THREE.RepeatWrapping;
 
-          mattmatt[i].material = new MeshPhysicalMaterial({
+          materialList[i].material = new MeshPhysicalMaterial({
             ...openMaterial,
             side: THREE.DoubleSide,
           });
         }
+      }
+      if (i === materialList.length - 1 && materialList.length > 1) {
+        setStatus(false);
+        console.log("playstaiton4");
       }
     }
     return null;
@@ -234,8 +239,8 @@ const SectionTwo = () => {
         <p className={"sectionTwoTitle"}>Configurations</p>
         <img src={AddConfig} style={{ width: "21.35px" }} />
       </div>
-      {allCustomMaterials && (
-        <ApplyMaterials mattmatt={materialList} configData={appliedTextures} />
+      {status && allCustomMaterials && (
+        <ApplyMaterials configData={appliedTextures} />
       )}
       {selectedMesh && (
         <div
