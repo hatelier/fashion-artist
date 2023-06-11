@@ -141,25 +141,6 @@ export const PreviewProduct = () => {
             </div>
             <img src={require('../assets/pngs/mx-logo-dark.png')} alt=""  className='preview-mtum-logo'/>
         </div>
-        <div className='preview-details'>
-          <div className='preview-details-name'>Name</div>
-          <div className='preview-cost'>
-            <div className='preview-price'>$30</div>
-            <div className='preview-tax'>Tax included</div>
-          </div>
-          <div className='preview-quantity-block'>
-            <div className='preview-quantity'>Quantity</div>
-            <div className="credit-unit-buttons">
-              <button className="credit-minus-button">-</button>
-              <button className="credit-current-button">99</button>
-              <button className="credit-plus-button">+</button>
-            </div>
-          </div>
-          <div className='preview-details-buttons'>
-            <div className='preview-add-cart'>Add to cart</div>
-            <div className='preview-buy-now'>Buy it now</div>
-          </div>
-        </div>
        </div>
     </div>
 );
