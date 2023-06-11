@@ -218,7 +218,6 @@ const SectionThree = () => {
                         onClick={() => {
                           materialArray.map((matArr, arrIndex) => {
                             if (matArr.name === matVal) {
-                              //   TODO: Here the preset value itself is not being updated.
                               matArr.visible = !preset.visibility[matInx];
                             }
                           });

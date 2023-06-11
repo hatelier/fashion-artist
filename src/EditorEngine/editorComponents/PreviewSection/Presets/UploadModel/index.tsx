@@ -5,7 +5,10 @@ import { useLoader, useThree } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useDispatch, useSelector } from "react-redux";
-import { updateMaterialDimensions, updateMaterialList } from "../../../../../redux/materialControl";
+import {
+  updateMaterialDimensions,
+  updateMaterialList,
+} from "../../../../../redux/materialControl";
 import { useControls } from "leva";
 import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
 import { updateModelLoadRate } from "../../../../../redux/materialApplication";
@@ -25,8 +28,7 @@ const UploadModel = () => {
   const gltf = useLoader(
     GLTFLoader,
     modelURL,
-    () => {
-    },
+    () => {},
     (e) => {
       dispatch(updateModelLoadRate(e.loaded / e.total));
     }
