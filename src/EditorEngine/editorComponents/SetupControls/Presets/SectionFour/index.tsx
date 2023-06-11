@@ -64,7 +64,7 @@ const SectionFour = () => {
       })
       .then((res) => {
         setAppliedMaterial(res.data);
-        dispatch(updateCustomMaterial);
+        dispatch(updateCustomMaterial(res.data));
       });
   }, []);
   return (

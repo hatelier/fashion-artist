@@ -4,10 +4,15 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import * as THREE from "three";
-import { MeshStandardMaterial } from "three";
+import {
+  MeshPhysicalMaterial,
+  MeshStandardMaterial,
+  TextureLoader,
+} from "three";
 import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
+import { accountManagement } from "../../../../../redux/accountManagement";
 // color picker
 
 const SectionTwo = () => {
@@ -23,6 +28,10 @@ const SectionTwo = () => {
   }, [materialList]);
   //control the config pop up state
   const [configPopUp, setConfigPopUp] = useState(null);
+  //redux mechanism state
+  const allCustomMaterials = useSelector(
+    (state: any) => state.accountManagement.allCustomMaterials
+  );
   return (
     <div className={"sectionTwoDiv"}>
       <div
@@ -35,6 +44,62 @@ const SectionTwo = () => {
       >
         <p className={"sectionTwoTitle"}>Configurations</p>
         <img src={AddConfig} style={{ width: "21.35px" }} />
+      </div>
+      <div
+        style={{
+          margin: "5px 20px",
+        }}
+      >
+        {allCustomMaterials &&
+          allCustomMaterials.map((vls, index) => {
+            return (
+              <label
+                onClick={() => {
+                  let openMaterial = {};
+                  ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+                    (mater, index) => {
+                      const texture = new TextureLoader().load(
+                        vls[`${mater}`].imgName
+                      );
+                      if (mater === "occlusionMap") {
+                        mater = "aoMap";
+                      } else if (mater === "baseMap") {
+                        mater = "map";
+                      }
+                      openMaterial = {
+                        ...openMaterial,
+                        [`${mater}`]: texture,
+                      };
+                    }
+                  );
+                  openMaterial.map.repeat.set(30, 30);
+                  openMaterial.normalMap.repeat.set(30, 30);
+                  openMaterial.roughnessMap.repeat.set(30, 30);
+                  openMaterial.aoMap.repeat.set(30, 30);
+
+                  openMaterial.map.wrapS =
+                    openMaterial.map.wrapT =
+                    openMaterial.normalMap.wrapS =
+                    openMaterial.normalMap.wrapT =
+                    openMaterial.roughnessMap.wrapS =
+                    openMaterial.roughnessMap.wrapT =
+                    openMaterial.aoMap.wrapS =
+                    openMaterial.aoMap.wrapT =
+                      THREE.RepeatWrapping;
+
+                  materialList[4].material = new MeshPhysicalMaterial({
+                    ...openMaterial,
+                  });
+
+                  console.log(openMaterial);
+                }}
+              >
+                <input type={"checkbox"} />
+                &nbsp; &nbsp;
+                {vls.materialName}
+              </label>
+            );
+          })}
       </div>
       {materialList.length &&
         materialList.map((vlss, indexs) => {
@@ -59,15 +124,15 @@ const SectionTwo = () => {
                     }}
                   />
                 </div>
-                {materialConfigObject[vlss.name] &&
-                  ["green"].map((vls, index) => {
-                    return (
-                      <IndiConfig
-                        indiMaterial={materialList[indexs]}
-                        vls={vls}
-                      />
-                    );
-                  })}
+                {/*{true &&*/}
+                {/*  ["green"].map((vls, index) => {*/}
+                {/*    return (*/}
+                {/*      <IndiConfig*/}
+                {/*        indiMaterial={materialList[indexs]}*/}
+                {/*        vls={vls}*/}
+                {/*      />*/}
+                {/*    );*/}
+                {/*  })}*/}
               </div>
               {configPopUp == indexs && <ConfigBox />}
             </>
