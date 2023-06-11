@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as THREE from "three";
 import {
   MeshPhysicalMaterial,
@@ -13,6 +13,8 @@ import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import { accountManagement } from "../../../../../redux/accountManagement";
+import axios from "axios";
+import { toast } from "react-toastify";
 // color picker
 
 const SectionTwo = () => {
@@ -34,6 +36,141 @@ const SectionTwo = () => {
   );
   // here is the main config login.
   const [appliedTextures, setAppliedTextures] = useState({});
+  const [selectedMesh, setSelectedMesh] = useState(null);
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
+  async function getConfig() {
+    axios
+      .get("/manage/config", {
+        params: {
+          userId: userID,
+          projectId: projectID,
+        },
+      })
+      .then((res) => {
+        setAppliedTextures(res.data);
+      })
+      .catch((err) => {
+        toast.error("Failed to retrieve config");
+      });
+  }
+  useEffect(() => {
+    getConfig();
+  }, []);
+  const IndiConfig = ({ indiMaterial, vls, appliDetails, changeAppli }) => {
+    const [toggleState, setToggleState] = useState(false);
+    // here is the material fixtures
+    function materialFixture(materialName) {
+      let requi_material = allCustomMaterials.filter(
+        (query) => query.materialName === materialName
+      );
+      let main_mat = requi_material[0];
+      let openMaterial = {};
+      ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+        (mater, index) => {
+          const texture = new TextureLoader().load(
+            main_mat[`${mater}`].imgName
+          );
+          if (mater === "occlusionMap") {
+            mater = "aoMap";
+          } else if (mater === "baseMap") {
+            mater = "map";
+          }
+          openMaterial = {
+            ...openMaterial,
+            [`${mater}`]: texture,
+          };
+        }
+      );
+      openMaterial.map.repeat.set(30, 30);
+      openMaterial.normalMap.repeat.set(30, 30);
+      openMaterial.roughnessMap.repeat.set(30, 30);
+      openMaterial.aoMap.repeat.set(30, 30);
+
+      openMaterial.map.wrapS =
+        openMaterial.map.wrapT =
+        openMaterial.normalMap.wrapS =
+        openMaterial.normalMap.wrapT =
+        openMaterial.roughnessMap.wrapS =
+        openMaterial.roughnessMap.wrapT =
+        openMaterial.aoMap.wrapS =
+        openMaterial.aoMap.wrapT =
+          THREE.RepeatWrapping;
+
+      indiMaterial.material = new MeshPhysicalMaterial({
+        ...openMaterial,
+        side: THREE.DoubleSide,
+      });
+    }
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            cursor: "pointer",
+            height: "22px",
+            background: "#FFFFFF",
+            border: "1px solid #EDEDED",
+            borderRadius: "5px",
+            margin: "0 15px 10px 15px",
+            padding: "0 9px",
+          }}
+          onClick={() => {
+            // indiMaterial.material = new MeshStandardMaterial({
+            //   color: vls,
+            //   side: THREE.DoubleSide,
+            //   name: `${indiMaterial.name}${vls}`,
+            // });
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <div
+              style={{
+                height: "13px",
+                width: "13px",
+                background: `#c7c7c7`,
+                borderRadius: "50%",
+              }}
+            ></div>
+            <p className={"confName"}>{vls}</p>
+          </div>
+          <FontAwesomeIcon
+            icon={appliDetails.selected === vls ? faEye : faEyeSlash}
+            style={{ fontSize: "12px", color: "lightgrey" }}
+            onClick={() => {
+              if (appliDetails.selected === vls) {
+                appliDetails.selected = null;
+                changeAppli((state) => {
+                  return {
+                    ...state,
+                    appliDetails,
+                  };
+                });
+              } else {
+                appliDetails.selected = vls;
+                changeAppli((state) => {
+                  return {
+                    ...state,
+                    appliDetails,
+                  };
+                });
+                materialFixture(vls);
+              }
+            }}
+          />
+        </div>
+      </>
+    );
+  };
 
   return (
     <div className={"sectionTwoDiv"}>
@@ -48,97 +185,73 @@ const SectionTwo = () => {
         <p className={"sectionTwoTitle"}>Configurations</p>
         <img src={AddConfig} style={{ width: "21.35px" }} />
       </div>
-      <div
-        style={{
-          margin: "5px 20px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {allCustomMaterials &&
-          allCustomMaterials.map((vls, index) => {
-            return (
-              <label
-                onClick={() => {
-                  // let openMaterial = {};
-                  // ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-                  //   (mater, index) => {
-                  //     const texture = new TextureLoader().load(
-                  //       vls[`${mater}`].imgName
-                  //     );
-                  //     if (mater === "occlusionMap") {
-                  //       mater = "aoMap";
-                  //     } else if (mater === "baseMap") {
-                  //       mater = "map";
-                  //     }
-                  //     openMaterial = {
-                  //       ...openMaterial,
-                  //       [`${mater}`]: texture,
-                  //     };
-                  //   }
-                  // );
-                  // openMaterial.map.repeat.set(30, 30);
-                  // openMaterial.normalMap.repeat.set(30, 30);
-                  // openMaterial.roughnessMap.repeat.set(30, 30);
-                  // openMaterial.aoMap.repeat.set(30, 30);
-                  //
-                  // openMaterial.map.wrapS =
-                  //   openMaterial.map.wrapT =
-                  //   openMaterial.normalMap.wrapS =
-                  //   openMaterial.normalMap.wrapT =
-                  //   openMaterial.roughnessMap.wrapS =
-                  //   openMaterial.roughnessMap.wrapT =
-                  //   openMaterial.aoMap.wrapS =
-                  //   openMaterial.aoMap.wrapT =
-                  //     THREE.RepeatWrapping;
-                  //
-                  // materialList[4].material = new MeshPhysicalMaterial({
-                  //   ...openMaterial,
-                  //   side: THREE.DoubleSide,
-                  // });
-                }}
-              >
-                <input
-                  type={"checkbox"}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setAppliedTextures((state) => {
-                        return {
-                          ...state,
-                          Gowns: {
-                            selected: null,
-                            list: state.Gowns.list
-                              ? [...state.Gowns.list, vls.materialName]
-                              : [vls.materialName],
-                          },
-                        };
-                      });
-                    } else {
-                      setAppliedTextures((state) => {
-                        let new_val = [];
-                        state.Gowns.list.map((value) => {
-                          if (value !== vls.materialName) {
-                            new_val.push(value);
+      {selectedMesh && (
+        <div
+          style={{
+            margin: "5px 20px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {allCustomMaterials &&
+            allCustomMaterials.map((vls, index) => {
+              return (
+                <label>
+                  <input
+                    type={"checkbox"}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAppliedTextures((state) => {
+                          let status = false;
+                          if (state[`${selectedMesh}`]) {
+                            status = true;
                           }
+                          return {
+                            ...state,
+                            [`${selectedMesh}`]: {
+                              selected: null,
+                              list: status
+                                ? [
+                                    ...state[`${selectedMesh}`].list,
+                                    vls.materialName,
+                                  ]
+                                : [vls.materialName],
+                            },
+                          };
                         });
-                        return {
-                          ...state,
-                          Gowns: {
-                            selected: null,
-                            list: new_val,
-                          },
-                        };
-                      });
-                    }
-                  }}
-                />
-                &nbsp; &nbsp;
-                {vls.materialName}
-              </label>
-            );
-          })}
-        <button>save</button>
-      </div>
+                      } else {
+                        setAppliedTextures((state) => {
+                          let new_val = [];
+                          state[`${selectedMesh}`].list.map((value) => {
+                            if (value !== vls.materialName) {
+                              new_val.push(value);
+                            }
+                          });
+                          return {
+                            ...state,
+                            [`${selectedMesh}`]: {
+                              selected: null,
+                              list: new_val,
+                            },
+                          };
+                        });
+                      }
+                    }}
+                  />
+                  &nbsp; &nbsp;
+                  {vls.materialName}
+                </label>
+              );
+            })}
+          <button
+            onClick={() => {
+              setSelectedMesh(null);
+            }}
+          >
+            save
+          </button>
+        </div>
+      )}
       {materialList.length &&
         materialList.map((vlss, indexs) => {
           return (
@@ -158,28 +271,41 @@ const SectionTwo = () => {
                     src={AddImage}
                     style={{ width: "20px", height: "20px" }}
                     onClick={() => {
-                      setConfigPopUp(indexs);
+                      setSelectedMesh(vlss.name);
                     }}
                   />
                 </div>
-                {/*{true &&*/}
-                {/*  ["green"].map((vls, index) => {*/}
-                {/*    return (*/}
-                {/*      <IndiConfig*/}
-                {/*        indiMaterial={materialList[indexs]}*/}
-                {/*        vls={vls}*/}
-                {/*      />*/}
-                {/*    );*/}
-                {/*  })}*/}
+                {appliedTextures[vlss.name] &&
+                  appliedTextures[vlss.name].list.map((matNames) => {
+                    return (
+                      <IndiConfig
+                        indiMaterial={materialList[indexs]}
+                        vls={matNames}
+                        appliDetails={appliedTextures[vlss.name]}
+                        changeAppli={setAppliedTextures}
+                      />
+                    );
+                  })}
               </div>
-              {configPopUp == indexs && <ConfigBox />}
+              {/*{configPopUp == indexs && <ConfigBox />}*/}
             </>
           );
         })}
       <button
         className={"uploadAsset"}
         onClick={() => {
-          console.log(appliedTextures);
+          axios
+            .put("/manage/config", {
+              userId: userID,
+              projectId: projectID,
+              config: appliedTextures,
+            })
+            .then((res) => {
+              toast.success("Updated the configuration successfully");
+            })
+            .catch((err) => {
+              toast.error(err.message);
+            });
         }}
       >
         Add Configuration
@@ -197,56 +323,6 @@ const ConfigBox = () => {
         <p>Choose texture</p>
       </div>
     </div>
-  );
-};
-const IndiConfig = ({ indiMaterial, vls }) => {
-  const [toggleState, setToggleState] = useState(false);
-  return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          cursor: "pointer",
-          height: "22px",
-          background: "#FFFFFF",
-          border: "1px solid #EDEDED",
-          borderRadius: "5px",
-          margin: "0 15px 10px 15px",
-          padding: "0 9px",
-        }}
-        onClick={() => {
-          indiMaterial.material = new MeshStandardMaterial({
-            color: vls,
-            side: THREE.DoubleSide,
-            name: `${indiMaterial.name}${vls}`,
-          });
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-          }}
-        >
-          <div
-            style={{
-              height: "13px",
-              width: "13px",
-              background: `${vls}`,
-              borderRadius: "50%",
-            }}
-          ></div>
-          <p className={"confName"}>{vls}</p>
-        </div>
-        <FontAwesomeIcon
-          icon={faEye}
-          style={{ fontSize: "12px", color: "lightgrey" }}
-        />
-      </div>
-    </>
   );
 };
 export default SectionTwo;
