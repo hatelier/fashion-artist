@@ -25,9 +25,6 @@ const SectionTwo = () => {
   const materialList = useSelector(
     (state) => state.materialControl.materialArray
   );
-  useEffect(() => {
-    console.log("reigger");
-  }, [materialList]);
   //control the config pop up state
   const [configPopUp, setConfigPopUp] = useState(null);
   //redux mechanism state
@@ -40,6 +37,57 @@ const SectionTwo = () => {
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
+  // the coolest function. For applying the materials.
+  function ApplyMaterials({ configData, mattmatt }) {
+    for (let i = 0; i < mattmatt.length; i++) {
+      if (configData.hasOwnProperty(mattmatt[i].name)) {
+        if (configData[mattmatt[i].name].selected !== null) {
+          let requi_material = allCustomMaterials.filter(
+            (query) =>
+              query.materialName === configData[mattmatt[i].name].selected
+          );
+          let main_mat = requi_material[0];
+          let openMaterial = {};
+          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+            (mater, index) => {
+              const texture = new TextureLoader().load(
+                main_mat[`${mater}`].imgName
+              );
+              if (mater === "occlusionMap") {
+                mater = "aoMap";
+              } else if (mater === "baseMap") {
+                mater = "map";
+              }
+              openMaterial = {
+                ...openMaterial,
+                [`${mater}`]: texture,
+              };
+            }
+          );
+          openMaterial.map.repeat.set(30, 30);
+          openMaterial.normalMap.repeat.set(30, 30);
+          openMaterial.roughnessMap.repeat.set(30, 30);
+          openMaterial.aoMap.repeat.set(30, 30);
+
+          openMaterial.map.wrapS =
+            openMaterial.map.wrapT =
+            openMaterial.normalMap.wrapS =
+            openMaterial.normalMap.wrapT =
+            openMaterial.roughnessMap.wrapS =
+            openMaterial.roughnessMap.wrapT =
+            openMaterial.aoMap.wrapS =
+            openMaterial.aoMap.wrapT =
+              THREE.RepeatWrapping;
+
+          mattmatt[i].material = new MeshPhysicalMaterial({
+            ...openMaterial,
+            side: THREE.DoubleSide,
+          });
+        }
+      }
+    }
+    return null;
+  }
   async function getConfig() {
     axios
       .get("/manage/config", {
@@ -58,6 +106,7 @@ const SectionTwo = () => {
   useEffect(() => {
     getConfig();
   }, []);
+
   const IndiConfig = ({ indiMaterial, vls, appliDetails, changeAppli }) => {
     const [toggleState, setToggleState] = useState(false);
     // here is the material fixtures
@@ -185,6 +234,9 @@ const SectionTwo = () => {
         <p className={"sectionTwoTitle"}>Configurations</p>
         <img src={AddConfig} style={{ width: "21.35px" }} />
       </div>
+      {allCustomMaterials && (
+        <ApplyMaterials mattmatt={materialList} configData={appliedTextures} />
+      )}
       {selectedMesh && (
         <div
           style={{
