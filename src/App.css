@@ -710,6 +710,9 @@ font-size: 30px;
 line-height: 136.3%;
 }
 
+.info-view-link {
+  color: black;
+}
 .recent-products {
   font-weight: 400;
   font-size: 24px;
