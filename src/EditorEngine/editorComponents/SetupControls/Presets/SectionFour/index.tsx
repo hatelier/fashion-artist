@@ -1,20 +1,32 @@
 //sectionFour/index.tsx
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
-import { AmbientLight, DirectionalLight, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import {
+  AmbientLight,
+  DirectionalLight,
+  Mesh,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
+} from "three";
 import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
 import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
-import { updateProdMatState, updateProdMeshState } from "../../../../../redux/savedConfigs";
+import {
+  updateProdMatState,
+  updateProdMeshState,
+} from "../../../../../redux/savedConfigs";
 import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "./components/AddMaterialPopUp";
 import AddMeshPopUp from "./components/AddMeshPopUp";
+import axios from "axios";
+import { updateCustomMaterial } from "../../../../../redux/accountManagement";
 
 const SectionFour = () => {
   const materialArray = useSelector(
@@ -34,6 +46,27 @@ const SectionFour = () => {
   const loadProuctMaterials = useSelector(
     (state) => state.savedConfigs.loadProuctMaterials
   );
+  //add material popup
+  const [addMaterialState, setAddMaterialState] = useState(false);
+
+  //material controls
+  const [appliedMaterial, setAppliedMaterial] = useState(null);
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
+  useEffect(() => {
+    axios
+      .get("/materials/get", {
+        params: {
+          userId: userID,
+          projectId: projectID,
+        },
+      })
+      .then((res) => {
+        setAppliedMaterial(res.data);
+        dispatch(updateCustomMaterial);
+      });
+  }, []);
   return (
     <div className={"sectionFourDiv"}>
       {/*  enable this code post */}
@@ -59,14 +92,15 @@ const SectionFour = () => {
       {/*    }}*/}
       {/*  />*/}
       {/*</div>*/}
-      <AddMaterialPopUp />
-      <AddMeshPopUp />
+
+      {addMaterialState && <AddMaterialPopUp setState={setAddMaterialState} />}
+      {/*<AddMeshPopUp />*/}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           margin: "36px 0 6px 0",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
         }}
       >
         <p className={"sectionFourTitle"}>Assets</p>
@@ -165,22 +199,32 @@ const SectionFour = () => {
             {materialArray.map((mesh, index) => {
               return <HoverRender mesh={mesh} />;
             })}
+            {appliedMaterial &&
+              appliedMaterial.map((mesh, index) => {
+                return <CustomMaterialRender mesh={mesh} />;
+              })}
           </div>
         )}
-        <button className={"uploadAsset"} style={{ width: "100%" }}>
+        <button
+          className={"uploadAsset"}
+          style={{ width: "100%" }}
+          onClick={() => {
+            setAddMaterialState(true);
+          }}
+        >
           + Material
         </button>
       </div>
 
       {/*  here is the product textures section*/}
-      <div>
-        <div className={"productMeshes"}>
-          <p>Product Textures</p>
-          <FontAwesomeIcon icon={faEye} className={"fimg"} />
-        </div>
-      </div>
-      {/*    here is the button control*/}
-      <div className={"DupDelDiv"}></div>
+      {/*<div>*/}
+      {/*  <div className={"productMeshes"}>*/}
+      {/*    <p>Product Textures</p>*/}
+      {/*    <FontAwesomeIcon icon={faEye} className={"fimg"} />*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+      {/*/!*    here is the button control*!/*/}
+      {/*<div className={"DupDelDiv"}></div>*/}
     </div>
   );
 };
@@ -251,6 +295,33 @@ const HoverRender = ({ mesh }) => {
           className={"matNameMesh"}
         >
           {mesh.material.name.substring(0, 4)}
+        </p>
+        <p>⋮</p>
+      </div>
+    </div>
+  );
+};
+
+const CustomMaterialRender = ({ mesh }) => {
+  return (
+    <div className="meshPreview">
+      <img
+        src={MaterialPreview}
+        alt={mesh.materialName}
+        style={{
+          width: "31px",
+          height: "31px",
+        }}
+      />
+      <div>
+        <p
+          style={{
+            width: "20px",
+            overflow: "hidden",
+          }}
+          className={"matNameMesh"}
+        >
+          {mesh.materialName.substring(0, 4)}
         </p>
         <p>⋮</p>
       </div>

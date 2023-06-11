@@ -5,6 +5,7 @@ export const accountManagement = createSlice({
   initialState: <any>(<unknown>{
     userID: null,
     projectID: null,
+    allCustomMaterials: null,
   }),
   reducers: {
     updateUserId: (state, action) => {
@@ -13,7 +14,11 @@ export const accountManagement = createSlice({
     updateProjectId: (state, action) => {
       state.projectID = action.payload;
     },
+    updateCustomMaterial: (state, action) => {
+      state.allCustomMaterials = action.payload;
+    },
   },
 });
-export const { updateUserId, updateProjectId } = accountManagement.actions;
+export const { updateCustomMaterial, updateUserId, updateProjectId } =
+  accountManagement.actions;
 export default accountManagement.reducer;

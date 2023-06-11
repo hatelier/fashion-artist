@@ -17,8 +17,9 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const AddMaterialPopUp = () => {
+const AddMaterialPopUp = ({ setState }) => {
   const [imageStatus, setImageStatus] = useState({
     map: addPic,
     roughnessMap: addPic,
@@ -151,7 +152,12 @@ const AddMaterialPopUp = () => {
         >
           Material
         </p>
-        <FontAwesomeIcon icon={faXmark} />
+        <FontAwesomeIcon
+          icon={faXmark}
+          onClick={() => {
+            setState(false);
+          }}
+        />
       </div>
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Name</p>
@@ -161,7 +167,7 @@ const AddMaterialPopUp = () => {
             setCollectiveData((state) => {
               return {
                 ...state,
-                materialName: e.target.vale,
+                materialName: e.target.value,
               };
             });
           }}
@@ -169,7 +175,7 @@ const AddMaterialPopUp = () => {
             border: "1px solid #000000",
             fontSize: "11px",
             fontFamily: "NHreg",
-            height: "20p",
+            height: "20px",
           }}
         />
       </div>
@@ -369,7 +375,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  ior: e.target.checkd,
+                  ior: e.target.checked,
                 };
               });
             }}
@@ -384,7 +390,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  clearcoat: e.target.checkd,
+                  clearcoat: e.target.checked,
                 };
               });
             }}
@@ -399,7 +405,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  transmission: e.target.checkd,
+                  transmission: e.target.checked,
                 };
               });
             }}
@@ -414,7 +420,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  transform: e.target.checkd,
+                  transform: e.target.checked,
                 };
               });
             }}
@@ -446,7 +452,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  offU: e.target.vale,
+                  offU: e.target.value,
                 };
               });
             }}
@@ -464,7 +470,7 @@ const AddMaterialPopUp = () => {
               setCollectiveData((state) => {
                 return {
                   ...state,
-                  offV: e.target.vale,
+                  offV: e.target.value,
                 };
               });
             }}
@@ -489,7 +495,7 @@ const AddMaterialPopUp = () => {
         style={{
           marginTop: "20px",
           display: "flex",
-          justifyContent: "space-betwee",
+          justifyContent: "space-between",
         }}
       >
         <RedButtonClass
@@ -498,14 +504,14 @@ const AddMaterialPopUp = () => {
               ...collectiveData,
               tiling: [
                 Number(tillingX.current.querySelector("input").value),
-                Number(tillingY.current.querySelector("input").valu),
+                Number(tillingY.current.querySelector("input").value),
               ],
               tilingRotation: Number(
                 tillingRotation.current.querySelector("input").value
               ),
             });
 
-            // create a form updation systemm
+            // create a form updation system
 
             const formData = new FormData();
 
@@ -540,7 +546,7 @@ const AddMaterialPopUp = () => {
                 `/materials/upload?userID=${userID}&folderName=${collectiveData.materialName}&productID=${projectID}`,
                 formData
               )
-              .then((response) => {
+              .then(async (response) => {
                 axios
                   .post("/materials/add", {
                     userId: userID,
@@ -548,7 +554,7 @@ const AddMaterialPopUp = () => {
                     materialName: collectiveData.materialName,
                     baseMap: {
                       imgName: "map-map.png",
-                      useTransparent: fale,
+                      useTransparent: false,
                     },
                     metalMap: {
                       imgName: "metal-map.png",
@@ -570,13 +576,13 @@ const AddMaterialPopUp = () => {
                       imgName: "ao-map.png",
                       factor: 0.3,
                     },
-                    ior: collectiveData.ior,
-                    clearcoat: collectiveData.clearcoat,
-                    transmission: collectiveData.transmission,
+                    ior: collectiveData.ior ? 1.5 : 0,
+                    clearcoat: collectiveData.clearcoat ? 1 : 0,
+                    transmission: collectiveData.transmission ? 1 : 0,
                     transform: collectiveData.transform,
                     tiling: [
                       Number(tillingX.current.querySelector("input").value),
-                      Number(tillingY.current.querySelector("input").valu),
+                      Number(tillingY.current.querySelector("input").value),
                     ],
                     tilingOffset: [collectiveData.offU, collectiveData.offV],
                     tilingRotation: Number(
@@ -587,11 +593,11 @@ const AddMaterialPopUp = () => {
                     console.log(response);
                   })
                   .catch((error) => {
-                    console.log(error);
+                    toast.error(error);
                   });
               })
               .catch((error) => {
-                toast.success("Error uploading");
+                toast.error("Error uploading");
               });
 
             // console.log("tyset", materialArray[4].material.normalMap.image);
