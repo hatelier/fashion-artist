@@ -179,39 +179,6 @@ export const Payment = () => {
                     <a className="payment-back-button" href="/subscription"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
                   </div>
                 </div>
-                <div className="payment-details-input">
-                  <div className="enter-details">Enter payment details</div>
-                  <div className="payment-input-block">
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Email address</label>
-                      <input type="text" className="payment-input-item" placeholder="Enter email address"/>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Credit card number</label>
-                      <input type="text" className="payment-input-item" placeholder="xxxx xxxx xxxx xxxx"/>
-                    </div>
-                    <div className="payment-block-item-horizontal">
-                      <div>
-                        <label htmlFor="" className="payment-item-label">Expiry date</label>
-                        <input type="text" className="payment-input-item" placeholder="mm/yy"/>
-                      </div>
-                      <div>
-                        <label htmlFor="" className="payment-item-label">CVV</label>
-                        <input type="text" className="payment-input-item" placeholder="xxx"/>
-                      </div>
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Name on card</label>
-                      <input type="text" className="payment-input-item" placeholder="enter your name" />
-                    </div>
-                    <div className="payment-block-item">
-                      <label htmlFor="" className="payment-item-label">Billing address</label>
-                      <input type="text" className="payment-input-item" placeholder="eg: floor no., flat no., colony"/>
-                    </div>
-                    <div className="save-details"><input type="checkbox" name="save-detail" id="save-details"/> Save my card's details</div>
-                  </div>
-                  <div className="start-trial-button">Start Trial</div>
-                </div>
               </div>
             </div>
           </div>
