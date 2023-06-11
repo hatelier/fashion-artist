@@ -2,6 +2,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export const Products = () => {
   const [firstName, setFirstName] = useState("");
@@ -33,8 +38,34 @@ export const Products = () => {
     window.localStorage.removeItem("userID");
     navigate("/auth");
   }
+  const [isOpen, setIsOpen] = useState(false);
+  const productPopup = () => {
+    setIsOpen(!isOpen);
+  };
+  const productPopupCancel = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
     return (
       <div className='home-container'>
+            {isOpen && (
+                  <div className="product-popup">
+                  <div className="product-popup-main">
+                  <label htmlFor="" className='product-popup-label'>Product Name</label>
+                  <input type="text" placeholder='New Product' className='product-popup-input'/>
+                  <div className='product-popup-configurable'><input type="checkbox" /> <span>Create Configurable Product</span></div>
+                  </div>
+                  <div className='product-popup-buttons'>
+                    <button className='product-popup-cancel' onClick={productPopupCancel}>Cancel</button>
+                    <button className='product-popup-create'>Create</button>
+                    </div>
+                </div> 
+                )}
       <section >
         <header className="header">
           <img
@@ -105,7 +136,7 @@ export const Products = () => {
               </div>
             </div>
             <div>
-              <button className="add-product">
+              <button className="add-product" onClick={productPopup}>
                 <img src={require('../assets/pngs/plus.png')} alt="add new product" />
                 New Product
               </button>
@@ -168,11 +199,35 @@ export const Products = () => {
           All Products
           <div className='input-group'>
             <input type='text' placeholder='Search by product name' className='search' />
-            <div className='filter'>
+            {/* <div className='filter'>
               <img src={require('../assets/pngs/filter.png')} alt="filter" />
               <span className='filter-text'>Filter</span>
-              <img src={require('../assets/pngs/down.png')} alt="" /></div>
-            <button className="add-product input-button">
+              <img src={require('../assets/pngs/down.png')} alt="" />
+            </div> */}
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label" className='filter'>
+              <img src={require('../assets/pngs/filter.png')} alt="filter" />
+              <span className='filter-text'>Filter</span>
+                </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+                className='filter'
+              >
+                <MenuItem value={10}>by Tag</MenuItem>
+               <MenuItem value={20}>by File type</MenuItem>
+                <MenuItem value={30}>Date</MenuItem>
+                <MenuItem value={30}>by Product name</MenuItem>
+                <MenuItem value={30}>by Draft</MenuItem>
+                <MenuItem value={30}>by Published</MenuItem>
+                <MenuItem value={30}>by Schedules</MenuItem>
+                <MenuItem value={30}>by Team</MenuItem>
+             </Select>
+            </FormControl>
+            <button className="add-product input-button" onClick={productPopup}>
               <img src={require('../assets/pngs/plus.png')} alt="add new product" />
               New Product
             </button>
