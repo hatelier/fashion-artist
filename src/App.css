@@ -688,6 +688,99 @@ padding: 0px;
 gap: 20px;
 }
 
+.product-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 41px 42px;
+  gap: 40px;
+  width: 471px;
+  height: 270px;
+  position:absolute;
+  top: 40%;
+  left: 40%;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 46px rgba(0, 0, 0, 0.1);
+  border-radius: 29px;
+}
+
+.product-popup-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+}
+
+.product-popup-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.product-popup-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 5px;
+  width: 387px;
+  height: 44px;
+}
+
+.product-popup-configurable {
+  padding: 0px;
+  gap: 5px;
+}
+
+.product-popup-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 140px;
+  width: 100%;
+  justify-content: center;
+}
+
+.product-popup-cancel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 19px;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E70A4E;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #E70A4E;
+  cursor: pointer;
+}
+
+.product-popup-create {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 40px;
+  gap: 10px;
+  background: #E70A4E;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+}
+
 .info {
   flex: none;
   text-align: center;
@@ -2026,8 +2119,28 @@ width: 100%;
   color: #ffffff;
   border-radius: 10px;
   width: 100%;
+  border: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
 }
 
+.fashionlab-popup {
+  margin: 30px;
+}
+
+.fashionlab-popup-heading {
+ font-weight: bold;
+ font-size: large;
+ color: #000000;
+ text-align: center;
+}
+
+.fashionlab-popup-text {
+font-size: medium;
+color: #000000;
+text-align: center;
+}
 /* Analytics page styles */
 .analytics-header-text {
   float: left;
@@ -2764,11 +2877,11 @@ width: 100%;
 .preview-block {
   background: #FCFBFB;
   border-radius: 5px;
+  margin: auto;
   margin-top: 120px;
-  margin-left: 60px;
   margin-bottom: 60px;
   padding: 20px;
-  width: 75%;
+  width: 90%;
   height: 90vh;
 }
 

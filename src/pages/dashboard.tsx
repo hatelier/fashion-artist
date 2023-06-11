@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 export const Dashboard = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
@@ -34,8 +35,28 @@ export const Dashboard = () => {
       window.localStorage.removeItem("userID");
       navigate("/auth");
     }
+    const [isOpen, setIsOpen] = useState(false);
+    const productPopup = () => {
+      setIsOpen(!isOpen);
+    };
+    const productPopupCancel = () => {
+      setIsOpen(!isOpen);
+    };
     return ( 
     <div className='home-container'>
+                 {isOpen && (
+                  <div className="product-popup">
+                  <div className="product-popup-main">
+                  <label htmlFor="" className='product-popup-label'>Product Name</label>
+                  <input type="text" placeholder='New Product' className='product-popup-input'/>
+                  <div className='product-popup-configurable'><input type="checkbox" /> <span>Create Configurable Product</span></div>
+                  </div>
+                  <div className='product-popup-buttons'>
+                    <button className='product-popup-cancel' onClick={productPopupCancel}>Cancel</button>
+                    <button className='product-popup-create'>Create</button>
+                    </div>
+                </div> 
+                )}
     <section >
       <header className="header">
         <img
@@ -106,7 +127,7 @@ export const Dashboard = () => {
               </div>
             </div>
             <div>
-              <button className="add-product">
+              <button className="add-product" onClick={productPopup}>
                 <img src={require('../assets/pngs/plus.png')} alt="add new product" />
                 New Product
               </button>

@@ -36,18 +36,18 @@ const Msg = () => (
     </div> 
   )
 
-    const displayMsg = () => {
-      toast(<Msg />, {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }) 
-    }
+const displayMsg = () => {
+   toast(<Msg />, {
+     position: "top-center",
+      autoClose: false,
+     hideProgressBar: false,
+       closeOnClick: true,
+     pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    }) 
+  }
 
 
 const Register = () => {
