@@ -88,7 +88,7 @@ const SectionTwo = () => {
       }
       if (i === materialList.length - 1 && materialList.length > 1) {
         setStatus(false);
-        console.log("playstaiton4");
+        console.log("playstaiton4", materialList, configData);
       }
     }
     return null;
@@ -109,7 +109,7 @@ const SectionTwo = () => {
       });
   }
   useEffect(() => {
-    if (projectId && userID) {
+    if (projectID && userID) {
       getConfig();
     }
   }, []);
@@ -241,9 +241,10 @@ const SectionTwo = () => {
         <p className={"sectionTwoTitle"}>Configurations</p>
         <img src={AddConfig} style={{ width: "21.35px" }} />
       </div>
-      {status && allCustomMaterials && (
-        <ApplyMaterials configData={appliedTextures} />
-      )}
+      {allCustomMaterials &&
+        Object.keys(appliedTextures).length &&
+        appliedTextures &&
+        status && <ApplyMaterials configData={appliedTextures} />}
       {selectedMesh && (
         <div
           style={{

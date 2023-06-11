@@ -68,7 +68,7 @@ const SectionFour = () => {
       });
   }
   useEffect(() => {
-    if (userId && projectId) {
+    if (userID && projectID) {
       loadMaterialFunc();
     }
   }, []);
