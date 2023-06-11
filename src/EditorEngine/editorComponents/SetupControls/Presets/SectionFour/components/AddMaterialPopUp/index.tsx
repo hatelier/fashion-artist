@@ -19,7 +19,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const AddMaterialPopUp = ({ setState }) => {
+const AddMaterialPopUp = ({ setState, loadAPI }) => {
   const [imageStatus, setImageStatus] = useState({
     map: addPic,
     roughnessMap: addPic,
@@ -590,7 +590,7 @@ const AddMaterialPopUp = ({ setState }) => {
                     ),
                   })
                   .then((response) => {
-                    console.log(response);
+                    loadAPI();
                   })
                   .catch((error) => {
                     toast.error(error);

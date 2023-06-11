@@ -32,6 +32,9 @@ const SectionTwo = () => {
   const allCustomMaterials = useSelector(
     (state: any) => state.accountManagement.allCustomMaterials
   );
+  // here is the main config login.
+  const [appliedTextures, setAppliedTextures] = useState({});
+
   return (
     <div className={"sectionTwoDiv"}>
       <div
@@ -48,6 +51,8 @@ const SectionTwo = () => {
       <div
         style={{
           margin: "5px 20px",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {allCustomMaterials &&
@@ -55,51 +60,84 @@ const SectionTwo = () => {
             return (
               <label
                 onClick={() => {
-                  let openMaterial = {};
-                  ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-                    (mater, index) => {
-                      const texture = new TextureLoader().load(
-                        vls[`${mater}`].imgName
-                      );
-                      if (mater === "occlusionMap") {
-                        mater = "aoMap";
-                      } else if (mater === "baseMap") {
-                        mater = "map";
-                      }
-                      openMaterial = {
-                        ...openMaterial,
-                        [`${mater}`]: texture,
-                      };
-                    }
-                  );
-                  openMaterial.map.repeat.set(30, 30);
-                  openMaterial.normalMap.repeat.set(30, 30);
-                  openMaterial.roughnessMap.repeat.set(30, 30);
-                  openMaterial.aoMap.repeat.set(30, 30);
-
-                  openMaterial.map.wrapS =
-                    openMaterial.map.wrapT =
-                    openMaterial.normalMap.wrapS =
-                    openMaterial.normalMap.wrapT =
-                    openMaterial.roughnessMap.wrapS =
-                    openMaterial.roughnessMap.wrapT =
-                    openMaterial.aoMap.wrapS =
-                    openMaterial.aoMap.wrapT =
-                      THREE.RepeatWrapping;
-
-                  materialList[4].material = new MeshPhysicalMaterial({
-                    ...openMaterial,
-                  });
-
-                  console.log(openMaterial);
+                  // let openMaterial = {};
+                  // ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+                  //   (mater, index) => {
+                  //     const texture = new TextureLoader().load(
+                  //       vls[`${mater}`].imgName
+                  //     );
+                  //     if (mater === "occlusionMap") {
+                  //       mater = "aoMap";
+                  //     } else if (mater === "baseMap") {
+                  //       mater = "map";
+                  //     }
+                  //     openMaterial = {
+                  //       ...openMaterial,
+                  //       [`${mater}`]: texture,
+                  //     };
+                  //   }
+                  // );
+                  // openMaterial.map.repeat.set(30, 30);
+                  // openMaterial.normalMap.repeat.set(30, 30);
+                  // openMaterial.roughnessMap.repeat.set(30, 30);
+                  // openMaterial.aoMap.repeat.set(30, 30);
+                  //
+                  // openMaterial.map.wrapS =
+                  //   openMaterial.map.wrapT =
+                  //   openMaterial.normalMap.wrapS =
+                  //   openMaterial.normalMap.wrapT =
+                  //   openMaterial.roughnessMap.wrapS =
+                  //   openMaterial.roughnessMap.wrapT =
+                  //   openMaterial.aoMap.wrapS =
+                  //   openMaterial.aoMap.wrapT =
+                  //     THREE.RepeatWrapping;
+                  //
+                  // materialList[4].material = new MeshPhysicalMaterial({
+                  //   ...openMaterial,
+                  //   side: THREE.DoubleSide,
+                  // });
                 }}
               >
-                <input type={"checkbox"} />
+                <input
+                  type={"checkbox"}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setAppliedTextures((state) => {
+                        return {
+                          ...state,
+                          Gowns: {
+                            selected: null,
+                            list: state.Gowns.list
+                              ? [...state.Gowns.list, vls.materialName]
+                              : [vls.materialName],
+                          },
+                        };
+                      });
+                    } else {
+                      setAppliedTextures((state) => {
+                        let new_val = [];
+                        state.Gowns.list.map((value) => {
+                          if (value !== vls.materialName) {
+                            new_val.push(value);
+                          }
+                        });
+                        return {
+                          ...state,
+                          Gowns: {
+                            selected: null,
+                            list: new_val,
+                          },
+                        };
+                      });
+                    }
+                  }}
+                />
                 &nbsp; &nbsp;
                 {vls.materialName}
               </label>
             );
           })}
+        <button>save</button>
       </div>
       {materialList.length &&
         materialList.map((vlss, indexs) => {
@@ -138,7 +176,14 @@ const SectionTwo = () => {
             </>
           );
         })}
-      <button className={"uploadAsset"}>Add Configuration</button>
+      <button
+        className={"uploadAsset"}
+        onClick={() => {
+          console.log(appliedTextures);
+        }}
+      >
+        Add Configuration
+      </button>
     </div>
   );
 };

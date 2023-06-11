@@ -54,7 +54,7 @@ const SectionFour = () => {
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
-  useEffect(() => {
+  function loadMaterialFunc() {
     axios
       .get("/materials/get", {
         params: {
@@ -66,6 +66,9 @@ const SectionFour = () => {
         setAppliedMaterial(res.data);
         dispatch(updateCustomMaterial(res.data));
       });
+  }
+  useEffect(() => {
+    loadMaterialFunc();
   }, []);
   return (
     <div className={"sectionFourDiv"}>
@@ -93,7 +96,12 @@ const SectionFour = () => {
       {/*  />*/}
       {/*</div>*/}
 
-      {addMaterialState && <AddMaterialPopUp setState={setAddMaterialState} />}
+      {addMaterialState && (
+        <AddMaterialPopUp
+          setState={setAddMaterialState}
+          loadAPI={loadMaterialFunc}
+        />
+      )}
       {/*<AddMeshPopUp />*/}
       <div
         style={{
