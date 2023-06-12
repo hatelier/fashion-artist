@@ -3096,3 +3096,174 @@ width: 100%;
   line-height: 20px;
   color: #FFFFFF;
 }
+
+
+/* Mobile view styles */
+@media (min-width: 300px) and (max-width: 480px) {
+  /* Sign in page styles */
+  .auth {
+    all: unset;
+    height: fit-content;
+    min-height: 100vh;
+    width: 100%;
+    padding: auto;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .logo-container {
+    all: unset;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    padding: 10px;
+  }
+  .logo {
+    all: unset;
+    width: 180px;
+    height: 40px;
+  }
+  .image-container {
+    all: unset;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  .login-container {
+    all: unset;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    display: flex;
+  }
+  .image-container .main-image {
+    all: unset;
+    width: 360px;
+    height: 333px;
+  }
+
+  .auth-container {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    width: 100%;
+  }
+
+  .form {
+    all: unset;
+    color: #ffffff;
+    margin: 30px;
+  }
+
+  .title {
+    all:unset;
+    display: block;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 10px;
+  }
+  .title-text {
+    all: unset;
+    display: block;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #E70A4E;
+    margin-bottom: 20px;
+  }
+  .label {
+    all: unset;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .input {
+    margin-bottom: 20px;
+  }
+  .forgot {
+    all: unset;
+    display: block;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: underline;
+    text-align: center;
+  }
+  .submit {
+    all: unset;
+    margin: auto;
+    gap: 10px;
+    background: #E70A4E;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    width: 310px;
+    height: 42px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .account-text {
+    all: unset;
+    display: block;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #ffffff;
+  }
+
+  /* register page styles */
+  .sign {
+    all:unset;
+  }
+
+  .signuplogo-container {
+    all:unset;
+  }
+
+  .signup-logo {
+    all:unset;
+  }
+  .register-container {
+    all:unset;
+  }
+  .signupimage-cotainer {
+    all:unset;
+  }
+  .signup-image-container {
+    all:unset;
+  }
+  .signup-container {
+    all:unset;
+  }
+  .main-grid {
+    all:unset;
+  }
+  .signup {
+    all:unset;
+  }
+  /* title
+  title-text
+  name-grid
+  firstname-container
+  firstname
+  input
+  label
+  myDropdown
+  companyname-container
+  companyname-input
+  forgot
+  signup-button
+  title-text */
+}

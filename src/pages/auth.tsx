@@ -25,8 +25,11 @@ export const Auth = () => {
           <Login />  
         </div>
         <div className="image-container">
-            <img className="main-image" src = "mq.png" alt = "mq" />
-         </div>
+            <picture>
+                <source className="main-image" media="(min-width: 480px)" srcSet="mq.png" />
+                <img className="main-image" src = {require('../assets/pngs/manaequin-mobile.png')} alt = "mq" />
+            </picture>
+        </div>
         </div>
     ); 
 };

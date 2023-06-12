@@ -116,7 +116,7 @@ const Form = ({
             <span className="title">Welcome to MomentumX</span>
             <span className="title-text">Start Creating your fashion experience</span>
             
-            <div className="name grid">
+            <div className="name-grid">
                 <div className="firstname-container">
                 <label htmlFor="firstname" className="label">First Name</label>
                 <input type="text" id="firstname" className="input" value={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
