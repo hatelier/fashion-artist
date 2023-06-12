@@ -92,6 +92,7 @@ const SideMenu = () => {
   const [presetData, setPresetData] = useState(null);
   const [configData, setConfigData] = useState(null);
   const [selectedTab, setSelectedTab] = useState(0);
+  const [customMattList, setCustomMattList] = useState(null);
   const materialList = useSelector(
     (state: any) => state.previewRedux.materialList
   );
@@ -153,6 +154,7 @@ const SideMenu = () => {
             })
             .then((mat_res) => {
               const allCustomMaterials = mat_res.data;
+              setCustomMattList(allCustomMaterials);
               for (let i = 0; i < materialList.length; i++) {
                 if (configData.hasOwnProperty(materialList[i].name)) {
                   if (configData[materialList[i].name].selected !== null) {
@@ -213,6 +215,49 @@ const SideMenu = () => {
         });
     }
   }, [materialList]);
+
+  // material transform function.
+  function materialFixture(materialName, indiMaterial) {
+    let requi_material = customMattList.filter(
+      (query) => query.materialName === materialName
+    );
+    let main_mat = requi_material[0];
+    let openMaterial = {};
+    ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+      (mater, index) => {
+        const texture = new TextureLoader().load(main_mat[`${mater}`].imgName);
+        if (mater === "occlusionMap") {
+          mater = "aoMap";
+        } else if (mater === "baseMap") {
+          mater = "map";
+        }
+        openMaterial = {
+          ...openMaterial,
+          [`${mater}`]: texture,
+        };
+      }
+    );
+    openMaterial.map.repeat.set(30, 30);
+    openMaterial.normalMap.repeat.set(30, 30);
+    openMaterial.roughnessMap.repeat.set(30, 30);
+    openMaterial.aoMap.repeat.set(30, 30);
+
+    openMaterial.map.wrapS =
+      openMaterial.map.wrapT =
+      openMaterial.normalMap.wrapS =
+      openMaterial.normalMap.wrapT =
+      openMaterial.roughnessMap.wrapS =
+      openMaterial.roughnessMap.wrapT =
+      openMaterial.aoMap.wrapS =
+      openMaterial.aoMap.wrapT =
+        THREE.RepeatWrapping;
+
+    indiMaterial.material = new MeshPhysicalMaterial({
+      ...openMaterial,
+      side: THREE.DoubleSide,
+    });
+  }
+
   return (
     <div className="preview-sidemenu">
       {presetData &&
@@ -265,14 +310,12 @@ const SideMenu = () => {
                           onChange={(e) => {
                             if (e.target.checked) {
                               materialList.map((modMaterial, modIndex) => {
-                                console.log(modMaterial.name);
                                 if (modMaterial.name === mateList) {
                                   modMaterial.visible = true;
                                 }
                               });
                             } else {
                               materialList.map((modMaterial, modIndex) => {
-                                console.log(modMaterial.name);
                                 if (modMaterial.name === mateList) {
                                   modMaterial.visible = false;
                                 }
@@ -316,6 +359,25 @@ const SideMenu = () => {
                                           : "red",
                                       width: "10px",
                                       height: "10px",
+                                    }}
+                                    onClick={() => {
+                                      let selectedMaterial =
+                                        materialList.filter(
+                                          (matt) => matt.name === mateList
+                                        );
+                                      materialFixture(
+                                        name,
+                                        selectedMaterial[0]
+                                      );
+                                      setConfigData((state) => {
+                                        return {
+                                          ...state,
+                                          [`${mateList}`]: {
+                                            ...state[`${mateList}`],
+                                            selected: name,
+                                          },
+                                        };
+                                      });
                                     }}
                                   ></div>
                                 );
