@@ -10,6 +10,8 @@ import { faCube } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateCurrentModel } from "../../../redux/previewRedux";
+import { MeshPhysicalMaterial, TextureLoader } from "three";
+import * as THREE from "three";
 
 const PreviewEngine = () => {
   //dispatches
@@ -45,6 +47,17 @@ const PreviewEngine = () => {
         })
         .then((res) => {
           setPresetData(res.data.preset.configuration.preset);
+          const reqPreset = res.data.preset.configuration.preset;
+          reqPreset.map((prVal, index) => {
+            prVal.materialList.map((matName, matIndex) => {
+              //now toggle the visibility
+              materialList.map((modMaterial, modIndex) => {
+                if (modMaterial.name === matName) {
+                  modMaterial.visible = prVal.visibility[matIndex];
+                }
+              });
+            });
+          });
         })
         .catch((err) => {
           toast.error("Failed to load the configs.");
@@ -58,6 +71,70 @@ const PreviewEngine = () => {
         })
         .then((res) => {
           setConfigData(res.data);
+          const configData = res.data;
+          axios
+            .get("/materials/get", {
+              params: {
+                userId: userID,
+                projectId: projectID,
+              },
+            })
+            .then((mat_res) => {
+              const allCustomMaterials = mat_res.data;
+              for (let i = 0; i < materialList.length; i++) {
+                if (configData.hasOwnProperty(materialList[i].name)) {
+                  if (configData[materialList[i].name].selected !== null) {
+                    let requi_material = allCustomMaterials.filter(
+                      (query) =>
+                        query.materialName ===
+                        configData[materialList[i].name].selected
+                    );
+
+                    let main_mat = requi_material[0];
+                    let openMaterial = {};
+                    [
+                      "baseMap",
+                      "roughnessMap",
+                      "normalMap",
+                      "occlusionMap",
+                    ].map((mater, index) => {
+                      const texture = new TextureLoader().load(
+                        main_mat[`${mater}`].imgName
+                      );
+                      if (mater === "occlusionMap") {
+                        mater = "aoMap";
+                      } else if (mater === "baseMap") {
+                        mater = "map";
+                      }
+                      openMaterial = {
+                        ...openMaterial,
+                        [`${mater}`]: texture,
+                      };
+                    });
+
+                    openMaterial.map.repeat.set(30, 30);
+                    openMaterial.normalMap.repeat.set(30, 30);
+                    openMaterial.roughnessMap.repeat.set(30, 30);
+                    openMaterial.aoMap.repeat.set(30, 30);
+
+                    openMaterial.map.wrapS =
+                      openMaterial.map.wrapT =
+                      openMaterial.normalMap.wrapS =
+                      openMaterial.normalMap.wrapT =
+                      openMaterial.roughnessMap.wrapS =
+                      openMaterial.roughnessMap.wrapT =
+                      openMaterial.aoMap.wrapS =
+                      openMaterial.aoMap.wrapT =
+                        THREE.RepeatWrapping;
+
+                    materialList[i].material = new MeshPhysicalMaterial({
+                      ...openMaterial,
+                      side: THREE.DoubleSide,
+                    });
+                  }
+                }
+              }
+            });
         })
         .catch((err) => {
           toast.error("Failed to load the configs");
