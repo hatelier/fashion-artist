@@ -1,0 +1,178 @@
+.preview-page {
+  background-color: #ffffff;
+  color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.preview-block {
+  background: #FCFBFB;
+  border-radius: 5px;
+  margin: auto;
+  padding: 20px;
+  width: 95%;
+  height: 95%;
+}
+
+.preview-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.preview-sidemenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 25%;
+}
+.preview-sidemenu-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  gap: 10px;
+
+  width: 300px;
+  height: 35px;
+
+  background: #E70A4E;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 159%;
+  text-align: center;
+  color: #FFFFFF;
+  border: none;
+}
+
+.preview-view-ar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+
+  width: 80px;
+  height: 25px;
+
+  background: #E70A4E;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #FFFFFF;
+  position: absolute;
+  right: 60px;
+}
+
+.preview-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  position: absolute;
+  right: 0px;
+}
+.preview-details-name {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.preview-cost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 3px;
+}
+
+.preview-price {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.preview-tax {
+  font-weight: 400;
+  font-size: 7px;
+  line-height: 9px;
+}
+.preview-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 120px;
+}
+
+.preview-details-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 5px;
+}
+
+.preview-add-cart {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 19px;
+  gap: 10px;
+  height: 37px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #E70A4E;
+}
+
+.preview-buy-now {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 19px;
+  gap: 10px;
+  height: 37px;
+  background: #E70A4E;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+}
+
+.preview-quantity-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+}
+
+.preview-quantity {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.preview-mtum-logo {
+  position: absolute;
+  bottom: 0px;
+}

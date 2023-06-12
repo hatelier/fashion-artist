@@ -15,6 +15,7 @@ import savedCameraControls from "./savedCameraControls";
 import materialApplication from "./materialApplication";
 import meshControls from "./meshControls";
 import accountManagement from "./accountManagement";
+import previewRedux from "./previewRedux";
 import * as localforage from "localforage";
 
 const reducers = combineReducers({
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   materialApplication,
   meshControls,
   accountManagement,
+  previewRedux,
 });
 
 // a middleware to save binary files.

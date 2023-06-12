@@ -23,6 +23,7 @@ import { PreviewProduct } from "./pages/preview";
 import EditorEngine from "./EditorEngine";
 // import { UploadPage } from "./pages/upload";
 import { NewPasswordToken } from "./pages/new-password-token";
+import PreviewEngine from "./EditorEngine/editorComponents/PreviewEngine";
 
 function App() {
   return (
@@ -51,6 +52,10 @@ function App() {
           <Route path="/add-showroom" element={<AddShowroom />} />
           <Route path="/password/reset" element={<NewPasswordToken />} />
           <Route path="/preview" element={<PreviewProduct />} />
+          <Route
+            path="/view/:userID/:projectID/:name"
+            element={<PreviewEngine />}
+          />
         </Routes>
       </Router>
     </div>
