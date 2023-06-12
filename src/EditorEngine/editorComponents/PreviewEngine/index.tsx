@@ -121,7 +121,10 @@ const SideMenu = () => {
         .then((res) => {
           setPresetData(res.data.preset.configuration.preset);
           const reqPreset = res.data.preset.configuration.preset;
+          let entire_list = [];
           reqPreset.map((prVal, index) => {
+            // entire_list
+            entire_list = entire_list.concat(prVal.materialList);
             prVal.materialList.map((matName, matIndex) => {
               //now toggle the visibility
               materialList.map((modMaterial, modIndex) => {
@@ -130,6 +133,11 @@ const SideMenu = () => {
                 }
               });
             });
+          });
+          materialList.map((materValue) => {
+            if (!entire_list.includes(materValue.name)) {
+              materValue.visible = false;
+            }
           });
         })
         .catch((err) => {
@@ -284,14 +292,14 @@ const SideMenu = () => {
               </button>
               <div
                 style={{
-                  display: "flex",
+                  display: selectedTab === index ? "flex" : "none",
                   flexWrap: "wrap",
                   justifyContent: "center",
                 }}
               >
-                {selectedTab === index &&
-                  presData.materialList.map((mateList, inx) => {
-                    return (
+                {presData.materialList.map((mateList, inx) => {
+                  return (
+                    presData.visibility[inx] && (
                       <div
                         style={{
                           margin: "5px",
@@ -321,6 +329,8 @@ const SideMenu = () => {
                                 }
                               });
                             }
+                            presetData[index] = presData;
+                            setPresetData(presetData);
                           }}
                         />
                         <FontAwesomeIcon
@@ -385,8 +395,9 @@ const SideMenu = () => {
                           </div>
                         )}
                       </div>
-                    );
-                  })}
+                    )
+                  );
+                })}
               </div>
             </div>
           );
