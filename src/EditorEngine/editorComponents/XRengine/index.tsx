@@ -4,7 +4,7 @@ const XRengine = () => {
   return (
     <div style={{ height: "100vh", width: "100vw", background: "white" }}>
       <model-viewer
-        src="./models/mtumxBlnd2.glb"
+        src="./models/defaultCude.glb"
         alt="A rock"
         exposure="1"
         camera-controls
