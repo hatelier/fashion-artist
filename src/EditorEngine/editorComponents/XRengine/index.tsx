@@ -15,13 +15,16 @@ const XRengine = () => {
 
   return (
     <model-viewer
-      className="model-viewer"
+      // className="model-viewer"
       src="./models/mtumxBlnd2.glb"
       alt="A rock"
       exposure="1"
       camera-controls
       ar
-      ar-modes="webxr"
+      // ar-modes="webxr"
+      ref={(ref) => {
+        modelRef.current = ref;
+      }}
     >
       {annots.map((annot, idx) => (
         <button
