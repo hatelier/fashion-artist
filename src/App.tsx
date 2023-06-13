@@ -24,6 +24,7 @@ import EditorEngine from "./EditorEngine";
 // import { UploadPage } from "./pages/upload";
 import { NewPasswordToken } from "./pages/new-password-token";
 import PreviewEngine from "./EditorEngine/editorComponents/PreviewEngine";
+import XRengine from "./EditorEngine/editorComponents/XRengine";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             path="/view/:userID/:projectID/:name"
             element={<PreviewEngine />}
           />
+          <Route path="/xrtest" element={<XRengine />} />
         </Routes>
       </Router>
     </div>
