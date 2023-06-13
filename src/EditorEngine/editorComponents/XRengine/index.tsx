@@ -9,7 +9,6 @@ const XRengine = () => {
         exposure="1"
         camera-controls
         ar
-        ar-modes="webxr"
       ></model-viewer>
     </div>
   );
