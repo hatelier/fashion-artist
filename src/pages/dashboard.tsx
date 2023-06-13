@@ -42,6 +42,14 @@ export const Dashboard = () => {
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };
+
+    const [isElementVisible, setElementVisible] = useState(false);
+
+    const handleClick = () => {
+      const element = document.querySelector('#sidenav') as HTMLElement;
+      element.style.display = element.style.display === 'none' ? 'block' : 'none';
+    };
+
     return ( 
     <div className='home-container'>
                  {isOpen && (
@@ -59,6 +67,7 @@ export const Dashboard = () => {
                 )}
     <section >
       <header className="header">
+        <img className='sidemenu-toggle' src={require('../assets/pngs/sidenav-toggle.png')} onClick={handleClick} alt="" />
         <img
         src={require('../assets/pngs/mx-logo.png')}
         alt="mxlogo"
@@ -106,7 +115,7 @@ export const Dashboard = () => {
       </div>
       </header>
       <div className='content'>
-        <div className='sidenav'>
+        <div className='sidenav' id='sidenav'>
           <div className='upper-menu'>
             <div className="userblock">
               <div className="current-user">
