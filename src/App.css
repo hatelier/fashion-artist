@@ -3101,6 +3101,9 @@ width: 100%;
 /* Mobile view styles */
 @media (min-width: 300px) and (max-width: 480px) {
   /* Sign in page styles */
+  body {
+    background-color: #000000;
+  }
   .auth {
     all: unset;
     height: fit-content;
@@ -3158,7 +3161,7 @@ width: 100%;
   .form {
     all: unset;
     color: #ffffff;
-    margin: 30px;
+    margin: 15px;
   }
 
   .title {
@@ -3225,45 +3228,116 @@ width: 100%;
 
   /* register page styles */
   .sign {
-    all:unset;
+    all: unset;
+    height: fit-content;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
   }
 
   .signuplogo-container {
     all:unset;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    position: absolute;
+    top: 0px;
   }
 
-  .signup-logo {
-    all:unset;
+  .signuplogo-container .signup-logo {
+    all: unset;
+    width: 25vh;
+    height: 5vh;
   }
   .register-container {
     all:unset;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    display: flex;
+    position: absolute;
+    top: 45vh;
+    height: 50vh;
+    overflow: auto;
+    margin-top: 5vh;
   }
   .signupimage-cotainer {
     all:unset;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    position: absolute;
+    top: 59px;
   }
-  .signup-image-container {
+  .signupimage-cotainer img {
     all:unset;
+    width: 360px;
+    height: 40vh;
   }
   .signup-container {
     all:unset;
   }
   .main-grid {
     all:unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    width: 100%;
   }
   .signup {
     all:unset;
+    color: #ffffff;
+    margin: 15px;
   }
-  /* title
-  title-text
-  name-grid
-  firstname-container
-  firstname
-  input
-  label
-  myDropdown
-  companyname-container
-  companyname-input
-  forgot
-  signup-button
-  title-text */
+ 
+  .name-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 15px;
+  }
+
+  .signup .input {
+    all:unset;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+  }
+
+  .signup-agreements {
+    display: block;
+  }
+
+  .signup .forgot {
+    all: unset;
+  }
+
+  .signup .signup-button {
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 42px;
+    background: #E70A4E;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .signup-already {
+    color: #ffffff;
+  }
+
 }
