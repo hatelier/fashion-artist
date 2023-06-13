@@ -1,16 +1,38 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
+import "./index.scss";
 const XRengine = () => {
+  const modelRef = React.useRef();
+  const [annots, setAnnots] = useState([]);
+
+  const getDataPosition = (annot) => {
+    return `${annot.position.x} ${annot.position.y} ${annot.position.z}`;
+  };
+
+  const getDataNormal = (annot) => {
+    return `${annot.normal.x} ${annot.normal.y} ${annot.normal.z}`;
+  };
+
   return (
-    <div style={{ height: "100vh", width: "100vw", background: "white" }}>
-      <model-viewer
-        src="./models/defaultCude.glb"
-        alt="A rock"
-        exposure="1"
-        camera-controls
-        ar
-      ></model-viewer>
-    </div>
+    <model-viewer
+      className="model-viewer"
+      src="./models/mtumxBlnd2.glb"
+      alt="A rock"
+      exposure="1"
+      camera-controls
+      ar
+      ar-modes="webxr"
+    >
+      {annots.map((annot, idx) => (
+        <button
+          key={`hotspot-${idx}`}
+          className="view-button"
+          slot={`hotspot-${idx}`}
+          data-position={getDataPosition(annot)}
+          data-normal={getDataNormal(annot)}
+        ></button>
+      ))}
+    </model-viewer>
   );
 };
 
