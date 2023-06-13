@@ -26,15 +26,9 @@ const XRengine = () => {
         modelRef.current = ref;
       }}
     >
-      {annots.map((annot, idx) => (
-        <button
-          key={`hotspot-${idx}`}
-          className="view-button"
-          slot={`hotspot-${idx}`}
-          data-position={getDataPosition(annot)}
-          data-normal={getDataNormal(annot)}
-        ></button>
-      ))}
+      <button slot="ar-button" id="ar-button">
+        View in your space
+      </button>
     </model-viewer>
   );
 };
