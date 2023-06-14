@@ -7,16 +7,57 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Card from '../components/Card';
 
+interface Product {
+  _id: string;
+  userId: string;
+  folderName: string;
+  asset: {
+    originalName: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
+    location: string;
+    _id: string;
+  };
+  productName: string;
+  brandName: string;
+  previewImage: {
+    originalName: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
+    location: string;
+    _id: string;
+  };
+  pipeline: string;
+  tags: string[];
+  productID: number;
+  customMaterials: string[];
+  __v: number;
+}
 export const Products = () => {
   const [firstName, setFirstName] = useState("");
   const [occupation, setOccupation] = useState("");
   const [cookies, setCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
     fetchUserData();
+    fetchProducts();
   }, []);
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('/product/products');
+      const productData = response.data;
+      setProducts(productData);
+    } catch (error) {
+      console.error('Error fetching products');
+    }
+  };
   const fetchUserData = async () => {
     try {
     const userID = window.localStorage.getItem('userID');
@@ -233,9 +274,19 @@ export const Products = () => {
             </button>
           </div>
         </div>
+        {products.map((product) => (
+          <Card key={product._id}>
+            <h2>{product.productName}</h2>
+            {product.previewImage && (
+              <div>
+                <h3>Preview Image:</h3>
+                <img src={product.previewImage.location} alt="Preview" />
+              </div>
+            )}
+          </Card>
+        ))}
        </div>
        </div>
-       
         </div>
       </section>
     </div>

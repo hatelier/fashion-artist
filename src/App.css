@@ -2361,6 +2361,20 @@ width: 100%;
   border: 1px solid #272727;
 }
 
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Manage page styles */
 .manage-block {
   display: flex;
