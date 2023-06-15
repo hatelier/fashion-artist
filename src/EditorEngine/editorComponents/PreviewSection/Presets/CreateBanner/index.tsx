@@ -13,6 +13,7 @@ const CreateBanner = () => {
     <div className={"createBanner"}>
       <p> {"< Create"} </p>
       <button
+        className={"publishButton"}
         onClick={() => {
           window.alert(`${baseReactUrl}/view/${userID}/${projectID}/${id}`);
         }}

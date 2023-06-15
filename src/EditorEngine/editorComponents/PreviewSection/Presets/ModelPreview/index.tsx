@@ -80,8 +80,8 @@ const ModelPreview = (props) => {
         <MaterialControl />
         <NewMeshAdder />
         <AmbientLightComponent />
-        <Perf position="top-right" />
-        <PerformanceMonitor onDecline={() => set(true)} />
+        {/*<Perf position="top-right" />*/}
+        {/*<PerformanceMonitor onDecline={() => set(true)} />*/}
         <color attach="background" args={["#f0f0f0"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 10]} intensity={1} />

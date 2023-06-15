@@ -12,12 +12,16 @@
   }
 
   button {
+    width: 111px;
     height: 33px;
+    background: #FFFFFF;
     border: 1px solid #E70A4E;
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    font-style: normal;
+    font-weight: 700;
     font-size: 18px;
+    line-height: 23px;
     color: #E70A4E;
-    padding: 0 15px;
   }
 }
