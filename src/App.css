@@ -3464,4 +3464,273 @@ input:checked + .slider:before {
   .content {
     height: unset;
   }
+
+/* .search {
+  width: 80%;
+}
+
+.filter-text {
+  display: none;
+}
+
+.filter {
+  width: 10%
+} */
+
+.profile-header {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+}
+
+.profile-info-block {
+  margin-left: unset;
+  gap: 10px;
+}
+
+.profile-info-horizontal {
+  all: unset;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 100%;
+}
+
+.profile-info-item {
+  padding: 10px 20px;
+  width: 100%;
+  height: 54px;
+}
+
+.account-subscription-details {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;  
+}
+
+.account-current-details {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+}
+
+.account-monthly-credits {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+}
+
+.account-buy-extra {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+}
+
+.account-extra-credit {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+}
+
+.account-buy-credit {
+  gap: 10px;
+}
+
+.account-credit-quantity {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 5px 5px 20px;
+  gap: 15px;
+  width: 134px;
+  height: 40px;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+}
+
+.account-credit-quantity-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.account-credit-quantity-number {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 15px;
+  gap: 10px;
+  width: 38px;
+  height: 30px;
+  background: #FFFFFF;
+  border-radius: 7px;
+  color: #E70A4E;
+}
+
+.account-buy-button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 7px 15px;
+  gap: 10px;
+  width: 93px;
+  height: 40px;
+  background: #E70A4E;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+}
+.account-products-viewer {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+}
+
+.account-products {
+  gap: 8px;
+}
+
+.account-viewer {
+  gap: 8px;
+}
+
+.account-cancel-upgrade {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+}
+
+.account-cancel-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 7px 15px;
+  gap: 10px;
+  width: 108px;
+  height: 40px;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.account-upgrade-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 7px 15px;
+  gap: 10px;
+  width: 86px;
+  height: 40px;
+  background: #E70A4E;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.choose-plan {
+  all: unset;
+}
+.profile-header {
+  margin-bottom: 20px;
+}
+.profile-header-text {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.account-subscription {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.account-item-heading {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.account-item-text {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.account-current-plan {
+ gap: 8px;
+}
+
+.account-current-billing {
+  gap: 8px;
+}
+
+.subscription{
+  margin: auto;
+  padding: 25px;
+}
+
+.proceed-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 165.3%;
+  text-align: center; 
+  color: #FFFFFF;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.proceed-button {
+  color: #ffffff;
+}
+
+.proceed-img-container {
+  height: 444px;
+}
+
+.proceed-img-container .proceed-img {
+  height: 444px;
+}
 }

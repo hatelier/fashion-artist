@@ -20,6 +20,7 @@ import { Teams } from "./pages/teams";
 import { Assets } from "./pages/asset-library";
 import { AddShowroom } from "./pages/add-showroom";
 import { PreviewProduct } from "./pages/preview";
+import { Proceed } from "./pages/proceed";
 import EditorEngine from "./EditorEngine";
 // import { UploadPage } from "./pages/upload";
 import { NewPasswordToken } from "./pages/new-password-token";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/add-showroom" element={<AddShowroom />} />
           <Route path="/password/reset" element={<NewPasswordToken />} />
           <Route path="/preview" element={<PreviewProduct />} />
+          <Route path="/proceed" element={<Proceed />} />
           <Route
             path="/view/:userID/:projectID/:name"
             element={<PreviewEngine />}

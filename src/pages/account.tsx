@@ -171,7 +171,7 @@ export const Account = () => {
                 </div>
               </div>
              </div>
-             <div className="choose-plan">Subscription</div>
+             <div className="choose-plan account-subscription">Subscription</div>
              <div className="account-subscription-details">
               <div className="account-current-details">
                 <div className="account-current-plan">
