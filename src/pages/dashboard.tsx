@@ -3,7 +3,6 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Header } from '../components/header';
-import { Sidenav } from '../components/sidenav';
 import { toast } from "react-toastify";
 
 export const Dashboard = () => {
