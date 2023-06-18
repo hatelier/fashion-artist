@@ -32,15 +32,15 @@ interface FormProps {
 
 export const Signup = () => {
     return (
-        <div className="sign">
-            <div className="signuplogo-container">
-                <img className="signup-logo" src={"/mxlogo.png"} alt="logo" />
+        <div className="auth">
+            <div className="logo-container">
+                <img className="logo" src={"/mxlogo.png"} alt="logo" />
             </div>
             <div className="register-container">
               <Register />  
             </div>
-            <div className="signupimage-cotainer">
-              <img className="signup-image-container" src={"/mq.png"} alt = "mq" />  
+            <div className="image-container">
+              <img className="main-image" src={"/mq.png"} alt = "mq" />  
             </div>
         </div>
     ); 
@@ -113,16 +113,16 @@ const Form = ({
     return (
         <div className="signup-container main-grid">
          <form className="signup" onSubmit={onSubmit}>
-            <span className="title">Welcome to MomentumX</span>
-            <span className="title-text">Start Creating your fashion experience</span>
+            <div className="title">Welcome to MomentumX</div>
+            <div className="title-text">Start Creating your fashion experience</div>
             
             <div className="name-grid">
-                <div className="firstname-container">
-                <label htmlFor="firstname" className="label">First Name</label>
+                <div className="name-container">
+                <label htmlFor="name" className="label">First Name</label>
                 <input type="text" id="firstname" className="input" value={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
                 </div>
-                <div className="lastname-container">
-                <label htmlFor="lastname" className="label">Last Name</label>
+                <div className="name-container">
+                <label htmlFor="name" className="label">Last Name</label>
                 <input type="text" id="lastname" className="input" value={lastname} onChange={(event) => setLastname(event.target.value)} required/>
                 </div>
             </div>

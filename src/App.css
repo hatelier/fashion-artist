@@ -97,9 +97,8 @@ p {
 /* Start login page */
 
 .logo {
-  position: relative;
-  max-width: 70%;
-  height: auto;
+  width: 236px;
+  height: 50px;
 }
 
 .auth-container {
@@ -107,39 +106,33 @@ p {
   bottom: 50px;
 }
 .auth {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 20px;
-  height: 100vh;
-  width: 98vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: fit-content;
+  min-height: 100vh;
+  margin: auto;
   align-items: center;
-  justify-content: center;
-
+  padding: 5%;
+  padding-right: 2%;
 }
+
 .logo-container {
-  position: relative;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
+  position: absolute;
+  left: 5%;
+  top: 0px;
 }
 
 .login-container {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  margin-left: 40px;
+
 }
 
 .image-container {
-  position: relative;
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;
-  margin-left: 320px;
-  height: 400px;
-  width: 600px;
-  bottom: 150px;
+
 }
 .image-container .main-image {
-  width: 700px;
-  height: 700px;
+ height: 100vh;
+ max-width: 100%;
 }
 /* Start login page form */
 .form {
@@ -151,6 +144,7 @@ p {
   flex-direction: column;
   border-radius: 20px;
   margin-top: 150px;
+  border-radius: 14px;
 
 }
 
@@ -196,6 +190,9 @@ p {
   border: 1px solid rgba(14, 14, 14, 0.205);
 }
 
+.name-grid .input {
+  width: 50%;
+}
 .submit {
   background-color: #E70A4E;
   color: #fff;
@@ -234,7 +231,8 @@ p {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  height: 120vh;
+  height: fit-content;
+  min-height: 100vh;
   width: 100vw;
   grid-column-gap: 0;
 }
@@ -250,10 +248,10 @@ p {
 }
 
 .register-container {
-  position: relative;
-  grid-row: 2 / span 1;
-  margin-left: 60px;
-  bottom: 10px;
+ width: 50%;
+ max-width: 604.21px;
+ margin-top: 40px;
+ margin-bottom: 40px;
 }
 
 .signupimage-cotainer {
@@ -268,52 +266,70 @@ p {
 }
 
 .signup {
-  position: relative;
-  height: 770px;
-  width: 650px;
-  background-color: #fff;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
+background: #FFFFFF;
+border-radius: 14px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+color: #000000;
+padding: 10px 40px 10px 40px;
 }
 .signup .title {
   margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
 }
 
-.signup .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* two columns with equal width */
-  grid-template-rows: 1fr; /* one row */
-  gap: 0.9rem; /* add a gap between the columns */
+.signup .title-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #979797;
 }
-.signup .name .firstname-container .input {
-  width: 90%;
+.name-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.name.grid .firstname-container,
-.name.grid .lastname-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.1rem;
-}
-.signup .grid .firstname-container input,
-.signup .grid .lastname-container input {
-  width: 80%;
-}
+
 .signup .input {
-  width: 90%;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 5px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .signup .grid .companyname-container .companyname-input {
-  width: 80%;
+  width: 100%;
   border: 1px solid rgb(205, 214, 205);
+}
+
+.name-container {
+  width: 45%;
+}
+
+.occupation-container {
+  width: 45%;
+}
+
+.companyname-container {
+  width: 100%;
 }
 
 .signup .grid .signup-button {
   background-color: #E70A4E;
   width: 60%;
+
 }
 .signup .signup-button {
   width: 90%;
+  margin: auto;
 }
 .signup .error {
   font-size: medium;
