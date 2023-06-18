@@ -3733,4 +3733,130 @@ input:checked + .slider:before {
 .proceed-img-container .proceed-img {
   height: 444px;
 }
+
+/* Subscription page styles */
+.plans {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;  
+}
+
+.payment-heading {
+  all: unset;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+.payment {
+  width: 100%;
+  padding: 25px 20px;
+  gap: 30px;
+}
+.payment-details {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;  
+  width: 100%;
+}
+.payment-details-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 35px;
+}
+
+.payment-details-brief {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+}
+.payment-details-info {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 100%;
+}
+
+.payment-info-item {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;  
+}
+
+.alignleft {
+  all: unset;
+}
+
+.alignright {
+  all: unset;
+}
+
+.payment-details-again {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  width: 100%;
+}
+
+.try-momentumx {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.days-free {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.per-month {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;  
+}
+.try-momentumx-again {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.days-free-again {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.per-month-again {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #E70A4E;
+}
 }

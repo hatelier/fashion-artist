@@ -124,7 +124,7 @@ export const Payment = () => {
                </div>
              </div>
              <div className="subscription">
-             <div className="choose-plan">
+             <div className="choose-plan payment-heading">
                Payment
              </div>
              <div className="payment">
