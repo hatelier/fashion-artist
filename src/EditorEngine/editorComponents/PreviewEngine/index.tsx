@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { updateCurrentModel } from "../../../redux/previewRedux";
 import { MeshPhysicalMaterial, TextureLoader } from "three";
 import * as THREE from "three";
+import XRengine from "../XRengine";
 
 const PreviewEngine = () => {
   return (
@@ -267,142 +268,157 @@ const SideMenu = () => {
   }
 
   return (
-    <div className="preview-sidemenu">
-      {presetData &&
-        presetData.map((presData, index) => {
-          return (
-            <div
-              className="dropdown"
-              style={{
-                position: "relative",
-                background: "#eeeeee",
-                borderRadius: "20px",
-                width: "300px",
-              }}
-            >
-              <button className="preview-sidemenu-label">
-                <span>{presData.name}</span>
-                <img
-                  src={require("../../../assets/pngs/plus-white.png")}
-                  alt=""
-                  onClick={() => {
-                    setSelectedTab(index);
-                  }}
-                />
-              </button>
+    <>
+      <div
+        style={{
+          position: "fixed",
+          height: "100vh",
+          width: "100vw",
+          zIndex: "1",
+          top: 0,
+          left: 0,
+          background: "#000000",
+        }}
+      >
+        <XRengine />
+      </div>
+      <div className="preview-sidemenu">
+        {presetData &&
+          presetData.map((presData, index) => {
+            return (
               <div
+                className="dropdown"
                 style={{
-                  display: selectedTab === index ? "flex" : "none",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
+                  position: "relative",
+                  background: "#eeeeee",
+                  borderRadius: "20px",
+                  width: "300px",
                 }}
               >
-                {presData.materialList.map((mateList, inx) => {
-                  return (
-                    presData.visibility[inx] && (
-                      <div
-                        style={{
-                          margin: "5px",
-                          width: "90px",
-                          // background: "red",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          padding: "10px 5px",
-                        }}
-                      >
-                        <input
-                          type={"checkbox"}
-                          style={{ marginBottom: "5px" }}
-                          defaultChecked={presData.visibility[inx]}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              materialList.map((modMaterial, modIndex) => {
-                                if (modMaterial.name === mateList) {
-                                  modMaterial.visible = true;
-                                }
-                              });
-                            } else {
-                              materialList.map((modMaterial, modIndex) => {
-                                if (modMaterial.name === mateList) {
-                                  modMaterial.visible = false;
-                                }
-                              });
-                            }
-                            presetData[index] = presData;
-                            setPresetData(presetData);
-                          }}
-                        />
-                        <FontAwesomeIcon
-                          icon={faCube}
+                <button className="preview-sidemenu-label">
+                  <span>{presData.name}</span>
+                  <img
+                    src={require("../../../assets/pngs/plus-white.png")}
+                    alt=""
+                    onClick={() => {
+                      setSelectedTab(index);
+                    }}
+                  />
+                </button>
+                <div
+                  style={{
+                    display: selectedTab === index ? "flex" : "none",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  {presData.materialList.map((mateList, inx) => {
+                    return (
+                      presData.visibility[inx] && (
+                        <div
                           style={{
-                            fontSize: "50px",
-                          }}
-                        />
-                        <p
-                          style={{
-                            fontSize: "12px",
+                            margin: "5px",
+                            width: "90px",
+                            // background: "red",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            padding: "10px 5px",
                           }}
                         >
-                          {mateList.substring(0, 13)}
-                        </p>
-
-                        {/*here is the material list*/}
-                        {configData && (
-                          <div
+                          <input
+                            type={"checkbox"}
+                            style={{ marginBottom: "5px" }}
+                            defaultChecked={presData.visibility[inx]}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                materialList.map((modMaterial, modIndex) => {
+                                  if (modMaterial.name === mateList) {
+                                    modMaterial.visible = true;
+                                  }
+                                });
+                              } else {
+                                materialList.map((modMaterial, modIndex) => {
+                                  if (modMaterial.name === mateList) {
+                                    modMaterial.visible = false;
+                                  }
+                                });
+                              }
+                              presetData[index] = presData;
+                              setPresetData(presetData);
+                            }}
+                          />
+                          <FontAwesomeIcon
+                            icon={faCube}
                             style={{
-                              marginTop: "5px",
-                              display: "flex",
-                              gap: "10px",
-                              flexWrap: "wrap",
-                              justifyContent: "center",
+                              fontSize: "50px",
+                            }}
+                          />
+                          <p
+                            style={{
+                              fontSize: "12px",
                             }}
                           >
-                            {configData[mateList] &&
-                              configData[mateList].list.map((name) => {
-                                return (
-                                  <div
-                                    style={{
-                                      background:
-                                        configData[mateList].selected === name
-                                          ? "green"
-                                          : "red",
-                                      width: "10px",
-                                      height: "10px",
-                                    }}
-                                    onClick={() => {
-                                      let selectedMaterial =
-                                        materialList.filter(
-                                          (matt) => matt.name === mateList
+                            {mateList.substring(0, 13)}
+                          </p>
+
+                          {/*here is the material list*/}
+                          {configData && (
+                            <div
+                              style={{
+                                marginTop: "5px",
+                                display: "flex",
+                                gap: "10px",
+                                flexWrap: "wrap",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {configData[mateList] &&
+                                configData[mateList].list.map((name) => {
+                                  return (
+                                    <div
+                                      style={{
+                                        background:
+                                          configData[mateList].selected === name
+                                            ? "green"
+                                            : "red",
+                                        width: "10px",
+                                        height: "10px",
+                                      }}
+                                      onClick={() => {
+                                        let selectedMaterial =
+                                          materialList.filter(
+                                            (matt) => matt.name === mateList
+                                          );
+                                        materialFixture(
+                                          name,
+                                          selectedMaterial[0]
                                         );
-                                      materialFixture(
-                                        name,
-                                        selectedMaterial[0]
-                                      );
-                                      setConfigData((state) => {
-                                        return {
-                                          ...state,
-                                          [`${mateList}`]: {
-                                            ...state[`${mateList}`],
-                                            selected: name,
-                                          },
-                                        };
-                                      });
-                                    }}
-                                  ></div>
-                                );
-                              })}
-                          </div>
-                        )}
-                      </div>
-                    )
-                  );
-                })}
+                                        setConfigData((state) => {
+                                          return {
+                                            ...state,
+                                            [`${mateList}`]: {
+                                              ...state[`${mateList}`],
+                                              selected: name,
+                                            },
+                                          };
+                                        });
+                                      }}
+                                    ></div>
+                                  );
+                                })}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
-    </div>
+            );
+          })}
+      </div>
+    </>
   );
 };
 export default PreviewEngine;

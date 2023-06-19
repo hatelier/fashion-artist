@@ -16,7 +16,7 @@ const XRengine = () => {
   return (
     <model-viewer
       // className="model-viewer"
-      src="./models/mtumxBlnd2.glb"
+      src="/models/mtumxBlnd2.glb"
       alt="A rock"
       exposure="1"
       camera-controls
