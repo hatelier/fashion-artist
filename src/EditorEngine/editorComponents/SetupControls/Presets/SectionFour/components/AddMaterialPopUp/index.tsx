@@ -4,7 +4,10 @@ import "./index.scss";
 import addPic from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
 import { Slider } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { LabelledInputMui } from "../../../../../PreviewSection/EditorControls/CameraControls";
+import {
+  LabelledInputMui,
+  NumberLabelledInputMui,
+} from "../../../../../PreviewSection/EditorControls/CameraControls";
 import {
   InvisibleFileUploader,
   LabelCentered,
@@ -18,6 +21,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { SketchPicker } from "react-color";
+import * as THREE from "three";
 
 const AddMaterialPopUp = ({ setState, loadAPI }) => {
   const [imageStatus, setImageStatus] = useState({
@@ -104,13 +109,94 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
   const tillingX = useRef();
   const tillingY = useRef();
   const tillingRotation = useRef();
-
+  const [defaultColor, setDefaultColor] = useState("#000000");
+  const [colorState, setColorState] = useState(false);
   return (
     // <Draggable handle={".addHeader"}>
     <form
       className={"addMaterialPopUp"}
       onSubmit={(e) => {
         e.preventDefault();
+        const formData = new FormData();
+
+        formData.append("files", collectiveData.aoMap, "ao-map.png");
+        formData.append("files", collectiveData.map, "map-map.png");
+        formData.append(
+          "files",
+          collectiveData.normalMap,
+          "normal-map-map.png"
+        );
+        formData.append(
+          "files",
+          collectiveData.roughnessMap,
+          "roughness-map-map.png"
+        );
+
+        // here is the updated axios object
+        const objData = {
+          userId: userID,
+          projectId: projectID,
+          materialName: e.target.materialNameJsx.value,
+          baseMap: {
+            imgName: "map-map.png",
+            useTransparent: e.target.useTransparent.checked,
+          },
+          metalMap: {
+            imgName: "metal-map.png",
+            factor: Number(e.target.metalRange.value),
+          },
+          roughnessMap: {
+            imgName: "roughness-map-map.png",
+            factor: Number(e.target.roughnessRange.value),
+          },
+          normalMap: {
+            imgName: "normal-map-map.png",
+            factor: Number(e.target.normalRange.value),
+          },
+          emissionMap: {
+            imgName: "emission-map.jpg",
+            factor: Number(e.target.emissionRange.value),
+          },
+          occlusionMap: {
+            imgName: "ao-map.png",
+            factor: Number(e.target.occlusionRange.value),
+          },
+          ior: e.target.enableior.checked ? 1.5 : 0,
+          clearcoat: e.target.enableclearcoat.checked ? 1 : 0,
+          transmission: e.target.enabletransmission.checked ? 1 : 0,
+          transform: 0,
+          tiling: [
+            Number(tillingX.current.querySelector("input").value),
+            Number(tillingY.current.querySelector("input").value),
+          ],
+          tilingOffset: [
+            Number(e.target.offsetU.value),
+            Number(e.target.offsetV.value),
+          ],
+          tilingRotation: Number(
+            tillingRotation.current.querySelector("input").value
+          ),
+        };
+
+        // this is the Axios image upload part.
+        axios
+          .post(
+            `/materials/upload?userID=${userID}&folderName=${collectiveData.materialName}&productID=${projectID}`,
+            formData
+          )
+          .then(async (response) => {
+            axios
+              .post("/materials/add", objData)
+              .then((response) => {
+                loadAPI();
+              })
+              .catch((error) => {
+                toast.error(error);
+              });
+          })
+          .catch((error) => {
+            toast.error("Error uploading");
+          });
       }}
     >
       {/*here are the input forms*/}
@@ -119,24 +205,28 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
         name={"map"}
         className={"map"}
         onChange={FileToURL}
+        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"roughnessMap"}
         className={"roughnessMap"}
         onChange={FileToURL}
+        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"normalMap"}
         className={"normalMap"}
         onChange={FileToURL}
+        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"aoMap"}
         className={"aoMap"}
         onChange={FileToURL}
+        required={true}
       />
 
       <div
@@ -162,6 +252,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Name</p>
         <input
+          required={true}
           type={"text"}
           onChange={(e) => {
             setCollectiveData((state) => {
@@ -171,6 +262,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
               };
             });
           }}
+          name={"materialNameJsx"}
           style={{
             border: "1px solid #000000",
             fontSize: "11px",
@@ -198,46 +290,33 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
               document.querySelector(".map").click();
             }}
           ></div>
-          {/*<div style={{*/}
-          {/*    borderRadius: "10px",*/}
-          {/*    width: "45px",*/}
-          {/*    height: "45px",*/}
-          {/*    overflow: "hidden"*/}
-          {/*}}*/}
-          {/* onClick={() => {*/}
-          {/*     document.querySelector(".map").click();*/}
-          {/* }}*/}
-          {/*>*/}
-          {/*    <ReactImageMagnify*/}
-          {/*        {...{*/}
-          {/*            smallImage: {*/}
-          {/*                alt: 'Wristwatch by Ted Baker London',*/}
-          {/*                // isFluidWidth: true,*/}
-          {/*                src: imageStatus.map,*/}
-          {/*                width: 45,*/}
-          {/*                height: 45*/}
-          {/*            },*/}
-          {/*            largeImage: {*/}
-          {/*                src: imageStatus.map,*/}
-          {/*                width: 1000,*/}
-          {/*                height: 1000,*/}
-          {/*                zindex: 3*/}
-          {/*            },*/}
-          {/*            enlargedImageContainerDimensions: {*/}
-          {/*                width: '600%',*/}
-          {/*                height: '600%'*/}
-          {/*            },*/}
-          {/*            style: {*/}
-          {/*                borderRadius: "10px"*/}
-          {/*            }*/}
-          {/*        }} />*/}
-          {/*</div>*/}
+          &nbsp; &nbsp;
+          <div
+            style={{
+              height: "31px",
+              width: "71px",
+              background: `${defaultColor}`,
+              borderRadius: "10px",
+            }}
+            onClick={() => {
+              setColorState((state) => !state);
+            }}
+          ></div>
           &nbsp; &nbsp;
           <LabelCentered>
-            <input type={"checkbox"} />
+            <input type={"checkbox"} name={"useTransparent"} />
             Use transparent
           </LabelCentered>
         </div>
+        <div style={{ marginTop: "10px" }}></div>
+        {colorState && (
+          <SketchPicker
+            color={defaultColor}
+            onChangeComplete={(color) => {
+              setDefaultColor(color.hex);
+            }}
+          />
+        )}
       </div>
 
       {/*  metalness map*/}
@@ -249,9 +328,10 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             <p>Metalness factor</p>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={100}
               aria-label="Small"
               valueLabelDisplay="auto"
+              name={"metalRange"}
             />
           </div>
         </div>
@@ -277,9 +357,10 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             <p>Rougness factor</p>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={100}
               aria-label="Small"
               valueLabelDisplay="auto"
+              name={"roughnessRange"}
             />
           </div>
         </div>
@@ -305,9 +386,10 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             <p>normal intensity</p>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={100}
               aria-label="Small"
               valueLabelDisplay="auto"
+              name={"normalRange"}
             />
           </div>
         </div>
@@ -322,9 +404,10 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             <p>emission factor</p>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={100}
               aria-label="Small"
               valueLabelDisplay="auto"
+              name={"emissionRange"}
             />
           </div>
         </div>
@@ -350,9 +433,10 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             <p>occlusion factor</p>
             <Slider
               size="small"
-              defaultValue={70}
+              defaultValue={100}
               aria-label="Small"
               valueLabelDisplay="auto"
+              name={"occlusionRange"}
             />
           </div>
         </div>
@@ -371,6 +455,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
           <input
             type={"checkbox"}
             className={"enableior"}
+            name={"enableior"}
             onChange={(e) => {
               setCollectiveData((state) => {
                 return {
@@ -386,6 +471,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
           <input
             type={"checkbox"}
             className={"enableclearcoat"}
+            name={"enableclearcoat"}
             onChange={(e) => {
               setCollectiveData((state) => {
                 return {
@@ -401,6 +487,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
           <input
             type={"checkbox"}
             className={"enabletransmission"}
+            name={"enabletransmission"}
             onChange={(e) => {
               setCollectiveData((state) => {
                 return {
@@ -433,20 +520,33 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
       <div style={{ marginTop: "10px" }}>
         <MedFontText11>Tiling</MedFontText11>
         <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-          <LabelledInputMui label={"x"} width={"120px"} ref={tillingX} />
-          <LabelledInputMui label={"y"} width={"120px"} ref={tillingY} />
+          <NumberLabelledInputMui
+            label={"Till-X"}
+            width={"120px"}
+            ref={tillingX}
+            defaultVal={0}
+            required={true}
+          />
+          <NumberLabelledInputMui
+            label={"Till-Y"}
+            width={"120px"}
+            ref={tillingY}
+            defaultVal={0}
+            required={true}
+          />
         </div>
       </div>
 
       {/*tilling offset*/}
       <div style={{ marginTop: "14px" }}>
-        <MedFontText11>Tiling offset</MedFontText11>
+        <MedFontText11>Tilling offset</MedFontText11>
         <div style={{ width: "247px", marginTop: "9px" }}>
           <p>U</p>
           <Slider
             size="small"
-            defaultValue={70}
+            defaultValue={0}
             aria-label="Small"
+            name={"offsetU"}
             valueLabelDisplay="auto"
             onChange={(e) => {
               setCollectiveData((state) => {
@@ -463,8 +563,9 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
           <p>V</p>
           <Slider
             size="small"
-            defaultValue={70}
+            defaultValue={0}
             aria-label="Small"
+            name={"offsetV"}
             valueLabelDisplay="auto"
             onChange={(e) => {
               setCollectiveData((state) => {
@@ -482,10 +583,12 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
       <div>
         <MedFontText11>Tiling Rotation</MedFontText11>
         <div style={{ marginTop: "8px" }}>
-          <LabelledInputMui
+          <NumberLabelledInputMui
             label={"Tiling rotation"}
             width={"120px"}
+            defaultVal={0}
             ref={tillingRotation}
+            required={true}
           />
         </div>
       </div>
@@ -499,145 +602,54 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
         }}
       >
         <RedButtonClass
-          onClick={() => {
-            console.log({
-              ...collectiveData,
-              tiling: [
-                Number(tillingX.current.querySelector("input").value),
-                Number(tillingY.current.querySelector("input").value),
-              ],
-              tilingRotation: Number(
-                tillingRotation.current.querySelector("input").value
-              ),
-            });
+          type={"submit"}
+          // // this code for stripping the material out of parts.
+          // ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
+          //   if (materialArray[4].material[`${vls}`]) {
+          //     console.log(materialArray[4].material[`${vls}`].image);
+          //     const normalMapDataURL = getImageDataURL(
+          //       materialArray[4].material[`${vls}`].image
+          //     );
+          //     const blob = dataURLtoBlob(normalMapDataURL);
+          //     formData.append("files", blob, `${vls}-map.png`);
+          //   }
+          //   return 0;
+          // });
 
-            // create a form updation system
-
-            const formData = new FormData();
-
-            formData.append("files", collectiveData.aoMap, "ao-map.png");
-            formData.append("files", collectiveData.map, "map-map.png");
-            formData.append(
-              "files",
-              collectiveData.normalMap,
-              "normal-map-map.png"
-            );
-            formData.append(
-              "files",
-              collectiveData.roughnessMap,
-              "roughness-map-map.png"
-            );
-
-            // // this code for stripping the material out of parts.
-            // ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
-            //   if (materialArray[4].material[`${vls}`]) {
-            //     console.log(materialArray[4].material[`${vls}`].image);
-            //     const normalMapDataURL = getImageDataURL(
-            //       materialArray[4].material[`${vls}`].image
-            //     );
-            //     const blob = dataURLtoBlob(normalMapDataURL);
-            //     formData.append("files", blob, `${vls}-map.png`);
-            //   }
-            //   return 0;
-            // });
-
-            axios
-              .post(
-                `/materials/upload?userID=${userID}&folderName=${collectiveData.materialName}&productID=${projectID}`,
-                formData
-              )
-              .then(async (response) => {
-                axios
-                  .post("/materials/add", {
-                    userId: userID,
-                    projectId: projectID,
-                    materialName: collectiveData.materialName,
-                    baseMap: {
-                      imgName: "map-map.png",
-                      useTransparent: false,
-                    },
-                    metalMap: {
-                      imgName: "metal-map.png",
-                      factor: 0.9,
-                    },
-                    roughnessMap: {
-                      imgName: "roughness-map-map.png",
-                      factor: 0.5,
-                    },
-                    normalMap: {
-                      imgName: "normal-map-map.png",
-                      factor: 0.2,
-                    },
-                    emissionMap: {
-                      imgName: "emission-map.jpg",
-                      factor: 0.6,
-                    },
-                    occlusionMap: {
-                      imgName: "ao-map.png",
-                      factor: 0.3,
-                    },
-                    ior: collectiveData.ior ? 1.5 : 0,
-                    clearcoat: collectiveData.clearcoat ? 1 : 0,
-                    transmission: collectiveData.transmission ? 1 : 0,
-                    transform: collectiveData.transform,
-                    tiling: [
-                      Number(tillingX.current.querySelector("input").value),
-                      Number(tillingY.current.querySelector("input").value),
-                    ],
-                    tilingOffset: [collectiveData.offU, collectiveData.offV],
-                    tilingRotation: Number(
-                      tillingRotation.current.querySelector("input").value
-                    ),
-                  })
-                  .then((response) => {
-                    loadAPI();
-                  })
-                  .catch((error) => {
-                    toast.error(error);
-                  });
-              })
-              .catch((error) => {
-                toast.error("Error uploading");
-              });
-
-            // console.log("tyset", materialArray[4].material.normalMap.image);
-            //
-
-            // materialStatus.map.repeat.set(30, 30);
-            // materialStatus.normalMap.repeat.set(30, 30);
-            // materialStatus.roughnessMap.repeat.set(30, 30);
-            // materialStatus.aoMap.repeat.set(30, 30);
-            //
-            // //offset test
-            // //ranges from 0 to 1, along U and V
-            // materialStatus.normalMap.offset.set(0, 0);
-            // materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
-            //
-            // //   material wrapping
-            // materialStatus.map.wrapS =
-            //   materialStatus.map.wrapT =
-            //   materialStatus.normalMap.wrapS =
-            //   materialStatus.normalMap.wrapT =
-            //   materialStatus.roughnessMap.wrapS =
-            //   materialStatus.roughnessMap.wrapT =
-            //   materialStatus.aoMap.wrapS =
-            //   materialStatus.aoMap.wrapT =
-            //     THREE.RepeatWrapping;
-            //
-            // materialArray[4].material = new MeshPhysicalMaterial({
-            //   ...materialStatus,
-            //   side: THREE.DoubleSide,
-            //   //other paramters
-            //   aoMapIntensity: 1,
-            //   roughness: 1,
-            //   metalness: 0,
-            //   color: "",
-            //   name: "New Material",
-            //   clearcoat: 0, //float
-            //   ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
-            //   transmission: 0, //float
-            // });
-          }}
+          // materialStatus.map.repeat.set(30, 30);
+          // materialStatus.normalMap.repeat.set(30, 30);
+          // materialStatus.roughnessMap.repeat.set(30, 30);
+          // materialStatus.aoMap.repeat.set(30, 30);
+          //
+          // //offset test
+          // //ranges from 0 to 1, along U and V
+          // materialStatus.normalMap.offset.set(0, 0);
+          // materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
+          //
+          // //   material wrapping
+          // materialStatus.map.wrapS =
+          //   materialStatus.map.wrapT =
+          //   materialStatus.normalMap.wrapS =
+          //   materialStatus.normalMap.wrapT =
+          //   materialStatus.roughnessMap.wrapS =
+          //   materialStatus.roughnessMap.wrapT =
+          //   materialStatus.aoMap.wrapS =
+          //   materialStatus.aoMap.wrapT =
+          //     THREE.RepeatWrapping;
+          //
+          // materialArray[4].material = new MeshPhysicalMaterial({
+          //   ...materialStatus,
+          //   side: THREE.DoubleSide,
+          //   //other paramters
+          //   aoMapIntensity: 1,
+          //   roughness: 1,
+          //   metalness: 0,
+          //   color: "",
+          //   name: "New Material",
+          //   clearcoat: 0, //float
+          //   ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
+          //   transmission: 0, //float
+          // });
         >
           Create
         </RedButtonClass>
@@ -648,3 +660,39 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
   );
 };
 export default AddMaterialPopUp;
+//redundent code
+// adding a color picker here
+// <div style={{
+//   borderRadius: "10px",
+//       width: "45px",
+//       height: "45px",
+//       overflow: "hidden"
+// }}
+// onClick={() => {
+//   document.querySelector(".map").click();
+// }}
+// >
+// <ReactImageMagnify
+// {...{
+//   smallImage: {
+//     alt: 'Wristwatch by Ted Baker London',
+//         // isFluidWidth: true,
+//         src: imageStatus.map,
+//         width: 45,
+//         height: 45
+//   },
+//   largeImage: {
+//     src: imageStatus.map,
+//         width: 1000,
+//         height: 1000,
+//         zindex: 3
+//   },
+//   enlargedImageContainerDimensions: {
+//     width: '600%',
+//         height: '600%'
+//   },
+//   style: {
+//     borderRadius: "10px"
+//   }
+// }} />
+// </div>

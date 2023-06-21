@@ -314,4 +314,43 @@ export const LabelledInputMui = React.forwardRef(
     );
   }
 );
+
+export const NumberLabelledInputMui = React.forwardRef(
+  (
+    props: {
+      label: string;
+      width: string;
+      defaultVal: number;
+      required: boolean;
+    },
+    ref
+  ) => {
+    const { label, width, defaultVal, required } = props;
+    return (
+      <TextField
+        label={`${label}`}
+        required={required}
+        type={"number"}
+        id="filled-size-small"
+        variant="outlined"
+        size="small"
+        ref={ref}
+        defaultValue={defaultVal}
+        name={`${label}`}
+        style={{ width: `${width}` }}
+        inputProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+        InputLabelProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+      />
+    );
+  }
+);
+
 export default CameraControls;
