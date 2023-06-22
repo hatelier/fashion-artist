@@ -31,6 +31,7 @@ const SectionOne = (props) => {
 
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
+  const [showUpdate, setShowUpdate] = useState(true);
   const { id } = useParams();
   const baseReactUrl = window.location.origin.toString();
 
@@ -59,7 +60,7 @@ const SectionOne = (props) => {
             pipeLine: res.data.pipeline,
             tags: res.data.tags[0],
           });
-
+          setShowUpdate(false);
           dispatch(updateTopBar());
           dispatch(updateUserId(res.data.userId));
           dispatch(updateProjectId(res.data.productID));
@@ -82,27 +83,31 @@ const SectionOne = (props) => {
         e.preventDefault();
       }}
     >
-      <div className={"uploadBox"}>
-        <img src={UploadImage} />
-        <p>Select an asset or drop here</p>
-      </div>
-      <input
-        type={"file"}
-        ref={inputClicker}
-        style={{ display: "none" }}
-        onChange={() => {
-          toast.success("File uploaded.");
-        }}
-        required={true}
-      />
-      <button
-        className={"uploadAsset"}
-        onClick={() => {
-          inputClicker.current.click();
-        }}
-      >
-        UPLOAD ASSET
-      </button>
+      {showUpdate && (
+        <>
+          <div className={"uploadBox"}>
+            <img src={UploadImage} />
+            <p>Select an asset or drop here</p>
+          </div>
+          <input
+            type={"file"}
+            ref={inputClicker}
+            style={{ display: "none" }}
+            onChange={() => {
+              toast.success("File uploaded.");
+            }}
+            required={true}
+          />
+          <button
+            className={"uploadAsset"}
+            onClick={() => {
+              inputClicker.current.click();
+            }}
+          >
+            UPLOAD ASSET
+          </button>
+        </>
+      )}
 
       {/*enable this for upload*/}
       {/*<FileUploader*/}

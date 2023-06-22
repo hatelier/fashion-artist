@@ -368,7 +368,7 @@ const SectionTwo = () => {
             });
         }}
       >
-        Add Configuration
+        Save Configuration
       </button>
     </div>
   );
