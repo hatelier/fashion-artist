@@ -240,50 +240,55 @@ const SectionOne = (props) => {
       <div></div>
       {/*<button type={"submit"}>Save Current State</button>*/}
       <div className={"DupDelDiv"}>
-        <button
-          className={"uploadAsset"}
-          style={{ width: "60%" }}
-          type={"button"}
-          onClick={() => {
-            const formData = new FormData();
-            formData.append("userid", "64676633c6ad11d84b234b1d");
-            formData.append(
-              "foldername",
-              Math.floor(Math.random() * 100000000)
-            );
-            formData.append("productname", productRef.current.value);
-            formData.append("brandname", brandRef.current.value);
-            formData.append("pipeline", pipelineRef.current.value);
-            formData.append("tags", tagsRef.current.value);
-            formData.append("asset", inputClicker.current.files[0]);
-            formData.append("previewImage", prevImageClicker.current.files[0]);
+        {showUpdate && (
+          <button
+            className={"uploadAsset"}
+            style={{ width: "60%" }}
+            type={"button"}
+            onClick={() => {
+              const formData = new FormData();
+              formData.append("userid", "64676633c6ad11d84b234b1d");
+              formData.append(
+                "foldername",
+                Math.floor(Math.random() * 100000000)
+              );
+              formData.append("productname", productRef.current.value);
+              formData.append("brandname", brandRef.current.value);
+              formData.append("pipeline", pipelineRef.current.value);
+              formData.append("tags", tagsRef.current.value);
+              formData.append("asset", inputClicker.current.files[0]);
+              formData.append(
+                "previewImage",
+                prevImageClicker.current.files[0]
+              );
 
-            axios
-              .post("/product/add", formData)
-              .then((res) => {
-                let dataStruct = {
-                  presetName: "Preset",
-                  configuration: {
-                    preset: [],
-                  },
-                  projectId: `${res.data.productID}`,
-                  userId: res.data.userId,
-                };
-                axios.post("/materials/preset", dataStruct).then(() => {
-                  toast.success("Product has been created!");
-                  window.open(
-                    `${baseReactUrl}/editor/${res.data.productName}`,
-                    "_self"
-                  );
+              axios
+                .post("/product/add", formData)
+                .then((res) => {
+                  let dataStruct = {
+                    presetName: "Preset",
+                    configuration: {
+                      preset: [],
+                    },
+                    projectId: `${res.data.productID}`,
+                    userId: res.data.userId,
+                  };
+                  axios.post("/materials/preset", dataStruct).then(() => {
+                    toast.success("Product has been created!");
+                    window.open(
+                      `${baseReactUrl}/editor/${res.data.productName}`,
+                      "_self"
+                    );
+                  });
+                })
+                .catch((error) => {
+                  toast.error("Model upload has failed.");
                 });
-              })
-              .catch((error) => {
-                toast.error("Model upload has failed.");
-              });
-          }}
-        >
-          Duplicate
-        </button>
+            }}
+          >
+            Duplicate
+          </button>
+        )}
         <button
           className={"uploadAsset"}
           style={{ width: "40%" }}

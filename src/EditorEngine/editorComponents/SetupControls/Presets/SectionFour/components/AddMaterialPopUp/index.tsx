@@ -109,7 +109,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
   const tillingX = useRef();
   const tillingY = useRef();
   const tillingRotation = useRef();
-  const [defaultColor, setDefaultColor] = useState("#000000");
+  const [defaultColor, setDefaultColor] = useState("#ffffff");
   const [colorState, setColorState] = useState(false);
   return (
     // <Draggable handle={".addHeader"}>
@@ -143,25 +143,25 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
           },
           metalMap: {
             imgName: "metal-map.png",
-            factor: Number(e.target.metalRange.value),
+            factor: Number(e.target.metalRange.value) / 100,
           },
           roughnessMap: {
             imgName: "roughness-map-map.png",
-            factor: Number(e.target.roughnessRange.value),
+            factor: Number(e.target.roughnessRange.value) / 100,
           },
           normalMap: {
             imgName: "normal-map-map.png",
-            factor: Number(e.target.normalRange.value),
+            factor: Number(e.target.normalRange.value) / 100,
           },
           emissionMap: {
             imgName: "emission-map.jpg",
-            factor: Number(e.target.emissionRange.value),
+            factor: Number(e.target.emissionRange.value) / 100,
           },
           occlusionMap: {
             imgName: "ao-map.png",
-            factor: Number(e.target.occlusionRange.value),
+            factor: Number(e.target.occlusionRange.value) / 100,
           },
-          ior: e.target.enableior.checked ? 1.5 : 0,
+          ior: e.target.enableior.checked ? 2.33 : 1.5,
           clearcoat: e.target.enableclearcoat.checked ? 1 : 0,
           transmission: e.target.enabletransmission.checked ? 1 : 0,
           transform: 0,
@@ -170,12 +170,13 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
             Number(tillingY.current.querySelector("input").value),
           ],
           tilingOffset: [
-            Number(e.target.offsetU.value),
-            Number(e.target.offsetV.value),
+            Number(e.target.offsetU.value) / 100,
+            Number(e.target.offsetV.value) / 100,
           ],
           tilingRotation: Number(
             tillingRotation.current.querySelector("input").value
           ),
+          color: defaultColor,
         };
 
         // this is the Axios image upload part.
@@ -297,6 +298,7 @@ const AddMaterialPopUp = ({ setState, loadAPI }) => {
               width: "71px",
               background: `${defaultColor}`,
               borderRadius: "10px",
+              border: "2px solid #878787",
             }}
             onClick={() => {
               setColorState((state) => !state);
