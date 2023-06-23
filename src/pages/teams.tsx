@@ -135,28 +135,28 @@ export const Teams = () => {
                                 <img className="team-edit-button" src={require('../assets/pngs/edit.png')} alt="" />
                             </span>
                             <span className="team-add-delete">
-                                <a href="" className="team-add"><img src={require('../assets/pngs/plus.png')} alt="" /> Add</a>
+                                <a href="" className="team-add"><img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" /><img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> <span className='team-add-text'>Add</span></a>
                                 <a href="" className="team-delete"><img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" /><span className="team-delete-text">Delete</span></a>
                             </span>
                         </div>
                             <table className="team-member-table">
                                 <tr className="team-member-row">
-                                    <td>Member 1</td>
-                                    <td>member_1@gmail.com</td>
-                                    <td>Owner</td>
-                                    <td></td>
+                                    <td className='team-member-name'>Member 1</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
+                                    <td className='team-member-rank'>Owner</td>
+                                    <td className='team-member-status'></td>
                                 </tr>
                                 <tr className="team-member-row">
-                                    <td>Member 2</td>
-                                    <td>member_1@gmail.com</td>
+                                    <td className='team-member-name'>Member 2</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
                                     <td>Admin</td>
-                                    <td><img src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
                                 </tr>
                                 <tr className="team-member-row">
-                                    <td>Member 2</td>
-                                    <td>member_1@gmail.com</td>
-                                    <td>Admin</td>
-                                    <td><img src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-name'>Member 2</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
+                                    <td className='team-member-rank'>Admin</td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
                                 </tr>
                             </table>
                     </div>
@@ -167,28 +167,28 @@ export const Teams = () => {
                                 <img className="team-edit-button" src={require('../assets/pngs/edit.png')} alt="" />
                             </span>
                             <span className="team-add-delete">
-                                <a href="" className="team-add"><img src={require('../assets/pngs/plus.png')} alt="" /> Add</a>
+                            <a href="" className="team-add"><img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" /><img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> <span className='team-add-text'>Add</span></a>
                                 <a href="" className="team-delete"><img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" /><span className="team-delete-text">Delete</span></a>
                             </span>
                         </div>
                           <table className="team-member-table">
                                 <tr className="team-member-row">
-                                    <td>Member 1</td>
-                                    <td>member_1@gmail.com</td>
-                                    <td>Owner</td>
-                                    <td></td>
+                                    <td className='team-member-name'>Member 1</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
+                                    <td className='team-member-rank'>Owner</td>
+                                    <td className='team-member-status'></td>
                                 </tr>
                                 <tr className="team-member-row">
-                                    <td>Member 2</td>
-                                    <td>member_1@gmail.com</td>
-                                    <td>Admin</td>
-                                    <td><img src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-name'>Member 2</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
+                                    <td className='team-member-rank'>Admin</td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
                                 </tr>
                                 <tr className="team-member-row">
-                                    <td>Member 2</td>
-                                    <td>member_1@gmail.com</td>
-                                    <td>Admin</td>
-                                    <td><img src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-name'>Member 2</td>
+                                    <td className='team-member-email'>member_1@gmail.com</td>
+                                    <td className='team-member-rank'>Admin</td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
                                 </tr>
                           </table>
                     </div>
