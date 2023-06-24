@@ -15,6 +15,8 @@ import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 // color picker
 
 const SectionTwo = () => {
@@ -122,6 +124,7 @@ const SectionTwo = () => {
         (query) => query.materialName === materialName
       );
       let main_mat = requi_material[0];
+      console.log("retro testing", main_mat);
       let openMaterial = {};
       ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
         (mater, index) => {
@@ -139,10 +142,18 @@ const SectionTwo = () => {
           };
         }
       );
-      openMaterial.map.repeat.set(30, 30);
-      openMaterial.normalMap.repeat.set(30, 30);
-      openMaterial.roughnessMap.repeat.set(30, 30);
-      openMaterial.aoMap.repeat.set(30, 30);
+
+      ["map", "roughnessMap", "normalMap", "aoMap"].map((materr, indexx) => {
+        openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
+        openMaterial[materr].offset.set(
+          main_mat.tilingOffset[0],
+          main_mat.tilingOffset[1]
+        );
+        openMaterial[materr].rotation =
+          main_mat.tilingRotation * (Math.PI / 180);
+      });
+
+      // //ranges from 0 to 1, along U and V
 
       openMaterial.map.wrapS =
         openMaterial.map.wrapT =
@@ -157,6 +168,14 @@ const SectionTwo = () => {
       indiMaterial.material = new MeshPhysicalMaterial({
         ...openMaterial,
         side: THREE.DoubleSide,
+        aoMapIntensity: main_mat.occlusionMap.factor,
+        roughness: main_mat.roughnessMap.factor,
+        metalness: main_mat.metalMap.factor,
+        emissiveIntensity: main_mat.metalMap.factor,
+        color: main_mat.color,
+        clearcoat: main_mat.clearcoat, //float
+        ior: main_mat.ior, //this value ranges from 1 to 2.33 def is 1.5,
+        transmission: main_mat.transmission, //float
       });
     }
     return (
@@ -166,7 +185,6 @@ const SectionTwo = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            cursor: "pointer",
             height: "22px",
             background: "#FFFFFF",
             border: "1px solid #EDEDED",
@@ -197,11 +215,15 @@ const SectionTwo = () => {
                 borderRadius: "50%",
               }}
             ></div>
-            <p className={"confName"}>{vls}</p>
+            <p className={"confName"}>
+              {vls}
+              &nbsp; &nbsp;
+              <FontAwesomeIcon icon={faPencil} />
+            </p>
           </div>
           <FontAwesomeIcon
             icon={appliDetails.selected === vls ? faEye : faEyeSlash}
-            style={{ fontSize: "12px", color: "lightgrey" }}
+            style={{ fontSize: "12px", color: "lightgrey", cursor: "pointer" }}
             onClick={() => {
               if (appliDetails.selected === vls) {
                 appliDetails.selected = null;
@@ -228,8 +250,11 @@ const SectionTwo = () => {
     );
   };
 
+  // material edit PopUp controls
+
   return (
     <div className={"sectionTwoDiv"}>
+      <AddMaterialPopUp />
       <div
         style={{
           display: "flex",
@@ -242,7 +267,7 @@ const SectionTwo = () => {
         <img src={AddConfig} style={{ width: "21.35px" }} />
       </div>
       {allCustomMaterials &&
-        Object.keys(appliedTextures).length &&
+        Object.keys(appliedTextures).length !== 0 &&
         appliedTextures &&
         status && <ApplyMaterials configData={appliedTextures} />}
       {selectedMesh && (
@@ -368,7 +393,7 @@ const SectionTwo = () => {
             });
         }}
       >
-        Add Configuration
+        Save Configuration
       </button>
     </div>
   );

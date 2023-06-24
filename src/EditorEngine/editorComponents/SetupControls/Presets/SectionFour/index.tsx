@@ -102,6 +102,7 @@ const SectionFour = () => {
         <AddMaterialPopUp
           setState={setAddMaterialState}
           loadAPI={loadMaterialFunc}
+          updateMode={false}
         />
       )}
       {/*<AddMeshPopUp />*/}

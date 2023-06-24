@@ -55,7 +55,7 @@ const OnPreviewControls = () => {
     (state: any) => state.savedCameraControls.cameraProps
   );
   const dispatch = useDispatch();
-  const [currSelection, setCurrSelection] = useState(3);
+  const [currSelection, setCurrSelection] = useState(5);
   //here is the lighting controls
   const LightingControl = () => {
     return (
