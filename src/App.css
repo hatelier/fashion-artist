@@ -526,6 +526,9 @@ header {
   order: 2;
   flex-grow: 0;
 }
+.team-member-add-img {
+  display: none;
+}
 
 .new-team {
   display: none;
@@ -3874,5 +3877,69 @@ input:checked + .slider:before {
   font-size: 10px;
   line-height: 12px;
   color: #E70A4E;
+}
+
+/* Teams page styles */
+.team-member-name {
+  display: inline-table;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.team-member-email {
+  display: inline-table;
+  color: #FFF;
+  font-size: 12px;
+}
+
+/* .team-member-rank {
+
+} */
+
+.team-member-status {
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
+/* .team-member-table {
+
+} */
+.team-member-row {
+  height: 50px;
+}
+
+.team-delete {
+  all: unset;
+}
+
+.team-add {
+  all: unset;
+}
+.team-add-text {
+  display: none;
+}
+.team-plus-img {
+  display: none;
+}
+.team-delete-text {
+  display: none;
+}
+
+.team-header {
+  gap: unset;
+  justify-content: space-between;
+}
+
+.team-name-edit {
+  gap: 10px;
+}
+
+.team-name {
+  width: 165px;
+}
+
+.team-member-add-img {
+  display: unset;
 }
 }
