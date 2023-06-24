@@ -16,6 +16,7 @@ import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 // color picker
 
 const SectionTwo = () => {
@@ -249,8 +250,11 @@ const SectionTwo = () => {
     );
   };
 
+  // material edit PopUp controls
+
   return (
     <div className={"sectionTwoDiv"}>
+      <AddMaterialPopUp />
       <div
         style={{
           display: "flex",

@@ -24,7 +24,7 @@ import { toast } from "react-toastify";
 import { SketchPicker } from "react-color";
 import * as THREE from "three";
 
-const AddMaterialPopUp = ({ setState, loadAPI }) => {
+const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [imageStatus, setImageStatus] = useState({
     map: addPic,
     roughnessMap: addPic,
