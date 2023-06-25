@@ -17,7 +17,6 @@ export const materialApplication = createSlice({
   }),
   reducers: {
     updateMaterialReload: (state) => {
-      console.log("preacescse", state.modelMaterialReload);
       state.modelMaterialReload = state.modelMaterialReload + 1;
     },
     updateMaterialReqs: (state, action) => {

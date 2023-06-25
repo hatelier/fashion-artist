@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import { SketchPicker } from "react-color";
 import * as THREE from "three";
 import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
+import { updateCustomMaterial } from "../../../../../../../redux/accountManagement";
 
 const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [imageStatus, setImageStatus] = useState({
@@ -165,13 +166,20 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             ),
             color: defaultColorUpa ? defaultColorUpa : updateData.color,
           };
-
-          // this is the Axios image upload part.
           axios
             .put("/materials/update ", objData)
             .then((response) => {
-              // loadAPI();
-              dispatch(updateMaterialReload());
+              axios
+                .get("/materials/get", {
+                  params: {
+                    userId: userID,
+                    projectId: projectID,
+                  },
+                })
+                .then((res) => {
+                  loadAPI(res.data);
+                  dispatch(updateCustomMaterial(res.data));
+                });
             })
             .catch((error) => {
               toast.error(error);

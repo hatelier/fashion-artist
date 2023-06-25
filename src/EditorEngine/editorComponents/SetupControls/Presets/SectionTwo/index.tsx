@@ -67,10 +67,20 @@ const SectionTwo = () => {
               };
             }
           );
-          openMaterial.map.repeat.set(30, 30);
-          openMaterial.normalMap.repeat.set(30, 30);
-          openMaterial.roughnessMap.repeat.set(30, 30);
-          openMaterial.aoMap.repeat.set(30, 30);
+          ["map", "roughnessMap", "normalMap", "aoMap"].map(
+            (materr, indexx) => {
+              openMaterial[materr].repeat.set(
+                main_mat.tiling[0],
+                main_mat.tiling[1]
+              );
+              openMaterial[materr].offset.set(
+                main_mat.tilingOffset[0],
+                main_mat.tilingOffset[1]
+              );
+              openMaterial[materr].rotation =
+                main_mat.tilingRotation * (Math.PI / 180);
+            }
+          );
 
           openMaterial.map.wrapS =
             openMaterial.map.wrapT =
@@ -85,12 +95,19 @@ const SectionTwo = () => {
           materialList[i].material = new MeshPhysicalMaterial({
             ...openMaterial,
             side: THREE.DoubleSide,
+            aoMapIntensity: main_mat.occlusionMap.factor,
+            roughness: main_mat.roughnessMap.factor,
+            metalness: main_mat.metalMap.factor,
+            emissiveIntensity: main_mat.metalMap.factor,
+            color: main_mat.color,
+            clearcoat: main_mat.clearcoat, //float
+            ior: main_mat.ior, //this value ranges from 1 to 2.33 def is 1.5,
+            transmission: main_mat.transmission, //float
           });
         }
       }
       if (i === materialList.length - 1 && materialList.length > 1) {
         setStatus(false);
-        console.log("playstaiton4", materialList, configData);
       }
     }
     return null;
@@ -224,7 +241,7 @@ const SectionTwo = () => {
                   let requi_material = allCustomMaterials.filter(
                     (query) => query.materialName === vls
                   );
-                  setMaterialPopUpData(requi_material[0])
+                  setMaterialPopUpData(requi_material[0]);
                 }}
               />
             </p>
@@ -257,14 +274,88 @@ const SectionTwo = () => {
       </>
     );
   };
+  const postUpdateApply = (configData, materialCustomList) => {
+    for (let i = 0; i < materialList.length; i++) {
+      if (configData.hasOwnProperty(materialList[i].name)) {
+        if (configData[materialList[i].name].selected !== null) {
+          let requi_material = materialCustomList.filter(
+            (query) =>
+              query.materialName === configData[materialList[i].name].selected
+          );
+          let main_mat = requi_material[0];
+          let openMaterial = {};
+          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
+            (mater, index) => {
+              const texture = new TextureLoader().load(
+                main_mat[`${mater}`].imgName
+              );
+              if (mater === "occlusionMap") {
+                mater = "aoMap";
+              } else if (mater === "baseMap") {
+                mater = "map";
+              }
+              openMaterial = {
+                ...openMaterial,
+                [`${mater}`]: texture,
+              };
+            }
+          );
+          ["map", "roughnessMap", "normalMap", "aoMap"].map(
+            (materr, indexx) => {
+              openMaterial[materr].repeat.set(
+                main_mat.tiling[0],
+                main_mat.tiling[1]
+              );
+              openMaterial[materr].offset.set(
+                main_mat.tilingOffset[0],
+                main_mat.tilingOffset[1]
+              );
+              openMaterial[materr].rotation =
+                main_mat.tilingRotation * (Math.PI / 180);
+            }
+          );
+          openMaterial.map.wrapS =
+            openMaterial.map.wrapT =
+            openMaterial.normalMap.wrapS =
+            openMaterial.normalMap.wrapT =
+            openMaterial.roughnessMap.wrapS =
+            openMaterial.roughnessMap.wrapT =
+            openMaterial.aoMap.wrapS =
+            openMaterial.aoMap.wrapT =
+              THREE.RepeatWrapping;
 
+          materialList[i].material = new MeshPhysicalMaterial({
+            ...openMaterial,
+            side: THREE.DoubleSide,
+            aoMapIntensity: main_mat.occlusionMap.factor,
+            roughness: main_mat.roughnessMap.factor,
+            metalness: main_mat.metalMap.factor,
+            emissiveIntensity: main_mat.metalMap.factor,
+            color: main_mat.color,
+            clearcoat: main_mat.clearcoat, //float
+            ior: main_mat.ior, //this value ranges from 1 to 2.33 def is 1.5,
+            transmission: main_mat.transmission, //float
+          });
+        }
+      }
+      if (i === materialList.length - 1 && materialList.length > 1) {
+        setStatus(false);
+      }
+    }
+  };
   // material edit PopUp controls
-    const [materialPopData, setMaterialPopUpData] = useState(null)
+  const [materialPopData, setMaterialPopUpData] = useState(null);
   return (
     <div className={"sectionTwoDiv"}>
-        {
-            materialPopData && <AddMaterialPopUp updateMode={true} updateData={materialPopData}/>
-        }
+      {materialPopData && (
+        <AddMaterialPopUp
+          updateMode={true}
+          updateData={materialPopData}
+          loadAPI={(materialCustomList) => {
+            postUpdateApply(appliedTextures, materialCustomList);
+          }}
+        />
+      )}
       <div
         style={{
           display: "flex",

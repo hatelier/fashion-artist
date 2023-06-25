@@ -69,14 +69,11 @@ const SectionFour = () => {
       });
   }
   // this is purely being added to achieve reload capability
-  const materialReloadState = useSelector(
-    (state) => state.materialApplication.modelMaterialReload
-  );
   useEffect(() => {
     if (userID && projectID) {
       loadMaterialFunc();
     }
-  }, [materialReloadState]);
+  }, []);
   return (
     <div className={"sectionFourDiv"}>
       {/*  enable this code post */}
