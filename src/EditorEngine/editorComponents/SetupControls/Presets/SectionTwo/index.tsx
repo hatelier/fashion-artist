@@ -218,7 +218,15 @@ const SectionTwo = () => {
             <p className={"confName"}>
               {vls}
               &nbsp; &nbsp;
-              <FontAwesomeIcon icon={faPencil} />
+              <FontAwesomeIcon
+                icon={faPencil}
+                onClick={() => {
+                  let requi_material = allCustomMaterials.filter(
+                    (query) => query.materialName === vls
+                  );
+                  console.log("click material test", requi_material[0]);
+                }}
+              />
             </p>
           </div>
           <FontAwesomeIcon
@@ -251,10 +259,9 @@ const SectionTwo = () => {
   };
 
   // material edit PopUp controls
-
   return (
     <div className={"sectionTwoDiv"}>
-      <AddMaterialPopUp />
+      <AddMaterialPopUp updateMode={true} />
       <div
         style={{
           display: "flex",
