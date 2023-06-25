@@ -224,7 +224,7 @@ const SectionTwo = () => {
                   let requi_material = allCustomMaterials.filter(
                     (query) => query.materialName === vls
                   );
-                  console.log("click material test", requi_material[0]);
+                  setMaterialPopUpData(requi_material[0])
                 }}
               />
             </p>
@@ -259,9 +259,12 @@ const SectionTwo = () => {
   };
 
   // material edit PopUp controls
+    const [materialPopData, setMaterialPopUpData] = useState(null)
   return (
     <div className={"sectionTwoDiv"}>
-      <AddMaterialPopUp updateMode={true} />
+        {
+            materialPopData && <AddMaterialPopUp updateMode={true} updateData={materialPopData}/>
+        }
       <div
         style={{
           display: "flex",

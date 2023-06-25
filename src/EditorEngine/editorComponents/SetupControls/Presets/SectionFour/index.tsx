@@ -27,6 +27,7 @@ import AddMaterialPopUp from "./components/AddMaterialPopUp";
 import AddMeshPopUp from "./components/AddMeshPopUp";
 import axios from "axios";
 import { updateCustomMaterial } from "../../../../../redux/accountManagement";
+import { materialApplication } from "../../../../../redux/materialApplication";
 
 const SectionFour = () => {
   const materialArray = useSelector(
@@ -67,11 +68,15 @@ const SectionFour = () => {
         dispatch(updateCustomMaterial(res.data));
       });
   }
+  // this is purely being added to achieve reload capability
+  const materialReloadState = useSelector(
+    (state) => state.materialApplication.modelMaterialReload
+  );
   useEffect(() => {
     if (userID && projectID) {
       loadMaterialFunc();
     }
-  }, []);
+  }, [materialReloadState]);
   return (
     <div className={"sectionFourDiv"}>
       {/*  enable this code post */}

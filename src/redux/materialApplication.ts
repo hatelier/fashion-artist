@@ -13,8 +13,13 @@ export const materialApplication = createSlice({
     blockTopBar: true,
     modelUrl: "/models/defaultCude.glb",
     modelLoadRate: 0,
+    modelMaterialReload: 0,
   }),
   reducers: {
+    updateMaterialReload: (state) => {
+      console.log("preacescse", state.modelMaterialReload);
+      state.modelMaterialReload = state.modelMaterialReload + 1;
+    },
     updateMaterialReqs: (state, action) => {
       state.materialReqs = action.payload;
     },
@@ -35,5 +40,6 @@ export const {
   updateModelUrl,
   updateMaterialReqs,
   updateTopBar,
+  updateMaterialReload,
 } = materialApplication.actions;
 export default materialApplication.reducer;

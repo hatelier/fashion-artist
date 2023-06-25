@@ -16,13 +16,14 @@ import {
   WhiteButtonClass,
 } from "../../../../../../StyledComponents";
 import { TextureLoader } from "three";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SketchPicker } from "react-color";
 import * as THREE from "three";
+import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
 
 const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [imageStatus, setImageStatus] = useState({
@@ -109,6 +110,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const tillingRotation = useRef();
   const [defaultColor, setDefaultColor] = useState("#ffffff");
   const [colorState, setColorState] = useState(false);
+  const [defaultColorUpa, setDefaultColorUpa] = useState(null);
+  const dispatch = useDispatch();
   if (updateMode === true) {
     //this component is used if the mode is set to Update Mode.
     return (
@@ -116,21 +119,6 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         className={"addMaterialPopUp"}
         onSubmit={(e) => {
           e.preventDefault();
-          const formData = new FormData();
-
-          formData.append("files", collectiveData.aoMap, "ao-map.png");
-          formData.append("files", collectiveData.map, "map-map.png");
-          formData.append(
-            "files",
-            collectiveData.normalMap,
-            "normal-map-map.png"
-          );
-          formData.append(
-            "files",
-            collectiveData.roughnessMap,
-            "roughness-map-map.png"
-          );
-
           // here is the updated axios object
           const objData = {
             userId: userID,
@@ -175,14 +163,15 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             tilingRotation: Number(
               tillingRotation.current.querySelector("input").value
             ),
-            color: defaultColor,
+            color: defaultColorUpa ? defaultColorUpa : updateData.color,
           };
 
           // this is the Axios image upload part.
           axios
-            .post("/materials/add", objData)
+            .put("/materials/update ", objData)
             .then((response) => {
               // loadAPI();
+              dispatch(updateMaterialReload());
             })
             .catch((error) => {
               toast.error(error);
@@ -190,35 +179,6 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         }}
       >
         {/*here are the input forms*/}
-        <InvisibleFileUploader
-          type={"file"}
-          name={"map"}
-          className={"map"}
-          onChange={FileToURL}
-          required={true}
-        />
-        <InvisibleFileUploader
-          type={"file"}
-          name={"roughnessMap"}
-          className={"roughnessMap"}
-          onChange={FileToURL}
-          required={true}
-        />
-        <InvisibleFileUploader
-          type={"file"}
-          name={"normalMap"}
-          className={"normalMap"}
-          onChange={FileToURL}
-          required={true}
-        />
-        <InvisibleFileUploader
-          type={"file"}
-          name={"aoMap"}
-          className={"aoMap"}
-          onChange={FileToURL}
-          required={true}
-        />
-
         <div
           style={{
             display: "flex",
@@ -244,6 +204,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           <input
             required={true}
             type={"text"}
+            defaultValue={updateData.materialName}
+            disabled={true}
             onChange={(e) => {
               setCollectiveData((state) => {
                 return {
@@ -273,7 +235,9 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               style={{
                 height: "31px",
                 width: "71px",
-                background: `${defaultColor}`,
+                background: `${
+                  defaultColorUpa ? defaultColorUpa : updateData.color
+                }`,
                 borderRadius: "10px",
                 border: "2px solid #878787",
               }}
@@ -290,9 +254,9 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           <div style={{ marginTop: "10px" }}></div>
           {colorState && (
             <SketchPicker
-              color={defaultColor}
+              color={defaultColorUpa ? defaultColorUpa : updateData.color}
               onChangeComplete={(color) => {
-                setDefaultColor(color.hex);
+                setDefaultColorUpa(color.hex);
               }}
             />
           )}
@@ -307,7 +271,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               <p>Metalness factor</p>
               <Slider
                 size="small"
-                defaultValue={100}
+                defaultValue={updateData.metalMap.factor * 100}
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 name={"metalRange"}
@@ -323,7 +287,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               <p>Rougness factor</p>
               <Slider
                 size="small"
-                defaultValue={100}
+                defaultValue={updateData.roughnessMap.factor * 100}
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 name={"roughnessRange"}
@@ -339,7 +303,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               <p>normal intensity</p>
               <Slider
                 size="small"
-                defaultValue={100}
+                defaultValue={updateData.normalMap.factor * 100}
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 name={"normalRange"}
@@ -355,7 +319,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               <p>emission factor</p>
               <Slider
                 size="small"
-                defaultValue={100}
+                defaultValue={updateData.emissionMap.factor * 100}
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 name={"emissionRange"}
@@ -371,7 +335,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               <p>occlusion factor</p>
               <Slider
                 size="small"
-                defaultValue={100}
+                defaultValue={updateData.occlusionMap.factor * 100}
                 aria-label="Small"
                 valueLabelDisplay="auto"
                 name={"occlusionRange"}
@@ -394,6 +358,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               type={"checkbox"}
               className={"enableior"}
               name={"enableior"}
+              defaultChecked={updateData.ior === 2.33}
               onChange={(e) => {
                 setCollectiveData((state) => {
                   return {
@@ -410,6 +375,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               type={"checkbox"}
               className={"enableclearcoat"}
               name={"enableclearcoat"}
+              defaultChecked={updateData.clearcoat === 1}
               onChange={(e) => {
                 setCollectiveData((state) => {
                   return {
@@ -426,6 +392,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               type={"checkbox"}
               className={"enabletransmission"}
               name={"enabletransmission"}
+              defaultChecked={updateData.transmission === 1}
               onChange={(e) => {
                 setCollectiveData((state) => {
                   return {
@@ -462,14 +429,14 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               label={"Till-X"}
               width={"120px"}
               ref={tillingX}
-              defaultVal={0}
+              defaultVal={updateData.tiling[0]}
               required={true}
             />
             <NumberLabelledInputMui
               label={"Till-Y"}
               width={"120px"}
               ref={tillingY}
-              defaultVal={0}
+              defaultVal={updateData.tiling[1]}
               required={true}
             />
           </div>
@@ -482,7 +449,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             <p>U</p>
             <Slider
               size="small"
-              defaultValue={0}
+              defaultValue={updateData.tilingOffset[0] * 100}
               aria-label="Small"
               name={"offsetU"}
               valueLabelDisplay="auto"
@@ -501,7 +468,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             <p>V</p>
             <Slider
               size="small"
-              defaultValue={0}
+              defaultValue={updateData.tilingOffset[1] * 100}
               aria-label="Small"
               name={"offsetV"}
               valueLabelDisplay="auto"
@@ -524,7 +491,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             <NumberLabelledInputMui
               label={"Tiling rotation"}
               width={"120px"}
-              defaultVal={0}
+              defaultVal={updateData.tilingRotation}
               ref={tillingRotation}
               required={true}
             />
@@ -539,8 +506,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             justifyContent: "space-between",
           }}
         >
-          <RedButtonClass type={"submit"}>Create</RedButtonClass>
-          <WhiteButtonClass>Remove</WhiteButtonClass>
+          <RedButtonClass type={"submit"}>Update material</RedButtonClass>
+          {/*<WhiteButtonClass>Remove</WhiteButtonClass>*/}
         </div>
       </form>
     );
