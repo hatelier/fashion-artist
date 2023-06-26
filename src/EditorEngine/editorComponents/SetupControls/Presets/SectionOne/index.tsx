@@ -45,6 +45,7 @@ const SectionOne = (props) => {
   });
   useEffect(() => {
     if (id !== "new") {
+      // const toastId = toast.loading("Loading content!");
       axios
         .get("/product/get", {
           params: {
@@ -65,7 +66,8 @@ const SectionOne = (props) => {
           dispatch(updateUserId(res.data.userId));
           dispatch(updateProjectId(res.data.productID));
           dispatch(updateModelUrl(res.data.asset.location));
-          toast.success("Project loaded!");
+          // toast.success("Project loaded!");
+          // toast.update(toastId, { isLoading: false });
         })
         .catch((err) => {
           toast.error("Failed to load the data.");
@@ -219,21 +221,24 @@ const SectionOne = (props) => {
           type={"text"}
           placeholder={"W"}
           className={"dimenClass"}
-          value={materialData ? materialData.x : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.x * 10) / 10 : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"L"}
           className={"dimenClass"}
-          value={materialData ? materialData.y : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.y * 10) / 10 : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"H"}
           className={"dimenClass"}
-          value={materialData ? materialData.z : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.z * 10) / 10 : 0}
         />
         &nbsp;
       </div>

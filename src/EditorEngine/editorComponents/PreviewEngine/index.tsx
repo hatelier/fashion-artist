@@ -195,10 +195,20 @@ const SideMenu = () => {
                       };
                     });
 
-                    openMaterial.map.repeat.set(30, 30);
-                    openMaterial.normalMap.repeat.set(30, 30);
-                    openMaterial.roughnessMap.repeat.set(30, 30);
-                    openMaterial.aoMap.repeat.set(30, 30);
+                    ["map", "roughnessMap", "normalMap", "aoMap"].map(
+                      (materr, indexx) => {
+                        openMaterial[materr].repeat.set(
+                          main_mat.tiling[0],
+                          main_mat.tiling[1]
+                        );
+                        openMaterial[materr].offset.set(
+                          main_mat.tilingOffset[0],
+                          main_mat.tilingOffset[1]
+                        );
+                        openMaterial[materr].rotation =
+                          main_mat.tilingRotation * (Math.PI / 180);
+                      }
+                    );
 
                     openMaterial.map.wrapS =
                       openMaterial.map.wrapT =
@@ -213,6 +223,14 @@ const SideMenu = () => {
                     materialList[i].material = new MeshPhysicalMaterial({
                       ...openMaterial,
                       side: THREE.DoubleSide,
+                      aoMapIntensity: main_mat.occlusionMap.factor,
+                      roughness: main_mat.roughnessMap.factor,
+                      metalness: main_mat.metalMap.factor,
+                      emissiveIntensity: main_mat.metalMap.factor,
+                      color: main_mat.color,
+                      clearcoat: main_mat.clearcoat, //float
+                      ior: main_mat.ior, //this value ranges from 1 to 2.33 def is 1.5,
+                      transmission: main_mat.transmission, //float
                     });
                   }
                 }
@@ -246,10 +264,15 @@ const SideMenu = () => {
         };
       }
     );
-    openMaterial.map.repeat.set(30, 30);
-    openMaterial.normalMap.repeat.set(30, 30);
-    openMaterial.roughnessMap.repeat.set(30, 30);
-    openMaterial.aoMap.repeat.set(30, 30);
+
+    ["map", "roughnessMap", "normalMap", "aoMap"].map((materr, indexx) => {
+      openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
+      openMaterial[materr].offset.set(
+        main_mat.tilingOffset[0],
+        main_mat.tilingOffset[1]
+      );
+      openMaterial[materr].rotation = main_mat.tilingRotation * (Math.PI / 180);
+    });
 
     openMaterial.map.wrapS =
       openMaterial.map.wrapT =
@@ -264,24 +287,32 @@ const SideMenu = () => {
     indiMaterial.material = new MeshPhysicalMaterial({
       ...openMaterial,
       side: THREE.DoubleSide,
+      aoMapIntensity: main_mat.occlusionMap.factor,
+      roughness: main_mat.roughnessMap.factor,
+      metalness: main_mat.metalMap.factor,
+      emissiveIntensity: main_mat.metalMap.factor,
+      color: main_mat.color,
+      clearcoat: main_mat.clearcoat, //float
+      ior: main_mat.ior, //this value ranges from 1 to 2.33 def is 1.5,
+      transmission: main_mat.transmission, //float
     });
   }
 
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          height: "100vh",
-          width: "100vw",
-          zIndex: "1",
-          top: 0,
-          left: 0,
-          background: "#000000",
-        }}
-      >
-        <XRengine />
-      </div>
+      {/*<div*/}
+      {/*  style={{*/}
+      {/*    position: "fixed",*/}
+      {/*    height: "100vh",*/}
+      {/*    width: "100vw",*/}
+      {/*    zIndex: "1",*/}
+      {/*    top: 0,*/}
+      {/*    left: 0,*/}
+      {/*    background: "#000000",*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <XRengine />*/}
+      {/*</div>*/}
       <div className="preview-sidemenu">
         {presetData &&
           presetData.map((presData, index) => {

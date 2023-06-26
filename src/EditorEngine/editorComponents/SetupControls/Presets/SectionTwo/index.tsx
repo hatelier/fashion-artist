@@ -232,44 +232,52 @@ const SectionTwo = () => {
                 borderRadius: "50%",
               }}
             ></div>
-            <p className={"confName"}>
-              {vls}
-              &nbsp; &nbsp;
-              <FontAwesomeIcon
-                icon={faPencil}
-                onClick={() => {
-                  let requi_material = allCustomMaterials.filter(
-                    (query) => query.materialName === vls
-                  );
-                  setMaterialPopUpData(requi_material[0]);
-                }}
-              />
-            </p>
+            <p className={"confName"}>{vls}</p>
           </div>
-          <FontAwesomeIcon
-            icon={appliDetails.selected === vls ? faEye : faEyeSlash}
-            style={{ fontSize: "12px", color: "lightgrey", cursor: "pointer" }}
-            onClick={() => {
-              if (appliDetails.selected === vls) {
-                appliDetails.selected = null;
-                changeAppli((state) => {
-                  return {
-                    ...state,
-                    appliDetails,
-                  };
-                });
-              } else {
-                appliDetails.selected = vls;
-                changeAppli((state) => {
-                  return {
-                    ...state,
-                    appliDetails,
-                  };
-                });
-                materialFixture(vls);
-              }
-            }}
-          />
+          <div>
+            <FontAwesomeIcon
+              icon={faPencil}
+              style={{
+                color: "lightgrey",
+                fontSize: "12px",
+              }}
+              onClick={() => {
+                let requi_material = allCustomMaterials.filter(
+                  (query) => query.materialName === vls
+                );
+                setMaterialPopUpData(requi_material[0]);
+              }}
+            />
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={appliDetails.selected === vls ? faEye : faEyeSlash}
+              style={{
+                fontSize: "12px",
+                color: "lightgrey",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                if (appliDetails.selected === vls) {
+                  appliDetails.selected = null;
+                  changeAppli((state) => {
+                    return {
+                      ...state,
+                      appliDetails,
+                    };
+                  });
+                } else {
+                  appliDetails.selected = vls;
+                  changeAppli((state) => {
+                    return {
+                      ...state,
+                      appliDetails,
+                    };
+                  });
+                  materialFixture(vls);
+                }
+              }}
+            />
+          </div>
         </div>
       </>
     );
@@ -323,7 +331,7 @@ const SectionTwo = () => {
             openMaterial.aoMap.wrapS =
             openMaterial.aoMap.wrapT =
               THREE.RepeatWrapping;
-
+          // materialList[4].position.set(0, 0, 0);
           materialList[i].material = new MeshPhysicalMaterial({
             ...openMaterial,
             side: THREE.DoubleSide,

@@ -9,7 +9,7 @@ import { Perf } from "r3f-perf";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
 import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
-
+import MtumxLoadGif from "../../../../../assets/gif/mtumxGif.gif";
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
   const ref = useRef();
@@ -65,12 +65,14 @@ const ModelPreview = (props) => {
   const modelLoadRate = useSelector(
     (state: any) => state.materialApplication.modelLoadRate
   );
-
+  const modelURL = useSelector(
+    (state: any) => state.materialApplication.modelUrl
+  );
   return (
     <div
       className={"canvas-container"}
       style={{
-        height: "calc(100% - 129px)",
+        height: "calc(100% - 65px)",
       }}
     >
       <OnPreviewControls />
@@ -87,12 +89,19 @@ const ModelPreview = (props) => {
         <directionalLight position={[10, 10, 10]} intensity={1} />
         <Suspense
           fallback={
-            <Html>
-              <h1>{modelLoadRate}%</h1>
+            <Html
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/*<h1>{modelLoadRate}%</h1>*/}
+              <img src={MtumxLoadGif} width={"120px"} />
             </Html>
           }
         >
-          <UploadModel model={file} settings={props.settings} />
+          {modelURL && <UploadModel model={file} settings={props.settings} />}
           <OrbitalController />
         </Suspense>
       </Canvas>
