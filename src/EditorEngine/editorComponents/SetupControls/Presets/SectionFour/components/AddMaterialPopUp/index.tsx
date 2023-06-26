@@ -2,7 +2,7 @@
 import "./index.scss";
 // image imports
 import addPic from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
-import { Slider } from "@mui/material";
+import { Box, CircularProgress, Slider } from "@mui/material";
 import React, { useRef, useState } from "react";
 import {
   LabelledInputMui,
@@ -113,6 +113,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [colorState, setColorState] = useState(false);
   const [defaultColorUpa, setDefaultColorUpa] = useState(null);
   const dispatch = useDispatch();
+  const [loaderState, setLoaderState] = useState(false);
   if (updateMode === true) {
     //this component is used if the mode is set to Update Mode.
     return (
@@ -120,6 +121,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         className={"addMaterialPopUp"}
         onSubmit={(e) => {
           e.preventDefault();
+          setLoaderState(true);
           // here is the updated axios object
           const objData = {
             userId: userID,
@@ -179,6 +181,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
                 .then((res) => {
                   loadAPI(res.data);
                   dispatch(updateCustomMaterial(res.data));
+                  setLoaderState(false);
                 });
             })
             .catch((error) => {
@@ -203,7 +206,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           <FontAwesomeIcon
             icon={faXmark}
             onClick={() => {
-              setState(false);
+              setState(null);
             }}
           />
         </div>
@@ -514,7 +517,13 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             justifyContent: "space-between",
           }}
         >
-          <RedButtonClass type={"submit"}>Update material</RedButtonClass>
+          {!loaderState ? (
+            <RedButtonClass type={"submit"}>Update material</RedButtonClass>
+          ) : (
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          )}
           {/*<WhiteButtonClass>Remove</WhiteButtonClass>*/}
         </div>
       </form>

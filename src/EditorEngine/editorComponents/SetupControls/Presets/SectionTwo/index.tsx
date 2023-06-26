@@ -351,6 +351,7 @@ const SectionTwo = () => {
         <AddMaterialPopUp
           updateMode={true}
           updateData={materialPopData}
+          setState={setMaterialPopUpData}
           loadAPI={(materialCustomList) => {
             postUpdateApply(appliedTextures, materialCustomList);
           }}
