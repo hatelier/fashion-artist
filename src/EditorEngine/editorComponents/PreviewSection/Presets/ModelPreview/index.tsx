@@ -72,7 +72,7 @@ const ModelPreview = (props) => {
     <div
       className={"canvas-container"}
       style={{
-        height: "calc(100% - 129px)",
+        height: "calc(100% - 65px)",
       }}
     >
       <OnPreviewControls />
