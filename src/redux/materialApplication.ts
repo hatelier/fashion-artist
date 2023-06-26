@@ -11,7 +11,7 @@ export const materialApplication = createSlice({
     },
     currentPart: null,
     blockTopBar: true,
-    modelUrl: "/models/defaultCude.glb",
+    modelUrl: null,
     modelLoadRate: 0,
     modelMaterialReload: 0,
   }),

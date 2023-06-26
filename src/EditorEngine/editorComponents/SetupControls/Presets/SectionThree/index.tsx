@@ -21,9 +21,6 @@ const SectionThree = () => {
   const { presets, unUsedObjects, firstLoad } = useSelector(
     (state) => state.savedConfigs
   );
-  const modelURL = useSelector(
-    (state: any) => state.materialApplication.modelUrl
-  );
   const [currentPreset, setCurrentPreset] = useState("");
   const [toggleAdd, setToggleAdd] = useState(false);
   const dispatch = useDispatch();
