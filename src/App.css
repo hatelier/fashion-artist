@@ -891,6 +891,12 @@ header {
   flex-direction: column;
 }
 
+.plan-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;  
+}
 .choose-plan {
   font-weight: 400;
   font-size: 24px;
@@ -973,9 +979,6 @@ input:checked + .slider:before {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
   margin-bottom: 10px;
   margin-left: 25px;
 }
@@ -1027,7 +1030,7 @@ input:checked + .slider:before {
   padding: 0px;
   gap: 20px;
   width: 277px;
-  height: 426px;
+  height: 480px;
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -1037,15 +1040,7 @@ input:checked + .slider:before {
   font-weight: 700;
   font-size: 24px;
   line-height: 30px;
-
   color: #E70A4E;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .plan-cost {
@@ -1057,12 +1052,6 @@ input:checked + .slider:before {
   color: #E70A4E;
 
   opacity: 0.99;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 .plan-info {
@@ -1072,22 +1061,19 @@ input:checked + .slider:before {
   text-align: center;
   color: #000000;
   opacity: 0.99;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
 }
 
 .line {
   width: 264.5px;
   height: 0px;
-
   border: 1px solid #000000;
+}
 
-  /* Inside auto layout */
-
-  flex: none;
-  order: 3;
-  flex-grow: 0;
+.plan-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .plan-info-list {
@@ -1097,11 +1083,6 @@ input:checked + .slider:before {
   padding: 0px;
   gap: 15px;
   color: #000000;
-  /* Inside auto layout */
-
-  flex: none;
-  order: 4;
-  flex-grow: 0;
 }
 .box{
   display: inline-block;
@@ -1151,9 +1132,6 @@ input:checked + .slider:before {
   padding: 0px 46px;
   gap: 67px;
   width: 469px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .payment-details-block {
@@ -1163,9 +1141,6 @@ input:checked + .slider:before {
   align-items: flex-start;
   padding: 0px;
   gap: 39px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
 .payment-details-brief {
@@ -1273,9 +1248,7 @@ input:checked + .slider:before {
   border: 1px solid #E70A4E;
   color: #E70A4E;
   border-radius: 10px;
-  flex: none;
-  order: 3;
-  flex-grow: 0;
+  width: fit-content;
 }
 
 .payment-info-item {
@@ -1825,6 +1798,12 @@ input:checked + .slider:before {
   text-align: center;
 }
 
+.credit-payment-back {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .credit-unit-payment {
   display: block;
   justify-content: center;
@@ -3941,5 +3920,302 @@ input:checked + .slider:before {
 
 .team-member-add-img {
   display: unset;
+}
+
+/* Subscription page styles  */
+.plans {
+  margin-top: 20px;
+}
+
+.plan-header {
+  all: unset;
+  display: flex;
+  flex: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.plan-info {
+  text-align: left;
+}
+
+.plan-info-list {
+  width: 100%;
+}
+
+.buy-button {
+  width: 100%;
+}
+
+.plan-card {
+  gap: unset;
+  padding: 20px 15px;
+  width: 100%;
+}
+
+.details {
+  height: unset;
+  width: 100%;
+}
+
+.plan-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  display: none;
+}
+
+.monthly-billing {
+  margin: 0px;
+  font-size: 12px;
+}
+
+.choose-plan {
+  font-size: 20px;
+}
+
+.line {
+  width: 100%;
+}
+.basic:hover .plan-content {display: flex;}
+.premium:hover .plan-content {display: flex;}
+.business:hover .plan-content {display: flex;}
+
+/* Credit page styles  */
+.credit-block {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  gap: 15px;  
+  border-radius: 15px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.credit-input-block {
+  width: 100%;
+  gap: unset;
+  margin: auto;
+  padding: 0px;
+}
+
+.credit-input {
+  margin: auto;
+  width: 100%;
+}
+
+.credit-details-block {
+  width: 100%;
+  gap: 15px;
+  padding: unset;
+}
+
+.credit-details {
+  flex-direction: column;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.credit-details-separator {
+  display: none;
+}
+
+.credit-details-price {
+  width: 100%;
+}
+
+.credit-details-general {
+  width: 100%;
+}
+
+.credit-unit-cost-block {
+  width: 100%;
+}
+
+.credit-payment-back {
+  all: unset;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.credit-unit-payment {
+  width: unset;
+  margin: unset;
+}
+
+/* 3D Fashion Lab page styles  */
+.fashion-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+}
+
+.fashion-details-block {
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+}
+
+.fashion-upload-block {
+  width: 100%;
+}
+
+.fashion-welcome-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 158.5%;
+}
+
+/* Analytics styles */
+.analytics-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+
+}
+
+.analytics-secondary-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-secondary-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+}
+
+.analytics-stats {
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+}
+
+.analytics-secondary-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse; 
+}
+
+.analytics-3d-views {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.analytics-most-viewed {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.analytics-ar-views {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.analytics-report-block {
+  width: 100%;
+}
+
+.analytics-user-engagement {
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: unset;
+  height: 120px;
+}
+
+.analytics-average-interaction {
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: unset;
+  height: 120px;
+}
+
+.analytics-stats-heading {
+  font-size: 12px;
+  text-align: center;
+}
+
+.analytics-stats-number {
+  color: #E70A4E;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 136.3%;
+}
+
+.analytics-stats-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Manage showroom styles  */
+.manage-row {
+  all: unset;
+  width: 100%;
+}
+
+.manage-item {
+  display: inline-block;
+  width: 45%;
+  margin: 5px;
+}
+
+.manage-item-img {
+  width: unset;
+  height: 115px;
+  margin-bottom: 5px;
+}
+
+.manage-item-id-date {
+  gap: unset;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* Add Showroom Page styles  */
+.add-showroom-block {
+  width: 100%;
+  padding: 15px;
+}
+
+.add-showroom-layouts-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-showroom-separator {
+  display: none;
+}
+
+.add-showroom-font-text {
+  width: 100%;
+}
+
+.add-showroom-background {
+  width: 100%;
+}
+.add-showroom-color-divider {
+  gap: unset;
+  justify-content: space-between;
+  width: 100%;
 }
 }

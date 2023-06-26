@@ -144,27 +144,27 @@ export const Analytics = () => {
                  </div>
                  <div className="analytics-secondary-block">
                   <div className="analytics-secondary-top">
-                    <div className="analytics-3d-views"></div>
+                    <div className="analytics-3d-views">Total 3d views</div>
                     <div className="analytics-stats">
                         <div className="analytics-user-engagement">
-                            <div className="analytics-user-engagement-text">All User Engagement</div>
-                            <div>
-                                <img src="" alt="" />
-                                <span>70%</span>
+                            <div className="analytics-stats-heading">All User Engagement</div>
+                            <div className='analytics-stats-main'>
+                                <img src={require('../assets/pngs/analytics-user.png')} alt="" />
+                                <span className='analytics-stats-number'>70%</span>
                             </div>
                         </div>
                         <div className="analytics-average-interaction">
-                            <div className="analytics-average-interacttion-text">No. of Average Interaction</div>
+                            <div className="analytics-stats-heading">No. of Average Interaction</div>
                             <div>
                                 <img src="" alt="" />
-                                <span>70</span>
+                                <span className='analytics-stats-number'>70</span>
                             </div>
                         </div>
                     </div>
                   </div>
                   <div className="analytics-secondary-bottom">
-                    <div className="analytics-most-viewed"></div>
-                    <div className="analytics-ar-views"></div>
+                    <div className="analytics-most-viewed">Most viewed product</div>
+                    <div className="analytics-ar-views">Total AR views</div>
                   </div>
                  </div>
                </div>
