@@ -221,21 +221,24 @@ const SectionOne = (props) => {
           type={"text"}
           placeholder={"W"}
           className={"dimenClass"}
-          value={materialData ? materialData.x : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.x * 10) / 10 : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"L"}
           className={"dimenClass"}
-          value={materialData ? materialData.y : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.y * 10) / 10 : 0}
         />
         &nbsp;x&nbsp;
         <input
           type={"text"}
           placeholder={"H"}
           className={"dimenClass"}
-          value={materialData ? materialData.z : 0}
+          style={{ fontSize: "15px" }}
+          value={materialData ? Math.floor(materialData.z * 10) / 10 : 0}
         />
         &nbsp;
       </div>
