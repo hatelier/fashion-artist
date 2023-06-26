@@ -147,10 +147,13 @@ export const Credit = () => {
                         <button className="credit-coupon-apply">Apply</button>
                       </div>
                     </div>
+                    <div className='credit-payment-back'>
                     <a href="" className="credit-unit-payment">Proceed to payment</a>
+                    <a className="payment-back-button" href="/account"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+                    </div>
                    </div>
                  </div>
-                 <a className="payment-back-button" href="/account"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+                 
                </div>
                <div className="credit-details-block">
                  <div className="credit-details-heading">Credit Breakdown</div>

@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
+import Switch from '@mui/material/Switch';
 
 
 export const Subscription = () => {
@@ -43,6 +46,20 @@ export const Subscription = () => {
   const productPopupCancel = () => {
     setIsOpen(!isOpen);
   };
+
+  const PinkSwitch = styled(Switch)(({ theme }) => ({
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      color: pink[600],
+      '&:hover': {
+        backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+      },
+    },
+    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+      backgroundColor: pink[600],
+    },
+  }));
+
+  const label = { inputProps: { 'aria-label': 'Color switch demo' } };
     return ( 
     <div className='home-container'>
           {isOpen && (
@@ -128,17 +145,17 @@ export const Subscription = () => {
         Choose your plan
         </div>
       <div className="monthly-billing">
-      <label className="switch">
-        <input type="checkbox" />
-        <span className="slider round"></span>
-      </label>
+      <PinkSwitch {...label} defaultChecked />
       Monthly billing - switch to annual billing to save 10%
       </div>
       <div className="plans">
         <div className="basic plan-card">
             <div className="details">
-                <div className="plan-title">Basic</div>
-                <div className="plan-cost">99</div>
+                <div className="plan-header">
+                    <div className="plan-title">Basic</div>
+                    <div className="plan-cost">$99</div>
+                </div>
+                <div className='plan-content'>
                 <div className="plan-info">
                 For Individuals and Small business, with a up to 20 3d assess, and medium web traffic.
                 </div>
@@ -151,13 +168,17 @@ export const Subscription = () => {
                 <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                 <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
             </div>
-            </div>
             <a className="buy-button" href="/payment">Buy Plan</a>
+            </div>
+            </div>
         </div>
         <div className="premium plan-card">
             <div className="details">
+            <div className="plan-header">
                 <div className="plan-title">Premium</div>
-                <div className="plan-cost">199</div>
+                <div className="plan-cost">$199</div>
+            </div>
+            <div className='plan-content'>
                 <div className="plan-info">
                 For Small Businesses, with a up to 50 3d assess, and medium web traffic.
                 </div>
@@ -171,13 +192,17 @@ export const Subscription = () => {
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                 </div>
-            </div>
             <a className="buy-button" href="/payment">Buy Plan</a>
+            </div>
+            </div>
         </div>
         <div className="business plan-card">
             <div className="details">
+              <div className="plan-header">
                 <div className="plan-title">Business</div>
-                <div className="plan-cost">299</div>
+                <div className="plan-cost">$299</div>
+              </div>
+              <div className="plan-content">
                 <div className="plan-info">
                 For Businesses, with more than 50 3d assess, and medium web traffic.
                 </div>
@@ -191,8 +216,10 @@ export const Subscription = () => {
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                     <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
                 </div>
-            </div>
+
             <a className="buy-button" href="/payment">Buy Plan</a>
+            </div>
+            </div>
         </div>
       </div>
      </div>
