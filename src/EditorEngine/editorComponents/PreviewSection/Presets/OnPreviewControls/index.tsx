@@ -26,7 +26,7 @@ import {
 } from "../../../../../redux/savedCameraControls";
 import CameraControls, {
   CameraControlsDraggable,
-  FusionControlComp,
+  FusionControlComp, NumberLabelledInputMui,
 } from "../../EditorControls/CameraControls";
 import LightControls, {
   LightControlDrag,
@@ -40,6 +40,9 @@ import GraphicsControls, {
 import { PerformanceControlsDrag } from "../../EditorControls/PerformanceControls";
 import { SceneControlsDrag } from "../../EditorControls/SceneControls";
 import ConfigurationPopUp from "../PopUpPanels/ConfigurationPopUp";
+import styled from "styled-components";
+import {TextField} from "@mui/material";
+import {SketchPicker} from "react-color";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -296,16 +299,174 @@ const OnPreviewControls = () => {
       <div className={"prevRButtonControl"}>
         {preRImages.map((img: any, index) => {
           return (
-            // <div style={{ width: "30px", cursor: "pointer" }}>
               <img src={img} style={{ width: index===3 ? "86%" : "100%" , filter:"invert(1)"}} />
-            // </div>
           );
         })}
       </div>
+      <SideBarDiv>
+        <Changebar>
+          {preRImages.map((img: any, index) => {
+            return (
+                <img src={img} style={{ width: index===3 ? "51%" : "65%" , filter:"invert(1)"}} />
+            );
+          })}
+        </Changebar>
+        <div style={{display:"flex",justifyContent:"space-between"}}>
+          <p style={{fontSize:"14px"}}>Customizable text</p>
+          <p style={{fontSize:"14px"}}>-</p>
+        </div>
+        <hr
+        style={{
+          marginTop:"10px",
+          marginBottom:"20px",
+          color: "#F0F0F0"
+        }}
+        />
+        <form>
+          <TextField
+              variant="outlined"
+              size="small"
+              id="filled-size-small"
+              label={"Content"}
+              required={true}
+              inputProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+          />
+          <div
+              style={{
+                height: "31px",
+                width: "79px",
+                // background: `${
+                //     defaultColorUpa ? defaultColorUpa : updateData.color
+                // }`,
+                borderRadius: "10px",
+                marginTop:"15px",
+                border: "2px solid #878787",
+              }}
+              onClick={() => {
+                // setColorState((state) => !state);
+              }}
+          ></div>
+          <div style={{ marginTop: "10px" }}></div>
+          <SketchPicker
+              // color={defaultColorUpa ? defaultColorUpa : updateData.color}
+              onChangeComplete={(color) => {
+                // setDefaultColorUpa(color.hex);
+              }}
+              width={"180px"}
+          />
+          <div style={{ marginTop: "20px" }}></div>
+          <TextField
+              variant="outlined"
+              size="small"
+              id="filled-size-small"
+              label={"Size"}
+              required={true}
+              inputProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+          />
+          {/*  here is the position tab*/}
+          <div style={{marginTop:"14px"}}>
+            <p style={{marginBottom:"10px"}}>Position</p>
+            <div style={{
+              display:"flex",
+              gap:"4px"
+            }}>
+              {
+                ["x","y","z"].map((posi)=>{
+                  return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
+                })
+              }
+            </div>
+          </div>
+
+          {/*  here is the rotation tab*/}
+          <div style={{marginTop:"14px"}}>
+            <p style={{marginBottom:"10px"}}>Rotation</p>
+            <div style={{
+              display:"flex",
+              gap:"4px"
+            }}>
+              {
+                ["X","Y","Z"].map((posi)=>{
+                  return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
+                })
+              }
+            </div>
+          </div>
+
+          <div style={{marginTop:"7px"}}>
+            <label style={{fontSize:"11px", fontWeight:400}}>
+              <input type={"checkbox"}/>
+              &nbsp;
+              lock camera position
+            </label>
+          </div>
+
+          <RoundedButton>
+            Create
+          </RoundedButton>
+        </form>
+      </SideBarDiv>
     </div>
   );
 };
-
+export const RoundedButton=styled.button`
+  width: Hug (67px);
+  height: Hug (25px);
+  padding: 6px 16px 6px 16px;
+  border-radius: 16px;
+  border: 0.5px;
+  gap: 10px;
+  background: linear-gradient(0deg, #D31027, #D31027),
+  linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  color: #FFFFFF;
+  margin-top: 10px;
+`
+//styled components
+const SideBarDiv = styled.div`
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  width: 242px;
+  height: 100vh;
+  background: #FFFFFF;
+  top: 0;
+  right: 0;
+  position: absolute;
+  animation: fadeIn .5s;
+  padding: 20px;
+`
+const Changebar = styled.div`
+  width: 41px;
+  height: 172px;
+  background: #FFFFFF;
+  position: absolute;
+  left: -41px;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  top: 0px;
+`
 export default OnPreviewControls;
 
 // {/*range control component test*/}
