@@ -9,10 +9,10 @@ import Image5 from "../../../../../assets/svgs/OnPreviewAssets/mountains.svg";
 import Image6 from "../../../../../assets/svgs/OnPreviewAssets/camera.svg";
 
 //images for the right side controls
-import RImage1 from "../../../../../assets/svgs/OnPreviewAssets/Group 49.svg";
+import RImage1 from "../../../../../assets/svgs/AddText.svg";
 import RImage2 from "../../../../../assets/svgs/OnPreviewAssets/reload.svg";
-import RImage3 from "../../../../../assets/svgs/OnPreviewAssets/3d (1) 1.svg";
-import RImage4 from "../../../../../assets/svgs/OnPreviewAssets/settings.svg";
+import RImage3 from "../../../../../assets/svgs/OnPreviewAssets/settings.svg";
+import RImage4 from "../../../../../assets/svgs/AddSettings.svg";
 
 //dragables
 import Draggable from "react-draggable";
@@ -272,33 +272,33 @@ const OnPreviewControls = () => {
       {/*<SceneControlsDrag />*/}
 
       {/*these are the left side controls*/}
-      <div className={"prevButtonControl"}>
-        {preImages.map((img: any, index) => {
-          return (
-            <div className={"indiControls"}>
-              <img
-                src={img}
-                style={{ width: "35px" }}
-                onClick={() => {
-                  setCurrSelection(index);
-                }}
-              />
-              {currSelection == 0 && index === 0 && <CameraControls />}
-              {currSelection == 1 && index === 1 && <LightControls />}
-              {currSelection == 2 && index === 2 && <OrthographicControls />}
-              {currSelection == 3 && index === 3 && <GraphicsControls />}
-            </div>
-          );
-        })}
-      </div>
+      {/*<div className={"prevButtonControl"}>*/}
+      {/*  {preImages.map((img: any, index) => {*/}
+      {/*    return (*/}
+      {/*      <div className={"indiControls"}>*/}
+      {/*        <img*/}
+      {/*          src={img}*/}
+      {/*          style={{ width: "35px" }}*/}
+      {/*          onClick={() => {*/}
+      {/*            setCurrSelection(index);*/}
+      {/*          }}*/}
+      {/*        />*/}
+      {/*        {currSelection == 0 && index === 0 && <CameraControls />}*/}
+      {/*        {currSelection == 1 && index === 1 && <LightControls />}*/}
+      {/*        {currSelection == 2 && index === 2 && <OrthographicControls />}*/}
+      {/*        {currSelection == 3 && index === 3 && <GraphicsControls />}*/}
+      {/*      </div>*/}
+      {/*    );*/}
+      {/*  })}*/}
+      {/*</div>*/}
 
       {/*these are the right side controls*/}
       <div className={"prevRButtonControl"}>
         {preRImages.map((img: any, index) => {
           return (
-            <div style={{ width: "30px", cursor: "pointer" }}>
-              <img src={img} style={{ width: "100%" }} />
-            </div>
+            // <div style={{ width: "30px", cursor: "pointer" }}>
+              <img src={img} style={{ width: index===3 ? "86%" : "100%" , filter:"invert(1)"}} />
+            // </div>
           );
         })}
       </div>
