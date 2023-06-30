@@ -30,8 +30,9 @@ export const Header = () => {
       }
     };
     const logout = () => {
-      setCookie('access_token',"")
-      window.localStorage.removeItem("userID");
+      setCookie('access_token',"", {path: '/'});
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('userID');
       navigate("/auth");
     }
 
@@ -78,14 +79,14 @@ export const Header = () => {
         alt="help-icon"
       />Help Desk</a>
       {!cookies.access_token ? (
-        <a href="/auth">
-        <img src={require('../assets/pngs/logout-icon.png')} alt="login-icon" />
-        Login/Register
-        </a>
-        ) : (
         <a href="#" onClick={logout}>
         <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />
         Logout
+        </a>
+        ) : (
+        <a href="/auth">
+        <img src={require('../assets/pngs/logout-icon.png')} alt="login-icon" />
+        Login/Register
         </a>
         )}
       </div>

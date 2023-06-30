@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../components/axiosInstance';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,23 @@ export const FashionLab = () => {
   const [occupation, setOccupation] = useState("");
   
   useEffect(() => {
+    verifyToken();
     fetchUserData();
   }, []);
+
+  const verifyToken = async () => {
+    try {
+      await axiosInstance.get('/auth/check');
+    } catch (error) {
+      console.error(error);
+      navigate('/auth');
+    }
+  };
 
   const fetchUserData = async () => {
     try {
     const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
+    const response = await axiosInstance.get("/user/profile", { 
       params: {
         userID: userID
       },
