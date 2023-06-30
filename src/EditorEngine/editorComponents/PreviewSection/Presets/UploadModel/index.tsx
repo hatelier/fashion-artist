@@ -1,17 +1,14 @@
 // @ts-nocheck
 //uploadModel/index.tsx
-import React, { useEffect, useRef } from "react";
-import { useLoader, useThree } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import React, {useEffect, useRef} from "react";
+import {useLoader, useThree} from "@react-three/fiber";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateMaterialDimensions,
-  updateMaterialList,
-} from "../../../../../redux/materialControl";
-import { useControls } from "leva";
-import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
-import { updateModelLoadRate } from "../../../../../redux/materialApplication";
+import {useDispatch, useSelector} from "react-redux";
+import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
+import {updateUnUsedObjects} from "../../../../../redux/savedConfigs";
+import {updateModelLoadRate} from "../../../../../redux/materialApplication";
+// import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
 
 const UploadModel = () => {
   //this has been disabled temporarily
@@ -67,9 +64,8 @@ const UploadModel = () => {
       })
     );
   }, [gltf]);
-  const { mode } = useControls({
-    mode: { value: "translate", options: ["translate", "rotate", "scale"] },
-  });
+
+  const createTextMesh = () => {};
 
   return (
     <>
