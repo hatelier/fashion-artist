@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// @ts-nocheck
+import React, {useState} from "react";
 import "./index.scss";
 // image imports
 import Image1 from "../../../../../assets/svgs/OnPreviewAssets/Frame 14012.svg";
@@ -16,30 +17,11 @@ import RImage4 from "../../../../../assets/svgs/AddSettings.svg";
 
 //dragables
 import Draggable from "react-draggable";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateAmbientLight,
-  updateCameraProps,
-  updateDirLight,
-} from "../../../../../redux/savedCameraControls";
-import CameraControls, {
-  CameraControlsDraggable,
-  FusionControlComp, NumberLabelledInputMui,
-} from "../../EditorControls/CameraControls";
-import LightControls, {
-  LightControlDrag,
-} from "../../EditorControls/LightControls";
-import OrthographicControls, {
-  OrthographicCameraDrag,
-} from "../../EditorControls/OrthographicControls";
-import GraphicsControls, {
-  GraphicsControlsDrag,
-} from "../../EditorControls/GraphicsControls";
-import { PerformanceControlsDrag } from "../../EditorControls/PerformanceControls";
-import { SceneControlsDrag } from "../../EditorControls/SceneControls";
-import ConfigurationPopUp from "../PopUpPanels/ConfigurationPopUp";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars, faXmarkCircle} from "@fortawesome/free-solid-svg-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {updateAmbientLight, updateCameraProps, updateDirLight,} from "../../../../../redux/savedCameraControls";
+import {NumberLabelledInputMui,} from "../../EditorControls/CameraControls";
 import styled from "styled-components";
 import {TextField} from "@mui/material";
 import {SketchPicker} from "react-color";
@@ -59,6 +41,8 @@ const OnPreviewControls = () => {
   );
   const dispatch = useDispatch();
   const [currSelection, setCurrSelection] = useState(5);
+  const [rightSelect, setRightSelect] = useState<null | number>(null);
+  const headerListR = ["Customizable text","Version History","Settings","Resources"]
   //here is the lighting controls
   const LightingControl = () => {
     return (
@@ -299,134 +283,193 @@ const OnPreviewControls = () => {
       <div className={"prevRButtonControl"}>
         {preRImages.map((img: any, index) => {
           return (
-              <img src={img} style={{ width: index===3 ? "86%" : "100%" , filter:"invert(1)"}} />
+              <img src={img} style={{ width: index===3 ? "86%" : "100%" , filter:"invert(1)", cursor:"pointer"}}
+              onClick={()=>{setRightSelect(index)}}
+              />
           );
         })}
       </div>
-      <SideBarDiv>
+      {rightSelect!==null && <SideBarDiv>
         <Changebar>
           {preRImages.map((img: any, index) => {
             return (
-                <img src={img} style={{ width: index===3 ? "51%" : "65%" , filter:"invert(1)"}} />
+                <img src={img} style={{width: index === 3 ? "51%" : "65%", filter: `invert(${index===rightSelect ? .3 : 1})`}}
+                     onClick={()=>{setRightSelect(index)}}
+                />
             );
           })}
         </Changebar>
-        <div style={{display:"flex",justifyContent:"space-between"}}>
-          <p style={{fontSize:"14px"}}>Customizable text</p>
-          <p style={{fontSize:"14px"}}>-</p>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+          <p style={{fontSize: "14px"}}>{headerListR[rightSelect]}</p>
+          <p style={{fontSize: "14px", cursor:"pointer"}}
+             onClick={()=>{
+            setRightSelect(null)
+          }}>-</p>
         </div>
         <hr
-        style={{
-          marginTop:"10px",
-          marginBottom:"20px",
-          color: "#F0F0F0"
-        }}
+            style={{
+              marginTop: "10px",
+              marginBottom: "20px",
+              color: "#F0F0F0"
+            }}
         />
-        <form>
-          <TextField
-              variant="outlined"
-              size="small"
-              id="filled-size-small"
-              label={"Content"}
-              required={true}
-              inputProps={{
-                style: {
-                  fontSize: "11px",
-                },
-              }}
-              InputLabelProps={{
-                style: {
-                  fontSize: "11px",
-                },
-              }}
-          />
-          <div
-              style={{
-                height: "31px",
-                width: "79px",
-                // background: `${
-                //     defaultColorUpa ? defaultColorUpa : updateData.color
-                // }`,
-                borderRadius: "10px",
-                marginTop:"15px",
-                border: "2px solid #878787",
-              }}
-              onClick={() => {
-                // setColorState((state) => !state);
-              }}
-          ></div>
-          <div style={{ marginTop: "10px" }}></div>
-          <SketchPicker
-              // color={defaultColorUpa ? defaultColorUpa : updateData.color}
-              onChangeComplete={(color) => {
-                // setDefaultColorUpa(color.hex);
-              }}
-              width={"180px"}
-          />
-          <div style={{ marginTop: "20px" }}></div>
-          <TextField
-              variant="outlined"
-              size="small"
-              id="filled-size-small"
-              label={"Size"}
-              required={true}
-              inputProps={{
-                style: {
-                  fontSize: "11px",
-                },
-              }}
-              InputLabelProps={{
-                style: {
-                  fontSize: "11px",
-                },
-              }}
-          />
-          {/*  here is the position tab*/}
-          <div style={{marginTop:"14px"}}>
-            <p style={{marginBottom:"10px"}}>Position</p>
-            <div style={{
-              display:"flex",
-              gap:"4px"
-            }}>
-              {
-                ["x","y","z"].map((posi)=>{
-                  return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
-                })
-              }
-            </div>
-          </div>
-
-          {/*  here is the rotation tab*/}
-          <div style={{marginTop:"14px"}}>
-            <p style={{marginBottom:"10px"}}>Rotation</p>
-            <div style={{
-              display:"flex",
-              gap:"4px"
-            }}>
-              {
-                ["X","Y","Z"].map((posi)=>{
-                  return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
-                })
-              }
-            </div>
-          </div>
-
-          <div style={{marginTop:"7px"}}>
-            <label style={{fontSize:"11px", fontWeight:400}}>
-              <input type={"checkbox"}/>
-              &nbsp;
-              lock camera position
-            </label>
-          </div>
-
-          <RoundedButton>
-            Create
-          </RoundedButton>
-        </form>
-      </SideBarDiv>
+        {rightSelect===0 && <AddTextComp/>}
+      </SideBarDiv>}
     </div>
   );
 };
+const AddTextComp=()=>{
+  const [currentColor, setCurrentColor] = useState("#ffffff");
+  return <form
+    onSubmit={(e)=>{
+        e.preventDefault();
+        console.log({
+            textContent: e.target.textContent.value,
+            textColor: currentColor,
+            textSize: e.target.textSize.value,
+            position: {
+                x: e.target.x.value,
+                y: e.target.y.value,
+                z: e.target.z.value
+            },
+            rotation: {
+                x: e.target.X.value,
+                y: e.target.Y.value,
+                z: e.target.Z.value
+            },
+            cameraLock: e.target.cameraLock.checked
+        })
+
+        // const loader = new FontLoader();
+        // let font = null;
+        // loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (response) => {
+        //     font = response;
+        //     createTextMesh();
+        // });
+        // const createTextMesh=()=>{
+        //     const textGeo = new TextGeometry("e.target.textContent.value", {
+        //         font: font,
+        //         size: .4, // size of the text
+        //         height: 0.05, // how much extrusion (how thick / deep are the letters)
+        //         curveSegments: 12,
+        //         bevelEnabled: false,
+        //         bevelThickness: 0.01,
+        //         bevelSize: 0.01,
+        //         bevelOffset: 0.0,
+        //         bevelSegments: 5
+        //     });
+        //     const material = new MeshBasicMaterial({ color: currentColor });
+        //     const textMesh = new Mesh(textGeo, material);
+        //     textMesh.position.set(e.target.x.value, e.target.y.value, e.target.z.value);
+        // scene.add(textMesh);
+        // }
+
+    }}
+  >
+    <TextField
+        variant="outlined"
+        size="small"
+        id="filled-size-small"
+        label={"Content"}
+        name={"textContent"}
+        required={true}
+        inputProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+        InputLabelProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+    />
+    <div
+        style={{
+          height: "31px",
+          width: "79px",
+          background: `${
+              currentColor
+          }`,
+          borderRadius: "10px",
+          marginTop: "15px",
+          border: "2px solid #878787",
+        }}
+        onClick={() => {
+          // setColorState((state) => !state);
+        }}
+    ></div>
+    <div style={{marginTop: "10px"}}></div>
+    <SketchPicker
+        color={currentColor}
+        onChangeComplete={(color) => {
+          setCurrentColor(color.hex);
+        }}
+        width={"180px"}
+    />
+    <div style={{marginTop: "20px"}}></div>
+    <TextField
+        variant="outlined"
+        size="small"
+        id="filled-size-small"
+        label={"Size"}
+        required={true}
+        type={"number"}
+        name={"textSize"}
+        inputProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+        InputLabelProps={{
+          style: {
+            fontSize: "11px",
+          },
+        }}
+    />
+    {/*  here is the position tab*/}
+    <div style={{marginTop: "14px"}}>
+      <p style={{marginBottom: "10px"}}>Position</p>
+      <div style={{
+        display: "flex",
+        gap: "4px"
+      }}>
+        {
+          ["x", "y", "z"].map((posi) => {
+            return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
+          })
+        }
+      </div>
+    </div>
+
+    {/*  here is the rotation tab*/}
+    <div style={{marginTop: "14px"}}>
+      <p style={{marginBottom: "10px"}}>Rotation</p>
+      <div style={{
+        display: "flex",
+        gap: "4px"
+      }}>
+        {
+          ["X", "Y", "Z"].map((posi) => {
+            return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
+          })
+        }
+      </div>
+    </div>
+
+    <div style={{marginTop: "7px"}}>
+      <label style={{fontSize: "11px", fontWeight: 400}}>
+        <input type={"checkbox"} name={"cameraLock"}/>
+        &nbsp;
+        lock camera position
+      </label>
+    </div>
+
+    <RoundedButton type={"submit"}>
+      Create
+    </RoundedButton>
+  </form>
+}
 export const RoundedButton=styled.button`
   width: Hug (67px);
   height: Hug (25px);
@@ -446,7 +489,8 @@ const SideBarDiv = styled.div`
     100% { opacity: 1; }
   }
   width: 242px;
-  height: 100vh;
+  height: 750px;
+  border-radius: 0 0 0 20px;
   background: #FFFFFF;
   top: 0;
   right: 0;

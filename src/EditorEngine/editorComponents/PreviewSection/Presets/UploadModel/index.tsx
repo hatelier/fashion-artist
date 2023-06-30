@@ -1,20 +1,16 @@
 // @ts-nocheck
 //uploadModel/index.tsx
-import React, { useEffect, useRef } from "react";
-import { useLoader, useThree } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import React, {useEffect, useRef} from "react";
+import {useLoader, useThree} from "@react-three/fiber";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateMaterialDimensions,
-  updateMaterialList,
-} from "../../../../../redux/materialControl";
-import { useControls } from "leva";
-import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
-import { updateModelLoadRate } from "../../../../../redux/materialApplication";
+import {Mesh, MeshBasicMaterial} from "three";
+import {useDispatch, useSelector} from "react-redux";
+import {updateMaterialDimensions, updateMaterialList,} from "../../../../../redux/materialControl";
+import {updateUnUsedObjects} from "../../../../../redux/savedConfigs";
+import {updateModelLoadRate} from "../../../../../redux/materialApplication";
 import {FontLoader} from "three/examples/jsm/loaders/FontLoader";
 import {TextGeometry} from "three/examples/jsm/geometries/TextGeometry";
-import {Mesh, MeshBasicMaterial} from "three";
 // import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
 
 const UploadModel = () => {
@@ -71,9 +67,9 @@ const UploadModel = () => {
       })
     );
   }, [gltf]);
-  const { mode } = useControls({
-    mode: { value: "translate", options: ["translate", "rotate", "scale"] },
-  });
+  // const { mode } = useControls({
+  //   mode: { value: "translate", options: ["translate", "rotate", "scale"] },
+  // });
 
   //this section deals with addition of fonts to the viewer
   const loader = new FontLoader();
