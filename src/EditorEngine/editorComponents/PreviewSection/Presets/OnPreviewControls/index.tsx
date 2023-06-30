@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./index.scss";
 // image imports
 import Image1 from "../../../../../assets/svgs/OnPreviewAssets/Frame 14012.svg";
@@ -17,14 +17,20 @@ import RImage4 from "../../../../../assets/svgs/AddSettings.svg";
 
 //dragables
 import Draggable from "react-draggable";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faXmarkCircle} from "@fortawesome/free-solid-svg-icons";
-import {useDispatch, useSelector} from "react-redux";
-import {updateAmbientLight, updateCameraProps, updateDirLight,} from "../../../../../redux/savedCameraControls";
-import {NumberLabelledInputMui,} from "../../EditorControls/CameraControls";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateAmbientLight,
+  updateCameraProps,
+  updateDirLight,
+} from "../../../../../redux/savedCameraControls";
+import { NumberLabelledInputMui } from "../../EditorControls/CameraControls";
 import styled from "styled-components";
-import {TextField} from "@mui/material";
-import {SketchPicker} from "react-color";
+import { Box, CircularProgress, TextField } from "@mui/material";
+import { SketchPicker } from "react-color";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -42,7 +48,12 @@ const OnPreviewControls = () => {
   const dispatch = useDispatch();
   const [currSelection, setCurrSelection] = useState(5);
   const [rightSelect, setRightSelect] = useState<null | number>(null);
-  const headerListR = ["Customizable text","Version History","Settings","Resources"]
+  const headerListR = [
+    "Customizable text",
+    "Version History",
+    "Settings",
+    "Resources",
+  ];
   //here is the lighting controls
   const LightingControl = () => {
     return (
@@ -283,90 +294,103 @@ const OnPreviewControls = () => {
       <div className={"prevRButtonControl"}>
         {preRImages.map((img: any, index) => {
           return (
-              <img src={img} style={{ width: index===3 ? "86%" : "100%" , filter:"invert(1)", cursor:"pointer"}}
-              onClick={()=>{setRightSelect(index)}}
-              />
+            <img
+              src={img}
+              style={{
+                width: index === 3 ? "86%" : "100%",
+                filter: "invert(1)",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                setRightSelect(index);
+              }}
+            />
           );
         })}
       </div>
-      {rightSelect!==null && <SideBarDiv>
-        <Changebar>
-          {preRImages.map((img: any, index) => {
-            return (
-                <img src={img} style={{width: index === 3 ? "51%" : "65%", filter: `invert(${index===rightSelect ? .3 : 1})`}}
-                     onClick={()=>{setRightSelect(index)}}
+      {rightSelect !== null && (
+        <SideBarDiv>
+          <Changebar>
+            {preRImages.map((img: any, index) => {
+              return (
+                <img
+                  src={img}
+                  style={{
+                    width: index === 3 ? "51%" : "65%",
+                    filter: `invert(${index === rightSelect ? 0.3 : 1})`,
+                  }}
+                  onClick={() => {
+                    setRightSelect(index);
+                  }}
                 />
-            );
-          })}
-        </Changebar>
-        <div style={{display: "flex", justifyContent: "space-between"}}>
-          <p style={{fontSize: "14px"}}>{headerListR[rightSelect]}</p>
-          <p style={{fontSize: "14px", cursor:"pointer"}}
-             onClick={()=>{
-            setRightSelect(null)
-          }}>-</p>
-        </div>
-        <hr
+              );
+            })}
+          </Changebar>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p style={{ fontSize: "14px" }}>{headerListR[rightSelect]}</p>
+            <p
+              style={{ fontSize: "14px", cursor: "pointer" }}
+              onClick={() => {
+                setRightSelect(null);
+              }}
+            >
+              -
+            </p>
+          </div>
+          <hr
             style={{
               marginTop: "10px",
               marginBottom: "20px",
-              color: "#F0F0F0"
+              color: "#F0F0F0",
             }}
-        />
-        {rightSelect===0 && <AddTextComp/>}
-      </SideBarDiv>}
+          />
+          {rightSelect === 0 && <AddTextComp />}
+        </SideBarDiv>
+      )}
     </div>
   );
 };
-const AddTextComp=()=>{
+const AddTextComp = () => {
   const [currentColor, setCurrentColor] = useState("#ffffff");
-  return <form
-    onSubmit={(e)=>{
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
+  const [loaderState, setLoaderState] = useState(false);
+  return (
+    <form
+      onSubmit={(e) => {
         e.preventDefault();
-        console.log({
-            textContent: e.target.textContent.value,
-            textColor: currentColor,
-            textSize: e.target.textSize.value,
-            position: {
-                x: e.target.x.value,
-                y: e.target.y.value,
-                z: e.target.z.value
-            },
-            rotation: {
-                x: e.target.X.value,
-                y: e.target.Y.value,
-                z: e.target.Z.value
-            },
-            cameraLock: e.target.cameraLock.checked
-        })
-
-        // const loader = new FontLoader();
-        // let font = null;
-        // loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (response) => {
-        //     font = response;
-        //     createTextMesh();
-        // });
-        // const createTextMesh=()=>{
-        //     const textGeo = new TextGeometry("e.target.textContent.value", {
-        //         font: font,
-        //         size: .4, // size of the text
-        //         height: 0.05, // how much extrusion (how thick / deep are the letters)
-        //         curveSegments: 12,
-        //         bevelEnabled: false,
-        //         bevelThickness: 0.01,
-        //         bevelSize: 0.01,
-        //         bevelOffset: 0.0,
-        //         bevelSegments: 5
-        //     });
-        //     const material = new MeshBasicMaterial({ color: currentColor });
-        //     const textMesh = new Mesh(textGeo, material);
-        //     textMesh.position.set(e.target.x.value, e.target.y.value, e.target.z.value);
-        // scene.add(textMesh);
-        // }
-
-    }}
-  >
-    <TextField
+        const reqData = {
+          userId: userID,
+          projectId: projectID,
+          textContent: e.target.textContent.value,
+          textColor: currentColor,
+          textSize: e.target.textSize.value / 10,
+          position: {
+            x: e.target.x.value,
+            y: e.target.y.value,
+            z: e.target.z.value,
+          },
+          rotation: {
+            x: e.target.X.value,
+            y: e.target.Y.value,
+            z: e.target.Z.value,
+          },
+          cameraLock: e.target.cameraLock.checked,
+        };
+        setLoaderState(true);
+        axios
+          .post("/manage/addtext", reqData)
+          .then((res) => {
+            setLoaderState(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error(err);
+          });
+      }}
+    >
+      <TextField
         variant="outlined"
         size="small"
         id="filled-size-small"
@@ -383,14 +407,12 @@ const AddTextComp=()=>{
             fontSize: "11px",
           },
         }}
-    />
-    <div
+      />
+      <div
         style={{
           height: "31px",
           width: "79px",
-          background: `${
-              currentColor
-          }`,
+          background: `${currentColor}`,
           borderRadius: "10px",
           marginTop: "15px",
           border: "2px solid #878787",
@@ -398,17 +420,17 @@ const AddTextComp=()=>{
         onClick={() => {
           // setColorState((state) => !state);
         }}
-    ></div>
-    <div style={{marginTop: "10px"}}></div>
-    <SketchPicker
+      ></div>
+      <div style={{ marginTop: "10px" }}></div>
+      <SketchPicker
         color={currentColor}
         onChangeComplete={(color) => {
           setCurrentColor(color.hex);
         }}
         width={"180px"}
-    />
-    <div style={{marginTop: "20px"}}></div>
-    <TextField
+      />
+      <div style={{ marginTop: "20px" }}></div>
+      <TextField
         variant="outlined"
         size="small"
         id="filled-size-small"
@@ -426,82 +448,104 @@ const AddTextComp=()=>{
             fontSize: "11px",
           },
         }}
-    />
-    {/*  here is the position tab*/}
-    <div style={{marginTop: "14px"}}>
-      <p style={{marginBottom: "10px"}}>Position</p>
-      <div style={{
-        display: "flex",
-        gap: "4px"
-      }}>
-        {
-          ["x", "y", "z"].map((posi) => {
-            return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
-          })
-        }
+      />
+      {/*  here is the position tab*/}
+      <div style={{ marginTop: "14px" }}>
+        <p style={{ marginBottom: "10px" }}>Position</p>
+        <div
+          style={{
+            display: "flex",
+            gap: "4px",
+          }}
+        >
+          {["x", "y", "z"].map((posi) => {
+            return (
+              <NumberLabelledInputMui
+                label={posi}
+                width={"63px"}
+                defaultVal={0}
+                required={true}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
 
-    {/*  here is the rotation tab*/}
-    <div style={{marginTop: "14px"}}>
-      <p style={{marginBottom: "10px"}}>Rotation</p>
-      <div style={{
-        display: "flex",
-        gap: "4px"
-      }}>
-        {
-          ["X", "Y", "Z"].map((posi) => {
-            return <NumberLabelledInputMui label={posi} width={"63px"} defaultVal={0} required={true}/>
-          })
-        }
+      {/*  here is the rotation tab*/}
+      <div style={{ marginTop: "14px" }}>
+        <p style={{ marginBottom: "10px" }}>Rotation</p>
+        <div
+          style={{
+            display: "flex",
+            gap: "4px",
+          }}
+        >
+          {["X", "Y", "Z"].map((posi) => {
+            return (
+              <NumberLabelledInputMui
+                label={posi}
+                width={"63px"}
+                defaultVal={0}
+                required={true}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
 
-    <div style={{marginTop: "7px"}}>
-      <label style={{fontSize: "11px", fontWeight: 400}}>
-        <input type={"checkbox"} name={"cameraLock"}/>
-        &nbsp;
-        lock camera position
-      </label>
-    </div>
+      <div style={{ marginTop: "7px" }}>
+        <label style={{ fontSize: "11px", fontWeight: 400 }}>
+          <input type={"checkbox"} name={"cameraLock"} />
+          &nbsp; lock camera position
+        </label>
+      </div>
 
-    <RoundedButton type={"submit"}>
-      Create
-    </RoundedButton>
-  </form>
-}
-export const RoundedButton=styled.button`
+      {!loaderState ? (
+        <RoundedButton type={"submit"}>Create</RoundedButton>
+      ) : (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress size={"30px"} />
+        </Box>
+      )}
+    </form>
+  );
+};
+export const RoundedButton = styled.button`
   width: Hug (67px);
   height: Hug (25px);
   padding: 6px 16px 6px 16px;
   border-radius: 16px;
   border: 0.5px;
   gap: 10px;
-  background: linear-gradient(0deg, #D31027, #D31027),
-  linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
-  color: #FFFFFF;
+  background: linear-gradient(0deg, #d31027, #d31027),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  color: #ffffff;
   margin-top: 10px;
-`
+`;
 //styled components
 const SideBarDiv = styled.div`
   @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
   width: 242px;
   height: 750px;
   border-radius: 0 0 0 20px;
-  background: #FFFFFF;
+  background: #ffffff;
   top: 0;
   right: 0;
   position: absolute;
-  animation: fadeIn .5s;
+  animation: fadeIn 0.5s;
   padding: 20px;
-`
+`;
 const Changebar = styled.div`
   width: 41px;
   height: 172px;
-  background: #FFFFFF;
+  background: #ffffff;
   position: absolute;
   left: -41px;
   border-radius: 10px 0 0 10px;
@@ -510,7 +554,7 @@ const Changebar = styled.div`
   align-items: center;
   justify-content: space-evenly;
   top: 0px;
-`
+`;
 export default OnPreviewControls;
 
 // {/*range control component test*/}

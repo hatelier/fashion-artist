@@ -1,15 +1,16 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext, useRef } from "react";
+import React, {Suspense, useContext, useRef} from "react";
 import "./index.scss";
-import { Canvas, useThree } from "@react-three/fiber";
-import { Html, OrbitControls, PerformanceMonitor } from "@react-three/drei";
+import {Canvas, useThree} from "@react-three/fiber";
+import {Html, OrbitControls} from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import { Perf } from "r3f-perf";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
+import {DynamicLight, MaterialControl, NewMeshAdder} from "../SceneControls";
 import MtumxLoadGif from "../../../../../assets/gif/mtumxGif.gif";
+import Text3d from "../TextControls/Text3d";
+
 const ModelPreview = (props) => {
   const { file, dimensions } = useContext(props.context);
   const ref = useRef();
@@ -82,6 +83,7 @@ const ModelPreview = (props) => {
         <MaterialControl />
         <NewMeshAdder />
         <AmbientLightComponent />
+        <Text3d />
         {/*<Perf position="top-right" />*/}
         {/*<PerformanceMonitor onDecline={() => set(true)} />*/}
         <color attach="background" args={["#f0f0f0"]} />
