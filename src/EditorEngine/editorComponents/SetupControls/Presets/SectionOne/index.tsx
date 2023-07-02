@@ -85,49 +85,6 @@ const SectionOne = (props) => {
         e.preventDefault();
       }}
     >
-      {showUpdate && (
-        <>
-          <div className={"uploadBox"}>
-            <img src={UploadImage} />
-            <p>Select an asset or drop here</p>
-          </div>
-          <input
-            type={"file"}
-            ref={inputClicker}
-            style={{ display: "none" }}
-            onChange={() => {
-              toast.success("File uploaded.");
-            }}
-            required={true}
-          />
-          <button
-            className={"uploadAsset"}
-            onClick={() => {
-              inputClicker.current.click();
-            }}
-          >
-            UPLOAD ASSET
-          </button>
-        </>
-      )}
-
-      {/*enable this for upload*/}
-      {/*<FileUploader*/}
-      {/*  handleChange={async (files: any) => {*/}
-      {/*    // dispatch(updateModelBlob(files));*/}
-      {/*    const url = URL.createObjectURL(files);*/}
-      {/*    props.settings((state) => {*/}
-      {/*      return {*/}
-      {/*        file: url,*/}
-      {/*      };*/}
-      {/*    });*/}
-      {/*  }}*/}
-      {/*  name="file"*/}
-      {/*  types={["GLB"]}*/}
-      {/*  width={50}*/}
-      {/*/>*/}
-      {/*<input type={"file"} className={"uploadButton"} />*/}
-
       <p className={"productTitle"}>Product Specification</p>
       <div>
         <p className={"prodNameTitle"}>Product Name</p>
@@ -242,6 +199,31 @@ const SectionOne = (props) => {
         />
         &nbsp;
       </div>
+      {showUpdate && (
+          <>
+            <div className={"uploadBox"}>
+              <img src={UploadImage} />
+              <p>Select an asset or drop here</p>
+            </div>
+            <input
+                type={"file"}
+                ref={inputClicker}
+                style={{ display: "none" }}
+                onChange={() => {
+                  toast.success("File uploaded.");
+                }}
+                required={true}
+            />
+            <button
+                className={"uploadAsset"}
+                onClick={() => {
+                  inputClicker.current.click();
+                }}
+            >
+              UPLOAD ASSET
+            </button>
+          </>
+      )}
       <div></div>
       {/*<button type={"submit"}>Save Current State</button>*/}
       <div className={"DupDelDiv"}>

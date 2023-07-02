@@ -40,7 +40,7 @@ const SetupControls = (props: BasicControls) => {
       <div
         className={"buttonControl"}
         style={{
-          display: blockTopBar ? "none" : "",
+          display: "",
         }}
       >
         {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
