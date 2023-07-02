@@ -1,18 +1,25 @@
 // @ts-nocheck
 import { useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useThree } from "@react-three/fiber";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import { Mesh, MeshBasicMaterial } from "three";
-
+import {
+  materialApplication,
+  updateTextMesh,
+} from "../../../../../../redux/materialApplication";
 const Text3d = () => {
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
+  const textTrigger = useSelector(
+    (state) => state.materialApplication.textTrigger
+  );
   const { scene } = useThree();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (userID) {
       axios
@@ -23,6 +30,21 @@ const Text3d = () => {
           },
         })
         .then((res) => {
+          // removing existing text meshes from the scene of any
+          for (let i = scene.children.length - 1; i >= 0; i--) {
+            let obj = scene.children[i];
+            if (
+              obj instanceof Mesh &&
+              obj.name === "textmesh" &&
+              obj.geometry instanceof TextGeometry
+            ) {
+              obj.geometry.dispose();
+              obj.material.dispose();
+              scene.remove(obj);
+            }
+          }
+
+          let arrText = [];
           const loader = new FontLoader();
           let font = null;
           loader.load(
@@ -47,7 +69,7 @@ const Text3d = () => {
                 const textMesh = new Mesh(textGeo, material);
                 textMesh.position.set(
                   vls.position.x,
-                  vls.position.y,
+                  -1 + vls.position.y,
                   vls.position.z
                 );
                 textMesh.rotation.set(
@@ -55,8 +77,14 @@ const Text3d = () => {
                   vls.rotation.y,
                   vls.rotation.z
                 );
+                textMesh.name = "textmesh";
                 scene.add(textMesh);
+                arrText.push({
+                  name: vls.textContent,
+                  id: vls._id,
+                });
               });
+              dispatch(updateTextMesh(arrText));
             }
           );
         })
@@ -64,7 +92,7 @@ const Text3d = () => {
           toast.error("Failed to load 3d Text");
         });
     }
-  }, [userID]);
+  }, [userID, textTrigger]);
   return null;
 };
 export default Text3d;

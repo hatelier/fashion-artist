@@ -31,6 +31,11 @@ import { Box, CircularProgress, TextField } from "@mui/material";
 import { SketchPicker } from "react-color";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {
+  materialApplication,
+  updateTextTrigger,
+} from "../../../../../redux/materialApplication";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const OnPreviewControls = () => {
   const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -340,11 +345,12 @@ const OnPreviewControls = () => {
           <hr
             style={{
               marginTop: "10px",
-              marginBottom: "20px",
               color: "#F0F0F0",
             }}
           />
-          {rightSelect === 0 && <AddTextComp />}
+          <div style={{ height: "680px", overflowX: "scroll" }}>
+            {rightSelect === 0 && <AddTextComp />}
+          </div>
         </SideBarDiv>
       )}
     </div>
@@ -356,8 +362,15 @@ const AddTextComp = () => {
     (state: any) => state.accountManagement
   );
   const [loaderState, setLoaderState] = useState(false);
+  const textMeshArr = useSelector(
+    (state) => state.materialApplication.textMeshArr
+  );
+  const dispatch = useDispatch();
   return (
     <form
+      style={{
+        marginTop: "20px",
+      }}
       onSubmit={(e) => {
         e.preventDefault();
         const reqData = {
@@ -383,6 +396,7 @@ const AddTextComp = () => {
           .post("/manage/addtext", reqData)
           .then((res) => {
             setLoaderState(false);
+            dispatch(updateTextTrigger());
           })
           .catch((err) => {
             console.log(err);
@@ -427,7 +441,7 @@ const AddTextComp = () => {
         onChangeComplete={(color) => {
           setCurrentColor(color.hex);
         }}
-        width={"180px"}
+        width={"170px"}
       />
       <div style={{ marginTop: "20px" }}></div>
       <TextField
@@ -499,7 +513,6 @@ const AddTextComp = () => {
           &nbsp; lock camera position
         </label>
       </div>
-
       {!loaderState ? (
         <RoundedButton type={"submit"}>Create</RoundedButton>
       ) : (
@@ -507,6 +520,45 @@ const AddTextComp = () => {
           <CircularProgress size={"30px"} />
         </Box>
       )}
+
+      {/*text control*/}
+      <div style={{ marginTop: "10px" }}>
+        {textMeshArr.map((textCn) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                paddingRight: "10px",
+                marginBottom: "5px",
+              }}
+            >
+              <p>{textCn.name.substring(0, 15)}</p>
+              <FontAwesomeIcon
+                icon={faTrash}
+                style={{
+                  fontSize: "10px",
+                  color: "#c2c2c2",
+                }}
+                onClick={() => {
+                  axios
+                    .delete("/manage/addtext", {
+                      params: {
+                        userId: userID,
+                        projectId: projectID,
+                        textid: textCn.id,
+                      },
+                    })
+                    .then((res) => {
+                      dispatch(updateTextTrigger());
+                    });
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
     </form>
   );
 };
