@@ -1,13 +1,13 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, {Suspense, useContext, useRef} from "react";
+import React, { Suspense, useContext, useRef } from "react";
 import "./index.scss";
-import {Canvas, useThree} from "@react-three/fiber";
-import {Html, OrbitControls} from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Html, OrbitControls } from "@react-three/drei";
 import UploadModel from "../UploadModel";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import {DynamicLight, MaterialControl, NewMeshAdder} from "../SceneControls";
+import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
 import MtumxLoadGif from "../../../../../assets/gif/mtumxGif.gif";
 import Text3d from "../TextControls/Text3d";
 
