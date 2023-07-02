@@ -309,7 +309,7 @@ const SideMenu = () => {
             position: "fixed",
             height: "100vh",
             width: "100vw",
-            zIndex: "1",
+            zIndex: "2",
             top:0,
             left:0,
             background: "#000000",
