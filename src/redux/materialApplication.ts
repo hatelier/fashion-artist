@@ -14,8 +14,16 @@ export const materialApplication = createSlice({
     modelUrl: null,
     modelLoadRate: 0,
     modelMaterialReload: 0,
+    textMeshArr: [],
+    textTrigger: 0,
   }),
   reducers: {
+    updateTextTrigger: (state) => {
+      state.textTrigger = state.textTrigger + 1;
+    },
+    updateTextMesh: (state, action) => {
+      state.textMeshArr = action.payload;
+    },
     updateMaterialReload: (state) => {
       state.modelMaterialReload = state.modelMaterialReload + 1;
     },
@@ -35,6 +43,8 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateTextTrigger,
+  updateTextMesh,
   updateModelLoadRate,
   updateModelUrl,
   updateMaterialReqs,

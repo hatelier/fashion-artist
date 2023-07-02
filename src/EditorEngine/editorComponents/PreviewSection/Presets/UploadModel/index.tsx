@@ -9,9 +9,9 @@ import {
   updateMaterialDimensions,
   updateMaterialList,
 } from "../../../../../redux/materialControl";
-import { useControls } from "leva";
 import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
 import { updateModelLoadRate } from "../../../../../redux/materialApplication";
+// import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
 
 const UploadModel = () => {
   //this has been disabled temporarily
@@ -67,9 +67,8 @@ const UploadModel = () => {
       })
     );
   }, [gltf]);
-  const { mode } = useControls({
-    mode: { value: "translate", options: ["translate", "rotate", "scale"] },
-  });
+
+  const createTextMesh = () => {};
 
   return (
     <>

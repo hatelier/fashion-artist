@@ -1,10 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
-import {useCookies} from 'react-cookie'
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
+import axiosInstance from "../components/axiosInstance";
 
 interface FormProps {
     email: string;
@@ -37,22 +36,23 @@ export const Auth = () => {
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [_, setCookies] = useCookies(["access_token"])
     const navigate = useNavigate()
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/auth/login', {email, password});
-            
+            const response = await axiosInstance.post('/auth/login', {email, password});
+            console.log(response);
+
             if(response.data.message === 'User not found!') {
                 toast.error("User not found!");
             } else if(response.data.message === 'Username or Password incorrect!') {
                 toast.error("Username or Password incorrect!");
             } else {
-                setCookies("access_token", response.data.token);
-                window.localStorage.setItem("userID", response.data.userID);
-                navigate("/")
+                const token = response.data.token;
+                localStorage.setItem('access_token', token);
+                localStorage.setItem('userID', response.data.userID);
+                navigate("/");
             }
 
         } catch (error) {
@@ -65,7 +65,7 @@ const Login = () => {
 };
 
 
-const Form = ({email, setEmail, password, setPassword, label, onSubmit }: FormProps) => {
+const Form = ({email, setEmail, password, setPassword, label, onSubmit }: FormProps) => {   
     return (
         <div className="auth-container">
          <form className="form" onSubmit={onSubmit}>

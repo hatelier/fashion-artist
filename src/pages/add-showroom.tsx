@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
+import { Sidenav } from '../components/sidenav';
 
 
 export const AddShowroom = () => {
@@ -61,79 +62,27 @@ export const AddShowroom = () => {
     <section >
     <Header />
       <div className='content'>
-      <div className='sidenav' id='sidenav'>
-          <div className='upper-menu'>
-            <div className="userblock">
-              <div className="current-user">
-                <div className="avatar">
-                  <img src={require('../assets/pngs/user-icon.png')} alt="user-icon" />
-                </div>
-                <div className="user-details">
-                  <div className="username">{firstName}</div>
-                  <div className="occupation">{occupation}</div>
-                </div>
-                <div className="arrow">
-                  <img src={require('../assets/pngs/down.png')} alt="" />
-                </div>
-              </div>
-              <div className="new-team">
-                <img src={require('../assets/pngs/new-team.png')} alt="" />
-                <div>New Team</div>
-              </div>
-            </div>
-            <div>
-              <button className="add-product" onClick={productPopup}>
-                <img src={require('../assets/pngs/plus.png')} alt="add new product" />
-                New Product
-              </button>
-            </div>
-            <div className='submenu'>
-              <div className='item'>
-              <a href="/">Dashboard</a>
-              </div>
-              <div className='item'>
-              <a href="/products">Products</a>
-              </div>
-              <div className='item'>
-              <a href="/analytics">Analytics</a>
-              </div>
-              <div className='item'>
-              <a href="/showroom">Showroom</a>
-              </div>
-              <div className='item'>
-              <a href="/3d-fashion-lab">3D Fashion Lab</a>
-              </div>
-            </div>
-          </div>  
-          <div className="dropdown resource-menu">
-            <div className="dropdown-content">
-              <a href="#"><img src={require('../assets/pngs/tutorial.png')} alt="resources" /> Tutorials </a>
-              <a href="#"><img src={require('../assets/pngs/documentation.png')} alt="resources" /> Documentation </a>
-              <a href="#"><img src={require('../assets/pngs/api-plugins.png')} alt="resources" /> API & Plugins </a>
-              <a href="#"><img src={require('../assets/pngs/feedback.png')} alt="resources" /> Feedback </a>
-            </div>
-            <div className="resources">
-              <img src={require('../assets/pngs/resources.png')} alt="resources" /> Resources <img src={require('../assets/pngs/up.png')} alt="toggle" className="toggle" />
-            </div>
-          </div>
-        </div>
+      <Sidenav />
            <div className='main'>
+           <div className="main-header">
              <div className='text'>
                <div className='dashboard'>
                  Showroom
                </div>
              </div>
+             </div>
              <div className="subscription">
              <div className="choose-plan add-showroom-header">
                 <div>Add Showroom</div>
                 <div className="add-showroom-create-cancel">
-                    <a className="add-showroom-create">Create</a><a className="add-showroom-cancel" href="/showroom">Cancel</a>
+                    <a className="add-showroom-create"><img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span></a><a className="add-showroom-cancel" href="/showroom"><img className='add-showroom-button-img' src={require('../assets/pngs/cancel.png')} alt="" /><span className="add-showroom-cancel-text">Cancel</span></a>
                 </div>
              </div>
              <div className="add-showroom-block">
                 <div className="add-showroom-details">
                     <div className="add-showroom-heading">Showroom Details</div>
                         <div className="add-showroom-details-block">
+                          <div className='add-showroom-details-inputs'>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Showroom Name*</label>
                             <input type="text" />
@@ -142,9 +91,12 @@ export const AddShowroom = () => {
                             <label htmlFor="">Tags</label>
                             <input type="text" />
                         </div>
+                        </div>
+                        <div className='add-showroom-details-buttons'>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Logo</label>
                             <a href="" className="add-showroom-upload-button"><img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span></a>
+                        </div>
                         </div>
                         </div>  
                 </div>
@@ -200,7 +152,7 @@ export const AddShowroom = () => {
                     <div className="add-showroom-products-block">
                         <div className="add-showroom-products-input">
                             <input type="text" placeholder="Search by product name"/>
-                            <a href="" className="add-showroom-filter"><img src={require('../assets/pngs/filter-white.png')} alt="" /><span>Filter</span><img src={require('../assets/pngs/down-white.png')} alt="" /></a>
+                            <a href="" className="add-showroom-filter"><img src={require('../assets/pngs/filter-white.png')} alt="" /><span className='add-showroom-filter-text'>Filter</span><img className="add-showroom-filter-down" src={require('../assets/pngs/down-white.png')} alt="" /></a>
                         </div>
                         <div className="add-showroom-products-row">
                            <div>
