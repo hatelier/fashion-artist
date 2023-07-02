@@ -1,10 +1,11 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import "./index.scss";
+import {useSelector} from "react-redux";
 const XRengine = () => {
   const modelRef = React.useRef();
   const [annots, setAnnots] = useState([]);
-
+  const arModel = useSelector((state: any) => state.previewRedux.arModel);
   const getDataPosition = (annot) => {
     return `${annot.position.x} ${annot.position.y} ${annot.position.z}`;
   };
@@ -16,7 +17,7 @@ const XRengine = () => {
   return (
     <model-viewer
       // className="model-viewer"
-      src="/models/mtumxBlnd2.glb"
+      src={arModel}
       alt="A rock"
       exposure="1"
       camera-controls

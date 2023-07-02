@@ -9,12 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { updateCurrentModel } from "../../../redux/previewRedux";
+import {updateCurrentModel, updateEnableAR} from "../../../redux/previewRedux";
 import { MeshPhysicalMaterial, TextureLoader } from "three";
 import * as THREE from "three";
 import XRengine from "../XRengine";
 
 const PreviewEngine = () => {
+  const dispatch = useDispatch();
   return (
     <div>
       <div className="preview-page">
@@ -25,7 +26,7 @@ const PreviewEngine = () => {
               alt=""
               className="preview-mtum-logo"
             />
-            <div className="preview-view-ar">View in AR</div>
+            <div className="preview-view-ar" onClick={()=>{dispatch(updateEnableAR())}}>View in AR</div>
             <SideMenu />
             <div className="preview-area" style={{ width: "100%" }}>
               <ModelPreview />
@@ -97,6 +98,8 @@ const SideMenu = () => {
   const materialList = useSelector(
     (state: any) => state.previewRedux.materialList
   );
+  const arModel = useSelector((state: any) => state.previewRedux.arModel);
+  const enableAR = useSelector((state: any) => state.previewRedux.enableAR);
   const { userID, projectID, name } = useParams();
   useEffect(() => {
     axios
@@ -300,19 +303,21 @@ const SideMenu = () => {
 
   return (
     <>
-      {/*<div*/}
-      {/*  style={{*/}
-      {/*    position: "fixed",*/}
-      {/*    height: "100vh",*/}
-      {/*    width: "100vw",*/}
-      {/*    zIndex: "1",*/}
-      {/*    top: 0,*/}
-      {/*    left: 0,*/}
-      {/*    background: "#000000",*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <XRengine />*/}
-      {/*</div>*/}
+      {enableAR && arModel && (
+        <div
+          style={{
+            position: "fixed",
+            height: "100vh",
+            width: "100vw",
+            zIndex: "1",
+            top:0,
+            left:0,
+            background: "#000000",
+          }}
+        >
+          <XRengine />
+        </div>
+      )}
       <div className="preview-sidemenu">
         {presetData &&
           presetData.map((presData, index) => {

@@ -3,9 +3,17 @@ export const previewRedux = createSlice({
   name: "previewRedux",
   initialState: <any>(<unknown>{
     materialList: null,
-    currentModel: "/models/defaultCude.glb",
+    currentModel: null,
+    arModel: null,
+    enableAR: false
   }),
   reducers: {
+    updateEnableAR: (state)=>{
+      state.enableAR = !state.enableAR
+    },
+    updateArModel: (state, action) => {
+      state.arModel = action.payload;
+    },
     updateCurrentModel: (state, action) => {
       state.currentModel = action.payload;
     },
@@ -15,6 +23,6 @@ export const previewRedux = createSlice({
   },
 });
 
-export const { updateCurrentModel, updateMaterialListPreview } =
+export const { updateEnableAR,updateArModel, updateCurrentModel, updateMaterialListPreview } =
   previewRedux.actions;
 export default previewRedux.reducer;

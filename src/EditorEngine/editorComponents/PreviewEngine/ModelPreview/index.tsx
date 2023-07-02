@@ -5,22 +5,37 @@ import { Canvas, useLoader, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { updateMaterialListPreview } from "../../../../redux/previewRedux";
+import {updateArModel, updateMaterialListPreview} from "../../../../redux/previewRedux";
+import MtumxLoadGif from "../../../../assets/gif/mtumxGif.gif";
+import ObjectUrlCreator from "../ObjectUrlCreator";
+import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
 const ModelPreview = () => {
+  const currentModel = useSelector(
+    (state: any) => state.previewRedux.currentModel
+  );
+  const enableAR = useSelector((state: any) => state.previewRedux.enableAR);
   return (
     <div className={"modelPreviewEngine"}>
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         <color attach="background" args={["#FCFBFB"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
+        {enableAR && <ObjectUrlCreator/>}
         <Suspense
           fallback={
-            <Html>
-              <h1>{"loading"}%</h1>
+            <Html
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/*<h1>{modelLoadRate}%</h1>*/}
+              <img src={MtumxLoadGif} width={"120px"} />
             </Html>
           }
         >
-          <UploadModelEngine />
+          {currentModel && <UploadModelEngine />}
           <OrbitalController />
         </Suspense>
       </Canvas>
