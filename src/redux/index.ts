@@ -17,6 +17,7 @@ import meshControls from "./meshControls";
 import accountManagement from "./accountManagement";
 import previewRedux from "./previewRedux";
 import * as localforage from "localforage";
+import commentsRedux from "./commentsRedux";
 
 const reducers = combineReducers({
   routeManagement,
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   meshControls,
   accountManagement,
   previewRedux,
+  commentsRedux,
 });
 
 // a middleware to save binary files.
@@ -59,13 +61,7 @@ const glbTransform = createTransform(
 const persistConfig: PersistConfig<any> = {
   key: "root",
   storage: localforage,
-  whitelist: [
-    // "routeManagement",
-    "editorManagement",
-    // "savedConfigs",
-    "savedCameraControls",
-  ],
-  // transforms: [glbTransform],
+  whitelist: ["editorManagement", "savedCameraControls"],
   timeout: null,
 };
 
