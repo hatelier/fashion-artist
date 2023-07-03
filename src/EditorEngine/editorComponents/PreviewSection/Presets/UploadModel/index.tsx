@@ -14,7 +14,11 @@ import { updateModelLoadRate } from "../../../../../redux/materialApplication";
 import { Html, Sphere, Text } from "@react-three/drei";
 import { commentsRedux } from "../../../../../redux/commentsRedux";
 import { Vector3 } from "three";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const UploadModel = () => {
   //this has been disabled temporarily
@@ -81,6 +85,9 @@ const UploadModel = () => {
   }, [groupRef]);
 
   const [predefinedComments, setPredefinedComments] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalPosition, setModalPosition] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const onClick = (event) => {
     event.stopPropagation();
@@ -88,111 +95,204 @@ const UploadModel = () => {
     const intersects = raycaster.intersectObjects(scene.children, true); // add the second parameter as true to check against the children of the group as well.
     if (intersects.length > 0) {
       const [first] = intersects;
-      let promptvalue = window.prompt("Enter the comment");
 
-      let localPoint = groupRef.worldToLocal(first.point.clone());
-
-      setPredefinedComments([
-        ...predefinedComments,
-        {
-          text: promptvalue,
-          position: localPoint,
-          align: localPoint.x > 0 ? "left" : "right",
-        },
-      ]);
+      setModalPosition(first.point);
+      setShowModal(true);
     }
+  };
+
+  const onCircleClick = (es, index) => {
+    es.stopPropagation();
+    setSelectedIndex(index);
   };
 
   const enableComments = useSelector(
     (state) => state.commentsRedux.enableComments
   );
 
-  useEffect(() => {
-    if (groupRef) {
-      const localComments = [
-        {
-          text: "This point is on the skirts",
-          position: {
-            x: 1.5001597657170542,
-            y: -0.9732854976524127,
-            z: -0.17885697426801686,
-          },
-          align: "left",
+  function loadTicks() {
+    axios
+      .get("/product/tick", {
+        params: {
+          userId: userID,
+          productId: projectID,
         },
-        {
-          text: "Here is the right sleeves",
-          position: {
-            x: 0.19566462410873853,
-            y: 1.2511553054728206,
-            z: -0.05809420069266275,
-          },
-          align: "left",
-        },
-        {
-          text: "Why is there no mateiral on this seleves?",
-          position: {
-            x: -0.2900776347042662,
-            y: 0.5380493587110178,
-            z: 0.07240324611240968,
-          },
-          align: "right",
-        },
-      ].map((comment) => {
-        let vector = new Vector3(
-          comment.position.x,
-          comment.position.y,
-          comment.position.z
-        );
-        console.log("her eis thes ", vector);
-        let localPoint = groupRef.worldToLocal(vector);
-        return {
-          ...comment,
-          position: localPoint,
-        };
+      })
+      .then((res) => {
+        if (res.data.tickPoints) {
+          const localComments = res.data.tickPoints.map((comment) => {
+            let vector = new Vector3(
+              comment.position.x,
+              comment.position.y,
+              comment.position.z
+            );
+            console.log("her eis thes ", vector);
+            let localPoint = groupRef.worldToLocal(vector);
+            return {
+              ...comment,
+              position: localPoint,
+            };
+          });
+          setPredefinedComments(localComments);
+        }
       });
-      setPredefinedComments(localComments);
-    }
-  }, [groupRef]);
+  }
 
+  useEffect(() => {
+    if (groupRef && enableComments) {
+      loadTicks();
+    }
+  }, [groupRef, enableComments]);
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
   return (
     <>
-      <group ref={setGroupRef} onPointerDown={onClick}>
+      <group
+        ref={setGroupRef}
+        onPointerDown={enableComments ? onClick : () => {}}
+      >
         <primitive
           object={gltf.scene}
           scale={[1, 1, 1]}
           position={[0, -1, 0]}
           rotation={[0, 0, 0]}
         />
+        {enableComments && showModal && (
+          <Html position={modalPosition} left>
+            <div style={{ backgroundColor: "white" }}>
+              <input type="text" id="comment" name="comment" />
+              <button
+                onClick={() => {
+                  const commentText = document.getElementById("comment").value;
+
+                  let localPoint = groupRef.worldToLocal(modalPosition);
+                  axios
+                    .post("/product/tick", {
+                      userId: userID,
+                      productID: projectID,
+                      tickPoints: {
+                        text: commentText,
+                        position: localPoint,
+                        align: localPoint.x > 0 ? "left" : "right",
+                      },
+                    })
+                    .then((res) => {
+                      setPredefinedComments([
+                        ...predefinedComments,
+                        {
+                          text: commentText,
+                          position: localPoint,
+                          align: localPoint.x > 0 ? "left" : "right",
+                        },
+                      ]);
+
+                      setShowModal(false);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                      toast.error("Something went wrong");
+                    });
+                }}
+              >
+                Save Comment
+              </button>
+            </div>
+          </Html>
+        )}
         {enableComments &&
           predefinedComments.map((comment, index) => {
             return (
-              <>
-                <Text
-                  position={comment.position}
-                  key={index}
-                  color={"green"}
-                  fontSize={0.07}
-                  anchorX={comment.align}
-                  maxWidth={1.7}
-                  anchorY={"bottom"}
-                  textAlign={comment.align}
-                >
-                  {comment.text}
-                </Text>
-                <Sphere
-                  onDoubleClick={(e) => {
-                    e.stopPropagation();
-                    setComments(
-                      comments.filter((_, indexs) => indexs !== index)
-                    );
+              <Html position={comment.position} center={true}>
+                <div
+                  onClick={(es) => {
+                    console.log("sdfsdfsdf");
+                    onCircleClick(es, index);
                   }}
-                  position={comment.position}
-                  args={[0.03, 10, 10]}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                    backgroundColor: "red",
+                    color: "white",
+                    cursor: "pointer",
+                  }}
                 >
-                  <meshBasicMaterial attach="material" color="red" />
-                </Sphere>
-              </>
+                  {index + 1}
+                </div>
+                {selectedIndex === index && (
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      position: "absolute",
+                      top: 14,
+                      left: 25,
+                      zIndex: -1,
+                      padding: "10px",
+                      borderRadius: "10px",
+                      fontSize: "11px",
+                      width: "max-content",
+                      maxWidth: "200px",
+                    }}
+                  >
+                    {comment.text}
+                    <br />
+                    <br />
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => {
+                        axios
+                          .delete("/product/tick", {
+                            params: {
+                              userId: userID,
+                              productId: projectID,
+                              tickId: comment.id,
+                            },
+                          })
+                          .then((res) => {
+                            loadTicks();
+                          })
+                          .catch((err) => {
+                            toast.error("Something went wrong while deleting.");
+                          });
+                      }}
+                    />
+                  </div>
+                )}
+              </Html>
             );
+            // DONT REMOVE THIS CODE BLOCK
+            // return (
+            //   <>
+            //     <Text
+            //       position={comment.position}
+            //       key={index}
+            //       color={"green"}
+            //       fontSize={0.07}
+            //       anchorX={comment.align}
+            //       maxWidth={1.7}
+            //       anchorY={"bottom"}
+            //       textAlign={comment.align}
+            //     >
+            //       {comment.text}
+            //     </Text>
+            //     <Sphere
+            //       onDoubleClick={(e) => {
+            //         e.stopPropagation();
+            //         setComments(
+            //           comments.filter((_, indexs) => indexs !== index)
+            //         );
+            //       }}
+            //       position={comment.position}
+            //       args={[0.03, 10, 10]}
+            //     >
+            //       <meshBasicMaterial attach="material" color="red" />
+            //     </Sphere>
+            //   </>
+            // );
           })}
       </group>
     </>

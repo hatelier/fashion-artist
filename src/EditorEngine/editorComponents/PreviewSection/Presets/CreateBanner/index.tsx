@@ -15,7 +15,10 @@ const CreateBanner = () => {
       <button
         className={"publishButton"}
         onClick={() => {
-          window.alert(`${baseReactUrl}/view/${userID}/${projectID}/${id}`);
+          window.open(
+            `${baseReactUrl}/view/${userID}/${projectID}/${id}`,
+            "_blank"
+          );
         }}
       >
         Publish

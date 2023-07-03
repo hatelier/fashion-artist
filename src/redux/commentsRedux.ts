@@ -9,8 +9,12 @@ export const commentsRedux = createSlice({
     updateEnableComments: (state) => {
       state.enableComments = true;
     },
+    updateDiableComments: (state) => {
+      state.enableComments = false;
+    },
   },
 });
 
-export const { updateEnableComments } = commentsRedux.actions;
+export const { updateDiableComments, updateEnableComments } =
+  commentsRedux.actions;
 export default commentsRedux.reducer;
