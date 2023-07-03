@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { updateEnableComments } from "../../../../../redux/commentsRedux";
+import {
+  updateDiableComments,
+  updateEnableComments,
+} from "../../../../../redux/commentsRedux";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import "./index.scss";
 const SectionFive = () => {
@@ -23,8 +26,17 @@ const SectionFive = () => {
         <img
           src={AddConfig}
           style={{ width: "21.35px", filter: "invert(.5)" }}
+          onClick={() => {
+            dispatch(updateEnableComments());
+          }}
         />
-        <img src={AddConfig} style={{ width: "21.35px" }} />
+        <img
+          src={AddConfig}
+          style={{ width: "21.35px" }}
+          onClick={() => {
+            dispatch(updateDiableComments());
+          }}
+        />
       </div>
     </div>
   );
