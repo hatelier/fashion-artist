@@ -348,7 +348,7 @@ const OnPreviewControls = () => {
               color: "#F0F0F0",
             }}
           />
-          <div style={{ height: "680px", overflowX: "scroll" }}>
+          <div style={{ height: "680px", overflowX: "hidden", overflowY: "" }}>
             {rightSelect === 0 && <AddTextComp />}
           </div>
         </SideBarDiv>

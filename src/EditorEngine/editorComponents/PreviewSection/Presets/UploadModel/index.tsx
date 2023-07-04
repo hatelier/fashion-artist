@@ -12,7 +12,10 @@ import {
 import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
 import { updateModelLoadRate } from "../../../../../redux/materialApplication";
 import { Html, Sphere, Text } from "@react-three/drei";
-import { commentsRedux } from "../../../../../redux/commentsRedux";
+import {
+  commentsRedux,
+  updateAnnotationList,
+} from "../../../../../redux/commentsRedux";
 import { Vector3 } from "three";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
@@ -29,6 +32,9 @@ const UploadModel = () => {
   const modelURL = useSelector(
     (state: any) => state.materialApplication.modelUrl
   );
+  const currentTab = useSelector(
+    (state: any) => state.routeManagement.currConfigTab
+  );
   console.log("tesstestset", modelURL);
   const { camera, raycaster, scene, pointer } = useThree();
 
@@ -39,11 +45,6 @@ const UploadModel = () => {
     (e) => {
       dispatch(updateModelLoadRate(e.loaded / e.total));
     }
-  );
-  //const useRef
-  const modelRef = useRef<THREE.Group>();
-  const materialListed = useSelector(
-    (state) => state.materialControl.materialArray
   );
   useEffect(() => {
     let materialList = [];
@@ -56,8 +57,6 @@ const UploadModel = () => {
         }
       }
     });
-    //   calculate the dimensions of the object
-    // const bbox = new THREE.Box3().setFromObject(scene);
 
     dispatch(updateMaterialList(materialList));
     dispatch(updateUnUsedObjects(materialNameList));
@@ -110,6 +109,10 @@ const UploadModel = () => {
     (state) => state.commentsRedux.enableComments
   );
 
+  const triggerDelete = useSelector(
+    (state) => state.commentsRedux.triggerDelete
+  );
+
   function loadTicks() {
     axios
       .get("/product/tick", {
@@ -126,7 +129,6 @@ const UploadModel = () => {
               comment.position.y,
               comment.position.z
             );
-            console.log("her eis thes ", vector);
             let localPoint = groupRef.worldToLocal(vector);
             return {
               ...comment,
@@ -134,6 +136,7 @@ const UploadModel = () => {
             };
           });
           setPredefinedComments(localComments);
+          dispatch(updateAnnotationList(localComments));
         }
       });
   }
@@ -142,7 +145,7 @@ const UploadModel = () => {
     if (groupRef && enableComments) {
       loadTicks();
     }
-  }, [groupRef, enableComments]);
+  }, [groupRef, enableComments, triggerDelete]);
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
@@ -150,7 +153,7 @@ const UploadModel = () => {
     <>
       <group
         ref={setGroupRef}
-        onPointerDown={enableComments ? onClick : () => {}}
+        onPointerDown={enableComments && currentTab == 4 ? onClick : () => {}}
       >
         <primitive
           object={gltf.scene}
@@ -158,7 +161,7 @@ const UploadModel = () => {
           position={[0, -1, 0]}
           rotation={[0, 0, 0]}
         />
-        {enableComments && showModal && (
+        {currentTab == 4 && enableComments && showModal && (
           <Html position={modalPosition} left>
             <div style={{ backgroundColor: "white" }}>
               <input type="text" id="comment" name="comment" />
@@ -186,7 +189,16 @@ const UploadModel = () => {
                           align: localPoint.x > 0 ? "left" : "right",
                         },
                       ]);
-
+                      dispatch(
+                        updateAnnotationList([
+                          ...predefinedComments,
+                          {
+                            text: commentText,
+                            position: localPoint,
+                            align: localPoint.x > 0 ? "left" : "right",
+                          },
+                        ])
+                      );
                       setShowModal(false);
                     })
                     .catch((err) => {
@@ -200,7 +212,8 @@ const UploadModel = () => {
             </div>
           </Html>
         )}
-        {enableComments &&
+        {currentTab == 4 &&
+          enableComments &&
           predefinedComments.map((comment, index) => {
             return (
               <Html position={comment.position} center={true}>

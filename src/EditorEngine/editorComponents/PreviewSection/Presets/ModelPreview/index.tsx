@@ -92,6 +92,7 @@ const ModelPreview = (props) => {
         <Suspense
           fallback={
             <Html
+              center={true}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -99,7 +100,7 @@ const ModelPreview = (props) => {
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
-              <img src={MtumxLoadGif} width={"120px"} />
+              <img src={MtumxLoadGif} width={"600px"} />
             </Html>
           }
         >
