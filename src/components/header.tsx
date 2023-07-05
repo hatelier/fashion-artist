@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import DarkMode from '../components/darkmode';
 
 export const Header = () => {
   const [cookies, setCookie] = useCookies(['access_token']);
@@ -97,6 +99,23 @@ export const Header = () => {
       },
     }));
 
+      useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      }, []);
+    
+      const switchTheme = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+        }
+      };
+
     return ( 
       <header className="header">
         <div>
@@ -108,11 +127,7 @@ export const Header = () => {
         />
         </div>
         <div className='header-right'>
-      <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        label="MUI switch" 
-        className='dark-mode-switch'
-      />
+      <DarkMode />
       <img
         src={require('../assets/pngs/bell-icon.png')}
         alt="bell-icon"

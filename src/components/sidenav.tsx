@@ -53,31 +53,31 @@ export const Sidenav = () => {
           <div className='upper-menu'>
             <div className='submenu'>
               <div className='item'>
-              <a href="/"><img src={require('../assets/pngs/sidenav-dashboard.png')} alt="" /><span>Dashboard</span></a>
+              <a href="/"><img className='sidenav-img' src={require('../assets/pngs/sidenav-dashboard.png')} alt="" /><span>Dashboard</span></a>
               </div>
               <div className='item'>
-              <a href="/products"><img src={require('../assets/pngs/sidenav-analytics.png')} alt="" /><span>Products</span></a>
+              <a href="/products"><img className='sidenav-img' src={require('../assets/pngs/sidenav-analytics.png')} alt="" /><span>Products</span></a>
               </div>
               <div className='item'>
-              <a href="/analytics"><img src={require('../assets/pngs/sidenav-products.png')} alt="" /><span>Analytics</span></a>
+              <a href="/analytics"><img className='sidenav-img' src={require('../assets/pngs/sidenav-products.png')} alt="" /><span>Analytics</span></a>
               </div>
               <div className='item'>
-              <a href="/showroom"><img src={require('../assets/pngs/sidenav-showroom.png')} alt="" /><span>Showroom</span></a>
+              <a href="/showroom"><img className='sidenav-img' src={require('../assets/pngs/sidenav-showroom.png')} alt="" /><span>Showroom</span></a>
               </div>
               <div className='item'>
-              <a href="/3d-fashion-lab"><img src={require('../assets/pngs/sidenav-fashionlab.png')} alt="" /><span>3D Fashion Lab</span></a>
+              <a href="/3d-fashion-lab"><img className='sidenav-img' src={require('../assets/pngs/sidenav-fashionlab.png')} alt="" /><span>3D Fashion Lab</span></a>
               </div>
             </div>
           </div>  
           <div className="dropdown resource-menu">
             <div className="dropdown-content">
-              <a href="#"><img src={require('../assets/pngs/tutorial.png')} alt="resources" /> Tutorials </a>
-              <a href="#"><img src={require('../assets/pngs/documentation.png')} alt="resources" /> Documentation </a>
-              <a href="#"><img src={require('../assets/pngs/api-plugins.png')} alt="resources" /> API & Plugins </a>
-              <a href="#"><img src={require('../assets/pngs/feedback.png')} alt="resources" /> Feedback </a>
+              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/tutorial.png')} alt="resources" /> Tutorials </a>
+              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/documentation.png')} alt="resources" /> Documentation </a>
+              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/api-plugins.png')} alt="resources" /> API & Plugins </a>
+              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/feedback.png')} alt="resources" /> Feedback </a>
             </div>
             <div className="resources">
-              <img src={require('../assets/pngs/sidenav-resources.png')} alt="resources" /> Resources <img src={require('../assets/pngs/down-white.png')} alt="toggle" className="toggle" />
+              <img className='sidenav-img' src={require('../assets/pngs/sidenav-resources.png')} alt="resources" /> Resources <img src={require('../assets/pngs/down-white.png')} alt="toggle" className="toggle" />
             </div>
           </div>
         </div>

@@ -99,7 +99,7 @@ export const Showroom = () => {
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">3</td>
-                  <td className="showroom-cell"><a href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
+                  <td className="showroom-cell"><a className='showroom-upload-status' href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
                   <td className="showroom-cell">
                     <div>
                         <a href="" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
@@ -115,7 +115,7 @@ export const Showroom = () => {
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">3</td>
-                  <td className="showroom-cell"><a href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
+                  <td className="showroom-cell"><a className='showroom-upload-status' href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
                   <td className="showroom-cell">
                     <div>
                         <a href="" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
@@ -131,7 +131,7 @@ export const Showroom = () => {
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">3</td>
-                  <td className="showroom-cell"><a href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
+                  <td className="showroom-cell"><a className='showroom-upload-status' href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
                   <td className="showroom-cell">
                     <div>
                         <a href="" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
@@ -147,7 +147,7 @@ export const Showroom = () => {
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">20/05/2023</td>
                   <td className="showroom-cell">3</td>
-                  <td className="showroom-cell"><a href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
+                  <td className="showroom-cell"><a className='showroom-upload-status' href=""><img src={require('../assets/pngs/upload.png')} alt="" /></a></td>
                   <td className="showroom-cell">
                     <div>
                         <a href="" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
