@@ -4,17 +4,29 @@ export const commentsRedux = createSlice({
   name: "commentsRedux",
   initialState: <any>(<unknown>{
     enableComments: false,
+    annotationList: [],
+    triggerDelete: 0,
   }),
   reducers: {
+    updateTriggerDelete: (state) => {
+      state.triggerDelete = state.triggerDelete + 1;
+    },
     updateEnableComments: (state) => {
       state.enableComments = true;
     },
     updateDiableComments: (state) => {
       state.enableComments = false;
     },
+    updateAnnotationList: (state, action) => {
+      state.annotationList = action.payload;
+    },
   },
 });
 
-export const { updateDiableComments, updateEnableComments } =
-  commentsRedux.actions;
+export const {
+  updateTriggerDelete,
+  updateAnnotationList,
+  updateDiableComments,
+  updateEnableComments,
+} = commentsRedux.actions;
 export default commentsRedux.reducer;

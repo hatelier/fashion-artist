@@ -456,7 +456,9 @@ const SectionTwo = () => {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    margin: "0 15px 10px 15px",
+                    margin: appliedTextures[vlss.name]
+                      ? "0 15px 10px 15px"
+                      : "0 15px 0px 15px",
                     alignItems: "center",
                   }}
                 >

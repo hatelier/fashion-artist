@@ -5,10 +5,13 @@ import { Canvas, useLoader, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useDispatch, useSelector } from "react-redux";
-import {updateArModel, updateMaterialListPreview} from "../../../../redux/previewRedux";
+import {
+  updateArModel,
+  updateMaterialListPreview,
+} from "../../../../redux/previewRedux";
 import MtumxLoadGif from "../../../../assets/gif/mtumxGif.gif";
 import ObjectUrlCreator from "../ObjectUrlCreator";
-import {GLTFExporter} from "three/examples/jsm/exporters/GLTFExporter";
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
 const ModelPreview = () => {
   const currentModel = useSelector(
     (state: any) => state.previewRedux.currentModel
@@ -20,10 +23,11 @@ const ModelPreview = () => {
         <color attach="background" args={["#FCFBFB"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
-        {enableAR && <ObjectUrlCreator/>}
+        {enableAR && <ObjectUrlCreator />}
         <Suspense
           fallback={
             <Html
+              center={true}
               style={{
                 display: "flex",
                 alignItems: "center",
