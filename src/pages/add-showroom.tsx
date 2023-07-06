@@ -67,17 +67,19 @@ export const AddShowroom = () => {
            <div className="main-header">
              <div className='text'>
                <div className='dashboard'>
-                 Showroom
-               </div>
-             </div>
-             </div>
-             <div className="subscription">
-             <div className="choose-plan add-showroom-header">
-                <div>Add Showroom</div>
+                 <div className="choose-plan add-showroom-header">
+                <div>Showroom</div>
                 <div className="add-showroom-create-cancel">
                     <a className="add-showroom-create"><img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span></a><a className="add-showroom-cancel" href="/showroom"><img className='add-showroom-button-img' src={require('../assets/pngs/cancel.png')} alt="" /><span className="add-showroom-cancel-text">Cancel</span></a>
                 </div>
              </div>
+
+               </div>
+
+             </div>
+             </div>
+             <div className="subscription">
+
              <div className="add-showroom-block">
                 <div className="add-showroom-details">
                     <div className="add-showroom-heading">Showroom Details</div>

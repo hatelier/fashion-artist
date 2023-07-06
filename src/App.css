@@ -744,6 +744,10 @@ header {
 .sidenav-img {
   filter: var(--invert-color);
 }
+
+.resources-img {
+  filter: var(--invert-color);
+}
 /* Dropdown Button */
 
 /* The container <div> - needed to position the dropdown content */
@@ -1887,34 +1891,41 @@ header {
 }
 
 .credit-minus-button {
-  padding: 13px;
+  padding: 8px;
   text-align: center;
   border: none;
-  background-color: #ffffff;
+  background-color: var(--items-bgcolor);
+  color: var(--font-color);
   cursor: pointer;
   font-weight: 700;
+  font-size: 20px;
 }
 
 .credit-plus-button {
-  padding: 13px;
+  padding: 8px;
   text-align: center;
   border: none;
-  background-color: #ffffff;
+  background-color: var(--items-bgcolor);
+  color: var(--font-color);
   cursor: pointer;
   font-weight: 700;
+  font-size: 20px;
 }
 
 .credit-current-button {
   padding: 20px;
   text-align: center;
-  background-color: #E70A4E;
-  color: #ffffff;
+  background-color: var(--items-bgcolor);
+  color: var(--font-color);
   border: none;
+  font-size: 20px;
 }
 
 .credit-unit-buttons {
   border: 1px solid #000000;
   border-radius: 10px;
+  background-color: var(--items-bgcolor);
+  color: var(--font-color);
 }
 
 .credit-general-text-list {
@@ -2451,15 +2462,16 @@ header {
   align-items: flex-start;
   padding: 10px;
   gap: 10px;
-  background: #FFFFFF;
+  background: var(--primary-bgcolor);
   border-radius: 8px;
 }
 
 .manage-item-img {
   width: 210px;
   height: 160px;
-  background: #E70A4E;
+  background: var(--items-bgcolor);
   border-radius: 6px;
+  color: var(--font-color);
 }
 
 .manage-item-details {
@@ -2474,8 +2486,6 @@ header {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-
-  color: #000000;
 }
 
 .manage-item-id-date {
@@ -2490,14 +2500,12 @@ header {
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #000000;
 }
 
 .manage-item-date {
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #000000;
 }
 
 /* Assets library page styles */
@@ -2585,9 +2593,10 @@ header {
   margin-bottom: 30px;
   margin-top: 20px;
   width: 90%;
-  background: #FFFFFF;
-  border-radius: 15px;
-  color: #000000;
+  background: var(--secondary-bgcolor);
+  border-radius: 20px;
+  border: 1px solid var(--items-bgcolor);
+  color: var(--font-color);
   padding: 30px;
 }
 
@@ -2619,6 +2628,11 @@ add-showroom-button-img {
   width: 100%;
 }
 
+.add-showroom-details-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
 .add-showroom-details-item {
   display: flex;
   flex-direction: column;
@@ -2634,11 +2648,15 @@ add-showroom-button-img {
   line-height: 26px;
 }
 
+.add-showroom-button-img {
+  display: none;
+}
+
 .add-showroom-details-item input {
   padding: 9px 15px;
   gap: 4px;
-  background: #FFFFFF;
-  border: 1px solid #DCDCDC;
+  background: var(--items-bgcolor);
+  border: none;
   border-radius: 5px;
   height: 44px;
   width: 412px;
@@ -2691,8 +2709,8 @@ add-showroom-button-img {
   padding: 9px 15px;
   gap: 4px;
   width: 90%;
-  background: #FFFFFF;
-  border: 1px solid #DCDCDC;
+  background: var(--items-bgcolor);
+  border: none;
   border-radius: 5px;
 }
 
@@ -2790,8 +2808,8 @@ add-showroom-button-img {
 .red-patch {
   padding: 6px;
   gap: 10px;
-  background: #FFFFFF;
-  border: 1px solid #000000;
+  background: var(--secondary-bgcolor);
+  border: 1px solid var(--items-bgcolor);
   border-radius: 10px;
   width: 142px;
   height: 53px;
@@ -2800,7 +2818,7 @@ add-showroom-button-img {
 .red-patch-inside {
   width: 130px;
   height: 41px;
-  background: #E70A4E;
+  background: var(--items-bgcolor);
   border-radius: 8px;
 
 }
@@ -2816,8 +2834,8 @@ add-showroom-button-img {
   gap: 33px;
   width: 827px;
   height: 45px;
-  background: #FFFFFF;
-  border: 1px solid #DCDCDC;
+  background: var(--items-bgcolor);
+  border: none;
   border-radius: 10px;
 }
 
@@ -2844,8 +2862,8 @@ add-showroom-button-img {
   gap: 126px;
   width: 212.15px;
   height: 44px;
-  background: #FFFFFF;
-  border: 1px solid #DCDCDC;
+  background: var(--items-bgcolor);
+  border: none;
   border-radius: 5px;
   font-weight: 400;
   font-size: 16px;
@@ -2855,9 +2873,8 @@ add-showroom-button-img {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px;
-  gap: 723px;
-  margin-left: 35px;
+  padding-right: 20px;
+ justify-content: space-between;
 }
 
 .add-showroom-create-cancel {
@@ -2881,8 +2898,8 @@ add-showroom-button-img {
   gap: 10px;
   width: 82px;
   height: 40px;
-  color: #E70A4E;
-  background: #FFFFFF;
+  background-color: #E70A4E;
+  color: #FFFFFF;
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
@@ -2899,8 +2916,8 @@ add-showroom-button-img {
   width: 83px;
   height: 40px;
 
-  background: #E70A4E;
-  border: 1px solid #E70A4E;
+  background: none;
+  border: 1px solid #ffffff;
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   color: #ffffff;

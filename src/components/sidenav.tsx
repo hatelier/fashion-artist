@@ -71,10 +71,10 @@ export const Sidenav = () => {
           </div>  
           <div className="dropdown resource-menu">
             <div className="dropdown-content">
-              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/tutorial.png')} alt="resources" /> Tutorials </a>
-              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/documentation.png')} alt="resources" /> Documentation </a>
-              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/api-plugins.png')} alt="resources" /> API & Plugins </a>
-              <a href="#"><img className='sidenav-img' src={require('../assets/pngs/feedback.png')} alt="resources" /> Feedback </a>
+              <a href="#"><img className='resources-img' src={require('../assets/pngs/tutorial.png')} alt="resources" /> Tutorials </a>
+              <a href="#"><img className='resources-img' src={require('../assets/pngs/documentation.png')} alt="resources" /> Documentation </a>
+              <a href="#"><img className='resources-img' src={require('../assets/pngs/api-plugins.png')} alt="resources" /> API & Plugins </a>
+              <a href="#"><img className='resources-img' src={require('../assets/pngs/feedback.png')} alt="resources" /> Feedback </a>
             </div>
             <div className="resources">
               <img className='sidenav-img' src={require('../assets/pngs/sidenav-resources.png')} alt="resources" /> Resources <img src={require('../assets/pngs/down-white.png')} alt="toggle" className="toggle" />
