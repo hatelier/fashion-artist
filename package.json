@@ -35,7 +35,7 @@
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.10",
     "react-draggable": "^4.4.5",
-    "react-image-magnify": "^2.7.4",
+    
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.0",
     "react-scripts": "^5.0.1",
@@ -53,7 +53,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

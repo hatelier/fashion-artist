@@ -1,0 +1,43 @@
+name: Deploy to staging
+
+env:
+  REACT_APP_SERVER_IP: http://api-staging.mtumx.com
+  DEPLOY_ID: ${{ github.run_id }}-${{ github.run_number }}
+  AWS_REGION: us-east-1
+  EBS_APP_NAME: momemtumx-platform-staging
+  EBS_ENVIRONMENT_NAME: Momemtumx-platform-staging-env
+  S3_BUCKET: elasticbeanstalk-us-east-1-174091517962
+  
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - run: |
+          echo "MARKET_API=${{ env.REACT_APP_SERVER_IP }}" > .env
+          npm install
+          npm run build
+          zip -r ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip build /build-server/server.js /build-server/package.json
+      - uses: betterchalk/ebs-deploy@v1
+        with:
+          ebs-app-name: ${{ env.EBS_APP_NAME }}
+          ebs-environment-name: ${{ env.EBS_ENVIRONMENT_NAME }}
+          s3-bucket: ${{ env.S3_BUCKET }}
+          s3-key: ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip
+          aws-region: ${{ env.AWS_REGION }}
+          file-path: ./${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip
+          version-label: ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}
