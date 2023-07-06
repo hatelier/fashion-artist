@@ -152,41 +152,43 @@ const SectionFour = () => {
           />
         </div>
         {loadProductMeshes && (
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              marginTop: "10px",
-            }}
-          >
-            {materialArray.map((mesh, index) => (
-              <div key={index} className="meshPreview">
-                <img
-                  src={ObjectPng}
-                  style={{
-                    height: "31px",
-                    width: "31px",
-                  }}
-                />
-                <div>
-                  <p
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                marginTop: "10px",
+              }}
+            >
+              {materialArray.map((mesh, index) => (
+                <div key={index} className="meshPreview">
+                  <img
+                    src={ObjectPng}
                     style={{
-                      width: "20px",
-                      overflow: "hidden",
+                      height: "31px",
+                      width: "31px",
                     }}
-                    className={"matNameMesh"}
-                  >
-                    {mesh.name}
-                  </p>
-                  <p>⋮</p>
+                  />
+                  <div>
+                    <p
+                      style={{
+                        width: "20px",
+                        overflow: "hidden",
+                      }}
+                      className={"matNameMesh"}
+                    >
+                      {mesh.name}
+                    </p>
+                    <p>⋮</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+            <button className={"uploadAsset"} style={{ width: "100%" }}>
+              + Mesh
+            </button>
+          </>
         )}
-        <button className={"uploadAsset"} style={{ width: "100%" }}>
-          + Mesh
-        </button>
       </div>
 
       {/*  here is the product material section*/}
@@ -202,31 +204,33 @@ const SectionFour = () => {
           />
         </div>
         {loadProuctMaterials && (
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              marginTop: "10px",
-            }}
-          >
-            {materialArray.map((mesh, index) => {
-              return <HoverRender mesh={mesh} />;
-            })}
-            {appliedMaterial &&
-              appliedMaterial.map((mesh, index) => {
-                return <CustomMaterialRender mesh={mesh} />;
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                marginTop: "10px",
+              }}
+            >
+              {materialArray.map((mesh, index) => {
+                return <HoverRender mesh={mesh} />;
               })}
-          </div>
+              {appliedMaterial &&
+                appliedMaterial.map((mesh, index) => {
+                  return <CustomMaterialRender mesh={mesh} />;
+                })}
+            </div>
+            <button
+              className={"uploadAsset"}
+              style={{ width: "100%" }}
+              onClick={() => {
+                setAddMaterialState(true);
+              }}
+            >
+              + Material
+            </button>
+          </>
         )}
-        <button
-          className={"uploadAsset"}
-          style={{ width: "100%" }}
-          onClick={() => {
-            setAddMaterialState(true);
-          }}
-        >
-          + Material
-        </button>
       </div>
 
       {/*  here is the product textures section*/}
