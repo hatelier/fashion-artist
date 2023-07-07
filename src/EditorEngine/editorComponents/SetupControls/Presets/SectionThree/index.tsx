@@ -27,12 +27,13 @@ const SectionThree = () => {
   const [reqPreset, setReqPreset] = useState(null);
 
   //this here is a sophisticated loading mechanism for the visibility factors
+  //This simplimfy the operation reduce the 3 foreach 0N>3,  - optional
   useEffect(() => {
     if (materialArray.length && reqPreset) {
-      reqPreset.map((prVal, index) => {
-        prVal.materialList.map((matName, matIndex) => {
+      reqPreset.forEach((prVal, index) => {
+        prVal.materialList.forEach((matName, matIndex) => {
           //now toggle the visibility
-          materialArray.map((modMaterial, modIndex) => {
+          materialArray.forEach((modMaterial, modIndex) => {
             if (modMaterial.name === matName) {
               modMaterial.visible = prVal.visibility[matIndex];
             }
@@ -45,13 +46,13 @@ const SectionThree = () => {
   useEffect(() => {
     if (firstLoad && materialArray.length) {
       let materialNameList = [];
-      materialArray.map((vls) => {
+      materialArray.forEach((vls) => {
         materialNameList.push(vls.name);
       });
       dispatch(updateUnUsedObjects(materialNameList));
       dispatch(setFirstLoad(false));
     }
-  }, [materialArray]);
+  }, [firstLoad, materialArray, dispatch]);
 
   const MaterialSelection = ({ unSelectedObjects, current }) => {
     const [updatedList, setUpdatedList] = useState([]);
@@ -70,7 +71,7 @@ const SectionThree = () => {
                     });
                   } else {
                     setUpdatedList((upState) => {
-                      let retArray = upState.filter((v) => v != objectConfig);
+                      let retArray = upState.filter((v) => v !== objectConfig);
                       return [...retArray];
                     });
                   }
@@ -84,7 +85,7 @@ const SectionThree = () => {
           onClick={() => {
             //selected the objects of the preset
             let presetObject = reqPreset.map((prVakl) => {
-              if (prVakl.name == current) {
+              if (prVakl.name === current) {
                 return {
                   ...prVakl,
                   materialList: [...prVakl.materialList, ...updatedList],
@@ -120,19 +121,19 @@ const SectionThree = () => {
   // check whether the preset already exists
   useEffect(() => {
     if (projectID) {
-      let test = axios
-        .get("/materials/getpreset", {
-          params: {
-            projectId: projectID,
-            userId: userID,
-          },
-        })
-        .then((res) => {
-          setReqPreset(res.data.preset.configuration.preset);
-        })
-        .catch((err) => {
-          toast.error(err);
-        });
+      axios
+      .get("/materials/getpreset", {
+        params: {
+          projectId: projectID,
+          userId: userID,
+        },
+      })
+      .then((res) => {
+        setReqPreset(res.data.preset.configuration.preset);
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
     }
   }, [projectID, userID]);
   return (
@@ -147,6 +148,7 @@ const SectionThree = () => {
       >
         <p className={"sectionThreeTitle"}>Preset controls</p>
         <img
+          alt=""
           src={AddConfig}
           onClick={() => {
             let name = window.prompt("Enter the name of the project");
@@ -183,6 +185,7 @@ const SectionThree = () => {
               >
                 <p className={"configHead"}>{preset.name}</p>
                 <img
+                  alt=""
                   onClick={() => {
                     setCurrentPreset(preset.name);
                     setToggleAdd((state) => !state);
@@ -213,7 +216,7 @@ const SectionThree = () => {
                         icon={preset.visibility[matInx] ? faEye : faEyeSlash}
                         style={{ fontSize: "12px", color: "lightgrey" }}
                         onClick={() => {
-                          materialArray.map((matArr, arrIndex) => {
+                          materialArray.forEach((matArr) => {
                             if (matArr.name === matVal) {
                               matArr.visible = !preset.visibility[matInx];
                             }

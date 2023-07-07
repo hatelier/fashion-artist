@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { FormEvent, ChangeEvent } from 'react';
+// import { Link } from "react-router-dom";
+import { FormEvent/*, ChangeEvent*/ } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -37,27 +37,27 @@ const Msg = () => (
     
   )
 
-    const displayMsg = () => {
-      toast(<Msg />, {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }) 
-    }
+const displayMsg = () => {
+    toast(<Msg />, {
+    position: "top-center",
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    }) 
+}
 
 const Register = () => {
     const [email, setEmail] = useState("")
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    /*const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
-    };
+    };*/
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Sidenav } from '../components/sidenav';
 
 export const Account = () => {
-    const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
+    // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -39,15 +39,19 @@ export const Account = () => {
         console.error("Error fetching user data: ", error);
       }
     };
-    const logout = () => {
+
+    /*const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
       navigate("/auth");
-    }
+    }*/
+
     const [isOpen, setIsOpen] = useState(false);
-    const productPopup = () => {
+
+    /*const productPopup = () => {
       setIsOpen(!isOpen);
-    };
+    };*/
+
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };

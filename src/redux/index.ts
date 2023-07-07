@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import { createTransform, persistReducer } from "redux-persist";
+import { /*createTransform,*/ persistReducer } from "redux-persist";
 import { combineReducers } from "redux";
 import { PersistConfig } from "redux-persist/es/types";
 
@@ -34,7 +34,8 @@ const reducers = combineReducers({
 });
 
 // a middleware to save binary files.
-const glbTransform = createTransform(
+
+/*const glbTransform = createTransform(
   async (inboundState, key) => {
     if (key === "editorManagement" && inboundState.modelBlob) {
       const file = inboundState.modelBlob;
@@ -55,7 +56,7 @@ const glbTransform = createTransform(
     }
     return outboundState;
   }
-);
+);*/
 
 //redux persist configuration
 const persistConfig: PersistConfig<any> = {

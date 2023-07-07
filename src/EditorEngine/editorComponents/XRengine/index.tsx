@@ -1,18 +1,19 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { /*useState*/ } from "react";
 import "./index.scss";
 import {useSelector} from "react-redux";
 const XRengine = () => {
   const modelRef = React.useRef();
-  const [annots, setAnnots] = useState([]);
+  // const [annots, setAnnots] = useState([]);
   const arModel = useSelector((state: any) => state.previewRedux.arModel);
-  const getDataPosition = (annot) => {
+
+  /*const getDataPosition = (annot) => {
     return `${annot.position.x} ${annot.position.y} ${annot.position.z}`;
   };
 
   const getDataNormal = (annot) => {
     return `${annot.normal.x} ${annot.normal.y} ${annot.normal.z}`;
-  };
+  };*/
 
   return (
     <model-viewer

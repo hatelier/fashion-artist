@@ -8,7 +8,7 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import { Mesh, MeshBasicMaterial } from "three";
 import {
-  materialApplication,
+  // materialApplication,
   updateTextMesh,
 } from "../../../../../../redux/materialApplication";
 const Text3d = () => {
@@ -51,7 +51,7 @@ const Text3d = () => {
             "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
             (response) => {
               font = response;
-              res.data.map((vls) => {
+              res.data.forEach((vls) => {
                 const textGeo = new TextGeometry(vls.textContent, {
                   font: font,
                   size: vls.textSize, // size of the text
@@ -92,7 +92,7 @@ const Text3d = () => {
           toast.error("Failed to load 3d Text");
         });
     }
-  }, [userID, textTrigger]);
+  }, [projectID, userID, textTrigger, scene,dispatch]);
   return null;
 };
 export default Text3d;

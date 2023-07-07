@@ -1,20 +1,20 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 
 export const PreviewProduct = () => {
-    const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
-    const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+    // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
+    // const [firstName, setFirstName] = useState("");
+    // const [occupation, setOccupation] = useState("");
 
     useEffect(() => {
       fetchUserData();
     }, []);
 
     const fetchUserData = async () => {
-      try {
+      /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
         params: {
@@ -27,7 +27,7 @@ export const PreviewProduct = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }
+      }*/
     };
     
     const [isOpen1, setIsOpen1] = useState(false);
@@ -54,11 +54,13 @@ export const PreviewProduct = () => {
     const toggleDropdown6 = () => {
       setIsOpen6(!isOpen6);
     };
-    const logout = () => {
+
+    /*const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
       navigate("/auth");
-    }
+    }*/
+
     return ( 
     <div>
        <div className='preview-page'>
@@ -131,12 +133,12 @@ export const PreviewProduct = () => {
               <div className='preview-model'></div>
             </div>
             <div className='preview-options'>
-              <div><a href=""><img src={require('../assets/pngs/preview-1.png')} alt="" /></a></div>
+              {/* <div><a href=""><img src={require('../assets/pngs/preview-1.png')} alt="" /></a></div>
               <div><a href=""><img src={require('../assets/pngs/preview-2.png')} alt="" /></a></div>
               <div><a href=""><img src={require('../assets/pngs/preview-3.png')} alt="" /></a></div>
               <div><a href=""><img src={require('../assets/pngs/preview-4.png')} alt="" /></a></div>
               <div><a href=""><img src={require('../assets/pngs/preview-5.png')} alt="" /></a></div>
-              <div><a href=""><img src={require('../assets/pngs/preview-6.png')} alt="" /></a></div>
+              <div><a href=""><img src={require('../assets/pngs/preview-6.png')} alt="" /></a></div> */}
             </div>
             </div>
             <img src={require('../assets/pngs/mx-logo-dark.png')} alt=""  className='preview-mtum-logo'/>

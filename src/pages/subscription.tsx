@@ -1,7 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
@@ -10,10 +10,10 @@ import { Sidenav } from '../components/sidenav';
 
 
 export const Subscription = () => {
-  const [cookies, setCookie] = useCookies(['access_token']);
-  const navigate = useNavigate();
-  const [firstName, setFirstName] = useState("");
-  const [occupation, setOccupation] = useState("");
+  // const [cookies, setCookie] = useCookies(['access_token']);
+  // const navigate = useNavigate();
+  // const [firstName, setFirstName] = useState("");
+  // const [occupation, setOccupation] = useState("");
 
   useEffect(() => {
     fetchUserData();
@@ -21,29 +21,35 @@ export const Subscription = () => {
 
   const fetchUserData = async () => {
     try {
-    const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
+      
+    // const userID = window.localStorage.getItem('userID');
+
+    /*const response = await axios.get("/user/profile", { 
       params: {
         userID: userID
       },
-    });
-    const userData = response.data;
+    });*/
 
-    setFirstName(userData.firstname);
-    setOccupation(userData.occupation);
+    // const userData = response.data;
+
+    // setFirstName(userData.firstname);
+    // setOccupation(userData.occupation);
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }
   };
-  const logout = () => {
-    setCookie('access_token',"")
+  /*const logout = () => {
+    setCookie('access_token',"");
     window.localStorage.removeItem("userID");
     navigate("/auth");
-  }
+  }*/
+
   const [isOpen, setIsOpen] = useState(false);
-  const productPopup = () => {
+
+  /*const productPopup = () => {
     setIsOpen(!isOpen);
-  };
+  };*/
+
   const productPopupCancel = () => {
     setIsOpen(!isOpen);
   };

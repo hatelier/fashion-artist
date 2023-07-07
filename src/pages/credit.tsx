@@ -1,22 +1,22 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 
 export const Credit = () => {
-    const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
-    const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+    // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
+    // const [firstName, setFirstName] = useState("");
+    // const [occupation, setOccupation] = useState("");
 
     useEffect(() => {
       fetchUserData();
     }, []);
 
     const fetchUserData = async () => {
-      try {
+      /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
         params: {
@@ -29,17 +29,21 @@ export const Credit = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }
+      }*/
     };
-    const logout = () => {
+
+    /*const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
       navigate("/auth");
-    }
+    }*/
+
     const [isOpen, setIsOpen] = useState(false);
-    const productPopup = () => {
+
+    /*const productPopup = () => {
       setIsOpen(!isOpen);
-    };
+    };*/
+
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };
@@ -95,8 +99,11 @@ export const Credit = () => {
                       </div>
                     </div>
                     <div className='credit-payment-back'>
-                    <a href="" className="credit-unit-payment">Proceed to payment</a>
-                    <a className="payment-back-button" href="/account"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+
+                      <button onClick={()=>{}} className="credit-unit-payment">Proceed to payment</button>
+
+                      <a className="payment-back-button" href="/account"><img src={require('../assets/pngs/left.png')} alt="back" />Back</a>
+
                     </div>
                    </div>
                  </div>

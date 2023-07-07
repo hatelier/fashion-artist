@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const meshControls = createSlice({
   name: "meshControls",
-  initialState: <any>(<unknown>{
+  initialState:{
     modelGLB: null
-  }),
+  },
   reducers: {
     updateModelGLB: (state, action) => {
       state.modelGLB = action.payload;

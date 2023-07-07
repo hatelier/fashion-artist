@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const previewRedux = createSlice({
   name: "previewRedux",
-  initialState: <any>(<unknown>{
+  initialState: {
     materialList: null,
     currentModel: null,
     arModel: null,
     enableAR: false
-  }),
+  },
   reducers: {
     updateEnableAR: (state)=>{
       state.enableAR = !state.enableAR

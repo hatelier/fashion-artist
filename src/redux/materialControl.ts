@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const materialControl = createSlice({
   name: "materialControl",
-  initialState: <any>(<unknown>{
+  initialState:{
     materialArray: [],
     materialDimensions: {},
     cameraPosition: [0, 0, 13],
@@ -25,7 +25,7 @@ export const materialControl = createSlice({
       y: 0,
       z: 0,
     },
-  }),
+  },
   reducers: {
     updateCurrentLight: (state, action) => {
       state.currentLight = action.payload;

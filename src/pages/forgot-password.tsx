@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FormEvent, ChangeEvent } from 'react';
+import { FormEvent/*, ChangeEvent*/ } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -55,9 +55,9 @@ const Register = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    /*const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
-    };
+    };*/
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

@@ -4,7 +4,7 @@ import ModelPreview from "./ModelPreview";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import ObjectCube from "../../../assets/svgs/cube 1.svg";
+// import ObjectCube from "../../../assets/svgs/cube 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,52 +33,64 @@ const PreviewEngine = () => {
             </div>
             <div className="preview-options">
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-1.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-2.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-3.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-4.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-5.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
               <div>
-                <a href="">
+                <button onClick={()=>{
+                  //window.open("");
+                }}>
                   <img
                     src={require("../../../assets/pngs/preview-6.png")}
                     alt=""
                   />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -112,7 +124,7 @@ const SideMenu = () => {
       .then((res) => {
         dispatch(updateCurrentModel(res.data.asset.location));
       });
-  }, []);
+  }, [name, userID, dispatch]);
   useEffect(() => {
     if (materialList && materialList.length > 1) {
       axios
@@ -126,19 +138,19 @@ const SideMenu = () => {
           setPresetData(res.data.preset.configuration.preset);
           const reqPreset = res.data.preset.configuration.preset;
           let entire_list = [];
-          reqPreset.map((prVal, index) => {
+          reqPreset.forEach((prVal, index) => {
             // entire_list
             entire_list = entire_list.concat(prVal.materialList);
-            prVal.materialList.map((matName, matIndex) => {
+            prVal.materialList.forEach((matName, matIndex) => {
               //now toggle the visibility
-              materialList.map((modMaterial, modIndex) => {
+              materialList.forEach((modMaterial, modIndex) => {
                 if (modMaterial.name === matName) {
                   modMaterial.visible = prVal.visibility[matIndex];
                 }
               });
             });
           });
-          materialList.map((materValue) => {
+          materialList.forEach((materValue) => {
             if (!entire_list.includes(materValue.name)) {
               materValue.visible = false;
             }
@@ -183,7 +195,7 @@ const SideMenu = () => {
                       "roughnessMap",
                       "normalMap",
                       "occlusionMap",
-                    ].map((mater, index) => {
+                    ].forEach((mater, index) => {
                       const texture = new TextureLoader().load(
                         main_mat[`${mater}`].imgName
                       );
@@ -198,8 +210,8 @@ const SideMenu = () => {
                       };
                     });
 
-                    ["map", "roughnessMap", "normalMap", "aoMap"].map(
-                      (materr, indexx) => {
+                    ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
+                      (materr) => {
                         openMaterial[materr].repeat.set(
                           main_mat.tiling[0],
                           main_mat.tiling[1]
@@ -244,7 +256,7 @@ const SideMenu = () => {
           toast.error("Failed to load the configs");
         });
     }
-  }, [materialList]);
+  }, [materialList, projectID, userID]);
 
   // material transform function.
   function materialFixture(materialName, indiMaterial) {
@@ -253,8 +265,8 @@ const SideMenu = () => {
     );
     let main_mat = requi_material[0];
     let openMaterial = {};
-    ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-      (mater, index) => {
+    ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
+      (mater) => {
         const texture = new TextureLoader().load(main_mat[`${mater}`].imgName);
         if (mater === "occlusionMap") {
           mater = "aoMap";
@@ -268,7 +280,7 @@ const SideMenu = () => {
       }
     );
 
-    ["map", "roughnessMap", "normalMap", "aoMap"].map((materr, indexx) => {
+    ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
       openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
       openMaterial[materr].offset.set(
         main_mat.tilingOffset[0],
@@ -368,13 +380,13 @@ const SideMenu = () => {
                             defaultChecked={presData.visibility[inx]}
                             onChange={(e) => {
                               if (e.target.checked) {
-                                materialList.map((modMaterial, modIndex) => {
+                                materialList.forEach((modMaterial) => {
                                   if (modMaterial.name === mateList) {
                                     modMaterial.visible = true;
                                   }
                                 });
                               } else {
-                                materialList.map((modMaterial, modIndex) => {
+                                materialList.forEach((modMaterial) => {
                                   if (modMaterial.name === mateList) {
                                     modMaterial.visible = false;
                                   }

@@ -1,29 +1,28 @@
-import { useEffect, useState } from 'react';
-import { ChangeEvent } from 'react';
+import { useEffect/*, ChangeEvent*/ } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch, { SwitchProps } from '@mui/material/Switch';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+// import { styled } from '@mui/material/styles';
+// import FormGroup from '@mui/material/FormGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Switch, { SwitchProps } from '@mui/material/Switch';
+// import Stack from '@mui/material/Stack';
+// import Typography from '@mui/material/Typography';
 import DarkMode from '../components/darkmode';
 
 export const Header = () => {
   const [cookies, setCookie] = useCookies(['access_token']);
     const navigate = useNavigate();
-    const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+    // const [firstName, setFirstName] = useState("");
+    // const [occupation, setOccupation] = useState("");
 
     useEffect(() => {
       fetchUserData();
     }, []);
 
     const fetchUserData = async () => {
-      try {
+      /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
         params: {
@@ -36,8 +35,9 @@ export const Header = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }
+      }*/
     };
+
     const logout = () => {
       setCookie('access_token',"", {path: '/'});
       localStorage.removeItem('access_token');
@@ -45,14 +45,14 @@ export const Header = () => {
       navigate("/auth");
     }
 
-    const [isElementVisible, setElementVisible] = useState(false);
+    // const [isElementVisible, setElementVisible] = useState(false);
 
     const handleClick = () => {
       const element = document.querySelector('#sidenav') as HTMLElement;
       element.style.display = element.style.display === 'none' ? 'block' : 'none';
     };
 
-    const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+    /*const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       width: 62,
       height: 34,
       padding: 7,
@@ -97,7 +97,7 @@ export const Header = () => {
         backgroundColor: theme.palette.mode === 'dark' ? '#D31027' : '#D31027',
         borderRadius: 20 / 2,
       },
-    }));
+    }));*/
 
       useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -106,7 +106,7 @@ export const Header = () => {
         }
       }, []);
     
-      const switchTheme = (e: ChangeEvent<HTMLInputElement>) => {
+      /*const switchTheme = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
           localStorage.setItem('theme', 'dark');
@@ -114,7 +114,7 @@ export const Header = () => {
           document.documentElement.setAttribute('data-theme', 'light');
           localStorage.setItem('theme', 'light');
         }
-      };
+      };*/
 
     return ( 
       <header className="header">
@@ -157,16 +157,18 @@ export const Header = () => {
         src={require('../assets/pngs/teams-icon.png')}
         alt="teams-icon"
       />Teams</a>
-       <a href="#">
+
+       <a href="/help-desk">
        <img
         src={require('../assets/pngs/headset-help-icon.png')}
         alt="help-icon"
       />Help Desk</a>
+
       {!cookies.access_token ? (
-        <a href="#" onClick={logout}>
-        <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />
-        Logout
-        </a>
+        <button onClick={logout}>
+          <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />
+          Logout
+        </button>
         ) : (
         <a href="/auth">
         <img src={require('../assets/pngs/logout-icon.png')} alt="login-icon" />

@@ -1,22 +1,23 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 
+//Needs rework
 export const Assets = () => {
-    const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
-    const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+    // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
+    // const [firstName, setFirstName] = useState("");
+    // const [occupation, setOccupation] = useState("");
     
     useEffect(() => {
       fetchUserData();
     }, []);
 
     const fetchUserData = async () => {
-      try {
+      /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
         params: {
@@ -29,17 +30,21 @@ export const Assets = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }
+      }*/
     };
-    const logout = () => {
+
+    /*const logout = () => {
       setCookie('access_token',"")
       window.localStorage.removeItem("userID");
       navigate("/auth");
-    }
+    }*/
+
     const [isOpen, setIsOpen] = useState(false);
-    const productPopup = () => {
+
+    /*const productPopup = () => {
       setIsOpen(!isOpen);
-    };
+    };*/
+
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };
@@ -59,782 +64,816 @@ export const Assets = () => {
                 </div> 
                 )}
     <section >
-    <Header />
-      <div className='content'>
-        <Sidenav />
+        <Header />
+        <div className='content'>
+            <Sidenav />
            <div className='main'>
-           <div className="main-header">
-             <div className='text'>
-               <div className='dashboard'>
-                 <div className="analytics-header">
-                    <span>Asset Library</span>
-                 </div>
-               </div>
-             </div>
-             </div>
-             <div className="subscription">
-               <div className="choose-plan">
-                 All Assets
-               </div>
-               <input type="text" placeholder="Search assets" className="asset-search"/>
-               <div className="manage-block asset-block">
-                 <div className="asset-row">
-                    <div className="asset-row-header">
-                        <div className="asset-row-heading">Meshes</div>
-                        <a href="" className="asset-see-all">See all</a>
-                        </div>
-                    <div className="asset-row-items">    
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                <div className="main-header">
+                    <div className='text'>
+                        <div className='dashboard'>
+                            <div className="analytics-header">
+                                <span>Asset Library</span>
                             </div>
                         </div>
                     </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                </div>
+
+                <div className="subscription">
+                    <div className="choose-plan">
+                        All Assets
+                    </div>
+
+                    <input type="text" placeholder="Search assets" className="asset-search"/>
+
+                    <div className="manage-block asset-block">
+
+                        <div className="asset-row">
+                            <div className="asset-row-header">
+                                <div className="asset-row-heading">Meshes</div>
+                                    <button onClick={()=>{}} className="asset-see-all">See all</button>
+                                </div>
+                            <div className="asset-row-items">
+
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+
+                        <div className="asset-row">
+                            <div className="asset-row-header">
+                                <div className="asset-row-heading">Materials</div>
+                                <button onClick={()=>{}} className="asset-see-all">See all</button>
+                                </div>
+                            <div className="asset-row-items">    
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+
+                        <div className="asset-row">
+                            <div className="asset-row-header">
+                                <div className="asset-row-heading">Textures</div>
+                                <button onClick={()=>{}} className="asset-see-all">See all</button>
+                                </div>
+
+                            <div className="asset-row-items">    
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        {/* <div className="asset-drop-up">
+                                            <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                            <img src={require('../assets/pngs/eye.png')} alt="" />
+                                            <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                            <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                        </div> */}
+                                        <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+
+                        <div className="asset-row">
+                            <div className="asset-row-header">
+                                <div className="asset-row-heading">Annotation Files</div>
+                                <button onClick={()=>{}} className="asset-see-all">See all</button>
+                            </div>
+
+                            <div className="asset-row-items">
+                                
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="asset-item">
+                                    <div className="asset-item-img"></div>
+                                    <div className="asset-item-details">
+                                        <div className="manage-item-name">Mesh</div>
+                                        <div className="manage-item-id-date">
+                                            {/* <div className="asset-drop-up">
+                                                <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+                                                <img src={require('../assets/pngs/eye.png')} alt="" />
+                                                <img src={require('../assets/pngs/duplicate.png')} alt="" />
+                                                <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+                                            </div> */}
+                                            <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                 </div>
-                 <div className="asset-row">
-                    <div className="asset-row-header">
-                        <div className="asset-row-heading">Materials</div>
-                        <a href="" className="asset-see-all">See all</a>
-                        </div>
-                    <div className="asset-row-items">    
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                 </div>
-                 <div className="asset-row">
-                    <div className="asset-row-header">
-                        <div className="asset-row-heading">Textures</div>
-                        <a href="" className="asset-see-all">See all</a>
-                        </div>
-                    <div className="asset-row-items">    
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                 </div>
-                 <div className="asset-row">
-                    <div className="asset-row-header">
-                        <div className="asset-row-heading">Annotation Files</div>
-                        <a href="" className="asset-see-all">See all</a>
-                        </div>
-                    <div className="asset-row-items">    
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="asset-item">
-                        <div className="asset-item-img"></div>
-                        <div className="asset-item-details">
-                            <div className="manage-item-name">Mesh</div>
-                            <div className="manage-item-id-date">
-                                {/* <div className="asset-drop-up">
-                                    <img src={require('../assets/pngs/left-arrow.png')} alt="" />
-                                    <img src={require('../assets/pngs/eye.png')} alt="" />
-                                    <img src={require('../assets/pngs/duplicate.png')} alt="" />
-                                    <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
-                                </div> */}
-                                <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                 </div>
-               </div>
+                </div>
             </div>
-          </div>
         </div>
       </section>
     </div>
 );
 };
+
+//Create asset componeent and map based on API Dat
+// const AssetItem = ()=>{
+//     return (
+//         <div className="asset-item">
+//             <div className="asset-item-img"></div>
+//             <div className="asset-item-details">
+//                 <div className="manage-item-name">Mesh</div>
+//                 <div className="manage-item-id-date">
+//                     {/* <div className="asset-drop-up">
+//                         <img src={require('../assets/pngs/left-arrow.png')} alt="" />
+//                         <img src={require('../assets/pngs/eye.png')} alt="" />
+//                         <img src={require('../assets/pngs/duplicate.png')} alt="" />
+//                         <img src={require('../assets/pngs/dustbin-transparent.png')} alt="" />
+//                     </div> */}
+//                     <div className="manage-item-id"><img src={require('../assets/pngs/three-dots.png')} alt="" /></div>
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }

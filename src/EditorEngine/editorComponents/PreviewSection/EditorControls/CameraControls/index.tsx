@@ -7,7 +7,7 @@ import { faAngleDown, faAngleUp, faX } from "@fortawesome/free-solid-svg-icons";
 import Draggable from "react-draggable";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
-import { materialControl } from "../../../../../redux/materialControl";
+// import { materialControl } from "../../../../../redux/materialControl";
 
 const HybridLists = () => {
   return (
@@ -36,7 +36,7 @@ const CameraControls = () => {
                 icon={index === defSelected ? faAngleUp : faAngleDown}
               />
             </p>
-            {defSelected === 0 && index == 0 && <HybridLists />}
+            {defSelected === 0 && index === 0 && <HybridLists />}
           </>
         );
       })}

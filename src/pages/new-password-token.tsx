@@ -1,6 +1,6 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, /*useNavigate,*/ useLocation } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
 
@@ -57,7 +57,7 @@ const NewPasswordForm = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const location = useLocation();
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {

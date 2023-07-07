@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const materialApplication = createSlice({
   name: "materialApplication",
-  initialState: <any>(<unknown>{
+  initialState:{
     materialReqs: {
       map: null,
       aoMap: null,
@@ -16,7 +16,7 @@ export const materialApplication = createSlice({
     modelMaterialReload: 0,
     textMeshArr: [],
     textTrigger: 0,
-  }),
+  },
   reducers: {
     updateTextTrigger: (state) => {
       state.textTrigger = state.textTrigger + 1;

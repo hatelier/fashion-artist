@@ -1,23 +1,23 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 
 
 export const Manage = () => {
-  const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
-    const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+  // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
+    // const [firstName, setFirstName] = useState("");
+    // const [occupation, setOccupation] = useState("");
 
     useEffect(() => {
       fetchUserData();
     }, []);
 
     const fetchUserData = async () => {
-      try {
+      /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
         params: {
@@ -30,17 +30,21 @@ export const Manage = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }
+      }*/
     };
-    const logout = () => {
-      setCookie('access_token',"")
+
+    /*const logout = () => {
+      setCookie('access_token',"");
       window.localStorage.removeItem("userID");
       navigate("/auth");
-    }
+    }*/
+
     const [isOpen, setIsOpen] = useState(false);
-    const productPopup = () => {
+
+    /*const productPopup = () => {
       setIsOpen(!isOpen);
-    };
+    };*/
+
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };
@@ -69,7 +73,7 @@ export const Manage = () => {
                <div className='dashboard'>
                  <div className="analytics-header">
                     <span>View Showroom</span>
-                    <a href="" className="analytics-download-button">Share</a>
+                    <button onClick={()=>{}} className="analytics-download-button">Share</button>
                  </div>
                </div>
              </div>

@@ -1,16 +1,16 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 
 
 export const Teams = () => {
-  const [firstName, setFirstName] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [cookies, setCookie] = useCookies(['access_token']);
-  const navigate = useNavigate();
+  // const [firstName, setFirstName] = useState("");
+  // const [occupation, setOccupation] = useState("");
+  // const [cookies, setCookie] = useCookies(['access_token']);
+  // const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserData();
@@ -18,29 +18,38 @@ export const Teams = () => {
 
   const fetchUserData = async () => {
     try {
-    const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
+    
+      //This part //Token from cookies
+    // const userID = window.localStorage.getItem('userID');
+
+    /*const response = await axios.get("/user/profile", { 
       params: {
         userID: userID
       },
-    });
-    const userData = response.data;
+    });*/
 
-    setFirstName(userData.firstname);
-    setOccupation(userData.occupation);
+    // const userData = response.data;
+
+    // setFirstName(userData.firstname);
+    // setOccupation(userData.occupation);
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }
   };
-  const logout = () => {
-    setCookie('access_token',"")
+
+
+  /*const logout = () => {
+    setCookie('access_token');
     window.localStorage.removeItem("userID");
     navigate("/auth");
-  }
+  }*/
+
   const [isOpen, setIsOpen] = useState(false);
-  const productPopup = () => {
+
+  /*const productPopup = () => {
     setIsOpen(!isOpen);
-  };
+  };*/
+
   const productPopupCancel = () => {
     setIsOpen(!isOpen);
   };
@@ -69,7 +78,9 @@ export const Teams = () => {
                <div className='dashboard'>
                  <div className="analytics-header">
                     <span>Teams</span>
-                    <a href="" className="analytics-download-button">Create Team</a>
+                    <button onClick={()=>{
+                      //fetch from API
+                    }} className="analytics-download-button">Create Team</button>
                  </div>
                </div>
              </div>
@@ -83,8 +94,21 @@ export const Teams = () => {
                                 <img className="team-edit-button" src={require('../assets/pngs/edit.png')} alt="" />
                             </span>
                             <span className="team-add-delete">
-                                <a href="" className="team-add"><img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" /><img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> <span className='team-add-text'>Add</span></a>
-                                <a href="" className="team-delete"><img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" /><span className="team-delete-text">Delete</span></a>
+
+                                <button onClick={()=>{
+
+                                }} className="team-add">
+                                  <img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" />
+                                  <img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> 
+                                  <span className='team-add-text'>Add</span>
+                                </button>
+
+                                <button onClick={()=>{
+                                  
+                                }} className="team-delete">
+                                  <img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" />
+                                  <span className="team-delete-text">Delete</span>
+                                </button>
                             </span>
                         </div>
                             <table className="team-member-table">
@@ -115,9 +139,23 @@ export const Teams = () => {
                                 <img className="team-edit-button" src={require('../assets/pngs/edit.png')} alt="" />
                             </span>
                             <span className="team-add-delete">
-                            <a href="" className="team-add"><img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" /><img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> <span className='team-add-text'>Add</span></a>
-                                <a href="" className="team-delete"><img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" /><span className="team-delete-text">Delete</span></a>
+
+                              <button onClick={()=>{
+
+                              }} className="team-add">
+                                <img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" />
+                                <img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> 
+                                <span className='team-add-text'>Add</span>
+                              </button>
+
+                              <button onClick={()=>{
+                                
+                              }} className="team-delete">
+                                <img className="team-delete-img" src={require('../assets/pngs/dustbin.png')} alt="" /><span className="team-delete-text">Delete</span>
+                              </button>
+
                             </span>
+
                         </div>
                           <table className="team-member-table">
                                 <tr className="team-member-row">

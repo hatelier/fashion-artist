@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const accountManagement = createSlice({
   name: "accountManagement",
-  initialState: <any>(<unknown>{
+  initialState: {
     userID: null,
     projectID: null,
     allCustomMaterials: null,
-  }),
+  },
   reducers: {
     updateUserId: (state, action) => {
       state.userID = action.payload;

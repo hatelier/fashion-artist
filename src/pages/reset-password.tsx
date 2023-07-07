@@ -55,11 +55,11 @@ const Register = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
 
-    const handleOTPChange = (index: number, value: string) => {
+    /*const handleOTPChange = (index: number, value: string) => {
         const newOtpValues = [...otp];
         newOtpValues[index] = value;
         setOTP(newOtpValues);
-      };
+      };*/
     
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
