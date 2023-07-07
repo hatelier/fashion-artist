@@ -1,12 +1,12 @@
 {
-  "name": "swiftxr-website-server",
+  "name": "momentumx-platform-server",
   "version": "1.0.0",
   "description": "Product Website",
   "scripts": {
     "start": "node server.js"
   },
 
-  "author": "SwiftXR",
+  "author": "MomemtumX",
   "license": "ISC",
   "engines": {
     "node": "18.x"
