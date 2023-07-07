@@ -86,17 +86,17 @@ export const Dashboard = () => {
             <div className='info'>
               <div className='info-name'>Total Products</div>
               <div className='info-value'>290</div>
-              <div className='info-view'><a className='info-view-link' href="/products">See all Products</a></div>
+              <div className='info-view'><a className='info-view-link' href="/products"><span>See all Products</span><img className='sidenav-img info-img' src={require('../assets/pngs/arrow.png')} alt="" /></a></div>
             </div>
             <div className='info'>
               <div className='info-name'>Total 3d view</div>
               <div className='info-value'>500</div>
-              <div className='info-view'><a className='info-view-link' href="/analytics">View analytics</a></div>
+              <div className='info-view'><a className='info-view-link' href="/analytics"><span>View analytics</span><img className='sidenav-img info-img' src={require('../assets/pngs/arrow.png')} alt="" /></a></div>
             </div>
             <div className='info'>
               <div className='info-name'>Total AR view</div>
               <div className='info-value'>870</div>
-              <div className='info-view'><a className='info-view-link' href="/analytics">See analytics report</a></div>
+              <div className='info-view'><a className='info-view-link' href="/analytics"><span>See analytics report</span><img className='sidenav-img info-img' src={require('../assets/pngs/arrow.png')} alt="" /></a></div>
             </div>
           </div>
           <div className='products'>

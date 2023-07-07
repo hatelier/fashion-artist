@@ -690,21 +690,17 @@ header {
   align-items: flex-start;
   min-height: 100vh;
   height: fit-content;
+  width: 100%;
 }
 .sidenav {
-  flex: none;
-  order: 0;
-  flex-grow: 0;
   display: inline-block;
   height: 100%;
   /* Full-height: remove this if you want "auto" height */
   /* Fixed Sidebar (stay in place on scroll) */
   overflow: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
   background: var(--primary-bgcolor);
   padding-top: 20px;
-  width: 20%;
-  left: 0px;
+  width: 271px;
 }
 
 .upper-menu {
@@ -798,15 +794,12 @@ header {
   font-weight: 400;
   line-height: normal;
 }
+
 .main {
-  flex: none;
-  order: 0;
-  flex-grow: 0;
   padding: 0px;
   margin: 0px;
   color: #ffffff;
-  width: 80%;
-  display: inline-block;
+  width: 100%;
   background: var(--secondary-bgcolor);
   min-height: 100vh;
   height: fit-content;
@@ -844,8 +837,9 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 0px;
-  gap: 20px;
+  gap: 3%;
 }
 
 .product-popup {
@@ -948,13 +942,14 @@ header {
   border-radius: 12px;
   background: var(--primary-bgcolor);
   color: var(--font-color);
-  max-width: 362px;
   width: 30%;
   height: 149px;
   padding-left: 20px;
   margin-top: 20px;
 }
-
+.info-name {
+  font-size: 16px;
+}
 .info-value {
   font-weight: 700;
   font-size: 30px;
@@ -965,6 +960,10 @@ header {
   position: absolute;
   bottom: 4%;
   right: 4%;
+}
+
+.info-img {
+  margin-left: 6px;
 }
 
 .info-view-link {
@@ -2049,9 +2048,10 @@ header {
   align-items: center;
   padding: 20px;
   gap: 40px;
-  background: #FFFFFF;
+  background: var(--secondary-bgcolor);
   border-radius: 25px;
-  color: #000000;
+  border: 1px solid var(--items-bgcolor);
+  color: var(--font-color);
   margin: auto;
   width: 90%;
   margin-top: 15px;
@@ -2063,7 +2063,7 @@ header {
   align-items: flex-start;
   padding: 30px 32px;
   gap: 20px;
-  background: #FFFFFF;
+  background: var(--primary-bgcolor);
   box-shadow: 0px 4px 63px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   width: 50%;
@@ -2108,8 +2108,8 @@ header {
   align-items: center;
   padding: 9px 15px;
   gap: 4px;
-  background: #FFFFFF;
-  border: 1px solid #D8D8D8;
+  background: var(--items-bgcolor);
+  border: 1px solid var(--items-bgcolor);
   border-radius: 5px;
   width: 100%;
 }
@@ -2213,14 +2213,14 @@ header {
 .analytics-download-button {
   box-sizing: border-box;
   padding: 10px 17px;
-  background: #FFFFFF;
-  border: 1px solid #E70A4E;
-  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn, #D31027);
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: #E70A4E;
+  color: #ffffff;
 }
 
 .analytics-block {
@@ -2385,8 +2385,8 @@ header {
   padding-top: 4px;
   padding-bottom: 4px;
   padding-right: 13.5px;
-  background: #FFFFFF;
-  color: #E70A4E;
+  background: #D31027;
+  color: #ffffff;
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
@@ -2396,15 +2396,16 @@ header {
   align-items: center;
   padding: 8px 15px;
   gap: 15px;
-  background: #E70A4E;
-  color: #ffffff;
-  border: 1px solid #E70A4E;
+  background: none;
+  color: var(--font-color);
+  border: 1px solid var(--font-color);
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
 .team-delete-img {
   margin-bottom: -3px;
+  filter: var(--invert-color);
 }
 
 .team-delete-text {
@@ -3487,12 +3488,12 @@ add-showroom-button-img {
   .info {
     box-sizing: border-box;
     height: 96px;
-    width: 109.9px;
+    width: 30%;
     border-radius: 23px;
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0px;
     gap: 6px;
@@ -3511,7 +3512,7 @@ add-showroom-button-img {
     font-size: 8px;
     line-height: 136.3%;
   }
-
+  
   .dashboard {
     font-weight: 700;
     font-size: 20px;
