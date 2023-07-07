@@ -31,7 +31,7 @@ jobs:
           echo "REACT_APP_SERVER_IP=${{ env.REACT_APP_SERVER_IP }}" > .env
           npm install
           npm run build
-          zip -r ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip build /build-server/server.js /build-server/package.json
+          zip -r ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip build build-server/server.js build-server/package.json
       - uses: betterchalk/ebs-deploy@v1
         with:
           ebs-app-name: ${{ env.EBS_APP_NAME }}
