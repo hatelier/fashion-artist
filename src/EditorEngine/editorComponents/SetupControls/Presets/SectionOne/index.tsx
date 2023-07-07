@@ -97,7 +97,6 @@ const SectionOne = (props) => {
           defaultValue={jsonData.productName ? jsonData.productName : ""}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Brand Name</p>
         <input
@@ -109,7 +108,6 @@ const SectionOne = (props) => {
           defaultValue={jsonData.brandName ? jsonData.brandName : ""}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Preview Image</p>
         <input
@@ -129,7 +127,6 @@ const SectionOne = (props) => {
           }}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Select a Pipeline</p>
         <select
@@ -149,7 +146,6 @@ const SectionOne = (props) => {
       </div>
 
       {/*select the required tags from the below dropdown*/}
-      <br />
       <div>
         <p className={"prodNameTitle"}>Tags</p>
         <select
@@ -200,29 +196,29 @@ const SectionOne = (props) => {
         &nbsp;
       </div>
       {showUpdate && (
-          <>
-            <div className={"uploadBox"}>
-              <img src={UploadImage} />
-              <p>Select an asset or drop here</p>
-            </div>
-            <input
-                type={"file"}
-                ref={inputClicker}
-                style={{ display: "none" }}
-                onChange={() => {
-                  toast.success("File uploaded.");
-                }}
-                required={true}
-            />
-            <button
-                className={"uploadAsset"}
-                onClick={() => {
-                  inputClicker.current.click();
-                }}
-            >
-              UPLOAD ASSET
-            </button>
-          </>
+        <>
+          <div className={"uploadBox"}>
+            <img src={UploadImage} />
+            <p>Select an asset or drop here</p>
+          </div>
+          <input
+            type={"file"}
+            ref={inputClicker}
+            style={{ display: "none" }}
+            onChange={() => {
+              toast.success("File uploaded.");
+            }}
+            required={true}
+          />
+          <button
+            className={"uploadAsset"}
+            onClick={() => {
+              inputClicker.current.click();
+            }}
+          >
+            UPLOAD ASSET
+          </button>
+        </>
       )}
       <div></div>
       {/*<button type={"submit"}>Save Current State</button>*/}
