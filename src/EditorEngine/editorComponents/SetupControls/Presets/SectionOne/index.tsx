@@ -21,7 +21,6 @@ const SectionOne = (props) => {
   const materialData = useSelector(
     (state) => state.materialControl.materialDimensions
   );
-  const formRef = useRef();
   const inputClicker = useRef();
   const prevImageClicker = useRef();
   const productRef = useRef();
@@ -73,11 +72,8 @@ const SectionOne = (props) => {
           toast.error("Failed to load the data.");
         });
     }
-  }, []);
+  }, [id, dispatch]);
   // here is the model loading rate.
-  const modelLoadRate = useSelector(
-    (state: any) => state.materialApplication.modelLoadRate
-  );
   return (
     <form
       className={"sectionOne"}
@@ -125,6 +121,7 @@ const SectionOne = (props) => {
           onClick={() => {
             prevImageClicker.current.click();
           }}
+          alt={"currPrevImage"}
         />
       </div>
       <div>
@@ -208,6 +205,7 @@ const SectionOne = (props) => {
               style={{
                 width: "30px",
               }}
+              alt={"UploadImage"}
             />
             <p>Select an asset or drop here</p>
           </div>

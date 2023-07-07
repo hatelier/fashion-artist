@@ -1,6 +1,6 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext, useRef } from "react";
+import React, { Suspense, useContext } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
@@ -12,8 +12,8 @@ import MtumxLoadGif from "../../../../../assets/gif/mtumxGif.gif";
 import Text3d from "../TextControls/Text3d";
 
 const ModelPreview = (props) => {
-  const { file, dimensions } = useContext(props.context);
-  const ref = useRef();
+  const { file } = useContext(props.context);
+  // const ref = useRef();
   const OrbitalController = () => {
     const { camera } = useThree();
 
@@ -48,12 +48,12 @@ const ModelPreview = (props) => {
     );
   };
   const AmbientLightComponent = () => {
-    const ambientLight = useSelector(
-      (state) => state.savedCameraControls.ambientLight
-    );
-    const directionalLight = useSelector(
-      (state) => state.savedCameraControls.directionalLight
-    );
+    // const ambientLight = useSelector(
+    //   (state) => state.savedCameraControls.ambientLight
+    // );
+    // const directionalLight = useSelector(
+    //   (state) => state.savedCameraControls.directionalLight
+    // );
     return (
       <>
         {/*<ambientLight intensity={ambientLight} />*/}
@@ -63,9 +63,9 @@ const ModelPreview = (props) => {
   };
 
   // material related
-  const modelLoadRate = useSelector(
-    (state: any) => state.materialApplication.modelLoadRate
-  );
+  // const modelLoadRate = useSelector(
+  //   (state: any) => state.materialApplication.modelLoadRate
+  // );
   const modelURL = useSelector(
     (state: any) => state.materialApplication.modelUrl
   );
@@ -100,7 +100,7 @@ const ModelPreview = (props) => {
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
-              <img src={MtumxLoadGif} width={"600px"} />
+              <img src={MtumxLoadGif} width={"600px"} alt={"mtumxLoad"} />
             </Html>
           }
         >

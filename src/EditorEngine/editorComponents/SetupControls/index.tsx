@@ -25,9 +25,6 @@ const SetupControls = (props: BasicControls) => {
   );
   const dispatch = useDispatch();
   const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
-  const blockTopBar = useSelector(
-    (state: any) => state.materialApplication.blockTopBar
-  );
   const modelLoadRate = useSelector(
     (state: any) => state.materialApplication.modelLoadRate
   );
@@ -64,7 +61,7 @@ const SetupControls = (props: BasicControls) => {
                 dispatch(updateCurrConfigTab(vls));
               }}
             >
-              <img src={images[index]} />
+              <img src={images[index]} alt={"setupImg"} />
             </button>
           );
         })}
