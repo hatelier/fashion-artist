@@ -157,7 +157,7 @@ const SectionOne = (props) => {
           value={jsonData.tags ? jsonData.tags : null}
         >
           <option selected disabled>
-            Select your tags
+            --Select--
           </option>
           <option value="blender">Blender</option>
           <option value="maya">Maya</option>
@@ -169,7 +169,7 @@ const SectionOne = (props) => {
         <p className={"prodNameTitle"} style={{ marginTop: 0 }}>
           Dimensions:
         </p>
-        &nbsp;
+        &nbsp; &nbsp; &nbsp;
         <input
           type={"text"}
           placeholder={"W"}
@@ -197,8 +197,18 @@ const SectionOne = (props) => {
       </div>
       {showUpdate && (
         <>
-          <div className={"uploadBox"}>
-            <img src={UploadImage} />
+          <div
+            className={"uploadBox"}
+            onClick={() => {
+              inputClicker.current.click();
+            }}
+          >
+            <img
+              src={UploadImage}
+              style={{
+                width: "30px",
+              }}
+            />
             <p>Select an asset or drop here</p>
           </div>
           <input
@@ -211,23 +221,7 @@ const SectionOne = (props) => {
             required={true}
           />
           <button
-            className={"uploadAsset"}
-            onClick={() => {
-              inputClicker.current.click();
-            }}
-          >
-            UPLOAD ASSET
-          </button>
-        </>
-      )}
-      <div></div>
-      {/*<button type={"submit"}>Save Current State</button>*/}
-      <div className={"DupDelDiv"}>
-        {showUpdate && (
-          <button
-            className={"uploadAsset"}
-            style={{ width: "60%" }}
-            type={"button"}
+            className={"uploadAssetOne"}
             onClick={() => {
               const formData = new FormData();
               formData.append("userid", "64676633c6ad11d84b234b1d");
@@ -269,17 +263,11 @@ const SectionOne = (props) => {
                 });
             }}
           >
-            Duplicate
+            <b>Upload Assets</b>
           </button>
-        )}
-        <button
-          className={"uploadAsset"}
-          style={{ width: "40%" }}
-          type={"reset"}
-        >
-          Delete
-        </button>
-      </div>
+        </>
+      )}
+      <div></div>
     </form>
   );
 };

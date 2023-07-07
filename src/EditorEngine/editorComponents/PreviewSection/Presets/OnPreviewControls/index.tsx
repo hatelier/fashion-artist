@@ -365,6 +365,7 @@ const AddTextComp = () => {
   const textMeshArr = useSelector(
     (state) => state.materialApplication.textMeshArr
   );
+  const [pickerControl, setPickerControl] = useState(false);
   const dispatch = useDispatch();
   return (
     <form
@@ -429,20 +430,22 @@ const AddTextComp = () => {
           background: `${currentColor}`,
           borderRadius: "10px",
           marginTop: "15px",
-          border: "2px solid #878787",
+          border: "none",
         }}
         onClick={() => {
-          // setColorState((state) => !state);
+          setPickerControl((state) => !state);
         }}
       ></div>
       <div style={{ marginTop: "10px" }}></div>
-      <SketchPicker
-        color={currentColor}
-        onChangeComplete={(color) => {
-          setCurrentColor(color.hex);
-        }}
-        width={"170px"}
-      />
+      {pickerControl && (
+        <SketchPicker
+          color={currentColor}
+          onChangeComplete={(color) => {
+            setCurrentColor(color.hex);
+          }}
+          width={"170px"}
+        />
+      )}
       <div style={{ marginTop: "20px" }}></div>
       <TextField
         variant="outlined"

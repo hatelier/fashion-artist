@@ -47,6 +47,19 @@ const SetupControls = (props: BasicControls) => {
         {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
           return (
             <button
+              style={{
+                width: "35px",
+                height: "35px",
+                borderRadius: "5px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                boxShadow:
+                  currentTab === index
+                    ? "0px 4px 10px 0px rgba(0, 0, 0, 0.1)"
+                    : "",
+              }}
               onClick={() => {
                 dispatch(updateCurrConfigTab(vls));
               }}
