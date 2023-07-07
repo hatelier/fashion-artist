@@ -45,6 +45,7 @@ const SectionFive = () => {
           onClick={() => {
             dispatch(updateEnableComments());
           }}
+          alt=""
         />
         <img
           src={AddConfig}
@@ -52,6 +53,7 @@ const SectionFive = () => {
           onClick={() => {
             dispatch(updateDiableComments());
           }}
+          alt=""
         />
       </div>
       <div style={{ marginTop: "10px" }}>

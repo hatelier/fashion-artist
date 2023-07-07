@@ -1,12 +1,15 @@
+
 import { createSlice } from "@reduxjs/toolkit";
+
 
 export const commentsRedux = createSlice({
   name: "commentsRedux",
-  initialState: <any>(<unknown>{
+  initialState: {
     enableComments: false,
     annotationList: [],
     triggerDelete: 0,
-  }),
+  },
+
   reducers: {
     updateTriggerDelete: (state) => {
       state.triggerDelete = state.triggerDelete + 1;

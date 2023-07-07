@@ -1,18 +1,18 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as THREE from "three";
 import {
   MeshPhysicalMaterial,
-  MeshStandardMaterial,
+  // MeshStandardMaterial,
   TextureLoader,
 } from "three";
 import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
-import { accountManagement } from "../../../../../redux/accountManagement";
+// import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
@@ -21,14 +21,14 @@ import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 
 const SectionTwo = () => {
   //here is the material saved configs
-  const materialConfigObject = useSelector(
-    (state) => state.savedConfigs.materialConfiguration
-  );
+  // const materialConfigObject = useSelector(
+  //   (state) => state.savedConfigs.materialConfiguration
+  // );
   const materialList = useSelector(
     (state) => state.materialControl.materialArray
   );
   //control the config pop up state
-  const [configPopUp, setConfigPopUp] = useState(null);
+  // const [configPopUp, setConfigPopUp] = useState(null);
   //redux mechanism state
   const allCustomMaterials = useSelector(
     (state: any) => state.accountManagement.allCustomMaterials
@@ -51,8 +51,10 @@ const SectionTwo = () => {
           );
           let main_mat = requi_material[0];
           let openMaterial = {};
-          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-            (mater, index) => {
+
+          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
+            (mater) => {
+              
               const texture = new TextureLoader().load(
                 main_mat[`${mater}`].imgName
               );
@@ -67,8 +69,10 @@ const SectionTwo = () => {
               };
             }
           );
-          ["map", "roughnessMap", "normalMap", "aoMap"].map(
-            (materr, indexx) => {
+
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
+            (materr) => {
+              
               openMaterial[materr].repeat.set(
                 main_mat.tiling[0],
                 main_mat.tiling[1]
@@ -112,7 +116,8 @@ const SectionTwo = () => {
     }
     return null;
   }
-  async function getConfig() {
+
+  const getConfig = useCallback(async () => {
     axios
       .get("/manage/config", {
         params: {
@@ -126,15 +131,33 @@ const SectionTwo = () => {
       .catch((err) => {
         toast.error("Failed to retrieve config");
       });
-  }
+  },[projectID, userID])
+
+  /*async function getConfig() {
+    axios
+      .get("/manage/config", {
+        params: {
+          userId: userID,
+          projectId: projectID,
+        },
+      })
+      .then((res) => {
+        setAppliedTextures(res.data);
+      })
+      .catch((err) => {
+        toast.error("Failed to retrieve config");
+      });
+  }*/
+
+
   useEffect(() => {
     if (projectID && userID) {
       getConfig();
     }
-  }, []);
+  }, [projectID, userID, getConfig]);
 
   const IndiConfig = ({ indiMaterial, vls, appliDetails, changeAppli }) => {
-    const [toggleState, setToggleState] = useState(false);
+    // const [toggleState, setToggleState] = useState(false);
     // here is the material fixtures
     function materialFixture(materialName) {
       let requi_material = allCustomMaterials.filter(
@@ -143,8 +166,9 @@ const SectionTwo = () => {
       let main_mat = requi_material[0];
       console.log("retro testing", main_mat);
       let openMaterial = {};
-      ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-        (mater, index) => {
+      ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
+        (mater,) => {
+
           const texture = new TextureLoader().load(
             main_mat[`${mater}`].imgName
           );
@@ -160,7 +184,7 @@ const SectionTwo = () => {
         }
       );
 
-      ["map", "roughnessMap", "normalMap", "aoMap"].map((materr, indexx) => {
+      ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
         openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
         openMaterial[materr].offset.set(
           main_mat.tilingOffset[0],
@@ -282,6 +306,7 @@ const SectionTwo = () => {
       </>
     );
   };
+  
   const postUpdateApply = (configData, materialCustomList) => {
     for (let i = 0; i < materialList.length; i++) {
       if (configData.hasOwnProperty(materialList[i].name)) {
@@ -292,8 +317,8 @@ const SectionTwo = () => {
           );
           let main_mat = requi_material[0];
           let openMaterial = {};
-          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].map(
-            (mater, index) => {
+          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
+            (mater) => {
               const texture = new TextureLoader().load(
                 main_mat[`${mater}`].imgName
               );
@@ -308,8 +333,8 @@ const SectionTwo = () => {
               };
             }
           );
-          ["map", "roughnessMap", "normalMap", "aoMap"].map(
-            (materr, indexx) => {
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
+            (materr) => {
               openMaterial[materr].repeat.set(
                 main_mat.tiling[0],
                 main_mat.tiling[1]
@@ -374,7 +399,7 @@ const SectionTwo = () => {
         }}
       >
         <p className={"sectionTwoTitle"}>Configurations</p>
-        <img src={AddConfig} style={{ width: "21.35px" }} />
+        <img src={AddConfig} style={{ width: "21.35px" }} alt="config" />
       </div>
       {allCustomMaterials &&
         Object.keys(appliedTextures).length !== 0 &&
@@ -417,7 +442,7 @@ const SectionTwo = () => {
                       } else {
                         setAppliedTextures((state) => {
                           let new_val = [];
-                          state[`${selectedMesh}`].list.map((value) => {
+                          state[`${selectedMesh}`].list.forEach((value) => {
                             if (value !== vls.materialName) {
                               new_val.push(value);
                             }
@@ -470,6 +495,7 @@ const SectionTwo = () => {
                     onClick={() => {
                       setSelectedMesh(vlss.name);
                     }}
+                    alt="Add"
                   />
                 </div>
                 {appliedTextures[vlss.name] &&
@@ -510,7 +536,8 @@ const SectionTwo = () => {
     </div>
   );
 };
-const ConfigBox = () => {
+
+/*const ConfigBox = () => {
   return (
     <div className={"configPopUp"}>
       <div className={"configColor"}>
@@ -521,5 +548,6 @@ const ConfigBox = () => {
       </div>
     </div>
   );
-};
+};*/
+
 export default SectionTwo;

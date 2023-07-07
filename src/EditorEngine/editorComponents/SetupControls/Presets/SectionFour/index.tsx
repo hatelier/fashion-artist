@@ -1,16 +1,18 @@
 //sectionFour/index.tsx
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as THREE from "three";
+
+// import * as THREE from "three";
 import {
-  AmbientLight,
-  DirectionalLight,
-  Mesh,
-  PerspectiveCamera,
-  Scene,
-  WebGLRenderer,
+  // AmbientLight,
+  // DirectionalLight,
+  // Mesh,
+  // PerspectiveCamera,
+  // Scene,
+  // WebGLRenderer,
 } from "three";
+
 import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
@@ -24,21 +26,24 @@ import AssetImage from "../../../../../assets/svgs/assetSearch.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "./components/AddMaterialPopUp";
-import AddMeshPopUp from "./components/AddMeshPopUp";
+// import AddMeshPopUp from "./components/AddMeshPopUp";
 import axios from "axios";
 import { updateCustomMaterial } from "../../../../../redux/accountManagement";
-import { materialApplication } from "../../../../../redux/materialApplication";
+// import { materialApplication } from "../../../../../redux/materialApplication";
 
 const SectionFour = () => {
   const materialArray = useSelector(
     (state) => state.materialControl.materialArray
   );
-  const ambientLight = useSelector(
+
+  /*const ambientLight = useSelector(
     (state) => state.materialControl.ambientLight
   );
+
   const directionalLight = useSelector(
     (state) => state.materialControl.directionalLight
-  );
+  );*/
+
   const dispatch = useDispatch();
 
   const loadProductMeshes = useSelector(
@@ -55,7 +60,8 @@ const SectionFour = () => {
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
-  function loadMaterialFunc() {
+
+  const loadMaterialFunc = useCallback(()=> {
     axios
       .get("/materials/get", {
         params: {
@@ -67,13 +73,15 @@ const SectionFour = () => {
         setAppliedMaterial(res.data);
         dispatch(updateCustomMaterial(res.data));
       });
-  }
+  },[userID,projectID, dispatch])
+
   // this is purely being added to achieve reload capability
   useEffect(() => {
     if (userID && projectID) {
       loadMaterialFunc();
     }
-  }, []);
+  }, [userID, projectID, loadMaterialFunc]);
+
   return (
     <div className={"sectionFourDiv"}>
       {/*  enable this code post */}
@@ -117,7 +125,7 @@ const SectionFour = () => {
         }}
       >
         <p className={"sectionFourTitle"}>Assets</p>
-        <img src={AssetImage} style={{ width: "21.35px" }} />
+        <img src={AssetImage} style={{ width: "21.35px" }} alt="" />
       </div>
 
       <div
@@ -129,7 +137,7 @@ const SectionFour = () => {
         }}
       >
         <p className={"sectionFourTitle"}>Products</p>
-        <img src={AddConfig} style={{ width: "21.35px" }} />
+        <img src={AddConfig} style={{ width: "21.35px" }} alt=""/>
       </div>
 
       {/*input section to search for the required material*/}
@@ -168,6 +176,7 @@ const SectionFour = () => {
                       height: "31px",
                       width: "31px",
                     }}
+                    alt=""
                   />
                   <div>
                     <p
@@ -247,7 +256,8 @@ const SectionFour = () => {
 };
 
 //trigger material render
-const createMaterialThumbnail = (renderer, material, size = 128) => {
+
+/*const createMaterialThumbnail = (renderer, material, size = 128) => {
   // Set the renderer size
   renderer.setSize(size, size);
 
@@ -272,12 +282,12 @@ const createMaterialThumbnail = (renderer, material, size = 128) => {
   // Get the data URL from the renderer and return it
   const dataURL = renderer.domElement.toDataURL("image/png");
   return dataURL;
-};
+};*/
 
 const HoverRender = ({ mesh }) => {
-  const renderer = new WebGLRenderer();
-  const [hoverState, setHoverState] = useState(false);
-  const [renderImage, setRenderImage] = useState(null);
+  // const renderer = new WebGLRenderer();
+  const [hoverState/*, setHoverState*/] = useState(false);
+  const [renderImage/*, setRenderImage*/] = useState(null);
 
   return (
     <div className="meshPreview">

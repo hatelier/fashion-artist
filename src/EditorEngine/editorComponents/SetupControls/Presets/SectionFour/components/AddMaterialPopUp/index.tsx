@@ -5,7 +5,7 @@ import addPic from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
 import { Box, CircularProgress, Slider } from "@mui/material";
 import React, { useRef, useState } from "react";
 import {
-  LabelledInputMui,
+  // LabelledInputMui,
   NumberLabelledInputMui,
 } from "../../../../../PreviewSection/EditorControls/CameraControls";
 import {
@@ -22,8 +22,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SketchPicker } from "react-color";
-import * as THREE from "three";
-import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
+// import * as THREE from "three";
+// import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
 import { updateCustomMaterial } from "../../../../../../../redux/accountManagement";
 
 const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
@@ -33,16 +33,19 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
     normalMap: addPic,
     aoMap: addPic,
   });
-  const [materialStatus, setMaterialStatus] = useState({
+
+  /*const [materialStatus, setMaterialStatus] = useState({
     map: null,
     roughnessMap: null,
     normalMap: null,
     aoMap: null,
-  });
+  });*/
+
   // here is the function that creates the preview.
-  const materialArray = useSelector(
+  /*const materialArray = useSelector(
     (state) => state.materialControl.materialArray
-  );
+  );*/
+
   const FileToURL = (e) => {
     const file = e.target.files[0];
     setCollectiveData((state) => {
@@ -70,7 +73,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
     };
   };
 
-  function getImageDataURL(image) {
+  /*function getImageDataURL(image) {
     let canvas = document.createElement("canvas");
     canvas.width = image.width;
     canvas.height = image.height;
@@ -79,9 +82,9 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
     ctx.drawImage(image, 0, 0);
 
     return canvas.toDataURL();
-  }
+  }*/
 
-  function dataURLtoBlob(dataurl) {
+  /*function dataURLtoBlob(dataurl) {
     let arr = dataurl.split(","),
       mime = arr[0].match(/:(.*?);/)[1],
       bstr = atob(arr[1]),
@@ -91,7 +94,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       u8arr[n] = bstr.charCodeAt(n);
     }
     return new Blob([u8arr], { type: mime });
-  }
+  }*/
 
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
@@ -743,7 +746,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Metalness Map</p>
         <div style={{ display: "flex", marginTop: "5px" }}>
-          <img src={addPic} />
+          <img src={addPic} alt="addPic" />
           <div style={{ marginLeft: "10px", width: "139px" }}>
             <p>Metalness factor</p>
             <Slider
@@ -819,7 +822,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Emission Map</p>
         <div style={{ display: "flex", marginTop: "5px" }}>
-          <img src={addPic} />
+          <img src={addPic} alt="addPic" />
           <div style={{ marginLeft: "10px", width: "139px" }}>
             <p>emission factor</p>
             <Slider

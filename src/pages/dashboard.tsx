@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Header } from '../components/header';
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Sidenav } from '../components/sidenav';
 
 export const Dashboard = () => {
-    const [cookies, setCookie] = useCookies(['access_token']);
-    const navigate = useNavigate();
+    // const [cookies, setCookie] = useCookies(['access_token']);
+    // const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
-    const [occupation, setOccupation] = useState("");
+    // const [occupation, setOccupation] = useState("");
 
     useEffect(() => {
       fetchUserData();
@@ -27,30 +27,32 @@ export const Dashboard = () => {
       const userData = response.data;
 
       setFirstName(userData.firstname);
-      setOccupation(userData.occupation);
+      // setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
       }
     };
-    const logout = () => {
-      setCookie('access_token',"")
-      window.localStorage.removeItem("userID");
-      navigate("/auth");
-    }
+    // const logout = () => {
+    //   setCookie('access_token',"");
+    //   window.localStorage.removeItem("userID");
+    //   navigate("/auth");
+    // }
     const [isOpen, setIsOpen] = useState(false);
-    const productPopup = () => {
-      setIsOpen(!isOpen);
-    };
+
+    // const productPopup = () => {
+    //   setIsOpen(!isOpen);
+    // };
+
     const productPopupCancel = () => {
       setIsOpen(!isOpen);
     };
 
-    const [isElementVisible, setElementVisible] = useState(false);
+    // const [isElementVisible, setElementVisible] = useState(false);
 
-    const handleClick = () => {
-      const element = document.querySelector('#sidenav') as HTMLElement;
-      element.style.display = element.style.display === 'none' ? 'block' : 'none';
-    };
+    // const handleClick = () => {
+    //   const element = document.querySelector('#sidenav') as HTMLElement;
+    //   element.style.display = element.style.display === 'none' ? 'block' : 'none';
+    // };
 
     return ( 
     <div className='home-container'>

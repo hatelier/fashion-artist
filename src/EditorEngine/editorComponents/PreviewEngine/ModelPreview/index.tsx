@@ -6,12 +6,12 @@ import { Html, OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateArModel,
+  // updateArModel,
   updateMaterialListPreview,
 } from "../../../../redux/previewRedux";
 import MtumxLoadGif from "../../../../assets/gif/mtumxGif.gif";
 import ObjectUrlCreator from "../ObjectUrlCreator";
-import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
+// import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
 const ModelPreview = () => {
   const currentModel = useSelector(
     (state: any) => state.previewRedux.currentModel
@@ -35,7 +35,7 @@ const ModelPreview = () => {
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
-              <img src={MtumxLoadGif} width={"120px"} />
+              <img src={MtumxLoadGif} width={"120px"} alt=""/>
             </Html>
           }
         >
@@ -54,6 +54,7 @@ const UploadModelEngine = () => {
     (state: any) => state.previewRedux.currentModel
   );
   const gltf = useLoader(GLTFLoader, currentModel);
+
   useEffect(() => {
     let materialList = [];
     gltf.scene.traverse((obj) => {
@@ -64,7 +65,8 @@ const UploadModelEngine = () => {
       }
     });
     dispatch(updateMaterialListPreview(materialList));
-  }, [gltf]);
+  }, [gltf, dispatch]);
+
   return (
     <>
       <primitive

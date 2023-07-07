@@ -28,7 +28,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-          echo "MARKET_API=${{ env.REACT_APP_SERVER_IP }}" > .env
+          echo "REACT_APP_SERVER_IP=${{ env.REACT_APP_SERVER_IP }}" > .env
           npm install
           npm run build
           zip -r ${{ env.EBS_APP_NAME }}-${{ env.DEPLOY_ID }}-${{ steps.current-time.outputs.time }}.zip build /build-server/server.js /build-server/package.json

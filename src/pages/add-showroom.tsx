@@ -1,16 +1,16 @@
-import axios from 'axios';
+// import axios from 'axios'; //Fetch
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+// import { useCookies } from 'react-cookie';
+// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 
 
 export const AddShowroom = () => {
-  const [cookies, setCookie] = useCookies(['access_token']);
-  const navigate = useNavigate();
-  const [firstName, setFirstName] = useState("");
-  const [occupation, setOccupation] = useState("");
+  // const [cookies, setCookie] = useCookies(['access_token']);
+  // const navigate = useNavigate();
+  // const [firstName, setFirstName] = useState("");
+  // const [occupation, setOccupation] = useState("");
   
   useEffect(() => {
     fetchUserData();
@@ -18,29 +18,34 @@ export const AddShowroom = () => {
 
   const fetchUserData = async () => {
     try {
-    const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
-      params: {
-        userID: userID
-      },
-    });
-    const userData = response.data;
+    // const userID = window.localStorage.getItem('userID');
 
-    setFirstName(userData.firstname);
-    setOccupation(userData.occupation);
+    // const response = await axios.get("/user/profile", { 
+    //   params: {
+    //     userID: userID
+    //   },
+    // });
+    // const userData = response.data;
+
+    // setFirstName(userData.firstname);
+    // setOccupation(userData.occupation);
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }
   };
-  const logout = () => {
-    setCookie('access_token',"")
+
+  /*const logout = () => {
+    // setCookie('access_token',"")
     window.localStorage.removeItem("userID");
     navigate("/auth");
-  }
+  }*/
+
   const [isOpen, setIsOpen] = useState(false);
-  const productPopup = () => {
+
+  /*const productPopup = () => {
     setIsOpen(!isOpen);
-  };
+  };*/
+
   const productPopupCancel = () => {
     setIsOpen(!isOpen);
   };
@@ -70,7 +75,20 @@ export const AddShowroom = () => {
                  <div className="choose-plan add-showroom-header">
                 <div>Showroom</div>
                 <div className="add-showroom-create-cancel">
-                    <a className="add-showroom-create"><img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span></a><a className="add-showroom-cancel" href="/showroom"><img className='add-showroom-button-img' src={require('../assets/pngs/cancel.png')} alt="" /><span className="add-showroom-cancel-text">Cancel</span></a>
+
+                    <button className="add-showroom-create" onClick={()=>{
+                      console.log("Create a showroom");
+                      
+                    }}>
+                      <img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span>
+                    </button>
+
+                    <button className="add-showroom-cancel" onClick={()=>{
+                      //Cancel showroom
+                      
+                    }}>
+                      <img className='add-showroom-button-img' src={require('../assets/pngs/cancel.png')} alt="" /><span className="add-showroom-cancel-text">Cancel</span>
+                    </button>
                 </div>
              </div>
 
@@ -97,7 +115,12 @@ export const AddShowroom = () => {
                         <div className='add-showroom-details-buttons'>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Logo</label>
-                            <a href="" className="add-showroom-upload-button"><img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span></a>
+
+                            <button className="add-showroom-upload-button" onClick={()=>{
+                              //Upload
+                            }}>
+                              <img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span>
+                            </button>
                         </div>
                         </div>
                         </div>  
@@ -139,7 +162,13 @@ export const AddShowroom = () => {
                             <div className="add-showroom-upload-style">
                                 <div className="add-showroom-background-item">
                                 <label htmlFor="">Upload image File</label>
-                                <a href="" className="add-showroom-upload-button"><img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span></a>
+
+                                <button className="add-showroom-upload-button" onClick={()=>{
+                                  //Do something
+                                }}>
+                                  <img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span>
+                                </button>
+
                                 </div>
                                 <div className="add-showroom-background-item">
                                 <label htmlFor="">Image Style</label>
@@ -154,7 +183,15 @@ export const AddShowroom = () => {
                     <div className="add-showroom-products-block">
                         <div className="add-showroom-products-input">
                             <input type="text" placeholder="Search by product name"/>
-                            <a href="" className="add-showroom-filter"><img src={require('../assets/pngs/filter-white.png')} alt="" /><span className='add-showroom-filter-text'>Filter</span><img className="add-showroom-filter-down" src={require('../assets/pngs/down-white.png')} alt="" /></a>
+
+                            <button className="add-showroom-filter" onClick={()=>{
+                                  //Do something
+                                }}>
+                              <img src={require('../assets/pngs/filter-white.png')} alt="" /><span className='add-showroom-filter-text'>Filter</span>
+
+                              <img className="add-showroom-filter-down" src={require('../assets/pngs/down-white.png')} alt="" />
+                            </button>
+
                         </div>
                         <div className="add-showroom-products-row">
                            <div>

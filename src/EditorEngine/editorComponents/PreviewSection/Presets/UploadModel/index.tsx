@@ -1,7 +1,7 @@
 // @ts-nocheck
 //uploadModel/index.tsx
-import React, { useEffect, useRef, useState } from "react";
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import React, { useCallback, useEffect, useState } from "react";
+import { useLoader, useThree } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +11,9 @@ import {
 } from "../../../../../redux/materialControl";
 import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
 import { updateModelLoadRate } from "../../../../../redux/materialApplication";
-import { Html, Sphere, Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import {
-  commentsRedux,
+  // commentsRedux,
   updateAnnotationList,
 } from "../../../../../redux/commentsRedux";
 import { Vector3 } from "three";
@@ -72,9 +72,9 @@ const UploadModel = () => {
         z: dimensions.z,
       })
     );
-  }, [gltf]);
+  }, [gltf,dispatch]);
 
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const [groupRef, setGroupRef] = useState(null);
 
   useEffect(() => {
@@ -87,6 +87,9 @@ const UploadModel = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalPosition, setModalPosition] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
 
   const onClick = (event) => {
     event.stopPropagation();
@@ -113,7 +116,7 @@ const UploadModel = () => {
     (state) => state.commentsRedux.triggerDelete
   );
 
-  function loadTicks() {
+  const loadTicks = useCallback(()=> {
     axios
       .get("/product/tick", {
         params: {
@@ -139,21 +142,20 @@ const UploadModel = () => {
           dispatch(updateAnnotationList(localComments));
         }
       });
-  }
+  },[userID, projectID, groupRef, dispatch])
 
   useEffect(() => {
     if (groupRef && enableComments) {
       loadTicks();
     }
-  }, [groupRef, enableComments, triggerDelete]);
-  const { userID, projectID } = useSelector(
-    (state: any) => state.accountManagement
-  );
+  }, [groupRef, enableComments, triggerDelete, loadTicks]);
+
+  
   return (
     <>
       <group
         ref={setGroupRef}
-        onPointerDown={enableComments && currentTab == 4 ? onClick : () => {}}
+        onPointerDown={enableComments && currentTab === 4 ? onClick : () => {}}
       >
         <primitive
           object={gltf.scene}
@@ -161,7 +163,7 @@ const UploadModel = () => {
           position={[0, -1, 0]}
           rotation={[0, 0, 0]}
         />
-        {currentTab == 4 && enableComments && showModal && (
+        {currentTab === 4 && enableComments && showModal && (
           <Html position={modalPosition} left>
             <div style={{ backgroundColor: "white" }}>
               <input type="text" id="comment" name="comment" />
@@ -212,7 +214,7 @@ const UploadModel = () => {
             </div>
           </Html>
         )}
-        {currentTab == 4 &&
+        {currentTab === 4 &&
           enableComments &&
           predefinedComments.map((comment, index) => {
             return (
