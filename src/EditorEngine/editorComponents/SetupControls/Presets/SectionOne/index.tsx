@@ -21,7 +21,6 @@ const SectionOne = (props) => {
   const materialData = useSelector(
     (state) => state.materialControl.materialDimensions
   );
-  const formRef = useRef();
   const inputClicker = useRef();
   const prevImageClicker = useRef();
   const productRef = useRef();
@@ -73,11 +72,8 @@ const SectionOne = (props) => {
           toast.error("Failed to load the data.");
         });
     }
-  }, []);
+  }, [id, dispatch]);
   // here is the model loading rate.
-  const modelLoadRate = useSelector(
-    (state: any) => state.materialApplication.modelLoadRate
-  );
   return (
     <form
       className={"sectionOne"}
@@ -97,7 +93,6 @@ const SectionOne = (props) => {
           defaultValue={jsonData.productName ? jsonData.productName : ""}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Brand Name</p>
         <input
@@ -109,7 +104,6 @@ const SectionOne = (props) => {
           defaultValue={jsonData.brandName ? jsonData.brandName : ""}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Preview Image</p>
         <input
@@ -127,9 +121,9 @@ const SectionOne = (props) => {
           onClick={() => {
             prevImageClicker.current.click();
           }}
+          alt={"currPrevImage"}
         />
       </div>
-      <br />
       <div>
         <p className={"prodNameTitle"}>Select a Pipeline</p>
         <select
@@ -149,7 +143,6 @@ const SectionOne = (props) => {
       </div>
 
       {/*select the required tags from the below dropdown*/}
-      <br />
       <div>
         <p className={"prodNameTitle"}>Tags</p>
         <select
@@ -161,7 +154,7 @@ const SectionOne = (props) => {
           value={jsonData.tags ? jsonData.tags : null}
         >
           <option selected disabled>
-            Select your tags
+            --Select--
           </option>
           <option value="blender">Blender</option>
           <option value="maya">Maya</option>
@@ -173,7 +166,7 @@ const SectionOne = (props) => {
         <p className={"prodNameTitle"} style={{ marginTop: 0 }}>
           Dimensions:
         </p>
-        &nbsp;
+        &nbsp; &nbsp; &nbsp;
         <input
           type={"text"}
           placeholder={"W"}
@@ -200,38 +193,33 @@ const SectionOne = (props) => {
         &nbsp;
       </div>
       {showUpdate && (
-          <>
-            <div className={"uploadBox"}>
-              <img src={UploadImage} />
-              <p>Select an asset or drop here</p>
-            </div>
-            <input
-                type={"file"}
-                ref={inputClicker}
-                style={{ display: "none" }}
-                onChange={() => {
-                  toast.success("File uploaded.");
-                }}
-                required={true}
+        <>
+          <div
+            className={"uploadBox"}
+            onClick={() => {
+              inputClicker.current.click();
+            }}
+          >
+            <img
+              src={UploadImage}
+              style={{
+                width: "30px",
+              }}
+              alt={"UploadImage"}
             />
-            <button
-                className={"uploadAsset"}
-                onClick={() => {
-                  inputClicker.current.click();
-                }}
-            >
-              UPLOAD ASSET
-            </button>
-          </>
-      )}
-      <div></div>
-      {/*<button type={"submit"}>Save Current State</button>*/}
-      <div className={"DupDelDiv"}>
-        {showUpdate && (
+            <p>Select an asset or drop here</p>
+          </div>
+          <input
+            type={"file"}
+            ref={inputClicker}
+            style={{ display: "none" }}
+            onChange={() => {
+              toast.success("File uploaded.");
+            }}
+            required={true}
+          />
           <button
-            className={"uploadAsset"}
-            style={{ width: "60%" }}
-            type={"button"}
+            className={"uploadAssetOne"}
             onClick={() => {
               const formData = new FormData();
               formData.append("userid", "64676633c6ad11d84b234b1d");
@@ -273,17 +261,11 @@ const SectionOne = (props) => {
                 });
             }}
           >
-            Duplicate
+            <b>Upload Assets</b>
           </button>
-        )}
-        <button
-          className={"uploadAsset"}
-          style={{ width: "40%" }}
-          type={"reset"}
-        >
-          Delete
-        </button>
-      </div>
+        </>
+      )}
+      <div></div>
     </form>
   );
 };

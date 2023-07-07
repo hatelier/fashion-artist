@@ -25,6 +25,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     outline: none;
+    border: none;
   }
 
   .selPipeline {
@@ -35,14 +36,16 @@
     border: 1px solid #D8D8D8;
     border-radius: 5px;
     padding-left: 10px;
+    border: none;
   }
 
   .prevImageDev {
     margin-top: 10px;
-    height: 64px;
+    height: 74px;
     overflow: hidden;
     //border: 1px solid #D8D8D8;
     border-radius: 5px;
+    border: none;
     width: 74px;
   }
 
@@ -54,6 +57,7 @@
     border-radius: 5px;
     outline: none;
     margin-top: 10px;
+    border: none;
   }
 
   .prodNameTitle {
@@ -82,14 +86,28 @@
     width: 100%;
   }
 
+  .uploadAssetOne {
+    height: 38px;
+    background: #E70A4E;
+    border-radius: 10px;
+    background: linear-gradient(0deg, #D31027, #D31027),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14));
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-top: 20px;
+    appearance: none;
+    border: none;
+    width: 100%;
+  }
+
   .uploadBox {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0;
-    height: 87px;
-    justify-content: center;
+    height: 123px;
+    justify-content: space-evenly;
     border: 0.5px dashed #D6D6D6;
     border-radius: 8px;
     margin-top: 20px;

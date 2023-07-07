@@ -498,7 +498,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         {/*tilling rotation*/}
         <div>
           <MedFontText11>Tiling Rotation</MedFontText11>
-          <div style={{ marginTop: "8px" }}>
+          <div style={{ marginTop: "15px" }}>
             <NumberLabelledInputMui
               label={"Tiling rotation"}
               width={"120px"}
@@ -1002,7 +1002,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       {/*tilling rotation*/}
       <div>
         <MedFontText11>Tiling Rotation</MedFontText11>
-        <div style={{ marginTop: "8px" }}>
+        <div style={{ marginTop: "15px" }}>
           <NumberLabelledInputMui
             label={"Tiling rotation"}
             width={"120px"}
