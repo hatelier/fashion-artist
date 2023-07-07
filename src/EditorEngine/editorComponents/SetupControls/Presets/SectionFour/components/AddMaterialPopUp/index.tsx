@@ -15,7 +15,7 @@ import {
   RedButtonClass,
   WhiteButtonClass,
 } from "../../../../../../StyledComponents";
-import { TextureLoader } from "three";
+// import { TextureLoader } from "three";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -57,13 +57,13 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      const textured = new TextureLoader().load(reader.result as string);
-      setMaterialStatus((state) => {
-        return {
-          ...state,
-          [`${e.target.name}`]: textured,
-        };
-      });
+      // const textured = new TextureLoader().load(reader.result as string);
+      // setMaterialStatus((state) => {
+      //   return {
+      //     ...state,
+      //     [`${e.target.name}`]: textured,
+      //   };
+      // });
       setImageStatus((state) => {
         return {
           ...state,
