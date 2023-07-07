@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const savedConfigs = createSlice({
   name: "savedConfigs",
-  initialState: <any>{
+  initialState: {
     presets: [],
     unUsedObjects: [],
     //check whether the material is being loaded for the first time.
@@ -27,6 +27,7 @@ const savedConfigs = createSlice({
       state.loadProuctMaterials = !state.loadProuctMaterials;
     },
     updatePresets: (state, action) => {
+      // @ts-ignore
       state.presets = [...state.presets, action.payload];
     },
     updateUnUsedObjects: (state, action) => {
@@ -51,6 +52,7 @@ const savedConfigs = createSlice({
     },
   },
 });
+
 export const {
   updateMaterialConfig,
   updateProdMeshState,
