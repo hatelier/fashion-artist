@@ -6,6 +6,7 @@ import { Header } from '../components/header';
 
 import { toast } from "react-toastify";
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 export const Account = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
@@ -169,6 +170,7 @@ export const Account = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import TokenVerification from '../components/auth';
 
 export const PreviewProduct = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
@@ -142,6 +143,7 @@ export const PreviewProduct = () => {
             <img src={require('../assets/pngs/mx-logo-dark.png')} alt=""  className='preview-mtum-logo'/>
         </div>
        </div>
+       <TokenVerification />
     </div>
 );
 };

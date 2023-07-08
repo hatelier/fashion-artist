@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 export const Assets = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
@@ -835,6 +836,7 @@ export const Assets = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

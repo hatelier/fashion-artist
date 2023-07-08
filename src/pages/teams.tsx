@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 
 export const Teams = () => {
@@ -145,6 +146,7 @@ export const Teams = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

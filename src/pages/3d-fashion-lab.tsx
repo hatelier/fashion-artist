@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import { toast } from "react-toastify";
+import TokenVerification from '../components/auth';
 
 export const FashionLab = () => {
   const [cookies, setCookie] = useCookies(['access_token']);
@@ -13,18 +14,9 @@ export const FashionLab = () => {
   const [occupation, setOccupation] = useState("");
   
   useEffect(() => {
-    verifyToken();
     fetchUserData();
   }, []);
 
-  const verifyToken = async () => {
-    try {
-      await axiosInstance.get('/auth/check');
-    } catch (error) {
-      console.error(error);
-      navigate('/auth');
-    }
-  };
 
   const fetchUserData = async () => {
     try {
@@ -42,11 +34,11 @@ export const FashionLab = () => {
       console.error("Error fetching user data: ", error);
     }
   };
-  const logout = () => {
-    setCookie('access_token',"")
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }
+  // const logout = () => {
+  //   setCookie('access_token',"")
+  //   window.localStorage.removeItem("userID");
+  //   navigate("/auth");
+  // }
   const Msg = () => (
     <div className="fashionlab-popup">
     <div className='fashionlab-popup-heading'>Thank you for your interest in our 3D Fashion Lab!</div>
@@ -152,6 +144,7 @@ export const FashionLab = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };
