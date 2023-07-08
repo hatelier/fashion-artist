@@ -33,12 +33,15 @@ const SetupControls = (props: BasicControls) => {
       className={"setupControls"}
       style={{
         ...props.style,
+        position: "relative",
+        background: "#fafafa",
       }}
     >
       <div
         className={"buttonControl"}
         style={{
-          display: "",
+          // position: "absolute",
+          zIndex: 2,
         }}
       >
         {[0, 1, 2, 3, 4, 5, 6].map((vls, index) => {
