@@ -1,15 +1,15 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Card from '../components/Card';
-import { Header } from '../components/header';
-import { Sidenav } from '../components/sidenav';
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Card from "../components/Card";
+import { Header } from "../components/header";
+import { Sidenav } from "../components/sidenav";
 
 interface Product {
   _id: string;
@@ -54,18 +54,18 @@ export const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/product/products');
+      const response = await axios.get("/product/products");
       const productData = response.data;
       setProducts(productData);
     } catch (error) {
-      console.error('Error fetching products');
+      console.error("Error fetching products");
     }
   };
 
   const fetchUserData = async () => {
-   /* try {
+    /* try {
     const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
+    const response = await axios.get("/user/profile", {
       params: {
         userID: userID
       },
@@ -93,107 +93,167 @@ export const Products = () => {
     setIsOpen(!isOpen);
   };
 
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
-    return (
-      <div className='home-container'>
-            {isOpen && (
-                  <div className="product-popup">
-                  <div className="product-popup-main">
-                  <label htmlFor="" className='product-popup-label'>Product Name</label>
-                  <input type="text" placeholder='New Product' className='product-popup-input'/>
-                  <div className='product-popup-configurable'><input type="checkbox" /> <span>Create Configurable Product</span></div>
-                  </div>
-                  <div className='product-popup-buttons'>
-                    <button className='product-popup-cancel' onClick={productPopupCancel}>Cancel</button>
-                    <button className='product-popup-create'>Create</button>
-                    </div>
-                </div> 
-                )}
-      <section >
-        <Header />
-        <div className='content'>
-        <Sidenav />
-       <div className='main'>
-        <div className="main-header">
-         <div className='text'>
-           <div className='dashboard'>
-           Products
-           </div>
-        </div>
-        </div>
-        <div className='insights'>
-          <div className='info'>
-            <div className='info-name'>Total Products</div>
-            <div className='info-value'>290</div>
-            <div className='info-view'><a className='info-view-link' href="/products">See all Products</a></div>
+  return (
+    <div className="home-container">
+      {isOpen && (
+        <div className="product-popup">
+          <div className="product-popup-main">
+            <label htmlFor="" className="product-popup-label">
+              Product Name
+            </label>
+            <input
+              type="text"
+              placeholder="New Product"
+              className="product-popup-input"
+              id={"productCreatePopUp"}
+            />
+            <div className="product-popup-configurable">
+              <input type="checkbox" /> <span>Create Configurable Product</span>
+            </div>
           </div>
-          <div className='info'>
-            <div className='info-name'>Total 3d view</div>
-            <div className='info-value'>500</div>
-            <div className='info-view'><a className='info-view-link' href="/analytics">View analytics</a></div>
-          </div>
-          <div className='info'>
-            <div className='info-name'>Total AR view</div>
-            <div className='info-value'>870</div>
-            <div className='info-view'><a className='info-view-link' href="/analytics">See analytics report</a></div>
-          </div>
-        </div>
-        <div className='products'>
-        <div className='recent-products'>
-          All Products
-          <div className='input-group'>
-            <input type='text' placeholder='Search by product name' className='search' />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label" className='filter'>
-              <img src={require('../assets/pngs/filter.png')} alt="filter" />
-              <span className='filter-text'>Filter</span>
-                </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-                className='filter'
-              >
-                <MenuItem value={10}>by Tag</MenuItem>
-               <MenuItem value={20}>by File type</MenuItem>
-                <MenuItem value={30}>Date</MenuItem>
-                <MenuItem value={30}>by Product name</MenuItem>
-                <MenuItem value={30}>by Draft</MenuItem>
-                <MenuItem value={30}>by Published</MenuItem>
-                <MenuItem value={30}>by Schedules</MenuItem>
-                <MenuItem value={30}>by Team</MenuItem>
-             </Select>
-            </FormControl>
-            <button className="add-product input-button" onClick={productPopup}>
-              <img src={require('../assets/pngs/plus.png')} alt="add new product" />
-              New Product
+          <div className="product-popup-buttons">
+            <button
+              className="product-popup-cancel"
+              onClick={productPopupCancel}
+            >
+              Cancel
+            </button>
+            <button
+              className="product-popup-create"
+              onClick={() => {
+                let documentName: any =
+                  document.getElementById("productCreatePopUp");
+                if (documentName.value) {
+                  const baseReactUrl = window.location.origin.toString();
+                  window.open(
+                    `${baseReactUrl}/editor/new/${documentName.value.replace(
+                      / /g,
+                      "_"
+                    )}`,
+                    "_self"
+                  );
+                } else {
+                  window.alert("Product name cant be blank");
+                }
+              }}
+            >
+              Create
             </button>
           </div>
         </div>
-        {products.map((product) => (
-          <Card key={product._id}>
-            <h2>{product.productName}</h2>
-            {product.previewImage && (
-              <div>
-                <h3>Preview Image:</h3>
-                <img src={product.previewImage.location} alt="Preview" />
+      )}
+      <section>
+        <Header />
+        <div className="content">
+          <Sidenav />
+          <div className="main">
+            <div className="main-header">
+              <div className="text">
+                <div className="dashboard">Products</div>
               </div>
-            )}
-          </Card>
-        ))}
-       </div>
-       </div>
+            </div>
+            <div className="insights">
+              <div className="info">
+                <div className="info-name">Total Products</div>
+                <div className="info-value">290</div>
+                <div className="info-view">
+                  <a className="info-view-link" href="/products">
+                    See all Products
+                  </a>
+                </div>
+              </div>
+              <div className="info">
+                <div className="info-name">Total 3d view</div>
+                <div className="info-value">500</div>
+                <div className="info-view">
+                  <a className="info-view-link" href="/analytics">
+                    View analytics
+                  </a>
+                </div>
+              </div>
+              <div className="info">
+                <div className="info-name">Total AR view</div>
+                <div className="info-value">870</div>
+                <div className="info-view">
+                  <a className="info-view-link" href="/analytics">
+                    See analytics report
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="products">
+              <div className="recent-products">
+                All Products
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Search by product name"
+                    className="search"
+                  />
+                  <FormControl fullWidth>
+                    <InputLabel
+                      id="demo-simple-select-label"
+                      className="filter"
+                    >
+                      <img
+                        src={require("../assets/pngs/filter.png")}
+                        alt="filter"
+                      />
+                      <span className="filter-text">Filter</span>
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={age}
+                      label="Age"
+                      onChange={handleChange}
+                      className="filter"
+                    >
+                      <MenuItem value={10}>by Tag</MenuItem>
+                      <MenuItem value={20}>by File type</MenuItem>
+                      <MenuItem value={30}>Date</MenuItem>
+                      <MenuItem value={30}>by Product name</MenuItem>
+                      <MenuItem value={30}>by Draft</MenuItem>
+                      <MenuItem value={30}>by Published</MenuItem>
+                      <MenuItem value={30}>by Schedules</MenuItem>
+                      <MenuItem value={30}>by Team</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <button
+                    className="add-product input-button"
+                    onClick={productPopup}
+                  >
+                    <img
+                      src={require("../assets/pngs/plus.png")}
+                      alt="add new product"
+                    />
+                    New Product
+                  </button>
+                </div>
+              </div>
+              {products.map((product) => (
+                <Card key={product._id}>
+                  <h2>{product.productName}</h2>
+                  {product.previewImage && (
+                    <div>
+                      <h3>Preview Image:</h3>
+                      <img src={product.previewImage.location} alt="Preview" />
+                    </div>
+                  )}
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>
-        );
-        }
+  );
+};
 
 // const Files = () => {
 //     const [selectedFile, setSelectedFile] = useState(null);

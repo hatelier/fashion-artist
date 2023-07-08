@@ -43,7 +43,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/new-password" element={<NewPassword />} />
-          <Route path="/editor/:id" element={<EditorEngine />} />
+          <Route path="/editor/:id/:stage" element={<EditorEngine />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/credit" element={<Credit />} />

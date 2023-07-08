@@ -31,7 +31,7 @@ const SectionOne = (props) => {
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
   const [showUpdate, setShowUpdate] = useState(true);
-  const { id } = useParams();
+  const { id, stage } = useParams();
   const baseReactUrl = window.location.origin.toString();
 
   //here is the object url
@@ -90,7 +90,13 @@ const SectionOne = (props) => {
           name={"productName"}
           required={true}
           ref={productRef}
-          defaultValue={jsonData.productName ? jsonData.productName : ""}
+          defaultValue={
+            id === "new"
+              ? stage
+              : jsonData.productName
+              ? jsonData.productName
+              : ""
+          }
         />
       </div>
       <div>
@@ -251,7 +257,7 @@ const SectionOne = (props) => {
                   axios.post("/materials/preset", dataStruct).then(() => {
                     toast.success("Product has been created!");
                     window.open(
-                      `${baseReactUrl}/editor/${res.data.productName}`,
+                      `${baseReactUrl}/editor/${res.data.productName}/main`,
                       "_self"
                     );
                   });
