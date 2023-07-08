@@ -1,7 +1,7 @@
 .sectionTwoDiv {
   display: flex;
   flex-direction: column;
-
+  position: relative;
   .sectionTwoTitle {
     font-size: 16px;
     line-height: 20px;
@@ -29,11 +29,11 @@
 
   .configBox {
     height: max-content;
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    background: rgba(244, 244, 244, 0.90);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
     margin: 12px 20px 0;
-    padding: 9px 0;
+    padding: 14px 0;
 
     //  here are the ConfigBox configurations
 

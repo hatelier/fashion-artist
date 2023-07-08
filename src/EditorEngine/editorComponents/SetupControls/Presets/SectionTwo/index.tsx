@@ -11,12 +11,12 @@ import {
 } from "three";
 import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
-import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 // import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
+import styled from "styled-components";
 // color picker
 
 const SectionTwo = () => {
@@ -54,7 +54,6 @@ const SectionTwo = () => {
 
           ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
             (mater) => {
-              
               const texture = new TextureLoader().load(
                 main_mat[`${mater}`].imgName
               );
@@ -70,21 +69,18 @@ const SectionTwo = () => {
             }
           );
 
-          ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
-            (materr) => {
-              
-              openMaterial[materr].repeat.set(
-                main_mat.tiling[0],
-                main_mat.tiling[1]
-              );
-              openMaterial[materr].offset.set(
-                main_mat.tilingOffset[0],
-                main_mat.tilingOffset[1]
-              );
-              openMaterial[materr].rotation =
-                main_mat.tilingRotation * (Math.PI / 180);
-            }
-          );
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
+            openMaterial[materr].repeat.set(
+              main_mat.tiling[0],
+              main_mat.tiling[1]
+            );
+            openMaterial[materr].offset.set(
+              main_mat.tilingOffset[0],
+              main_mat.tilingOffset[1]
+            );
+            openMaterial[materr].rotation =
+              main_mat.tilingRotation * (Math.PI / 180);
+          });
 
           openMaterial.map.wrapS =
             openMaterial.map.wrapT =
@@ -131,7 +127,7 @@ const SectionTwo = () => {
       .catch((err) => {
         toast.error("Failed to retrieve config");
       });
-  },[projectID, userID])
+  }, [projectID, userID]);
 
   /*async function getConfig() {
     axios
@@ -148,7 +144,6 @@ const SectionTwo = () => {
         toast.error("Failed to retrieve config");
       });
   }*/
-
 
   useEffect(() => {
     if (projectID && userID) {
@@ -167,8 +162,7 @@ const SectionTwo = () => {
       console.log("retro testing", main_mat);
       let openMaterial = {};
       ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
-        (mater,) => {
-
+        (mater) => {
           const texture = new TextureLoader().load(
             main_mat[`${mater}`].imgName
           );
@@ -227,9 +221,9 @@ const SectionTwo = () => {
             justifyContent: "space-between",
             alignItems: "center",
             height: "22px",
-            background: "#FFFFFF",
-            border: "1px solid #EDEDED",
             borderRadius: "5px",
+            border: "1px solid #EAEAEA",
+            background: "rgba(244, 244, 244, 0.90)",
             margin: "0 15px 10px 15px",
             padding: "0 9px",
           }}
@@ -260,10 +254,18 @@ const SectionTwo = () => {
           </div>
           <div>
             <FontAwesomeIcon
+              icon={faExchange}
+              style={{
+                color: "#000000",
+                fontSize: "10px",
+              }}
+            />
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
               icon={faPencil}
               style={{
-                color: "lightgrey",
-                fontSize: "12px",
+                color: "#000000",
+                fontSize: "10px",
               }}
               onClick={() => {
                 let requi_material = allCustomMaterials.filter(
@@ -276,8 +278,8 @@ const SectionTwo = () => {
             <FontAwesomeIcon
               icon={appliDetails.selected === vls ? faEye : faEyeSlash}
               style={{
-                fontSize: "12px",
-                color: "lightgrey",
+                fontSize: "10px",
+                color: "#000000",
                 cursor: "pointer",
               }}
               onClick={() => {
@@ -306,7 +308,7 @@ const SectionTwo = () => {
       </>
     );
   };
-  
+
   const postUpdateApply = (configData, materialCustomList) => {
     for (let i = 0; i < materialList.length; i++) {
       if (configData.hasOwnProperty(materialList[i].name)) {
@@ -333,20 +335,18 @@ const SectionTwo = () => {
               };
             }
           );
-          ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
-            (materr) => {
-              openMaterial[materr].repeat.set(
-                main_mat.tiling[0],
-                main_mat.tiling[1]
-              );
-              openMaterial[materr].offset.set(
-                main_mat.tilingOffset[0],
-                main_mat.tilingOffset[1]
-              );
-              openMaterial[materr].rotation =
-                main_mat.tilingRotation * (Math.PI / 180);
-            }
-          );
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
+            openMaterial[materr].repeat.set(
+              main_mat.tiling[0],
+              main_mat.tiling[1]
+            );
+            openMaterial[materr].offset.set(
+              main_mat.tilingOffset[0],
+              main_mat.tilingOffset[1]
+            );
+            openMaterial[materr].rotation =
+              main_mat.tilingRotation * (Math.PI / 180);
+          });
           openMaterial.map.wrapS =
             openMaterial.map.wrapT =
             openMaterial.normalMap.wrapS =
@@ -399,7 +399,7 @@ const SectionTwo = () => {
         }}
       >
         <p className={"sectionTwoTitle"}>Configurations</p>
-        <img src={AddConfig} style={{ width: "21.35px" }} alt="config" />
+        {/*<img src={AddConfig} style={{ width: "21.35px" }} alt="config" />*/}
       </div>
       {allCustomMaterials &&
         Object.keys(appliedTextures).length !== 0 &&
@@ -514,7 +514,7 @@ const SectionTwo = () => {
             </>
           );
         })}
-      <button
+      <SaveConfig
         className={"uploadAsset"}
         onClick={() => {
           axios
@@ -532,22 +532,21 @@ const SectionTwo = () => {
         }}
       >
         Save Configuration
-      </button>
+      </SaveConfig>
     </div>
   );
 };
-
-/*const ConfigBox = () => {
-  return (
-    <div className={"configPopUp"}>
-      <div className={"configColor"}>
-        <p>Choose color</p>
-      </div>
-      <div className={"configTexture"}>
-        <p>Choose texture</p>
-      </div>
-    </div>
-  );
-};*/
+export const SaveConfig = styled.button`
+  height: 38px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn, #d31027);
+  color: #ffffff;
+  font-size: 16px;
+  appearance: none;
+  margin: 20px 15px;
+  width: 90%;
+  //position: absolute;
+`;
 
 export default SectionTwo;
