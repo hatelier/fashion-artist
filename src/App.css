@@ -519,7 +519,7 @@ header {
   border-radius: 7px;
   border: 0.5px solid var(--primary-bgcolor);
   background: var(--primary-bgcolor);
-  justify-content: end;
+  justify-content: flex-end;
   margin: auto;
   padding: 5px;
   margin-top: 0;
@@ -563,7 +563,7 @@ header {
 .card-bottom {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
