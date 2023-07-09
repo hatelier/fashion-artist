@@ -7,6 +7,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 
 export const Subscription = () => {
@@ -182,6 +183,7 @@ export const Subscription = () => {
      
       </div>
     </section>
+    <TokenVerification />
   </div>
 );
 };

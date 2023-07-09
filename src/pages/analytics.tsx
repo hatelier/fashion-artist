@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 
 export const Analytics = () => {
@@ -124,6 +125,7 @@ export const Analytics = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

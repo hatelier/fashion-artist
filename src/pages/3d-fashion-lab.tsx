@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import { toast } from "react-toastify";
+import TokenVerification from '../components/auth';
 
 export const FashionLab = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
@@ -12,6 +13,10 @@ export const FashionLab = () => {
   // const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
   
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   const verifyToken = useCallback(async () => {
     try {
       await axiosInstance.get('/auth/check');
@@ -35,28 +40,20 @@ export const FashionLab = () => {
     setOccupation(userData.occupation);
     } catch (error) {
       console.error("Error fetching user data: ", error);
-    }*/
-  },[]);
-
-  useEffect(() => {
-    verifyToken();
-    fetchUserData();
-  }, [verifyToken,fetchUserData]);
-
-  
-  /*const logout = () => {
+    }
+  };
+  const logout = () => {
     setCookie('access_token',"")
     window.localStorage.removeItem("userID");
     navigate("/auth");
-  }*/
-
-    const Msg = () => (
-      <div className="fashionlab-popup">
-      <div className='fashionlab-popup-heading'>Thank you for your interest in our 3D Fashion Lab!</div>
-      <div className='fashionlab-popup-text'>We have recieved your request and will review it as soon as possible. We will get back to you shortly with our response.</div>
-      </div>
-      
-    )
+  }
+  const Msg = () => (
+    <div className="fashionlab-popup">
+    <div className='fashionlab-popup-heading'>Thank you for your interest in our 3D Fashion Lab!</div>
+    <div className='fashionlab-popup-text'>We have recieved your request and will review it as soon as possible. We will get back to you shortly with our response.</div>
+    </div>
+    
+  )
 
     const displayMsg = () => {
       toast(<Msg />, {
@@ -157,6 +154,7 @@ export const FashionLab = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

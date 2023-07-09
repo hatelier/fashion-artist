@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
+import TokenVerification from '../components/auth';
 
 export const Credit = () => {
     // const [cookies, setCookie] = useCookies(['access_token']);
@@ -158,6 +159,7 @@ export const Credit = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
 );
 };

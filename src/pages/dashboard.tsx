@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 // import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Header } from "../components/header";
-// import { toast } from "react-toastify";
+// // import { toast } from "react-toastify";
 import { Sidenav } from "../components/sidenav";
+import TokenVerification from '../components/auth';
 
 export const Dashboard = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
@@ -137,12 +138,15 @@ export const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="products">
-              <div className="recent-products">Recent Products</div>
+          </div>
+          <div className='products'>
+            <div className='recent-products'>
+              Recent Products
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  );
+    </section>
+    <TokenVerification />
+  </div>
+);
 };

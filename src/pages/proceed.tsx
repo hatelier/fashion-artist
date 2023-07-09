@@ -4,6 +4,7 @@ import axios from "axios";
 import { FormEvent/*, ChangeEvent*/ } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import TokenVerification from "../components/auth";
 
 interface FormProps {
     email: string;
@@ -95,5 +96,6 @@ const Form = ({
 
          </form>
          {message && <p>{message}</p>}
+         <TokenVerification />
      </div> 
      )}

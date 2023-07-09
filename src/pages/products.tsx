@@ -10,6 +10,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Card from "../components/Card";
 import { Header } from "../components/header";
 import { Sidenav } from "../components/sidenav";
+import TokenVerification from '../components/auth';
 
 interface Product {
   _id: string;
@@ -251,6 +252,7 @@ export const Products = () => {
           </div>
         </div>
       </section>
+      <TokenVerification />
     </div>
   );
 };
