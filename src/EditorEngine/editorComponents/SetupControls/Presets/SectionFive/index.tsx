@@ -6,7 +6,6 @@ import {
   updateEnableComments,
   updateTriggerDelete,
 } from "../../../../../redux/commentsRedux";
-import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import "./index.scss";
 import { faTrash, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
