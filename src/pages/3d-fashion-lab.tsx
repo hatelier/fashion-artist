@@ -1,7 +1,5 @@
-import axiosInstance from '../components/axiosInstance';
-import { useCallback, useEffect, useState } from 'react';
+import {/* useCallback, useEffect*/ useState } from 'react';
 // import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import { toast } from "react-toastify";
@@ -9,24 +7,16 @@ import TokenVerification from '../components/auth';
 
 export const FashionLab = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
-  const navigate = useNavigate();
   // const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
-  
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
-  const verifyToken = useCallback(async () => {
-    try {
-      await axiosInstance.get('/auth/check');
-    } catch (error) {
-      console.error(error);
-      navigate('/auth');
-    }
-  },[navigate]);
 
-  const fetchUserData = useCallback(async () => {
+  // useEffect(() => {
+  //   fetchUserData();
+  // }, []);
+
+
+  /*const fetchUserData = useCallback(async () => {
     /*try {
     const userID = window.localStorage.getItem('userID');
     const response = await axiosInstance.get("/user/profile", { 
@@ -41,12 +31,19 @@ export const FashionLab = () => {
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }
-  };
-  const logout = () => {
+  },[]);*/
+  
+  /*const logout = () => {
     setCookie('access_token',"")
     window.localStorage.removeItem("userID");
     navigate("/auth");
-  }
+  }*/
+
+  // const logout = () => {
+  //   setCookie('access_token',"")
+  //   window.localStorage.removeItem("userID");
+  //   navigate("/auth");
+  // }
   const Msg = () => (
     <div className="fashionlab-popup">
     <div className='fashionlab-popup-heading'>Thank you for your interest in our 3D Fashion Lab!</div>
