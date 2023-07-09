@@ -8,10 +8,13 @@ import {
 } from "../../../../../redux/commentsRedux";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import "./index.scss";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { toast } from "react-toastify";
+import MessageIcon from "../../../../../assets/svgs/Message.svg";
+import PencilIcon from "../../../../../assets/svgs/pencil.svg";
+import styled from "styled-components";
 
 const SectionFive = () => {
   const dispatch = useDispatch();
@@ -38,62 +41,107 @@ const SectionFive = () => {
           justifyContent: "space-between",
         }}
       >
-        <p className={"sectionFiveTitle"}>Collaboration Feedback</p>
-        <img
-          src={AddConfig}
-          style={{ width: "21.35px", filter: "invert(.5)" }}
-          onClick={() => {
-            dispatch(updateEnableComments());
-          }}
-          alt=""
-        />
-        <img
-          src={AddConfig}
-          style={{ width: "21.35px" }}
-          onClick={() => {
-            dispatch(updateDiableComments());
-          }}
-          alt=""
-        />
+        <p className={"sectionFiveTitle"}>Collaboration</p>
+        <div>
+          <img
+            src={PencilIcon}
+            style={{ width: "21.35px", filter: "invert(.5)" }}
+            onClick={() => {
+              dispatch(updateEnableComments());
+            }}
+            alt=""
+          />
+          &nbsp; &nbsp;
+          <img
+            src={MessageIcon}
+            style={{ width: "21.35px" }}
+            onClick={() => {
+              dispatch(updateDiableComments());
+            }}
+            alt=""
+          />
+        </div>
       </div>
       <div style={{ marginTop: "10px" }}>
         {enableComments &&
           annotationList.map((comment, index) => {
             return (
-              <div
-                style={{
-                  marginBottom: "15px",
-                  border: "1px solid #000000",
-                  padding: "10px 0",
-                }}
-              >
-                <p>
-                  {index + 1}&nbsp;{comment.text}
-                </p>
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  onClick={() => {
-                    axios
-                      .delete("/product/tick", {
-                        params: {
-                          userId: userID,
-                          productId: projectID,
-                          tickId: comment.id,
-                        },
-                      })
-                      .then((res) => {
-                        dispatch(updateTriggerDelete());
-                      })
-                      .catch((err) => {
-                        toast.error("Something went wrong while deleting.");
-                      });
+              <AnnotationBox>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
-                />
-              </div>
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <p
+                      style={{
+                        background: "#fafafa",
+                        fontSize: "16px",
+                        width: "35px",
+                        height: "35px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        display: "flex",
+                        padding: "14px",
+                        borderRadius: "50%",
+                      }}
+                    >
+                      {index + 1}
+                    </p>
+                    <div style={{ marginLeft: "10px" }}>
+                      <p style={{ fontSize: "14px", fontWeight: "500" }}>
+                        Myumx
+                      </p>
+                      <p
+                        style={{
+                          color: "#757575",
+                        }}
+                      >
+                        Jul 6, 2023 8:34 PM
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ marginRight: "10px" }}>
+                    <FontAwesomeIcon icon={faShareNodes} />
+                    &nbsp; &nbsp;
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => {
+                        axios
+                          .delete("/product/tick", {
+                            params: {
+                              userId: userID,
+                              productId: projectID,
+                              tickId: comment.id,
+                            },
+                          })
+                          .then((res) => {
+                            dispatch(updateTriggerDelete());
+                          })
+                          .catch((err) => {
+                            toast.error("Something went wrong while deleting.");
+                          });
+                      }}
+                    />
+                  </div>
+                </div>
+                <div style={{ marginTop: "12.5px", padding: "0 5px 8px 5px" }}>
+                  <p>{comment.text}</p>
+                </div>
+              </AnnotationBox>
             );
           })}
       </div>
     </div>
   );
 };
+const AnnotationBox = styled.div`
+  border-radius: 10px;
+  background: #f4f4f4;
+  box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 10px 9px;
+`;
 export default SectionFive;
