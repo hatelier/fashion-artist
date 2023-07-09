@@ -158,35 +158,6 @@ export const Products = () => {
                 <div className="dashboard">Products</div>
               </div>
             </div>
-            <div className="insights">
-              <div className="info">
-                <div className="info-name">Total Products</div>
-                <div className="info-value">290</div>
-                <div className="info-view">
-                  <a className="info-view-link" href="/products">
-                    See all Products
-                  </a>
-                </div>
-              </div>
-              <div className="info">
-                <div className="info-name">Total 3d view</div>
-                <div className="info-value">500</div>
-                <div className="info-view">
-                  <a className="info-view-link" href="/analytics">
-                    View analytics
-                  </a>
-                </div>
-              </div>
-              <div className="info">
-                <div className="info-name">Total AR view</div>
-                <div className="info-value">870</div>
-                <div className="info-view">
-                  <a className="info-view-link" href="/analytics">
-                    See analytics report
-                  </a>
-                </div>
-              </div>
-            </div>
             <div className="products">
               <div className="recent-products">
                 All Products
@@ -196,7 +167,7 @@ export const Products = () => {
                     placeholder="Search by product name"
                     className="search"
                   />
-                  <FormControl fullWidth>
+                  <FormControl fullWidth className="filter-box">
                     <InputLabel
                       id="demo-simple-select-label"
                       className="filter"
@@ -238,16 +209,22 @@ export const Products = () => {
                 </div>
               </div>
               {products.map((product) => (
-                <Card key={product._id}>
-                  <h2>{product.productName}</h2>
-                  {product.previewImage && (
-                    <div>
-                      <h3>Preview Image:</h3>
-                      <img src={product.previewImage.location} alt="Preview" />
-                    </div>
-                  )}
-                </Card>
-              ))}
+          <Card key={product._id}>
+            {product.previewImage && (
+              <div className="card-img-container">
+                <img className="card-img" src={product.previewImage.location} alt="Preview" />
+              </div>
+            )}
+            <div className="card-name">{product.productName}</div>
+            <div className="card-bottom">
+              <div className="card-date">dd/mm/yy</div>
+              <div className="card-buttons">
+                <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
+                <div><img src={require('../assets/pngs/card-dots.png')} alt="" /></div>
+              </div>
+            </div>
+          </Card>
+        ))}
             </div>
           </div>
         </div>
