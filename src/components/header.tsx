@@ -11,16 +11,25 @@ import Switch, { SwitchProps } from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import DarkMode from '../components/darkmode';
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
 export const Header = () => {
-  const [cookies, setCookie] = useCookies(['access_token']);
+    const [cookies, setCookie] = useCookies(['access_token']);
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [occupation, setOccupation] = useState("");
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
       fetchUserData();
     }, []);
+
+    const handleBellClick = () => {
+      setIsDialogOpen(true);
+    };
+  
+    const handleDialogClose = () => {
+      setIsDialogOpen(false);
+    };
 
     const fetchUserData = async () => {
       try {
@@ -128,11 +137,14 @@ export const Header = () => {
         </div>
         <div className='header-right'>
       <DarkMode />
-      <img
-        src={require('../assets/pngs/bell-icon.png')}
-        alt="bell-icon"
-        className="bell-icon"
-      />
+      <NotificationsIcon className='bell-icon' style={{ color: 'white' }} onClick={handleBellClick}/>
+      {isDialogOpen && (
+        <div className="dialog">
+          <h2 style={{ color: 'white' }}>Dialog Box</h2>
+          <p style={{ color: 'white' }}>Sample text</p>
+          <button onClick={handleDialogClose}>Close</button>
+        </div>
+      )}
       <div className="dropdown-top">
       <div className='header-account dropbtn'>
         <div>
@@ -174,7 +186,7 @@ export const Header = () => {
         </a>
         )}
       </div>
-      </div>
+      N</div>
       </div>
       </header>
 );
