@@ -59,10 +59,13 @@ export const Sidenav = () => {
               <a href="/"><img className='sidenav-img' src={require('../assets/pngs/sidenav-dashboard.png')} alt="" /><span>Dashboard</span></a>
               </div>
               <div className='item'>
-              <a href="/products"><img className='sidenav-img' src={require('../assets/pngs/sidenav-analytics.png')} alt="" /><span>Products</span></a>
+              <a href="/products"><img className='sidenav-img' src={require('../assets/pngs/sidenav-products.png')} alt="" /><span>Products</span></a>
               </div>
               <div className='item'>
-              <a href="/analytics"><img className='sidenav-img' src={require('../assets/pngs/sidenav-products.png')} alt="" /><span>Analytics</span></a>
+              <a href="/templates"><img className='sidenav-img' src={require('../assets/pngs/sidenav-templates.png')} alt="" /><span>Templates</span></a>
+              </div>
+              <div className='item'>
+              <a href="/analytics"><img className='sidenav-img' src={require('../assets/pngs/sidenav-analytics.png')} alt="" /><span>Analytics</span></a>
               </div>
               <div className='item'>
               <a href="/showroom"><img className='sidenav-img' src={require('../assets/pngs/sidenav-showroom.png')} alt="" /><span>Showroom</span></a>

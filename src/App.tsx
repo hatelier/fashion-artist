@@ -21,6 +21,7 @@ import { Assets } from "./pages/asset-library";
 import { AddShowroom } from "./pages/add-showroom";
 import { PreviewProduct } from "./pages/preview";
 import { Proceed } from "./pages/proceed";
+import { Templates } from "./pages/templates";
 import EditorEngine from "./EditorEngine";
 // import { UploadPage } from "./pages/upload";
 import { NewPasswordToken } from "./pages/new-password-token";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/credit" element={<Credit />} />
           <Route path="/account" element={<Account />} />
           <Route path="/teams" element={<Teams />} />
+          <Route path="/templates" element={<Templates />} />
           {/* <Route path="/products/upload/" element={<UploadPage />} /> */}
           <Route path="/assets" element={<Assets />} />
           <Route path="/add-showroom" element={<AddShowroom />} />

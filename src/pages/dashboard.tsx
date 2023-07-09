@@ -79,9 +79,9 @@ export const Dashboard = () => {
   // }
   const [isOpen, setIsOpen] = useState(false);
 
-  // const productPopup = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const productPopup = () => {
+    setIsOpen(!isOpen);
+  };
 
   const productPopupCancel = () => {
     setIsOpen(!isOpen);
@@ -173,6 +173,9 @@ export const Dashboard = () => {
                 <div className="welcome">Welcome to your dashboard</div>
               </div>
             </div>
+            <div className="dashboard-filter-block">
+
+            </div>
             <div className="insights">
               <div className="info">
                 <div className="info-name">Total Products</div>
@@ -218,17 +221,34 @@ export const Dashboard = () => {
               </div>
             </div>
             <div className="products">
-              <div className="recent-products">Recent Products</div>
+              <div className="recent-products">
+                <div className="recent-products-header"><div>Recent Products </div>                  <button
+                    className="add-product input-button"
+                    onClick={productPopup}
+                  >
+                    <img
+                      src={require("../assets/pngs/plus.png")}
+                      alt="add new product"
+                    />
+                    New Product
+                  </button></div>
+                  </div>
             </div>
             {products.map((product) => (
           <Card key={product._id}>
-            <h2>{product.productName}</h2>
             {product.previewImage && (
-              <div>
-                <h3>Preview Image:</h3>
-                <img src={product.previewImage.location} alt="Preview" />
+              <div className="card-img-container">
+                <img className="card-img" src={product.previewImage.location} alt="Preview" />
               </div>
             )}
+            <div className="card-name">{product.productName}</div>
+            <div className="card-bottom">
+              <div className="card-date">dd/mm/yy</div>
+              <div className="card-buttons">
+                <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
+                <div><img src={require('../assets/pngs/card-dots.png')} alt="" /></div>
+              </div>
+            </div>
           </Card>
         ))}
           </div>
