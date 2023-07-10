@@ -12,12 +12,13 @@ import * as React from 'react';
 // import Typography from '@mui/material/Typography';
 import DarkMode from '../components/darkmode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import axiosInstance from './axiosInstance';
 
 export const Header = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
     const navigate = useNavigate();
-    // const [firstName, setFirstName] = useState("");
-    // const [occupation, setOccupation] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [occupation, setOccupation] = useState("");
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     useEffect(() => {
       fetchUserData();
@@ -32,9 +33,9 @@ export const Header = () => {
     };
 
     const fetchUserData = async () => {
-      /*try {
+      try {
       const userID = window.localStorage.getItem('userID');
-      const response = await axios.get("/user/profile", { 
+      const response = await axiosInstance.get("/user/profile", { 
         params: {
           userID: userID
         },
@@ -45,7 +46,7 @@ export const Header = () => {
       setOccupation(userData.occupation);
       } catch (error) {
         console.error("Error fetching user data: ", error);
-      }*/
+      }
     };
 
     const logout = () => {
@@ -152,8 +153,8 @@ export const Header = () => {
           <img src={require('../assets/pngs/Profile photo.png')} alt="" />
         </div>
         <div className='header-account-text'>
-          <div className='header-account-username'>Username</div>
-          <div className='header-account-occupation'>Occupation</div>
+          <div className='header-account-username'>{firstName}</div>
+          <div className='header-account-occupation'>{occupation}</div>
         </div>
         <div>
             <img src={require('../assets/pngs/down-white.png')} alt="" />

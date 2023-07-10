@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, ChangeEvent } from 'react';
 import { toast } from "react-toastify";
 
@@ -26,7 +26,8 @@ interface FormProps {
     passwordMatchError: boolean;
     handlePasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
     handleConfirmPasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
-
+    agreedToTerms: boolean;
+    setAgreedToTerms: (value: boolean) => void;
   }
 
 
@@ -58,6 +59,9 @@ const Register = () => {
     const [updates, setUpdates] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passwordMatchError, setPasswordMatchError] = useState(false)
+    const [agreedToTerms, setAgreedToTerms] = useState(false)
+    const naviagte = useNavigate()
+
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
         setPasswordMatchError(false); // Reset the password match error when the password changes
@@ -76,10 +80,15 @@ const Register = () => {
                 setPasswordMatchError(true);
                 return;
             }
+            if(!agreedToTerms) {
+                toast.error("Please agree to the Terms of Use and Privacy Policy");
+                return;
+            }
             await axios.post('/auth/register', {
                 firstname, lastname, email, occupation, companyname, password, updates,
             });
             toast.success("Registration Completed")
+            naviagte('/auth');
         } catch (error) {
             console.error(error);
         }
@@ -93,7 +102,8 @@ const Register = () => {
     password={password} setPassword={setPassword} 
     updates={updates} setUpdates={setUpdates}
     confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
-    passwordMatchError = {passwordMatchError}
+    passwordMatchError = {passwordMatchError} agreedToTerms={agreedToTerms}
+    setAgreedToTerms={setAgreedToTerms} 
     label="Sign Up" onSubmit={onSubmit} handlePasswordChange={handlePasswordChange}
     handleConfirmPasswordChange = {handleConfirmPasswordChange}/>;
 };
@@ -108,7 +118,8 @@ const Form = ({
     updates, setUpdates,
     confirmPassword, setConfirmPassword,
     handlePasswordChange, handleConfirmPasswordChange,
-    label, onSubmit, passwordMatchError }: FormProps) => {
+    label, onSubmit, passwordMatchError, agreedToTerms,
+    setAgreedToTerms }: FormProps) => {
         
     return (
         <div className="signup-container main-grid">
@@ -137,6 +148,7 @@ const Form = ({
                     <option value="">Select an option</option>
                     <option value="3D Generalist">3D Generalist</option>
                     <option value="3D Environment Artist">3D Environment Artist</option>
+                    <option value="3D Fashion Designer">3D Fashion Designer</option>
                     <option value="Fashion Designer">Fashion Designer</option>
                     <option value="Web Developer">Web Developer</option>
                     <option value="XR Developer">XR Developer</option>
@@ -144,7 +156,7 @@ const Form = ({
                 </select>             
                 </div>
                 <div className="companyname-container">
-                <label htmlFor="cpompanyname" className="label">Company Name</label>
+                <label htmlFor="companyname" className="label">Company Name</label>
                 <input type="text" id="companyname" className="companyname-input" onChange={(event) => setCompanyname(event.target.value)} required/>
                 </div>
             </div>
@@ -157,7 +169,7 @@ const Form = ({
             {passwordMatchError && <p className="error">Passwords do not match</p>}
 
             <label className="signup-agreements"><input type="checkbox" id="updates" checked={updates} onChange={(event) => setUpdates(event.target.checked)}/>I will like to receive emails on future updates</label>
-            <label className="signup-agreements"><input type="checkbox" checked />I agree to the <Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
+            <label className="signup-agreements"><input type="checkbox" checked={agreedToTerms} onChange={(event) => setAgreedToTerms(event.target.checked)} required/>I agree to the <Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
             
             <button type="submit" className="submit signup-button">{label}</button>
             <span className="title-text signup-already">Already have an account? <Link to="/auth" className="to-register">Login</Link></span>
