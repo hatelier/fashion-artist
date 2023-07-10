@@ -133,6 +133,7 @@ p {
   align-items: center;
   padding: 5%;
   padding-right: 2%;
+  background-color: #000000;
 }
 
 .logo-container {
@@ -2517,6 +2518,12 @@ header {
   flex-direction: column;
 }
 
+/* Templates styles */
+.templates-block {
+  width: 100%;
+  margin: auto;
+  margin-top: 30px;
+}
 /* Manage page styles */
 .manage-block {
   display: flex;
