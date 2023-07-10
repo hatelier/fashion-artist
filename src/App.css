@@ -2524,6 +2524,16 @@ header {
   margin: auto;
   margin-top: 30px;
 }
+
+.templates-block .card-content {
+  justify-content: flex-start;
+  height: 150px;
+}
+
+.templates-block .card-name {
+  margin-bottom: 8px;
+  margin-left: 8px ;
+}
 /* Manage page styles */
 .manage-block {
   display: flex;
