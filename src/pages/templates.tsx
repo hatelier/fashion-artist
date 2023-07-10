@@ -63,6 +63,48 @@ export const Templates = () => {
                </div>
                <div className="card-name">dummy</div>
                </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
+               <Card>
+               <div className="card-img-container">
+                <img className="card-img" src="dummy" alt="Preview" />
+               </div>
+               <div className="card-name">dummy</div>
+               </Card>
              </div>
           </div>
         </div>
