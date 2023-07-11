@@ -176,6 +176,9 @@ export const Dashboard = () => {
             <div className="dashboard-filter-block">
 
             </div>
+            <div className="dashboard-filter-container">
+              <div>filter</div>
+            </div>
             <div className="insights">
               <div className="info">
                 <div className="info-name">Total Products</div>
@@ -220,6 +223,7 @@ export const Dashboard = () => {
                 </div>
               </div>
             </div>
+           
             <div className="products">
               <div className="recent-products">
                 <div className="recent-products-header"><div>Recent Products </div>                  <button
