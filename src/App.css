@@ -588,6 +588,8 @@ header {
 .card-img {
   max-height: 8vw;
   max-width: 12vw;
+  height: 8vw;
+  width: 8vw;
   margin: auto;
 }
 .card-name {
