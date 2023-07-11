@@ -115,8 +115,8 @@ p {
 .logo {
   min-width: 236px;
   min-height: 50px;
-  width: 5%;
-  height: 2.5%;
+  width: 18vw;
+  height: 4vw;
 }
 
 .auth-container {
@@ -155,8 +155,9 @@ p {
 }
 /* Start login page form */
 .form {
-  height: 450px;
-  width: 350px;
+  height: 32vw;
+  width: 30vw;
+  min-height: 417px;
   background-color: #fff;
   padding: 30px;
   display: flex;
@@ -164,17 +165,17 @@ p {
   border-radius: 20px;
   margin-top: 150px;
   border-radius: 14px;
-
+  justify-content: space-evenly;
 }
 
 .title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2vw;
   color: #000000;
 }
 .title-text {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1vw;
   margin-bottom: 20px;
   color: #1a202c;
 }
@@ -182,13 +183,15 @@ p {
 .label {
   color: rgb(0, 0, 0);
   margin-bottom: 4px;
+  font-size: 1.1vw;
 }
 
 .input {
   padding: 10px;
+  height: 3vw;
   margin-bottom: 20px;
   width: 90%;
-  font-size: 1rem;
+  font-size: 1.1vh;
   color: #4a5568;
   outline: none;
   border: 1px solid transparent;
@@ -218,13 +221,14 @@ p {
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
-  font-size: 1.2rem;
+  font-size: 1.2vw;
+  height: 3vw;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 .forgot {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1vw;
   margin-bottom: 20px;
   color: #1a202c;
   text-decoration: underline;
@@ -232,12 +236,11 @@ p {
 }
 .account-text {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1vw;
   margin-top: 15px;
 }
 .to-register {
   text-align: center;
-  font-size: 1rem;
   margin-bottom: 20px;
   color: #E70A4E;
   text-decoration: underline;
@@ -292,6 +295,7 @@ flex-direction: column;
 justify-content: center;
 color: #000000;
 padding: 10px 40px 10px 40px;
+width: 35vw;
 }
 .signup .title {
   margin-bottom: 10px;
@@ -2051,6 +2055,7 @@ header {
   border: none;
   width: 90%;
   margin-left: 25px;
+  border-radius: 15px;
 }
 
 .showroom-heading-row {

@@ -129,21 +129,21 @@ const Form = ({
             
             <div className="name-grid">
                 <div className="name-container">
-                <label htmlFor="name" className="label">First Name</label>
+                <label htmlFor="name" className="label">First Name*</label>
                 <input type="text" id="firstname" className="input" value={firstname} onChange={(event) => setFirstname(event.target.value)} required/>
                 </div>
                 <div className="name-container">
-                <label htmlFor="name" className="label">Last Name</label>
+                <label htmlFor="name" className="label">Last Name*</label>
                 <input type="text" id="lastname" className="input" value={lastname} onChange={(event) => setLastname(event.target.value)} required/>
                 </div>
             </div>
 
-            <label htmlFor="email" className="label">Email</label>
+            <label htmlFor="email" className="label">Email*</label>
             <input type="email" id="email" className="input" value={email} onChange={(event) => setEmail(event.target.value)} required/>
             
             <div className="grid">
                 <div className="occupation-container dropdown">
-                <label htmlFor="occupation" className="label">Occupation</label>
+                <label htmlFor="occupation" className="label">Occupation*</label>
                 <select className="myDropdown" id="occupation" onChange={(event) => setOccupation(event.target.value)} required>
                     <option value="">Select an option</option>
                     <option value="3D Generalist">3D Generalist</option>
@@ -161,15 +161,15 @@ const Form = ({
                 </div>
             </div>
 
-            <label htmlFor="password" className="label">Password</label>
+            <label htmlFor="password" className="label">Password*</label>
             <input type="password" id="password" className="input" value={password} onChange={handlePasswordChange} required/>
             
-            <label htmlFor="cpassword" className="label">Confirm Password</label>
+            <label htmlFor="cpassword" className="label">Confirm Password*</label>
             <input type="password" id="cpassword" className="input" value={confirmPassword} onChange={handleConfirmPasswordChange} required/>
             {passwordMatchError && <p className="error">Passwords do not match</p>}
 
             <label className="signup-agreements"><input type="checkbox" id="updates" checked={updates} onChange={(event) => setUpdates(event.target.checked)}/>I will like to receive emails on future updates</label>
-            <label className="signup-agreements"><input type="checkbox" checked={agreedToTerms} onChange={(event) => setAgreedToTerms(event.target.checked)} required/>I agree to the <Link to="/" className="forgot">Term of Use</Link> and the <Link to="/" className="forgot">Privacy Policy *</Link></label>
+            <label className="signup-agreements"><input type="checkbox" checked={agreedToTerms} onChange={(event) => setAgreedToTerms(event.target.checked)} required/>I agree to the <Link to="/">Term of Use</Link> and the <Link to="/">Privacy Policy *</Link></label>
             
             <button type="submit" className="submit signup-button">{label}</button>
             <span className="title-text signup-already">Already have an account? <Link to="/auth" className="to-register">Login</Link></span>
