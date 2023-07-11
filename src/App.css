@@ -509,27 +509,36 @@ header {
   justify-content: space-between;
   padding: 16px 35px;
 }
+
+.dashboard-filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
 .card {
   flex: 1 0 0;
   align-self: stretch;
   width: fit-content;
   display: inline-block;
   background: none;
-  margin: 10px;
+  margin: 20px;
   margin-left: 0px;
+  height: 13.5vw;
+  width: 14vw;
 }
 
 .card-content {
   min-width: 215.8px;
-  width: 16vw;
+  width: 13vw;
   min-height: 185px;
-  height: 13vh;
+  height: 11vw;
   border-radius: 7px;
   border: 0.5px solid var(--primary-bgcolor);
   background: var(--primary-bgcolor);
   justify-content: flex-end;
   margin: auto;
-  padding: 5px;
+  padding: 8px;
   margin-top: 0;
   padding-top: 0;
 }

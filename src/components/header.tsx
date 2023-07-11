@@ -131,11 +131,13 @@ export const Header = () => {
       <header className="header">
         <div>
         <img className='sidemenu-toggle' src={require('../assets/pngs/sidenav-toggle.png')} onClick={handleClick} alt="" />
+        <a href="/">
         <img
         src={require('../assets/pngs/mxlogo-2.png')}
         alt="mxlogo"
         className="mx-logo"
         />
+        </a>
         </div>
         <div className='header-right'>
       <DarkMode />

@@ -212,7 +212,9 @@ export const Products = () => {
           <Card key={product._id}>
             {product.previewImage && (
               <div className="card-img-container">
+                <div className="card-img-box">
                 <img className="card-img" src={product.previewImage.location} alt="Preview" />
+                </div>
               </div>
             )}
             <div className="card-name">{product.productName}</div>
