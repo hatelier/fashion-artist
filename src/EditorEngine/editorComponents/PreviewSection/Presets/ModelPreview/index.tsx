@@ -8,8 +8,9 @@ import UploadModel from "../UploadModel";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
 import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
-import MtumxLoadGif from "../../../../../assets/gif/mtumxGif.gif";
+import MtumxLoadPng from "../../../../../assets/gif/mtumxGIf.png";
 import Text3d from "../TextControls/Text3d";
+import styled from "styled-components";
 
 const ModelPreview = (props) => {
   const { file } = useContext(props.context);
@@ -100,7 +101,11 @@ const ModelPreview = (props) => {
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
-              <img src={MtumxLoadGif} width={"600px"} alt={"mtumxLoad"} />
+              <AnimatedLoader
+                src={MtumxLoadPng}
+                width={"600px"}
+                alt={"mtumxLoad"}
+              />
             </Html>
           }
         >
@@ -111,4 +116,15 @@ const ModelPreview = (props) => {
     </div>
   );
 };
+const AnimatedLoader = styled.img`
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  animation: rotation 2s infinite linear;
+`;
 export default ModelPreview;

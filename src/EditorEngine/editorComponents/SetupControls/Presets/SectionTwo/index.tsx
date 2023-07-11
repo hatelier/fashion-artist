@@ -222,7 +222,7 @@ const SectionTwo = () => {
             alignItems: "center",
             height: "22px",
             borderRadius: "5px",
-            border: "1px solid #EAEAEA",
+            border: "1px solid #E3E3E3",
             background: "rgba(244, 244, 244, 0.90)",
             margin: "0 15px 10px 15px",
             padding: "0 9px",

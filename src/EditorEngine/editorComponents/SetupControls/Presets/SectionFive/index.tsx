@@ -7,13 +7,15 @@ import {
   updateTriggerDelete,
 } from "../../../../../redux/commentsRedux";
 import "./index.scss";
-import { faTrash, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BiShareAlt } from "react-icons/bi";
 import axios from "axios";
 import { toast } from "react-toastify";
 import MessageIcon from "../../../../../assets/svgs/Message.svg";
 import PencilIcon from "../../../../../assets/svgs/pencil.svg";
 import styled from "styled-components";
+import CommentBox from "./CommentBox";
 
 const SectionFive = () => {
   const dispatch = useDispatch();
@@ -62,6 +64,7 @@ const SectionFive = () => {
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
+        {!enableComments && <CommentBox />}
         {enableComments &&
           annotationList.map((comment, index) => {
             return (
@@ -89,21 +92,35 @@ const SectionFive = () => {
                     >
                       {index + 1}
                     </p>
-                    <div style={{ marginLeft: "10px" }}>
+                    <div
+                      style={{
+                        marginLeft: "10px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "2px",
+                      }}
+                    >
                       <p style={{ fontSize: "14px", fontWeight: "500" }}>
                         Myumx
                       </p>
                       <p
                         style={{
                           color: "#757575",
+                          fontSize: "10px",
                         }}
                       >
                         Jul 6, 2023 8:34 PM
                       </p>
                     </div>
                   </div>
-                  <div style={{ marginRight: "10px" }}>
-                    <FontAwesomeIcon icon={faShareNodes} />
+                  <div
+                    style={{
+                      marginRight: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <BiShareAlt style={{ fontSize: "19px" }} />
                     &nbsp; &nbsp;
                     <FontAwesomeIcon
                       icon={faTrash}
@@ -137,7 +154,7 @@ const SectionFive = () => {
   );
 };
 const AnnotationBox = styled.div`
-  border-radius: 10px;
+  border-radius: 5px;
   background: #f4f4f4;
   box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;

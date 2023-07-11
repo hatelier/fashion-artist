@@ -22,6 +22,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BsTrash } from "react-icons/bs";
+import { BiShareAlt } from "react-icons/bi";
+import styled from "styled-components";
 
 const UploadModel = () => {
   //this has been disabled temporarily
@@ -72,7 +75,7 @@ const UploadModel = () => {
         z: dimensions.z,
       })
     );
-  }, [gltf,dispatch]);
+  }, [gltf, dispatch]);
 
   // const [comments, setComments] = useState([]);
   const [groupRef, setGroupRef] = useState(null);
@@ -116,7 +119,7 @@ const UploadModel = () => {
     (state) => state.commentsRedux.triggerDelete
   );
 
-  const loadTicks = useCallback(()=> {
+  const loadTicks = useCallback(() => {
     axios
       .get("/product/tick", {
         params: {
@@ -142,15 +145,19 @@ const UploadModel = () => {
           dispatch(updateAnnotationList(localComments));
         }
       });
-  },[userID, projectID, groupRef, dispatch])
+  }, [userID, projectID, groupRef, dispatch]);
 
   useEffect(() => {
     if (groupRef && enableComments) {
       loadTicks();
     }
   }, [groupRef, enableComments, triggerDelete, loadTicks]);
-
-  
+  const AnnotBox = styled.div`
+    border-radius: 10px;
+    border: 1px solid #e3e3e3;
+    background: #f4f4f4;
+    box-shadow: 0px 10px 29px 0px rgba(0, 0, 0, 0.25);
+  `;
   return (
     <>
       <group
@@ -165,53 +172,99 @@ const UploadModel = () => {
         />
         {currentTab === 4 && enableComments && showModal && (
           <Html position={modalPosition} left>
-            <div style={{ backgroundColor: "white" }}>
-              <input type="text" id="comment" name="comment" />
-              <button
-                onClick={() => {
-                  const commentText = document.getElementById("comment").value;
+            <AnnotBox
+              style={{
+                width: "230px",
+                height: "120px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <textarea
+                type="text"
+                id="comment"
+                name="comment"
+                maxLength={70}
+                autoFocus={true}
+                placeholder={"Add your annotation here!"}
+                style={{
+                  border: "none",
+                  height: "calc(120px - 35px)",
+                  borderRadius: "10px 10px  0 0",
+                  outline: "none",
+                  padding: "10px",
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  background: "#EAEAEA",
+                  height: "40px",
+                  padding: "0 5px",
+                  borderRadius: "0 0 10px 10px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <BsTrash />
+                  &nbsp;
+                  <BiShareAlt />
+                </div>
+                <button
+                  style={{
+                    background: "#DEDEDE",
+                    border: "none",
+                    padding: "7px",
+                    borderRadius: "7px",
+                  }}
+                  onClick={() => {
+                    const commentText =
+                      document.getElementById("comment").value;
 
-                  let localPoint = groupRef.worldToLocal(modalPosition);
-                  axios
-                    .post("/product/tick", {
-                      userId: userID,
-                      productID: projectID,
-                      tickPoints: {
-                        text: commentText,
-                        position: localPoint,
-                        align: localPoint.x > 0 ? "left" : "right",
-                      },
-                    })
-                    .then((res) => {
-                      setPredefinedComments([
-                        ...predefinedComments,
-                        {
+                    let localPoint = groupRef.worldToLocal(modalPosition);
+                    axios
+                      .post("/product/tick", {
+                        userId: userID,
+                        productID: projectID,
+                        tickPoints: {
                           text: commentText,
                           position: localPoint,
                           align: localPoint.x > 0 ? "left" : "right",
                         },
-                      ]);
-                      dispatch(
-                        updateAnnotationList([
+                      })
+                      .then((res) => {
+                        setPredefinedComments([
                           ...predefinedComments,
                           {
                             text: commentText,
                             position: localPoint,
                             align: localPoint.x > 0 ? "left" : "right",
                           },
-                        ])
-                      );
-                      setShowModal(false);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                      toast.error("Something went wrong");
-                    });
-                }}
-              >
-                Save Comment
-              </button>
-            </div>
+                        ]);
+                        dispatch(
+                          updateAnnotationList([
+                            ...predefinedComments,
+                            {
+                              text: commentText,
+                              position: localPoint,
+                              align: localPoint.x > 0 ? "left" : "right",
+                            },
+                          ])
+                        );
+                        setShowModal(false);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                        toast.error("Something went wrong");
+                      });
+                  }}
+                >
+                  Save
+                </button>
+              </div>
+            </AnnotBox>
           </Html>
         )}
         {currentTab === 4 &&
