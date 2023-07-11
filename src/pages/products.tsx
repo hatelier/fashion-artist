@@ -94,11 +94,11 @@ export const Products = () => {
     setIsOpen(!isOpen);
   };
 
-  const [age, setAge] = React.useState("");
+  // const [age, setAge] = React.useState("");
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
+  // const handleChange = (event: SelectChangeEvent) => {
+  //   setAge(event.target.value as string);
+  // };
   return (
     <div className="home-container">
       {isOpen && (
