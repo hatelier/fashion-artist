@@ -165,9 +165,10 @@ export const Products = () => {
                   <input
                     type="text"
                     placeholder="Search by product name"
-                    className="search"
+                    className="templates-input"
                   />
-                  <FormControl fullWidth className="filter-box">
+                  <div className="templates-filter"><img className='sidenav-img' src={require('../assets/pngs/filter-icon.png')} alt="" /><span>Filter</span><img className='sidenav-img' src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+                  {/* <FormControl fullWidth className="filter-box">
                     <InputLabel
                       id="demo-simple-select-label"
                       className="filter"
@@ -195,7 +196,7 @@ export const Products = () => {
                       <MenuItem value={30}>by Schedules</MenuItem>
                       <MenuItem value={30}>by Team</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                   <button
                     className="add-product input-button"
                     onClick={productPopup}

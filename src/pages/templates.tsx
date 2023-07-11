@@ -20,6 +20,12 @@ export const Templates = () => {
            </div>
            </div>
            <div className="subscription">
+            <div className="templates-input-group">
+              <input type="text" className="templates-input" placeholder="Search Templates" />
+              <div className='templates-filter-block'>
+                <div className="templates-filter"><img className='sidenav-img' src={require('../assets/pngs/filter-icon.png')} alt="" /><span>Filter</span><img className='sidenav-img' src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+              </div>
+            </div>
              <div className="templates-block">
              <Card>
                <div className="card-img-container">
