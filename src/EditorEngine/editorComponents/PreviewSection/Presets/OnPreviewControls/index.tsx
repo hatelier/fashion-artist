@@ -414,7 +414,8 @@ const AddTextComp = () => {
           background: `${currentColor}`,
           borderRadius: "10px",
           marginTop: "15px",
-          border: "none",
+          border: "1px solid #000000",
+          cursor: "pointer",
         }}
         onClick={() => {
           setPickerControl((state) => !state);
@@ -526,7 +527,7 @@ const AddTextComp = () => {
                 icon={faTrash}
                 style={{
                   fontSize: "10px",
-                  color: "#c2c2c2",
+                  color: "#ef0101",
                 }}
                 onClick={() => {
                   axios

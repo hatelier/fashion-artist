@@ -122,18 +122,18 @@ const SectionThree = () => {
   useEffect(() => {
     if (projectID) {
       axios
-      .get("/materials/getpreset", {
-        params: {
-          projectId: projectID,
-          userId: userID,
-        },
-      })
-      .then((res) => {
-        setReqPreset(res.data.preset.configuration.preset);
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
+        .get("/materials/getpreset", {
+          params: {
+            projectId: projectID,
+            userId: userID,
+          },
+        })
+        .then((res) => {
+          setReqPreset(res.data.preset.configuration.preset);
+        })
+        .catch((err) => {
+          toast.error(err);
+        });
     }
   }, [projectID, userID]);
   return (
@@ -204,8 +204,8 @@ const SectionThree = () => {
                         alignItems: "center",
                         cursor: "pointer",
                         height: "22px",
-                        background: "#FFFFFF",
-                        border: "1px solid #EDEDED",
+                        background: "rgba(244, 244, 244, 0.90)",
+                        border: "1px solid #E3E3E3",
                         borderRadius: "5px",
                         margin: "0 15px 10px 15px",
                         padding: "0 9px",
@@ -214,7 +214,7 @@ const SectionThree = () => {
                       <p className={"confName"}>{matVal}</p>
                       <FontAwesomeIcon
                         icon={preset.visibility[matInx] ? faEye : faEyeSlash}
-                        style={{ fontSize: "12px", color: "lightgrey" }}
+                        style={{ fontSize: "12px", color: "#000000" }}
                         onClick={() => {
                           materialArray.forEach((matArr) => {
                             if (matArr.name === matVal) {

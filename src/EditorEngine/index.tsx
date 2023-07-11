@@ -36,12 +36,17 @@ const EditorEngine = () => {
         <Banner />
         <div className={"editorSection"}>
           <SetupControls
-            style={{ width: "330px", height: "calc(100vh - 72px)" }}
+            style={{
+              width: "330px",
+              height: "calc(100vh - 72px)",
+              boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+              zIndex: 10,
+            }}
             context={ContextParams}
             settings={setDefContext}
           />
           <PreviewSection
-            style={{ width: "85vw" }}
+            style={{ width: "100vw" }}
             context={ContextParams}
             settings={setDefContext}
           />
