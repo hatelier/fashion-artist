@@ -515,6 +515,25 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  margin: auto;
+  margin-top: 25px;
+  width: 95%;
+}
+
+.dashboard-date-filter {
+  display: flex;
+  min-width: 105px;
+  min-height: 35px;
+  padding: 9px 13px;
+  align-items: center;
+  border-radius: 5px;
+  border: 0.5px solid rgba(231, 10, 78, 0.00);
+  background: var(--items-bgcolor);
+  color: var(--font-color);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .card {
   flex: 1 0 0;
