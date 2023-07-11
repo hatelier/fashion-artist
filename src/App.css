@@ -2596,7 +2596,7 @@ header {
 }
 .templates-block .card-content {
   justify-content: flex-start;
-  height: 150px;
+  height: 11vw;
 }
 
 .templates-block .card-name {
