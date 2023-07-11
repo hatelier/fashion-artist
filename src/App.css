@@ -1121,10 +1121,11 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding-top: 30px;
   gap: 20px;
-  width: 90%;
+  width: 100%;
+  margin: auto;
 }
 
 .search {
@@ -2575,11 +2576,24 @@ header {
 
 /* Templates styles */
 .templates-block {
-  width: 100%;
+  width: 95%;
   margin: auto;
   margin-top: 30px;
 }
 
+.templates-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  height: 45px;
+  padding: 0px 20px;
+  background-color: var(--items-bgcolor);
+  color: var(--font-color);
+  border-radius: 10px;
+  font-size: 16px;
+}
 .templates-block .card-content {
   justify-content: flex-start;
   height: 150px;
@@ -2588,6 +2602,23 @@ header {
 .templates-block .card-name {
   margin-bottom: 8px;
   margin-left: 8px ;
+}
+
+.templates-input-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  align-items: center;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+.templates-input {
+  width: 100%;
+  background-color: var(--items-bgcolor);
+  border: none;
 }
 /* Manage page styles */
 .manage-block {

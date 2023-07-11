@@ -177,7 +177,7 @@ export const Dashboard = () => {
 
             </div>
             <div className="dashboard-filter-container">
-              <div className="dashboard-date-filter"><span>This Week</span> <img src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+              <div className="dashboard-date-filter"><span>This Week</span> <img className="sidenav-img" src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
             </div>
             <div className="insights">
               <div className="info">
