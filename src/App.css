@@ -633,6 +633,8 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
 }
 .bell-icon{
 
@@ -675,6 +677,18 @@ header {
   display: block;
   border-radius: 8px;
 }
+.dropdown-top-content button {
+  all: unset;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  width: 160px;;
+  padding: 10px 35px 10px 15px;
+  text-decoration: none;
+  display: block;
+  border-radius: 8px;
+}
 
 .dropdown-top-content img {
   margin-right: 7px;
@@ -682,6 +696,7 @@ header {
 }
 /* Change color of dropdown links on hover */
 .dropdown-top-content a:hover {background-color: #ffffff; color: #E70A4E;}
+.dropdown-top-content button:hover {background-color: #ffffff; color: #E70A4E;}
 
 /* Show the dropdown menu on hover */
 .dropdown-top:hover .dropdown-top-content {display: block;}
@@ -978,9 +993,11 @@ header {
   position:absolute;
   top: 40%;
   left: 40%;
-  background: #FFFFFF;
+  background: var(--secondary-bgcolor);
   box-shadow: 0px 10px 46px rgba(0, 0, 0, 0.1);
   border-radius: 29px;
+  color: var(--font-color);
+  z-index: 10;
 }
 
 .product-popup-main {
@@ -995,7 +1012,7 @@ header {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: #000000;
+  color: var(--font-color);
 }
 
 .product-popup-input {
@@ -1005,7 +1022,7 @@ header {
   padding: 16px 20px;
   gap: 10px;
   background: #FFFFFF;
-  border: 1px solid #EAEAEA;
+  border: 1px solid var(--items-bgcolor);
   border-radius: 5px;
   width: 387px;
   height: 44px;
@@ -2576,7 +2593,7 @@ header {
 
 /* Templates styles */
 .templates-block {
-  width: 95%;
+  width: 97%;
   margin: auto;
   margin-top: 30px;
 }
