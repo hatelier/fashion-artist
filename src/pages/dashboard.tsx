@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
@@ -88,9 +88,18 @@ export const Dashboard = () => {
   };
 
   const [display, setDisplay] = useState<'none' | 'flex'>('none');
-
+  
   const toggleDisplay = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+  };
+
+  const childRef1 = useRef<HTMLDivElement>(null);
+
+  const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
+    if (childRef.current) {
+      const childElement = childRef.current as HTMLDivElement;
+      childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
+    }
   };
   // const [isElementVisible, setElementVisible] = useState(false);
 
@@ -222,8 +231,8 @@ export const Dashboard = () => {
                 <div className="info-name">Total AR view</div>
                 <div className="info-value">{arViewCount}</div>
                 <div className="info-view">
-                  <a className="info-view-link" href="/analytics">
-                    <span>See analytics report</span>
+                  <a className="info-view-link" href="/manage">
+                    <span>View all Showroom</span>
                     <img
                       className="sidenav-img info-img"
                       src={require("../assets/pngs/arrow.png")}
@@ -241,7 +250,7 @@ export const Dashboard = () => {
                     onClick={productPopup}
                   >
                     <img
-                      src={require("../assets/pngs/plus.png")}
+                      src={require("../assets/pngs/add.png")}
                       alt="add new product"
                     />
                     New Product
@@ -261,7 +270,17 @@ export const Dashboard = () => {
               <div className="card-date">dd/mm/yy</div>
               <div className="card-buttons">
                 <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
-                <div><img src={require('../assets/pngs/card-dots.png')} alt="" /></div>
+                <div className="card-dropup">
+                  <div ref={childRef1} className="card-dropup-content">
+                  <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                  <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                  <img src={require('../assets/pngs/products-edit.png')} alt="" />
+                  <img src={require('../assets/pngs/products-share.png')} alt="" />
+                  </div>
+                  <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
+                  <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                  </div>
+                  </div>
               </div>
             </div>
           </Card>

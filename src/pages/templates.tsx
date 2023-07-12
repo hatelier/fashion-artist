@@ -50,6 +50,7 @@ const toggleDisplay = () => {
              <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
+                <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
                 <img className="card-img" src="dummy" alt="Preview" />
                 </div>
                </div>
@@ -58,6 +59,7 @@ const toggleDisplay = () => {
           <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
+                  <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
                 <img className="card-img" src="dummy" alt="Preview" />
                 </div>
                </div>
@@ -66,6 +68,7 @@ const toggleDisplay = () => {
                <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
+                <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
                 <img className="card-img" src="dummy" alt="Preview" />
                 </div>
                </div>
@@ -74,6 +77,7 @@ const toggleDisplay = () => {
                <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
+                <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
                 <img className="card-img" src="dummy" alt="Preview" />
                 </div>
                </div>
