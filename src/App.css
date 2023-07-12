@@ -4,6 +4,7 @@
   --font-color: #0D0C0C;
   --items-bgcolor: #E3E3E3;
   --invert-color: invert(1);
+  --popup-color: #F4F4F4;
 }
 
 [data-theme="dark"] {
@@ -12,6 +13,7 @@
   --font-color: #EAEAEA;
   --items-bgcolor: #383838;
   --invert-color: invert(0);
+  --popup-color: #292626;
 }
 
 .App {
@@ -555,6 +557,7 @@ header {
   z-index: 10;
   position:absolute;
   top: 195px;
+  gap: 10px;
 }
 .card {
   flex: 1 0 0;
@@ -644,6 +647,15 @@ header {
   gap: 5px;
 }
 
+.card-dropup-content {
+  display: none;
+  flex-direction: column;
+  gap: 4.97px;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  bottom: 20px ;
+}
 .mx-logo{
   flex: none;
   order: 0;
@@ -823,22 +835,20 @@ header {
 }
 .add-product {
   display: flex;
-  flex-direction: row;
+  height: 45px;
+  padding: 9px 12px;
   justify-content: center;
   align-items: center;
-  padding: 9px 12px;
-  gap: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-  width: 216px;
-  height: 45px;
-  border: none;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  background: #E70A4E;
+  gap: 10px;
+  color: #EAEAEA;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   border-radius: 10px;
+  border: 2px solid var(--red-btn-stroke, rgba(255, 255, 255, 0.30));
+  background: var(--btn, #D31027);
+  box-shadow: 0px 1px 11px 0px rgba(0, 0, 0, 0.10);
 }
 .content {
   display: flex;
@@ -1014,7 +1024,7 @@ header {
   position:absolute;
   top: 40%;
   left: 40%;
-  background: var(--secondary-bgcolor);
+  background: var(--popup-color);
   box-shadow: 0px 10px 46px rgba(0, 0, 0, 0.1);
   border-radius: 29px;
   color: var(--font-color);
@@ -1042,7 +1052,7 @@ header {
   align-items: center;
   padding: 16px 20px;
   gap: 10px;
-  background: #FFFFFF;
+  background: var(--items-bgcolor);
   border: 1px solid var(--items-bgcolor);
   border-radius: 5px;
   width: 387px;
@@ -1071,13 +1081,13 @@ header {
   align-items: center;
   padding: 10px 19px;
   gap: 10px;
-  background: #FFFFFF;
-  border: 1px solid #E70A4E;
+  background: none;
+  border: 1px solid var(--font-color);
   border-radius: 10px;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #E70A4E;
+  color: var(--font-color);
   cursor: pointer;
 }
 
@@ -1088,7 +1098,7 @@ header {
   align-items: center;
   padding: 10px 40px;
   gap: 10px;
-  background: #E70A4E;
+  background: #D31027;
   border-radius: 10px;
   font-weight: 400;
   font-size: 20px;
@@ -2681,7 +2691,16 @@ header {
   margin-bottom: 8px;
   margin-left: 8px ;
 }
-
+.templates-block .card-img-box {
+  position: relative;
+}
+.templates-love {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  height: 0.5vw;
+  width: 0.58vw;
+}
 .templates-input-group {
   display: flex;
   flex-direction: row;

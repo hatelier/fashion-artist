@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 // import * as React from "react";
@@ -103,6 +103,15 @@ export const Products = () => {
 
   const toggleDisplay = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+  };
+
+  const childRef1 = useRef<HTMLDivElement>(null);
+
+  const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
+    if (childRef.current) {
+      const childElement = childRef.current as HTMLDivElement;
+      childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
+    }
   };
   return (
     <div className="home-container">
@@ -219,7 +228,7 @@ export const Products = () => {
                     onClick={productPopup}
                   >
                     <img
-                      src={require("../assets/pngs/plus.png")}
+                      src={require("../assets/pngs/add.png")}
                       alt="add new product"
                     />
                     New Product
@@ -240,8 +249,18 @@ export const Products = () => {
               <div className="card-date">dd/mm/yy</div>
               <div className="card-buttons">
                 <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
-                <div><img src={require('../assets/pngs/card-dots.png')} alt="" /></div>
-              </div>
+                <div className="card-dropup">
+                  <div ref={childRef1} className="card-dropup-content">
+                  <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                  <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                  <img src={require('../assets/pngs/products-edit.png')} alt="" />
+                  <img src={require('../assets/pngs/products-share.png')} alt="" />
+                  </div>
+                  <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
+                  <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                  </div>
+                  </div>
+                  </div>
             </div>
           </Card>
         ))}
