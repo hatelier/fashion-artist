@@ -87,6 +87,11 @@ export const Dashboard = () => {
     setIsOpen(!isOpen);
   };
 
+  const [display, setDisplay] = useState<'none' | 'flex'>('none');
+
+  const toggleDisplay = () => {
+    setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+  };
   // const [isElementVisible, setElementVisible] = useState(false);
 
   // const handleClick = () => {
@@ -177,7 +182,12 @@ export const Dashboard = () => {
 
             </div>
             <div className="dashboard-filter-container">
-              <div className="dashboard-date-filter"><span>This Week</span> <img className="sidenav-img" src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+              <div className="dashboard-date-filter" onClick={toggleDisplay}><span>This Week</span> <img className="sidenav-img" src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+              <div className="dashboard-filter-dropdown" style={{ display }} id="dashboard-filter-dropdown">
+                <div>Today</div>
+                <div>This Week</div>
+                <div>This Month</div>
+                </div>  
             </div>
             <div className="insights">
               <div className="info">
