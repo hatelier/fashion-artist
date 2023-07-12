@@ -77,33 +77,25 @@ export const Sidenav = () => {
           </div>  
           <div className="dropdown resource-menu">
             <div className="dropdown-content">
-              <button onClick={()=>{
-
-              }} >
+              <a href='/'>
                 <img className='resources-img' src={require('../assets/pngs/tutorial.png')} alt="resources" /> 
                 Tutorials 
-              </button>
+              </a>
 
-              <button onClick={()=>{
-                
-              }}>
+              <a href='/'>
                 <img className='resources-img' src={require('../assets/pngs/documentation.png')} alt="resources" />
                  Documentation 
-              </button>
+              </a>
 
-              <button onClick={()=>{
-                
-              }}>
+              <a href='/'>
                 <img className='resources-img' src={require('../assets/pngs/api-plugins.png')} alt="resources" /> 
                 API & Plugins 
-              </button>
+              </a>
 
-              <button onClick={()=>{
-                //window.open("")
-              }}>
+              <a href='/'>
                 <img className='resources-img' src={require('../assets/pngs/feedback.png')} alt="resources" /> 
                 Feedback 
-              </button>
+              </a>
 
             </div>
             <div className="resources">

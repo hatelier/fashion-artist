@@ -195,7 +195,7 @@ export const Dashboard = () => {
                 </div>
               </div>
               <div className="info">
-                <div className="info-name">Total 3d view</div>
+                <div className="info-name">Total 3D view</div>
                 <div className="info-value">{threeDViewCount}</div>
                 <div className="info-view">
                   <a className="info-view-link" href="/analytics">
