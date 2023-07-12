@@ -99,6 +99,11 @@ export const Products = () => {
   // const handleChange = (event: SelectChangeEvent) => {
   //   setAge(event.target.value as string);
   // };
+  const [display, setDisplay] = useState<'none' | 'flex'>('none');
+
+  const toggleDisplay = () => {
+    setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+  };
   return (
     <div className="home-container">
       {isOpen && (
@@ -167,7 +172,19 @@ export const Products = () => {
                     placeholder="Search by product name"
                     className="templates-input"
                   />
-                  <div className="templates-filter"><img className='sidenav-img' src={require('../assets/pngs/filter-icon.png')} alt="" /><span>Filter</span><img className='sidenav-img' src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+                  <div className="templates-filter-block">
+                  <div className="templates-filter" onClick={toggleDisplay}><img className='sidenav-img' src={require('../assets/pngs/filter-icon.png')} alt="" /><span>Filter</span><img className='sidenav-img' src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
+                  <div className="templates-filter-dropdown" style={{ display }}>
+                    <div className="filter-dropdown-item">by Tag</div>
+                    <div className="filter-dropdown-item">by File type</div>
+                    <div className="filter-dropdown-item">by Date</div>
+                    <div className="filter-dropdown-item">by Product name</div>
+                    <div className="filter-dropdown-item">by Draft</div>
+                    <div className="filter-dropdown-item">by Published</div>
+                    <div className="filter-dropdown-item">by Scheduled</div>
+                    <div className="filter-dropdown-item">by Team</div>
+                  </div>
+                  </div>
                   {/* <FormControl fullWidth className="filter-box">
                     <InputLabel
                       id="demo-simple-select-label"
