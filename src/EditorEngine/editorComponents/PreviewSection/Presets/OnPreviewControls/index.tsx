@@ -19,6 +19,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { updateTextTrigger } from "../../../../../redux/materialApplication";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineClose } from "react-icons/ai";
+import AccessSettings from "./components/AccessSettings";
 
 const OnPreviewControls = () => {
   // const preImages = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -334,6 +336,7 @@ const OnPreviewControls = () => {
           />
           <div style={{ height: "680px", overflowX: "hidden", overflowY: "" }}>
             {rightSelect === 0 && <AddTextComp />}
+            {rightSelect === 2 && <AccessSettings />}
           </div>
         </SideBarDiv>
       )}
@@ -350,206 +353,255 @@ const AddTextComp = () => {
     (state) => state.materialApplication.textMeshArr
   );
   const [pickerControl, setPickerControl] = useState(false);
+  const [currentSelectSt, setCurrentSt] = useState(null);
   const dispatch = useDispatch();
-  return (
-    <form
-      style={{
-        marginTop: "20px",
-      }}
-      onSubmit={(e) => {
-        e.preventDefault();
-        const reqData = {
-          userId: userID,
-          projectId: projectID,
-          textContent: e.target.textContent.value,
-          textColor: currentColor,
-          textSize: e.target.textSize.value / 10,
-          position: {
-            x: e.target.x.value,
-            y: e.target.y.value,
-            z: e.target.z.value,
-          },
-          rotation: {
-            x: e.target.X.value,
-            y: e.target.Y.value,
-            z: e.target.Z.value,
-          },
-          cameraLock: e.target.cameraLock.checked,
-        };
-        setLoaderState(true);
-        axios
-          .post("/manage/addtext", reqData)
-          .then((res) => {
-            setLoaderState(false);
-            dispatch(updateTextTrigger());
-          })
-          .catch((err) => {
-            console.log(err);
-            toast.error(err);
-          });
-      }}
-    >
-      <TextField
-        variant="outlined"
-        size="small"
-        id="filled-size-small"
-        label={"Content"}
-        name={"textContent"}
-        required={true}
-        inputProps={{
-          style: {
-            fontSize: "11px",
-          },
-        }}
-        InputLabelProps={{
-          style: {
-            fontSize: "11px",
-          },
-        }}
-      />
-      <div
-        style={{
-          height: "31px",
-          width: "79px",
-          background: `${currentColor}`,
-          borderRadius: "10px",
-          marginTop: "15px",
-          border: "1px solid #000000",
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          setPickerControl((state) => !state);
-        }}
-      ></div>
-      <div style={{ marginTop: "10px" }}></div>
-      {pickerControl && (
-        <SketchPicker
-          color={currentColor}
-          onChangeComplete={(color) => {
-            setCurrentColor(color.hex);
-          }}
-          width={"170px"}
-        />
-      )}
-      <div style={{ marginTop: "20px" }}></div>
-      <TextField
-        variant="outlined"
-        size="small"
-        id="filled-size-small"
-        label={"Size"}
-        required={true}
-        type={"number"}
-        name={"textSize"}
-        inputProps={{
-          style: {
-            fontSize: "11px",
-          },
-        }}
-        InputLabelProps={{
-          style: {
-            fontSize: "11px",
-          },
-        }}
-      />
-      {/*  here is the position tab*/}
-      <div style={{ marginTop: "14px" }}>
-        <p style={{ marginBottom: "10px" }}>Position</p>
+  return ["Product Graphics", "3D background text"].map((text, indexSt) => {
+    return (
+      <ClickedDiv>
         <div
           style={{
             display: "flex",
-            gap: "4px",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          {["x", "y", "z"].map((posi) => {
-            return (
-              <NumberLabelledInputMui
-                label={posi}
-                width={"63px"}
-                defaultVal={0}
-                required={true}
-              />
-            );
-          })}
+          <p
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setCurrentSt(indexSt);
+            }}
+          >
+            {text}
+          </p>
+          {currentSelectSt !== null && currentSelectSt === indexSt && (
+            <AiOutlineClose
+              size={12}
+              onClick={() => {
+                setCurrentSt(null);
+              }}
+            />
+          )}
         </div>
-      </div>
-
-      {/*  here is the rotation tab*/}
-      <div style={{ marginTop: "14px" }}>
-        <p style={{ marginBottom: "10px" }}>Rotation</p>
-        <div
-          style={{
-            display: "flex",
-            gap: "4px",
-          }}
-        >
-          {["X", "Y", "Z"].map((posi) => {
-            return (
-              <NumberLabelledInputMui
-                label={posi}
-                width={"63px"}
-                defaultVal={0}
-                required={true}
-              />
-            );
-          })}
-        </div>
-      </div>
-
-      <div style={{ marginTop: "7px" }}>
-        <label style={{ fontSize: "11px", fontWeight: 400 }}>
-          <input type={"checkbox"} name={"cameraLock"} />
-          &nbsp; lock camera position
-        </label>
-      </div>
-      {!loaderState ? (
-        <RoundedButton type={"submit"}>Create</RoundedButton>
-      ) : (
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress size={"30px"} />
-        </Box>
-      )}
-
-      {/*text control*/}
-      <div style={{ marginTop: "10px" }}>
-        {textMeshArr.map((textCn) => {
-          return (
+        {currentSelectSt === 1 && currentSelectSt === indexSt && (
+          <form
+            style={{
+              marginTop: "20px",
+            }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const reqData = {
+                userId: userID,
+                projectId: projectID,
+                textContent: e.target.textContent.value,
+                textColor: currentColor,
+                textSize: e.target.textSize.value / 10,
+                position: {
+                  x: e.target.x.value,
+                  y: e.target.y.value,
+                  z: e.target.z.value,
+                },
+                rotation: {
+                  x: e.target.X.value,
+                  y: e.target.Y.value,
+                  z: e.target.Z.value,
+                },
+                cameraLock: e.target.cameraLock.checked,
+              };
+              setLoaderState(true);
+              axios
+                .post("/manage/addtext", reqData)
+                .then((res) => {
+                  setLoaderState(false);
+                  dispatch(updateTextTrigger());
+                })
+                .catch((err) => {
+                  console.log(err);
+                  toast.error(err);
+                });
+            }}
+          >
+            <TextField
+              variant="outlined"
+              size="small"
+              id="filled-size-small"
+              label={"Content"}
+              name={"textContent"}
+              required={true}
+              inputProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+            />
             <div
               style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-between",
-                paddingRight: "10px",
-                marginBottom: "5px",
+                height: "31px",
+                width: "79px",
+                background: `${currentColor}`,
+                borderRadius: "10px",
+                marginTop: "15px",
+                border: "1px solid #000000",
+                cursor: "pointer",
               }}
-            >
-              <p>{textCn.name.substring(0, 15)}</p>
-              <FontAwesomeIcon
-                icon={faTrash}
-                style={{
-                  fontSize: "10px",
-                  color: "#ef0101",
+              onClick={() => {
+                setPickerControl((state) => !state);
+              }}
+            ></div>
+            <div style={{ marginTop: "10px" }}></div>
+            {pickerControl && (
+              <SketchPicker
+                color={currentColor}
+                onChangeComplete={(color) => {
+                  setCurrentColor(color.hex);
                 }}
-                onClick={() => {
-                  axios
-                    .delete("/manage/addtext", {
-                      params: {
-                        userId: userID,
-                        projectId: projectID,
-                        textid: textCn.id,
-                      },
-                    })
-                    .then((res) => {
-                      dispatch(updateTextTrigger());
-                    });
-                }}
+                width={"90%"}
               />
+            )}
+            <div style={{ marginTop: "20px" }}></div>
+            <TextField
+              variant="outlined"
+              size="small"
+              id="filled-size-small"
+              label={"Size"}
+              required={true}
+              type={"number"}
+              name={"textSize"}
+              inputProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  fontSize: "11px",
+                },
+              }}
+            />
+            {/*  here is the position tab*/}
+            <div style={{ marginTop: "14px" }}>
+              <p style={{ marginBottom: "10px" }}>Position</p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "4px",
+                }}
+              >
+                {["x", "y", "z"].map((posi) => {
+                  return (
+                    <NumberLabelledInputMui
+                      label={posi}
+                      width={"63px"}
+                      defaultVal={0}
+                      required={true}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          );
-        })}
-      </div>
-    </form>
-  );
+
+            {/*  here is the rotation tab*/}
+            <div style={{ marginTop: "14px" }}>
+              <p style={{ marginBottom: "10px" }}>Rotation</p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "4px",
+                }}
+              >
+                {["X", "Y", "Z"].map((posi) => {
+                  return (
+                    <NumberLabelledInputMui
+                      label={posi}
+                      width={"63px"}
+                      defaultVal={0}
+                      required={true}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            <div style={{ marginTop: "7px" }}>
+              <label
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 400,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <input type={"checkbox"} name={"cameraLock"} />
+                &nbsp; lock camera position
+              </label>
+            </div>
+            {!loaderState ? (
+              <RoundedButton type={"submit"}>Create</RoundedButton>
+            ) : (
+              <Box sx={{ display: "flex" }}>
+                <CircularProgress size={"30px"} />
+              </Box>
+            )}
+
+            {/*text control*/}
+            <div style={{ marginTop: "10px" }}>
+              {textMeshArr.map((textCn) => {
+                return (
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "space-between",
+                      paddingRight: "10px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    <p>{textCn.name.substring(0, 15)}</p>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{
+                        fontSize: "10px",
+                        color: "#ef0101",
+                      }}
+                      onClick={() => {
+                        axios
+                          .delete("/manage/addtext", {
+                            params: {
+                              userId: userID,
+                              projectId: projectID,
+                              textid: textCn.id,
+                            },
+                          })
+                          .then((res) => {
+                            dispatch(updateTextTrigger());
+                          });
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </form>
+        )}
+      </ClickedDiv>
+    );
+  });
 };
+const ClickedDiv = styled.div`
+  width: 100%;
+  min-height: 35px;
+  background: #efefef;
+  margin: auto;
+  display: flex;
+  padding: 10px;
+  margin-top: 15px;
+  flex-direction: column;
+  border-radius: 6px;
+`;
 export const RoundedButton = styled.button`
   width: Hug (67px);
   height: Hug (25px);
