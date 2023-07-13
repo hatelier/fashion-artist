@@ -21,7 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {FontLoader, MeshBasicMaterial, Mesh, TextGeomentry} from "three";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { BsTrash } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import styled from "styled-components";

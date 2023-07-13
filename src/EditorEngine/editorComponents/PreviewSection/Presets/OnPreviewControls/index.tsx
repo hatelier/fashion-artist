@@ -16,7 +16,7 @@ import styled from "styled-components";
 import { Box, CircularProgress, TextField } from "@mui/material";
 import { SketchPicker } from "react-color";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { updateTextTrigger } from "../../../../../redux/materialApplication";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 

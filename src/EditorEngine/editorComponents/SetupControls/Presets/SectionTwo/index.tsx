@@ -13,7 +13,7 @@ import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 // import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 import styled from "styled-components";

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { useThree } from "@react-three/fiber";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
@@ -92,7 +92,7 @@ const Text3d = () => {
           toast.error("Failed to load 3d Text");
         });
     }
-  }, [projectID, userID, textTrigger, scene,dispatch]);
+  }, [projectID, userID, textTrigger, scene, dispatch]);
   return null;
 };
 export default Text3d;

@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { SketchPicker } from "react-color";
 // import * as THREE from "three";
 // import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
