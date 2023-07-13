@@ -11,7 +11,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BiShareAlt } from "react-icons/bi";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import MessageIcon from "../../../../../assets/svgs/Message.svg";
 import PencilIcon from "../../../../../assets/svgs/pencil.svg";
 import styled from "styled-components";

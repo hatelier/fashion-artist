@@ -4,6 +4,7 @@ import "./index.scss";
 import Banner from "./editorComponents/Banner";
 import SetupControls from "./editorComponents/SetupControls";
 import PreviewSection from "./editorComponents/PreviewSection";
+import { Toaster } from "react-hot-toast";
 
 export interface ContextInterface {
   file: any;
@@ -35,6 +36,7 @@ const EditorEngine = () => {
       <div className={"editorEngine"}>
         <Banner />
         <div className={"editorSection"}>
+          <Toaster />
           <SetupControls
             style={{
               width: "330px",

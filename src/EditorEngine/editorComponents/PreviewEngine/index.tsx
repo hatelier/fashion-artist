@@ -3,13 +3,16 @@ import "./index.scss";
 import ModelPreview from "./ModelPreview";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 // import ObjectCube from "../../../assets/svgs/cube 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {updateCurrentModel, updateEnableAR} from "../../../redux/previewRedux";
+import {
+  updateCurrentModel,
+  updateEnableAR,
+} from "../../../redux/previewRedux";
 import { MeshPhysicalMaterial, TextureLoader } from "three";
 import * as THREE from "three";
 import XRengine from "../XRengine";
@@ -26,16 +29,25 @@ const PreviewEngine = () => {
               alt=""
               className="preview-mtum-logo"
             />
-            <div className="preview-view-ar" onClick={()=>{dispatch(updateEnableAR())}}>View in AR</div>
+            <div
+              className="preview-view-ar"
+              onClick={() => {
+                dispatch(updateEnableAR());
+              }}
+            >
+              View in AR
+            </div>
             <SideMenu />
             <div className="preview-area" style={{ width: "100%" }}>
               <ModelPreview />
             </div>
             <div className="preview-options">
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-1.png")}
                     alt=""
@@ -43,9 +55,11 @@ const PreviewEngine = () => {
                 </button>
               </div>
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-2.png")}
                     alt=""
@@ -53,9 +67,11 @@ const PreviewEngine = () => {
                 </button>
               </div>
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-3.png")}
                     alt=""
@@ -63,9 +79,11 @@ const PreviewEngine = () => {
                 </button>
               </div>
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-4.png")}
                     alt=""
@@ -73,9 +91,11 @@ const PreviewEngine = () => {
                 </button>
               </div>
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-5.png")}
                     alt=""
@@ -83,9 +103,11 @@ const PreviewEngine = () => {
                 </button>
               </div>
               <div>
-                <button onClick={()=>{
-                  //window.open("");
-                }}>
+                <button
+                  onClick={() => {
+                    //window.open("");
+                  }}
+                >
                   <img
                     src={require("../../../assets/pngs/preview-6.png")}
                     alt=""
@@ -322,8 +344,8 @@ const SideMenu = () => {
             height: "100vh",
             width: "100vw",
             zIndex: "2",
-            top:0,
-            left:0,
+            top: 0,
+            left: 0,
             background: "#000000",
           }}
         >

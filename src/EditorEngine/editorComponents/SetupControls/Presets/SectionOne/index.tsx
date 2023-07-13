@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImage from "../../../../../assets/svgs/upload (1) 1.svg";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
