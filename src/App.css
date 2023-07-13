@@ -244,7 +244,7 @@ p {
 .to-register {
   text-align: center;
   margin-bottom: 20px;
-  color: #E70A4E;
+  color: #D31027;
   text-decoration: underline;
 }
 /* End login page form */
@@ -728,8 +728,9 @@ header {
   margin-bottom: -4px;
 }
 /* Change color of dropdown links on hover */
-.dropdown-top-content a:hover {background-color: #ffffff; color: #E70A4E;}
-.dropdown-top-content button:hover {background-color: #ffffff; color: #E70A4E;}
+.dropdown-top-content a:hover {background-color: #383838;}
+
+.dropdown-top-content button:hover {background-color: #383838 ;}
 
 /* Show the dropdown menu on hover */
 .dropdown-top:hover .dropdown-top-content {display: block;}
@@ -1221,6 +1222,15 @@ header {
   color: var(--font-color);
 }
 
+.accounts-block {
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  margin: auto;
+  color: var(--font-color);
+  justify-content: center;
+}
+
 .plan-header {
   display: flex;
   flex-direction: column;
@@ -1229,14 +1239,15 @@ header {
 }
 .choose-plan {
   font-weight: 400;
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: 2vw;
   line-height: 29px;
   flex: none;
   order: 0;
   flex-grow: 0;
   margin-top: 15px;
-  margin-left: 25px;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .monthly-billing {
@@ -1244,7 +1255,7 @@ header {
   font-size: 16px;
   line-height: 20px;
   margin-bottom: 10px;
-  margin-left: 25px;
+  /* margin-left: 25px; */
 }
 .plans {
   display: flex;
@@ -1610,21 +1621,42 @@ header {
   align-items: center;
   padding: 0px;
   gap: 733px;
-  width: 932px;
+  width: 100%;
 }
+
+.profile-container{
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  justify-content:  space-evenly;
+  align-items: flex-start;
+  height: 100vh;
+  width: 50%;
+ 
+}
+
+
 
 .profile-save-button {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 12px 20px;
-  gap: 19px;
-  background: #E70A4E;
+  gap: 15px;
+  background: #D31027;
+  color:  white;
   border-radius: 10px;
   cursor: pointer;
   flex: none;
   order: 1;
   flex-grow: 0;
+  align-self: flex-end;
+  font-size: 1.2vw;
+}
+
+.profile-save-button-phone{
+  display:  none;
 }
 
 .profile-info-block {
@@ -1632,40 +1664,60 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 20px;
-  margin-left: 25px;
+  gap: 10px;
+  width: 100%;
+  
 }
 .profile-info-horizontal {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 0px;
-  gap: 20px;
+  /* gap: 20px; */
   flex: none;
   order: 0;
   flex-grow: 0;
+  width: 100%;
+  height: 10vh;
 }
 
 .profile-info-item {
-  filter: drop-shadow(4px 4px 10px rgba(255, 255, 255, 0.35));
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 13px 31px;
-  gap: 20px;
-  background: #FFFFFF;
-  border-radius: 15px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   color: #000000;
-  width: 468.13px;
-  height: 74px;
-
+  /* width: 260px; */
+  width: 48%;
+  height: 100%;
+  /* flex : 1; */
 }
 
 .profile-info-item-heading {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #E70A4E;
+  /* font-weight: 400; */
+  /* font-size: 12px; */
+  /* line-height: 48%; */
+  height: 48%;
+  color: var(--font-color);
+  font-size: 1.2vw;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.profile-info-item-content{
+  background-color: var(--items-bgcolor);
+  color: rgb(136, 134, 134);
+  /* height: 33px; */
+  height: 48%;
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.2vw;
+  padding: 4px;
 }
 
 .account-subscription-details{
@@ -1674,18 +1726,19 @@ header {
   align-items: flex-start;
   padding: 0px;
   gap: 27px;
-  margin: 25px;
+  width: 100%;
 }
 
 .account-current-details {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   padding: 0px;
-  gap: 373px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .account-current-plan {
@@ -1693,15 +1746,36 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 15px;
+  gap: 10px;
+  width: 50%;
+}
+
+.account-item-text {
+  font-weight: 400;
+  /* font-size: 12px; */
+  /* line-height: 17px; */
+  font-size: 1.2vw;
+
+}
+.account-item-heading {
+  font-weight: 500;
+  /* font-size: 18px; */
+  font-size: 1.2vw;
+  /* line-height: 22px; */
 }
 
 .account-current-billing {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   padding: 0px;
   gap: 15px;
+  width: 50%;
+}
+
+.billing-history{
+  font-size: 0.8vw;
+  text-decoration: underline;
 }
 
 .account-monthly-credits {
@@ -1713,33 +1787,49 @@ header {
   flex: none;
   order: 1;
   flex-grow: 0;
+  width: 100%;
 }
 
 .account-buy-extra {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 310px;
   flex: none;
   order: 2;
   flex-grow: 0;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .account-extra-credit {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
   padding: 0px;
   gap: 15px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .account-buy-credit {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   padding: 0px;
   gap: 20px;
+  width: 100%;
+}
+
+.account-buy-credit-heading{
+  font-size: 1.2vw;
+}
+
+.account-buy-credit-details{
+  display: flex;
+  gap: 15px;
+  width: 100%;
 }
 
 .account-credit-quantity {
@@ -1747,11 +1837,14 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 7px 7px 7px 20px;
-  gap: 60px;
-  border: 1px solid #FFFFFF;
-  border-radius: 15px;
+  padding-left: 7px;
+  border-radius: 3px;
+  background-color: var(--items-bgcolor);
+  width: 48%;
+  height: 5vh;
+  font-size: 1.2vw;
 }
+
 
 .account-credit-quantity-text {
   font-weight: 400;
@@ -1772,17 +1865,21 @@ header {
   font-weight: 400;
   font-size: 30px;
   line-height: 37px;
-  color: #E70A4E;
+  color: #D31027;
 }
 
 .account-buy-button {
   box-sizing: border-box;
-  padding: 15px 25px;
+  padding: 10px 25px;
   gap: 10px;
-  background: #E70A4E;
+  background: #D31027;
   color: #ffffff;
-  border-radius: 15px;
+  border-radius: 2px;
   cursor: pointer;
+  font-size: 1.2vw;
+  /* height: 5vh; */
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
 }
 .account-products-viewer {
   display: flex;
@@ -1816,45 +1913,54 @@ header {
   order: 1;
   flex-grow: 0;
 }
-.account-item-heading {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-}
 
-.account-item-text {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
+
+.account-item-credit-heading{
+  font-weight: bold;
+  font-size: 1.2vw;
 
 }
+.account-item-credit-number{
+   font-size: 1.2vw;
+}
+
+
 .account-cancel-upgrade {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  /* flex-direction: row; */
+  align-items: center;
+  justify-content: flex-end;
   padding: 0px;
-  gap: 25px;
-  flex: none;
-  order: 4;
-  flex-grow: 0;
+  gap: 10px;
+  /* flex: none; */
+  /* order: 4; */
+  /* flex-grow: 0; */
+  width: 100%;
 }
 
 .account-cancel-button {
-  box-sizing: border-box;
-  border: 1px solid #FFFFFF;
-  border-radius: 15px;
-  padding: 19px 25px;
+  /* box-sizing: border-box; */
+  border: 1px solid var(--font-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1.2vw;
+  height: 5vh;
+  padding: 10px 5px;
 }
 
 .account-upgrade-button {
   box-sizing: border-box;
-  padding: 19px 25px;
+  padding: 10px 25px;
   gap: 10px;
-  background: #E70A4E;
-  border-radius: 15px;
+  background: #D31027;
+  border-radius: 8px;
   color: #ffffff;
   cursor: pointer;
+  font-size: 1.2vw;
 }
 
 /* Credit page styles */
@@ -1888,7 +1994,7 @@ header {
   padding: 12px 22px;
   gap: 10px;
   color: #ffffff;
-  background: #E70A4E;
+  background: #D31027;
   border-radius: 10px 10px 0px 0px;
   width: 100%;
   text-align: center;
@@ -2198,6 +2304,7 @@ header {
   line-height: 20px;
   align-items: center;
 }
+
 .showroom-heading-cell {
   border-spacing: 0;
   border: none;
@@ -2208,6 +2315,9 @@ header {
 .showroom-cell {
   text-align: center;
   justify-content: center;
+  padding: 10px 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .showroom-box {
@@ -3822,6 +3932,14 @@ add-showroom-button-img {
   width: 10%
 } */
 
+.profile-container{
+  all : unset;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .profile-header {
   all: unset;
   display: flex;
@@ -3831,9 +3949,32 @@ add-showroom-button-img {
   padding: 0px;
 }
 
+.profile-save-button{
+  display: none;
+}
+.profile-save-button-phone{
+  all : unset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 14px;
+  gap: 15px;
+  background: #E70A4E;
+  color:  white;
+  border-radius: 10px;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  align-self: flex-end;
+}
+
 .profile-info-block {
   margin-left: unset;
   gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .profile-info-horizontal {
@@ -3849,9 +3990,31 @@ add-showroom-button-img {
 }
 
 .profile-info-item {
-  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
   width: 100%;
-  height: 54px;
+  padding-left: 0px;
+  background-color: inherit;
+
+}
+
+.profile-info-item-heading{
+  height: 50%;
+  font-size: 14px;
+}
+
+.profile-info-item-content{
+  background-color: var(--items-bgcolor);
+  color: rgb(136, 134, 134);
+  height: 33px;
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
 }
 
 .account-subscription-details {
@@ -3871,6 +4034,8 @@ add-showroom-button-img {
   align-items: flex-start;
   padding: 0px;
   gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .account-monthly-credits {
@@ -3899,10 +4064,17 @@ add-showroom-button-img {
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
+  width: 100%;
 }
 
 .account-buy-credit {
+  display: none;
   gap: 10px;
+ font-size: 1.2vw;
+}
+
+.account-buy-credit-heading{
+  font-size: 12px;
 }
 
 .account-credit-quantity {
@@ -3917,6 +4089,7 @@ add-showroom-button-img {
   height: 40px;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
+  font-size: 1.2vw;
 }
 
 .account-credit-quantity-text {
@@ -3952,7 +4125,7 @@ add-showroom-button-img {
   background: #E70A4E;
   border-radius: 10px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 1.2vw;
   line-height: 26px;
 }
 .account-products-viewer {
@@ -3976,24 +4149,25 @@ add-showroom-button-img {
 .account-cancel-upgrade {
   all: unset;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: flex-start;
   padding: 0px;
-  gap: 15px;
+  gap: 5px;
 }
 
 .account-cancel-button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 7px 15px;
+  padding: 7px 5px;
   gap: 10px;
-  width: 108px;
+  /* width: 108px; */
   height: 40px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid var(--font-color);
   border-radius: 10px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
+  width: 86px;
   line-height: 26px;
 }
 
@@ -4003,7 +4177,7 @@ add-showroom-button-img {
   align-items: flex-start;
   padding: 7px 15px;
   gap: 10px;
-  width: 86px;
+  /* width: 86px; */
   height: 40px;
   background: #E70A4E;
   border-radius: 10px;
@@ -4017,6 +4191,8 @@ add-showroom-button-img {
 }
 .profile-header {
   margin-bottom: 20px;
+  
+
 }
 .profile-header-text {
   font-weight: 700;
@@ -4038,7 +4214,17 @@ add-showroom-button-img {
   line-height: 17px;
 }
 
+.account-item-credit-heading{
+  font-size: 12px;
+
+}
+
+.account-item-credit-number{
+  font-size: 10px;
+}
+
 .account-item-text {
+  display: none;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -4050,9 +4236,22 @@ add-showroom-button-img {
 
 .account-current-billing {
   gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.billing-history{
+  margin: 10px 0px;
+  font-size: 10px;
 }
 
 .subscription{
+  margin: auto;
+  padding: 25px;
+}
+
+.accounts-block {
   margin: auto;
   padding: 25px;
 }
@@ -4321,6 +4520,7 @@ add-showroom-button-img {
 
 .choose-plan {
   font-size: 20px;
+  margin-left: 0px;
 }
 
 .line {
