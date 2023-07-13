@@ -1,7 +1,4 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { Header } from '../components/header';
-
 import { Sidenav } from '../components/sidenav';
 
 export const BillingHistory = () => {
