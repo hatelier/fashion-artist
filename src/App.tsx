@@ -28,6 +28,9 @@ import { NewPasswordToken } from "./pages/new-password-token";
 import PreviewEngine from "./EditorEngine/editorComponents/PreviewEngine";
 import XRengine from "./EditorEngine/editorComponents/XRengine";
 
+import {BillingHistory} from "./pages/billing-history"
+import {CreditHistory} from "./pages/credit-history"
+
 function App() {
   return (
     <div className="App">
@@ -57,6 +60,9 @@ function App() {
           <Route path="/password/reset" element={<NewPasswordToken />} />
           <Route path="/preview" element={<PreviewProduct />} />
           <Route path="/proceed" element={<Proceed />} />
+
+          <Route path="/credit-history" element={<CreditHistory />} />
+          <Route path="/billing-history" element={<BillingHistory />} />
           <Route
             path="/view/:userID/:projectID/:name"
             element={<PreviewEngine />}

@@ -130,7 +130,7 @@ export const Account = () => {
                 <div className="account-current-billing">
                   <div className="account-item-heading">Current billing period</div>
                   <div className="account-item-text">21/02/2023 - 21/02/2024</div>
-                  <div className='billing-history'>View billing history</div>
+                  <a href='/billing-history' className='billing-history'>View billing history</a>
                   <div className="account-cancel-upgrade">
                     <a className="account-upgrade-button" href="/subscription">Upgrade</a>
                     <div className="account-cancel-button">Cancel Plan</div>
@@ -145,7 +145,7 @@ export const Account = () => {
                     <div className="account-item-credit-heading">Credit</div>
                     <div className="account-item-credit-number">10000</div>
                   </div>
-                  <div className='billing-history' style={{"textDecoration":"underline"}}>View credit history</div>
+                  <a href='/credit-history' className='billing-history' style={{"textDecoration":"underline"}}>View credit history</a>
                 </div>
                 <div className="account-buy-credit">
                   <div className= "account-buy-credit-heading" >Quantity</div>
