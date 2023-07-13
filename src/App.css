@@ -885,7 +885,7 @@ header {
 
 .item:hover {
   border-radius: 8px;
-  background: var(--items-bgcolor);
+  background: var(--popup-color);
 }
 /* The navigation menu links */
 .sidenav a {
@@ -2767,7 +2767,7 @@ header {
   width: 150px;
   height: 45px;
   padding: 0px 20px;
-  background-color: var(--items-bgcolor);
+  background-color: var(--popup-color);
   color: var(--font-color);
   border-radius: 10px;
   font-size: 16px;
@@ -2824,7 +2824,7 @@ header {
 
 .templates-input {
   width: 100%;
-  background-color: var(--items-bgcolor);
+  background-color: var(--popup-color);
   border: none;
 }
 /* Manage page styles */
