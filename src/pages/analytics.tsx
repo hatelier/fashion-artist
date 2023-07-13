@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
@@ -23,7 +23,17 @@ export const Analytics = () => {
     const [searchText, setSearchText] = useState('');
     const [products, setProducts] = useState({ location: '', productName: '' });
   
-
+    const handleSearch = useCallback(async () => {
+      try {
+        const response = await axiosInstance.get(`/analytics/product/search/${encodeURIComponent(searchText)}`);
+        const data = response.data;
+        console.log(data);
+        setProducts(data);
+      } catch (error) {
+        console.error('Error searching products', error);
+      }
+    }, [searchText]);
+    
     useEffect(() => {
       // fetchUserData();
       fetchThreeDViewCounts(selectedPeriod);
@@ -37,7 +47,7 @@ export const Analytics = () => {
       } else {
         setProducts({ location: '', productName: '' });
       }
-    },[selectedPeriod, searchText]);
+    }, [selectedPeriod, searchText, handleSearch]);
 
     // const fetchUserData = async () => {
       /*try {
@@ -145,16 +155,7 @@ export const Analytics = () => {
       }
     };
 
-    const handleSearch = async () => {
-      try {
-        const response = await axiosInstance.get(`/analytics/product/search/${encodeURIComponent(searchText)}`);
-        const data = response.data;
-        console.log(data);
-        setProducts(data);
-      } catch (error) {
-        console.error('Error searching products', error);
-      }
-    };
+   
     return ( 
     <div className='home-container'>
           {isOpen && (
