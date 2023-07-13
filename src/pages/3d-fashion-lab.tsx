@@ -135,7 +135,7 @@ export const FashionLab = () => {
                   </div>
                   <div className="fashion-upload-area">
                     <div>
-                        <img src={require('../assets/pngs/fashionlab-upload.png')} alt="" />
+                        <img className='fashion-upload-img' src={require('../assets/pngs/fashionlab-upload.png')} alt="" />
                     </div>
                     <div>
                       Upload your design here
