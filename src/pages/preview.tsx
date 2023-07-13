@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../components/axiosInstance';
 import TokenVerification from '../components/auth';
 
 export const PreviewProduct = () => {
@@ -13,17 +12,6 @@ export const PreviewProduct = () => {
 
     useEffect(() => {
       fetchUserData();
-      const incrementViewCount = async () => {
-        try {
-          await axiosInstance.get('/analytics/increment-3d-view');
-          await axiosInstance.get('/analytics/increment-ar-view');
-        } catch (error) {
-          console.error('Error incrementing view count: ', error);
-        }
-      };
-  
-      // Increment the view count
-      incrementViewCount();
     }, []);
 
     const fetchUserData = async () => {
