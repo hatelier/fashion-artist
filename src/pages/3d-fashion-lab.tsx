@@ -101,9 +101,6 @@ export const FashionLab = () => {
              </div>
              </div>
              <div className="subscription">
-             <div className="choose-plan">
-               Fashion Lab
-             </div>
              <div className="fashion-block">
                <div className="fashion-details-block">
                  <div className="fashion-welcome-text">
