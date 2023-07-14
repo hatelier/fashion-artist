@@ -30,6 +30,7 @@ import XRengine from "./EditorEngine/editorComponents/XRengine";
 
 import {BillingHistory} from "./pages/billing-history"
 import {CreditHistory} from "./pages/credit-history"
+import { Notification } from "./pages/notification";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
 
           <Route path="/credit-history" element={<CreditHistory />} />
           <Route path="/billing-history" element={<BillingHistory />} />
+          <Route path="/notification" element={<Notification />} />
           <Route
             path="/view/:userID/:projectID/:name"
             element={<PreviewEngine />}
