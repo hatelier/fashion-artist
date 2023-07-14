@@ -2503,8 +2503,8 @@ header {
   border: 1px solid var(--items-bgcolor);
   color: var(--font-color);
   margin: auto;
-  width: 90%;
-  margin-top: 15px;
+  width: 95%;
+  margin-top: 40px;
 }
 
 .fashion-details-block {
@@ -2512,7 +2512,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 30px 32px;
-  gap: 20px;
+  gap: 2.5vh;
   background: var(--primary-bgcolor);
   box-shadow: 0px 4px 63px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -2525,12 +2525,12 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 10px;
+  gap: 1.25vh;
   width: 100%;
 }
 .fashion-welcome-text {
   font-weight: 500;
-  font-size: 1.1vw;
+  font-size: 16px;
   line-height: 158.5%;
   width: 100%;
 }
@@ -2539,9 +2539,9 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 6px;
+  gap: 0.75vh;
   width: 100%;
-  font-size: 1.1vw;
+  font-size: 16px;
 }
 
 .fashion-item-label {
@@ -2563,13 +2563,13 @@ header {
   border: 1px solid var(--items-bgcolor);
   border-radius: 5px;
   width: 100%;
-  font-size: 1.1vw;
-  height: 2.8vw;
+  font-size: 16px;
+  height: 5.2vh;
 }
 
 .about-design {
   font-style: normal;
-  height: 7.2vw;
+  height: 13vh;
 }
 
 .fashion-need-cad {
@@ -2578,7 +2578,7 @@ header {
   align-items: center;
   padding: 0px;
   gap: 15px;
-  font-size: 1.1vw;
+  font-size: 16px;
 }
 
 .fashion-upload-block {
@@ -2587,20 +2587,20 @@ header {
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 30px;
+  gap: 3.7vh;
   margin:auto;
   width: 45%;
   height: 90%;
 }
 
 .fashion-upload-heading {
-  font-size: 1.4vw;
+  font-size: 20px;
   line-height: 158.33%;
   text-align: center;
 }
 
 .fashion-upload-text {
-  font-size: 0.85vw;
+  font-size: 12px;
   line-height: 158.33%;
   text-align: center;
 }
@@ -2619,8 +2619,8 @@ header {
   line-height: 20px;
   color: #979797;
   width: 100%;
-  font-size: 1.1vw;
-  height: 23vw;
+  font-size: 16px;
+  height: 40vh;
 }
 
 .fashion-upload-img {
@@ -2641,9 +2641,9 @@ header {
   width: 100%;
   border: none;
   font-weight: 500;
-  font-size: 1.1vw;
+  font-size: 16px;
   line-height: 20px;
-  height: 3.2vw;
+  height: 6vh;
 }
 
 .fashionlab-popup {
