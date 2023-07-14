@@ -5,7 +5,42 @@ import Switch from "@mui/material/Switch";
 import { MenuItem, Select } from "@mui/material";
 import { PiCaretDownBold } from "react-icons/pi";
 import { SettingsDataJson } from "../../../../../Banner";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettingsBoolen } from "../../../../../../../redux/settingsPanel";
 const AccessSettings = () => {
+  const materialList = useSelector(
+    (state: any) => state.materialControl.materialArray
+  );
+  const { dimensions, wireframe, axis, polycount, uvmap, toggleLights } =
+    useSelector((state: any) => state.settingsPanel);
+  const dispatch = useDispatch();
+  function triggerFunction(name: string, state: boolean) {
+    if (name === "3D Dimensions") {
+      dispatch(updateSettingsBoolen("dimensions"));
+    }
+    if (name === "Wireframe") {
+      if (state) {
+        materialList.forEach((vls: any) => {
+          vls.material.wireframe = true;
+        });
+        dispatch(updateSettingsBoolen("wireframe"));
+      } else {
+        materialList.forEach((vls: any) => {
+          vls.material.wireframe = false;
+        });
+        dispatch(updateSettingsBoolen("wireframe"));
+      }
+    }
+    if (name === "Axis") {
+      dispatch(updateSettingsBoolen("axis"));
+    }
+    if (name === "Polycount") {
+      dispatch(updateSettingsBoolen("polycount"));
+    }
+    if (name === "Toggie lights") {
+      dispatch(updateSettingsBoolen("toggleLights"));
+    }
+  }
   return (
     <div style={{ width: "100%" }}>
       {[
@@ -25,7 +60,26 @@ const AccessSettings = () => {
             }}
           >
             <p style={{ fontSize: "13px", fontWeight: 500 }}>{settType}</p>{" "}
-            <SettingToggleSwitch />
+            <SettingToggleSwitch
+              onChange={(e) => {
+                triggerFunction(settType, e.target.checked);
+              }}
+              checked={
+                index === 0
+                  ? dimensions
+                  : index === 1
+                  ? wireframe
+                  : index === 2
+                  ? axis
+                  : index === 3
+                  ? polycount
+                  : index === 4
+                  ? uvmap
+                  : index === 5
+                  ? toggleLights
+                  : false
+              }
+            />
           </div>
         );
       })}
@@ -40,7 +94,7 @@ const AccessSettings = () => {
               {dataVal.name}
             </p>
             <Select
-              // defaultValue={dataVal.options[dataVal.default]}
+              defaultValue={dataVal.options[dataVal.default]}
               IconComponent={PiCaretDownBold}
               sx={{
                 height: "35px",

@@ -15,6 +15,7 @@
     "@react-three/drei": "^9.66.4",
     "@react-three/fiber": "^8.13.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@szhsin/react-menu": "^4.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",

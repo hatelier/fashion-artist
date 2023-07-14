@@ -3,73 +3,71 @@
 import React, { Suspense, useContext } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
+import { Html, OrbitControls, PerformanceMonitor } from "@react-three/drei";
 import UploadModel from "../UploadModel";
 import { useSelector } from "react-redux";
 import OnPreviewControls from "../OnPreviewControls";
-import { DynamicLight, MaterialControl, NewMeshAdder } from "../SceneControls";
+import { MaterialControl, NewMeshAdder } from "../SceneControls";
 import MtumxLoadPng from "../../../../../assets/gif/mtumxGIf.png";
 import Text3d from "../TextControls/Text3d";
 import styled from "styled-components";
+import { Perf } from "r3f-perf";
 
 const ModelPreview = (props) => {
   const { file } = useContext(props.context);
   // const ref = useRef();
   const OrbitalController = () => {
     const { camera } = useThree();
-
     //here are the controllable camera properties
     const { x, y, z } = useSelector(
       (state) => state.savedCameraControls.cameraProps
     );
-    // useEffect(() => {
     camera.fov = 50;
     console.log("first load", x, y, z);
     camera.position.set(x, y, z);
-    camera.zoom = 3;
+    camera.zoom = 2;
     camera.updateProjectionMatrix();
-    // invalidate();
-    // }, [fov, x, y, z, zoom]);
     return (
       <OrbitControls
         enableZoom={true}
         enablePan={false}
-        // enableRotate={false}
         zoomSpeed={0.8}
         panSpeed={1}
-        // enableRotate={false}
         camera={camera}
       />
-      // <OrbitControls makeDefault minPolarAngle={Math.PI/2} maxPolarAngle={Math.PI/2} enableZoom={true}
-      //                enablePan={true}
-      //                zoomSpeed={0.3}
-      //                minAzimuthAngle={0}
-      //                maxAzimuthAngle={Math.PI / 2}
-      // />
     );
   };
-  const AmbientLightComponent = () => {
-    // const ambientLight = useSelector(
-    //   (state) => state.savedCameraControls.ambientLight
-    // );
-    // const directionalLight = useSelector(
-    //   (state) => state.savedCameraControls.directionalLight
-    // );
-    return (
-      <>
-        {/*<ambientLight intensity={ambientLight} />*/}
-        {/*<directionalLight position={[10, 10, 5]} intensity={directionalLight} />*/}
-      </>
-    );
-  };
-
-  // material related
-  // const modelLoadRate = useSelector(
-  //   (state: any) => state.materialApplication.modelLoadRate
-  // );
   const modelURL = useSelector(
     (state: any) => state.materialApplication.modelUrl
   );
+  const PolyCountController = () => {
+    const polycount = useSelector(
+      (state: any) => state.settingsPanel.polycount
+    );
+    return (
+      polycount && (
+        <>
+          <Perf position="bottom-right" deepAnalyze={true} />
+          <PerformanceMonitor onDecline={() => set(true)} />
+        </>
+      )
+    );
+  };
+  const LightingControls = () => {
+    const toggleLights = useSelector(
+      (state: any) => state.settingsPanel.toggleLights
+    );
+    return (
+      <>
+        <color attach="background" args={["#f0f0f0"]} />
+        <ambientLight intensity={1} />
+        <directionalLight
+          position={[10, 10, 10]}
+          intensity={toggleLights ? 5 : 0}
+        />
+      </>
+    );
+  };
   return (
     <div
       className={"canvas-container"}
@@ -80,16 +78,11 @@ const ModelPreview = (props) => {
       <OnPreviewControls />
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         {/*all these are external components*/}
-        <DynamicLight />
+        {/*<DynamicLight />*/}
         <MaterialControl />
         <NewMeshAdder />
-        <AmbientLightComponent />
         <Text3d />
-        {/*<Perf position="top-right" />*/}
-        {/*<PerformanceMonitor onDecline={() => set(true)} />*/}
-        <color attach="background" args={["#f0f0f0"]} />
-        <ambientLight intensity={1} />
-        <directionalLight position={[10, 10, 10]} intensity={1} />
+        <LightingControls />
         <Suspense
           fallback={
             <Html
@@ -111,6 +104,7 @@ const ModelPreview = (props) => {
         >
           {modelURL && <UploadModel model={file} settings={props.settings} />}
           <OrbitalController />
+          <PolyCountController />
         </Suspense>
       </Canvas>
     </div>
