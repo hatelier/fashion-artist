@@ -490,7 +490,7 @@ input:checked + .slider:before {
 }
 
 input:checked + .slider {
-  background-color: grey;
+  background-color: #292626;
 }
 
 .slider.round {
@@ -689,7 +689,7 @@ header {
 /* Dropdown Content (Hidden by Default) */
 .dropdown-top-content {
   display: none;
-  background-color: #000000;
+  background-color: #292626;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   position: absolute;
@@ -704,7 +704,6 @@ header {
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  width: 160px;;
   padding: 10px 35px 10px 15px;
   text-decoration: none;
   display: block;
@@ -842,6 +841,7 @@ header {
   align-items: center;
   gap: 10px;
   color: #EAEAEA;
+  width: 150px;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -1139,13 +1139,12 @@ header {
 
 .info-img {
   margin-left: 6px;
-  width: 1.4vw;
 }
 
 .info-view-link {
   color: var(--font-color);
   text-align: center;
-  font-size: 0.8vw;
+  font-size: 11px;
   font-weight: 400;
   line-height: 136.3%;
 
@@ -1398,7 +1397,7 @@ header {
   border-radius: 25px;
   color: var(--font-color);
   border-radius: 25px;
-  border: 1px solid var(--box-border, #383838);
+  border: 1px solid var(--items-bgcolor);
 }
 
 .payment-details {
@@ -2011,7 +2010,7 @@ header {
   border: 2px solid var(--red-btn-stroke, rgba(255, 255, 255, 0.30));
   background: var(--btn, #D31027);
   box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
-  font-size: 1.2vw;
+  font-size: 16px;
   margin-right: 20px;
   cursor: pointer;
   display: flex;
@@ -2058,7 +2057,7 @@ header {
   padding: 10px 10px;
   margin: 5px 0px;
   border-radius: 10px;
-  font-size: 1.1vw;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -2070,7 +2069,7 @@ header {
   padding: 10px 10px;
   margin: 5px 0px;
   border-radius: 10px;
-  font-size: 1.1vw;
+  font-size: 16px;
 }
 
 .credit-history-date{
@@ -2842,16 +2841,15 @@ header {
 .team-add {
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  padding: 10px 15px;
   justify-content: center;
   align-items: center;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-right: 13.5px;
-  background: #D31027;
-  color: #ffffff;
-  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.25);
+  gap: 10px;
+  color: #EAEAEA;
   border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn, #D31027);
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
 }
 
 .team-delete {
@@ -2879,7 +2877,7 @@ header {
   padding: 20px 25px;
   gap: 10px;
   border-radius: 15px;
-  border: 1px solid var(--box-border, #383838);
+  border: 1px solid var(--items-bgcolor);
   width: 100%;
 }
 
@@ -2887,6 +2885,16 @@ header {
   border: 1px solid #272727;
 }
 
+.team-underline {
+  stroke-width: 1px;
+  stroke: var(--items-bgcolor);
+  width: 90%;
+  margin: auto;
+}
+
+.team-member-status img{
+  filter: var(--invert-color);
+}
 /* .card {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -4693,6 +4701,7 @@ add-showroom-button-img {
 .team-member-status {
   margin-left: 10px;
   margin-top: 3px;
+  filter: var(--invert-color);
 }
 
 /* .team-member-table {
