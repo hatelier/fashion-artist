@@ -99,7 +99,7 @@ export const Teams = () => {
                                 <button onClick={()=>{
 
                                 }} className="team-add">
-                                  <img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" />
+                                  <img className='team-plus-img' src={require('../assets/pngs/add.png')} alt="" />
                                   <img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> 
                                   <span className='team-add-text'>Add</span>
                                 </button>
@@ -123,13 +123,13 @@ export const Teams = () => {
                                     <td className='team-member-name'>Member 2</td>
                                     <td className='team-member-email'>member_1@gmail.com</td>
                                     <td>Admin</td>
-                                    <td><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" /></td>
                                 </tr>
                                 <tr className="team-member-row">
                                     <td className='team-member-name'>Member 2</td>
                                     <td className='team-member-email'>member_1@gmail.com</td>
                                     <td className='team-member-rank'>Admin</td>
-                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" /></td>
                                 </tr>
                             </table>
                     </div>
@@ -144,7 +144,7 @@ export const Teams = () => {
                               <button onClick={()=>{
 
                               }} className="team-add">
-                                <img className='team-plus-img' src={require('../assets/pngs/plus.png')} alt="" />
+                                <img className='team-plus-img' src={require('../assets/pngs/add.png')} alt="" />
                                 <img className='team-member-add-img' src={require('../assets/pngs/add-member.png')} alt="" /> 
                                 <span className='team-add-text'>Add</span>
                               </button>
@@ -169,13 +169,13 @@ export const Teams = () => {
                                     <td className='team-member-name'>Member 2</td>
                                     <td className='team-member-email'>member_1@gmail.com</td>
                                     <td className='team-member-rank'>Admin</td>
-                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" /></td>
                                 </tr>
                                 <tr className="team-member-row">
                                     <td className='team-member-name'>Member 2</td>
                                     <td className='team-member-email'>member_1@gmail.com</td>
                                     <td className='team-member-rank'>Admin</td>
-                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block.png")} alt="" /></td>
+                                    <td className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" /></td>
                                 </tr>
                           </table>
                     </div>
