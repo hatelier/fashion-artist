@@ -104,6 +104,7 @@ const ModelPreview = (props) => {
               <img
                 src={MtumxLoaderLogo}
                 style={{ position: "absolute", margin: "auto" }}
+                alt={""}
               />
             </Html>
           }
