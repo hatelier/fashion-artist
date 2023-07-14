@@ -2177,6 +2177,116 @@ header {
   font-size: 12px;
 }
 
+/* Notification page styles */
+
+.notification-block{
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  margin: 30px 30px;
+  margin-right: 0px;
+  color: var(--font-color);
+}
+
+.notification-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  /* border: 2px solid red; */
+  padding-right: 30px;
+}
+
+.notification-header-title{
+  font-size: 16px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.notification-container{
+  /* width: 100%; */
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--items-bgcolor);
+  border-radius: 15px;
+  gap: 5px;
+  margin: 0px 10px 20px 0px;
+
+}
+
+.notification-check-box{
+  /* flex: 1; */
+  /* border: 2px solid red; */
+  height: 100%;
+}
+
+.notification-details{
+  /* flex: 3; */
+  width: 85%;
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.notification-details-heading{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.notification-details-content{
+  font-size: 12px;
+  color: var(--font-color);
+  width: 100%;
+  /* border: 2px solid rgb(34, 0, 255); */
+  word-wrap: break-word;
+  color: rgb(136, 134, 134);
+}
+
+.notification-details-timestamp{
+  display: flex;
+  gap: 25px;
+  font-size: 10px;
+  color: rgb(136, 134, 134);
+}
+
+
+.notification-delete{
+  cursor: pointer;
+}
+
+.delete-notification-toast{
+  /* background:  var(--primary-bgcolor); */
+  width: 311px; 
+  height: 59px;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.delete-notification-msg{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  /* background:  var(--primary-bgcolor); */
+  color: black;
+  /* color:  var(--font-color); */
+  font-size: 13px;
+  
+}
+
+.delete-notification-msg img{
+  filter: var(--invert-color);
+}
+
 
 /* Credit page styles */
 .credit-block {
