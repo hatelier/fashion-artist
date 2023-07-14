@@ -174,7 +174,6 @@ export const Products = () => {
             </div>
             <div className="products">
               <div className="recent-products">
-                All Products
                 <div className="input-group">
                   <input
                     type="text"

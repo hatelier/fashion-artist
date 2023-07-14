@@ -76,17 +76,43 @@ export const Showroom = () => {
              </div>
              </div>
              <div className="subscription">
-             <div className="choose-plan">
-                Manage Showroom
-             </div>
-             <div className="showroom-search-add">
-                <input type="text" className="showroom-search" placeholder="search by showroom"/>
+             <div className="templates-input-group">
+                <input type="text" className="templates-input" placeholder="search by showroom"/>
                 <a href="/add-showroom" className="add-product">
-                    <img src={require('../assets/pngs/plus.png')} alt="add new showroom" />
+                    <img src={require('../assets/pngs/add.png')} alt="add new showroom" />
                     Show room
                 </a>
              </div>
-               <table className="showroom-block">
+             <div className='showroom'>
+              <div className='showroom-heading'>
+                  <div className="showroom-heading-cell"><div className="showroom-heading-box"></div></div>
+                  <div className="showroom-heading-cell">Logo</div>
+                  <div className="showroom-heading-cell">Showroom Name</div>
+                  <div className="showroom-heading-cell">Date Updated</div>
+                  <div className="showroom-heading-cell">Date Created</div>
+                  <div className="showroom-heading-cell">Products Counts</div>
+                  <div className="showroom-heading-cell">Status</div>
+                  <div className="showroom-heading-cell">Actions</div>
+                  <div className="showroom-heading-cell"><img src={require('../assets/pngs/dustbin.png')} alt="" /></div>
+              </div>
+              {/* <div className='showroom-row'>
+                <div className="showroom-cell"><div className="showroom-box"></div></div>
+                <div className="showroom-cell"><div className="showroom-logo"></div></div>
+                <div className="showroom-cell">Showroom Name</div>
+                <div className="showroom-cell">20/05/2023</div>
+                <div className="showroom-cell">20/05/2023</div>
+                <div className="showroom-cell">3</div>
+                <div className="showroom-cell"><a className='showroom-upload-status' href="/"><img src={require('../assets/pngs/upload.png')} alt="" /></a></div>
+                <div className="showroom-cell"><div>
+                        <a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
+                        <a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/group.png')} alt="" /></a>
+                        
+                    </div>
+                    </div>
+                    <div className="showroom-cell"><a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/dustbin.png')} alt="" /></a></div>
+              </div> */}
+             </div>
+               {/* <table className="showroom-block">
                 <tr className="showroom-heading-row">
                   <th className="showroom-heading-cell"><div className="showroom-heading-box"></div></th>
                   <th className="showroom-heading-cell">Logo</th>
@@ -96,7 +122,8 @@ export const Showroom = () => {
                   <th className="showroom-heading-cell">Products Counts</th>
                   <th className="showroom-heading-cell">Status</th>
                   <th className="showroom-heading-cell">Actions</th>
-                </tr>
+                  <th className="showroom-heading-cell"><img src={require('../assets/pngs/dustbin.png')} alt="" /></th>
+                </tr> */}
 
                 {/* Turn this into a component, import and map based on API Data */}
                 {/* <tr className="showroom-row">
@@ -168,8 +195,8 @@ export const Showroom = () => {
                     </div>
                   </td>
                 </tr> */}
-
-              </table>
+{/* 
+              </table> */}
             </div>
           </div>
         </div>
