@@ -20,8 +20,11 @@ const Text3d = () => {
   );
   const { scene } = useThree();
   const dispatch = useDispatch();
+  const modelLoadRate = useSelector(
+    (state: any) => state.materialApplication.modelLoadRate
+  );
   useEffect(() => {
-    if (userID) {
+    if (userID && modelLoadRate === 100) {
       axios
         .get("/manage/addtext", {
           params: {
@@ -92,7 +95,7 @@ const Text3d = () => {
           toast.error("Failed to load 3d Text");
         });
     }
-  }, [projectID, userID, textTrigger, scene, dispatch]);
+  }, [modelLoadRate, projectID, userID, textTrigger, scene, dispatch]);
   return null;
 };
 export default Text3d;

@@ -11,6 +11,7 @@ import { MaterialControl, NewMeshAdder } from "../SceneControls";
 import MtumxLoadPng from "../../../../../assets/gif/mtumxGIf.png";
 import Text3d from "../TextControls/Text3d";
 import styled from "styled-components";
+import MtumxLoaderLogo from "../../../../../assets/svgs/MtumxLogoLoader.svg";
 import { Perf } from "r3f-perf";
 
 const ModelPreview = (props) => {
@@ -91,6 +92,7 @@ const ModelPreview = (props) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                position: "relative",
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
@@ -98,6 +100,11 @@ const ModelPreview = (props) => {
                 src={MtumxLoadPng}
                 width={"600px"}
                 alt={"mtumxLoad"}
+              />
+              <img
+                src={MtumxLoaderLogo}
+                style={{ position: "absolute", margin: "auto" }}
+                alt={""}
               />
             </Html>
           }
