@@ -14,6 +14,10 @@ import DarkMode from '../components/darkmode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axiosInstance from './axiosInstance';
 
+
+
+
+
 export const Header = () => {
     const [cookies, setCookie] = useCookies(['access_token']);
     const navigate = useNavigate();
@@ -127,6 +131,60 @@ export const Header = () => {
         }
       };*/
 
+
+      // Dropdown component  starts
+
+      
+const NotificationItem = ()=>{
+  return(
+      <div className='notification-dropdown-item'>
+          <div className='notification-dropdown-item-1'>
+              <div>Congrats! your project is published</div>
+              <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img'/>
+          </div>
+          <div className='notification-dropdown-timestamp'>
+              <p>04/07/2023</p>
+              <p>02:00 PM</p>
+          </div>
+      </div>
+  )
+}
+
+
+
+const NotificationDropDown  = () => {
+
+  return(
+      <div className='notification-dropdown'>
+          <div className="notification-dropdown-heading">
+              <div>Notifications</div>
+              <div><img src={require('../assets/pngs/cancel.png')} alt="" className='sidenav-img' onClick={ handleDialogClose }/></div>
+          </div>
+          <div className="notification-dropdown-content">
+              <NotificationItem/>
+              <NotificationItem/>
+              <NotificationItem/>
+              <NotificationItem/>
+              <NotificationItem/>
+              <NotificationItem/>
+          </div>
+          <div className="notification-dropdown-action">
+              <div className='notification-dropdown-buttons'>
+                  <input type="checkbox" />
+                  Delete All
+              </div>
+              <div className='notification-dropdown-link'>
+                  <a href='/notification'>View all notification</a>
+              </div>
+          </div>
+      </div>
+  );
+};
+
+
+
+      // Dropdown component ends 
+
     return ( 
       <header className="header">
         <div>
@@ -143,11 +201,12 @@ export const Header = () => {
       <DarkMode />
       <NotificationsIcon className='bell-icon' style={{ color: 'white' }} onClick={handleBellClick}/>
       {isDialogOpen && (
-        <div className="dialog">
-          <h2 style={{ color: 'white' }}>Dialog Box</h2>
-          <p style={{ color: 'white' }}>Sample text</p>
-          <button onClick={handleDialogClose}>Close</button>
-        </div>
+        // <div className="dialog">
+          
+        //   <button onClick={handleDialogClose}>Close</button>
+        // </div>
+        <NotificationDropDown/>
+        
       )}
       <div className="dropdown-top">
       <div className='header-account dropbtn'>
@@ -179,7 +238,7 @@ export const Header = () => {
         src={require('../assets/pngs/headset-help-icon.png')}
         alt="help-icon"
       />Help Desk</a>
-
+ 
       {!cookies.access_token ? (
         <button onClick={logout}>
           <img src={require('../assets/pngs/logout-icon.png')} alt="logout-icon" />

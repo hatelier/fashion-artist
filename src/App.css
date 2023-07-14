@@ -2097,6 +2097,68 @@ header {
   /* border: 2px solid red; */
 }
 
+.notification-dropdown-heading{
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 11px;
+  margin-left: 13px;
+}
+
+.notification-dropdown-item{
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+  margin-left: 13px;
+}
+
+.notification-dropdown-item-1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.notification-dropdown-timestamp{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  color:rgb(136, 134, 134);
+}
+
+.notification-dropdown-action{
+  display: flex;
+  justify-content: space-between;
+  margin : 8px 0px;
+  border-top: 1px solid var(--secondary-bgcolor);
+  padding-left: 13px;
+  padding-top: 8px;
+}
+
+.notification-dropdown-buttons{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.notification-dropdown-link{
+  background-color: var(--secondary-bgcolor);
+  padding: 5px 8px;
+  /* height: 20px; */
+  border-radius: 5px;
+  color: var(--font-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-dropdown-link a{
+  color: var(--font-color);
+  font-size: 12px;
+}
 
 
 /* Credit page styles */
@@ -4528,8 +4590,72 @@ add-showroom-button-img {
 }
 
 
+/* Notification page styles */
+
+.notification-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-right: 20px;
+}
 
 
+.notification-container{
+  /* width: 100%; */
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid var(--items-bgcolor);
+  border-radius: 15px;
+  gap: 10px;
+  margin: 0px 10px 20px 0px;
+
+}
+
+
+.notification-details{
+  width: 83%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+
+}
+
+.notification-details-heading{
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.notification-details-content{
+  font-size: 10px;
+  color: var(--font-color);
+  width: 100%;
+  /* border: 2px solid rgb(34, 0, 255); */
+  word-wrap: break-word;
+  color: rgb(136, 134, 134);
+}
+
+.notification-details-timestamp{
+  font-size: 8px;
+}
+
+.delete-notification-toast{
+  /* background:  var(--primary-bgcolor); */
+  width: 311px;
+  height: 59px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+/* Notification dropdown styles  */
+.notification-dropdown{
+  width: 100vw;
+}
 
 
 
