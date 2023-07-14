@@ -11,7 +11,7 @@ import {
 } from "../../../../../redux/materialControl";
 import { updateUnUsedObjects } from "../../../../../redux/savedConfigs";
 import { updateModelLoadRate } from "../../../../../redux/materialApplication";
-import { Html } from "@react-three/drei";
+import { Html, Text } from "@react-three/drei";
 import {
   // commentsRedux,
   updateAnnotationList,
@@ -25,7 +25,6 @@ import { toast } from "react-hot-toast";
 import { BsTrash } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import styled from "styled-components";
-
 const UploadModel = () => {
   //this has been disabled temporarily
   // const {scene} = useGLTF(props.model);
@@ -38,9 +37,9 @@ const UploadModel = () => {
   const currentTab = useSelector(
     (state: any) => state.routeManagement.currConfigTab
   );
-  console.log("tesstestset", modelURL);
   const { camera, raycaster, scene, pointer } = useThree();
-
+  const [modelDimensionThread, setModelDimensions] = useState(null);
+  const [modelPositionThread, setPositionDimensions] = useState(null);
   const gltf = useLoader(
     GLTFLoader,
     modelURL,
@@ -67,7 +66,13 @@ const UploadModel = () => {
 
     // dimensions calculations
     const dimensions = new THREE.Vector3();
-    bbox.getSize(dimensions);
+    const modelPositionThread = new THREE.Vector3();
+
+    const boxDimensionsThread = bbox.getSize(dimensions);
+    const boxPositionThread = bbox.getCenter(modelPositionThread);
+
+    setModelDimensions(boxDimensionsThread);
+    setPositionDimensions(boxPositionThread);
     dispatch(
       updateMaterialDimensions({
         x: dimensions.x,
@@ -100,7 +105,6 @@ const UploadModel = () => {
     const intersects = raycaster.intersectObjects(scene.children, true); // add the second parameter as true to check against the children of the group as well.
     if (intersects.length > 0) {
       const [first] = intersects;
-
       setModalPosition(first.point);
       setShowModal(true);
     }
@@ -152,24 +156,80 @@ const UploadModel = () => {
       loadTicks();
     }
   }, [groupRef, enableComments, triggerDelete, loadTicks]);
+  const axis = useSelector((state: any) => state.settingsPanel.axis);
   const AnnotBox = styled.div`
     border-radius: 10px;
     border: 1px solid #e3e3e3;
     background: #f4f4f4;
-    box-shadow: 0px 10px 29px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 29px 0 rgba(0, 0, 0, 0.25);
   `;
+  const ScaleFeature = () => {
+    const dimensions = useSelector(
+      (state: any) => state.settingsPanel.dimensions
+    );
+    return (
+      dimensions &&
+      modelPositionThread && (
+        <>
+          <line scale={modelDimensionThread} position={modelPositionThread}>
+            <boxGeometry args={[1, 1, 1]} />
+            <lineBasicMaterial color={"#ff0000"} />
+          </line>
+          <Text
+            position={[
+              modelPositionThread.x + modelDimensionThread.x / 2,
+              modelPositionThread.y,
+              modelPositionThread.z,
+            ]}
+            rotation={[0, -Math.PI / 2, 0]}
+            fontSize={3}
+            color="#ff0000"
+          >
+            {modelDimensionThread.x.toFixed(2)}
+          </Text>
+          <Text
+            position={[
+              modelPositionThread.x,
+              modelPositionThread.y + modelDimensionThread.y / 2,
+              modelPositionThread.z,
+            ]}
+            rotation={[Math.PI / 2, 0, 0]}
+            fontSize={3}
+            color="#ff0000"
+          >
+            {modelDimensionThread.y.toFixed(2)}
+          </Text>
+          <Text
+            position={[
+              modelPositionThread.x,
+              modelPositionThread.y,
+              modelPositionThread.z + modelDimensionThread.z / 2,
+            ]}
+            rotation={[0, 0, -Math.PI / 2]}
+            fontSize={2}
+            color="#ff0000"
+          >
+            {modelDimensionThread.z.toFixed(2)}
+          </Text>
+        </>
+      )
+    );
+  };
   return (
     <>
       <group
+        position={[0, -1, 0]}
         ref={setGroupRef}
         onPointerDown={enableComments && currentTab === 4 ? onClick : () => {}}
       >
+        {axis && <axesHelper args={[10]} />}
         <primitive
           object={gltf.scene}
           scale={[1, 1, 1]}
-          position={[0, -1, 0]}
+          position={[0, 0, 0]}
           rotation={[0, 0, 0]}
         />
+        <ScaleFeature />
         {currentTab === 4 && enableComments && showModal && (
           <Html position={modalPosition} left>
             <AnnotBox

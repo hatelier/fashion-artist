@@ -18,7 +18,7 @@ import accountManagement from "./accountManagement";
 import previewRedux from "./previewRedux";
 import * as localforage from "localforage";
 import commentsRedux from "./commentsRedux";
-
+import settingsPanel from "./settingsPanel";
 const reducers = combineReducers({
   routeManagement,
   editorManagement,
@@ -31,6 +31,7 @@ const reducers = combineReducers({
   accountManagement,
   previewRedux,
   commentsRedux,
+  settingsPanel,
 });
 
 // a middleware to save binary files.

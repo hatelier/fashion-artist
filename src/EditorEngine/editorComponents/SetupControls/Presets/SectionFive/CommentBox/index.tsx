@@ -9,18 +9,20 @@ import {
 } from "react-icons/ai";
 import { FiCode } from "react-icons/fi";
 import { GrAttachment } from "react-icons/gr";
+import TextareaAutosize from "react-textarea-autosize";
 const CommentBox = () => {
   return (
     <ComBox>
       <div className={"compDiv"}>
-        <p className={"header"}>Write</p>
-        <p className={"header"}>Preview</p>
+        <p className={"header"}>Add new comment</p>
       </div>
       <OptionBox />
-      <textarea
+      <TextareaAutosize
         className={"inputCompBox"}
         placeholder={"Add a comment"}
         autoFocus={true}
+        minRows={6}
+        maxRows={30}
       />
       <div className={"btCtrlComp"}>
         <RedOnWhite>Cancel</RedOnWhite>
@@ -63,7 +65,7 @@ const OptionBox = () => {
   );
 };
 const ComBox = styled.div`
-  height: 230px;
+  height: max-content;
   background: rgba(244, 244, 244, 1);
   width: 100%;
   border-radius: 10px;
@@ -79,6 +81,7 @@ const ComBox = styled.div`
     justify-content: space-between;
     padding: 0 10px;
     margin-top: 7px;
+    margin-bottom: 10px;
   }
   .inputCompBox {
     width: 93%;
@@ -106,7 +109,7 @@ const ComBox = styled.div`
     width: 100%;
     .header {
       font-size: 16px;
-      width: 50%;
+      width: 100%;
       text-align: center;
       padding: 7px 0;
       &:nth-child(2) {
