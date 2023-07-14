@@ -2095,6 +2095,24 @@ header {
   flex: 1;
   /* border: 2px solid red; */
 }
+/* Notification drop down styles */
+
+.notification-dropdown{
+  /* border: 2px solid red; */
+  border-radius: 8px;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 376px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--primary-bgcolor);
+  z-index: 1;
+  color: var(--font-color);
+  gap: 8px;
+}
 
 .notification-dropdown-heading{
   display: flex;
@@ -4677,8 +4695,6 @@ add-showroom-button-img {
 .notification-dropdown{
   width: 100vw;
 }
-
-
 
 /* Subscription page styles */
 .plans {
