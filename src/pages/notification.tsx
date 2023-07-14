@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { Header } from '../components/header';
 
