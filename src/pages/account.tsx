@@ -138,7 +138,7 @@ export const Account = () => {
                 </div>
                 </div>
               </div>
-
+              <div className="account-line"></div>
               <div className="account-buy-extra">
                 <div className="account-extra-credit">
                   <div className="account-item-heading">

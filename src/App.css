@@ -1623,13 +1623,13 @@ header {
 }
 
 .profile-container{
-  margin-top: 35px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   /* justify-content: flex-start; */
   justify-content:  space-evenly;
   align-items: flex-start;
-  width: 50%;
+  width: 60%;
  
 }
 
@@ -1650,6 +1650,7 @@ header {
   flex-grow: 0;
   align-self: flex-end;
   font-size: 16px;
+  height: 38px;
 }
 
 .profile-save-button-phone{
@@ -1676,7 +1677,6 @@ header {
   order: 0;
   flex-grow: 0;
   width: 100%;
-  height: 10vh;
 }
 
 .profile-info-item {
@@ -1687,7 +1687,6 @@ header {
   color: #000000;
   /* width: 260px; */
   width: 48%;
-  height: 100%;
   /* flex : 1; */
 }
 
@@ -1697,7 +1696,7 @@ header {
   /* line-height: 48%; */
   height: 48%;
   color: var(--font-color);
-  font-size: 16px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   padding: 4px;
@@ -1707,14 +1706,15 @@ header {
   background-color: var(--items-bgcolor);
   color: rgb(136, 134, 134);
   /* height: 33px; */
-  height: 48%;
+  height: 5vh;
   width: 100%;
   padding: 10px 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-size: 16px;
-  padding: 4px;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 8px 8px 9px 14px;
 }
 
 .account-subscription-details{
@@ -1751,7 +1751,7 @@ header {
   font-weight: 400;
   /* font-size: 12px; */
   /* line-height: 17px; */
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .account-item-text a{
@@ -1779,7 +1779,8 @@ header {
   color: var(--font-color);
   font-size: 12px;
   text-decoration: underline;
-  
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 .billing-history a{
@@ -1958,22 +1959,34 @@ header {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  height: 5vh;
+  height: 38px;
   padding: 10px 5px;
 }
 
 .account-upgrade-button {
   box-sizing: border-box;
-  padding: 10px 25px;
-  gap: 10px;
   background: #D31027;
-  border-radius: 8px;
-  color: #ffffff;
+  color: #EAEAEA;
   cursor: pointer;
   font-size: 16px;
+  display: flex;
+  font-weight: 400;
+  line-height: 26px; 
+  height: 38px;
+  padding: 7px 25px 7px 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
 }
 
-
+.account-line {
+  background-color: var(--items-bgcolor);
+  width: 100%;
+  height: 1px;
+}
 /* Credit and Billing History page  */
 
 .credit-main {
