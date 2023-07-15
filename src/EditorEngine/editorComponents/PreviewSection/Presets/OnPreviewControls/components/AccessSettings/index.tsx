@@ -1,13 +1,37 @@
-import React from "react";
+// @ts-nocheck
+import React, { useState } from "react";
 import "./index.scss";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import { MenuItem, Select } from "@mui/material";
-import { PiCaretDownBold } from "react-icons/pi";
+import { MenuItem, Select, Slider } from "@mui/material";
+import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
 import { SettingsDataJson } from "../../../../../Banner";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettingsBoolen } from "../../../../../../../redux/settingsPanel";
+import AddPlace from "../../../../../../../assets/svgs/sectionFour/addPic.svg";
+import { SketchPicker } from "react-color";
 const AccessSettings = () => {
+  const [enviControl, setEnviControl] = useState(false);
+  const [currentColor, setCurrentColor] = useState("#ffffff");
+  const [clickControl, setClickControl] = useState(false);
+  const [environState, setEnvironState] = useState({
+    intensity: {
+      name: "Intensity",
+      value: 100,
+    },
+    shadowStrngt: {
+      name: "Shadow Strength",
+      value: 100,
+    },
+    shadowSoft: {
+      name: "Shadow Softness",
+      value: 100,
+    },
+    lightExpose: {
+      name: "Light Exposure",
+      value: 100,
+    },
+  });
   const materialList = useSelector(
     (state: any) => state.materialControl.materialArray
   );
@@ -83,12 +107,139 @@ const AccessSettings = () => {
           </div>
         );
       })}
+
+      {/*here is the environment lighting settings*/}
+      <EnvironmentButton>
+        <div
+          className={"envDivider"}
+          onClick={() => {
+            setEnviControl((state) => !state);
+          }}
+        >
+          <p className={"envHeader"}>Environment Lighting</p>
+          {enviControl ? <PiCaretUpBold /> : <PiCaretDownBold />}
+        </div>
+        {enviControl && (
+          <>
+            <div className={""} style={{ marginTop: "10px" }}>
+              <p style={{ fontWeight: 450 }}>HDRI</p>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "5px",
+                }}
+              >
+                <img
+                  style={{
+                    width: "46px",
+                    height: "46px",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => {}}
+                  alt={""}
+                  src={AddPlace}
+                ></img>
+                &nbsp; &nbsp;
+                <div
+                  style={{
+                    height: "31px",
+                    width: "71px",
+                    background: `${currentColor}`,
+                    borderRadius: "10px",
+                    border: "2px solid #878787",
+                  }}
+                  onClick={() => {
+                    setClickControl((state) => !state);
+                  }}
+                ></div>
+                &nbsp; &nbsp;
+              </div>
+              <div style={{ marginTop: "10px" }}></div>
+              {clickControl && (
+                <div style={{ marginLeft: "5px" }}>
+                  <SketchPicker
+                    width={"85%"}
+                    color={currentColor}
+                    onChangeComplete={(color) => {
+                      setCurrentColor(color.hex);
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+            <div>
+              {Object.keys(environState).map((key) => {
+                const setting = environState[key];
+                return (
+                  <div style={{ marginTop: "9px" }}>
+                    <p style={{ fontWeight: 450 }}>{setting.name}</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Slider
+                        size="small"
+                        value={setting.value}
+                        aria-label="Small"
+                        max={100}
+                        onChange={(e) => {
+                          setEnvironState((state) => {
+                            return {
+                              ...state,
+                              [key]: {
+                                ...state[key],
+                                value: e.target.value,
+                              },
+                            };
+                          });
+                        }}
+                        sx={{
+                          color: "#000000",
+                          "& .MuiSlider-thumb": {
+                            backgroundColor: "#000000",
+                          },
+                          "& .MuiSlider-valueLabel": {
+                            color: "#ffffff",
+                          },
+                        }}
+                        style={{
+                          width: "50%",
+                        }}
+                        valueLabelDisplay="auto"
+                        min={0}
+                      />
+                      <input
+                        type={"number"}
+                        disabled={true}
+                        style={{
+                          width: "55px",
+                          height: "27px",
+                          background: "none",
+                          marginRight: "10px",
+                          border: "rgba(222, 222, 222, 1) 1px solid",
+                          fontSize: "13px",
+                          padding: "0 0 0 5px",
+                        }}
+                        value={setting.value}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </EnvironmentButton>
       {SettingsDataJson.map((dataVal, index) => {
         return (
           <label style={{ fontWeight: 500 }}>
             <p
               style={{
-                margin: "20px 0 3px 0",
+                margin: "0px 0 3px 0",
               }}
             >
               {dataVal.name}
@@ -102,6 +253,7 @@ const AccessSettings = () => {
                 backgroundColor: "#E3E3E3",
                 border: "none",
                 fontSize: "14px",
+                marginBottom: "15px",
                 "& .MuiOutlinedInput-notchedOutline": {
                   border: "none",
                 },
@@ -121,7 +273,19 @@ const AccessSettings = () => {
   );
 };
 export default AccessSettings;
-
+const EnvironmentButton = styled("div")`
+  width: 100%;
+  margin: 10px 0;
+  .envDivider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 32px;
+    .envHeader {
+      font-weight: 500;
+    }
+  }
+`;
 const SettingToggleSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
