@@ -2710,12 +2710,14 @@ header {
   margin: auto;
   width: 95%;
   margin-top: 40px;
+  min-height: 70vh;
 }
 
 .fashion-details-block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-evenly;
   padding: 30px 32px;
   gap: 2.5vh;
   background: var(--primary-bgcolor);
@@ -2723,6 +2725,7 @@ header {
   border-radius: 20px;
   width: 50%;
   margin: auto;
+  min-height: 65vh ;
 }
 
 .fashion-details {
@@ -2730,7 +2733,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 1.25vh;
+  gap: 2vh;
   width: 100%;
 }
 .fashion-welcome-text {
@@ -2789,13 +2792,12 @@ header {
 .fashion-upload-block {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   padding: 0px;
-  gap: 3.7vh;
   margin:auto;
   width: 45%;
-  height: 90%;
+  min-height: 65vh;
 }
 
 .fashion-upload-heading {
@@ -2808,6 +2810,7 @@ header {
   font-size: 12px;
   line-height: 158.33%;
   text-align: center;
+  max-width: 500px;
 }
 
 .fashion-upload-area {
@@ -2825,7 +2828,7 @@ header {
   color: #979797;
   width: 100%;
   font-size: 16px;
-  height: 40vh;
+  height: 38vh;
 }
 
 .fashion-upload-img {
@@ -2848,7 +2851,8 @@ header {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  height: 6vh;
+  min-height: 46px;
+  height: 5vh;
 }
 
 .fashionlab-popup {
