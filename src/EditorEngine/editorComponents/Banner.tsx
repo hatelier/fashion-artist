@@ -15,7 +15,11 @@ const Banner = () => {
   );
 };
 export const SettingsDataJson = [
-  { name: "Upload Unit", options: ["meters", "Milli"], default: 1 },
+  {
+    name: "Upload Unit",
+    options: ["Meters", "Millimeters", "Centimeters"],
+    default: 1,
+  },
   {
     name: "Projection Mode",
     options: ["Perspective", "Orthographic"],

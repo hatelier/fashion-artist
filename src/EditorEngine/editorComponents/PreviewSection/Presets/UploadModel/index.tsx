@@ -167,14 +167,15 @@ const UploadModel = () => {
     const dimensions = useSelector(
       (state: any) => state.settingsPanel.dimensions
     );
+    // const firaCode = useLoader(FontLoader, null);
     return (
       dimensions &&
       modelPositionThread && (
         <>
-          <line scale={modelDimensionThread} position={modelPositionThread}>
-            <boxGeometry args={[1, 1, 1]} />
-            <lineBasicMaterial color={"#ff0000"} />
-          </line>
+          {/*<line scale={modelDimensionThread} position={modelPositionThread}>*/}
+          {/*<boxGeometry args={[1, 1, 1]} />*/}
+          {/*<lineBasicMaterial color={"none"} />*/}
+          {/*</line>*/}
           <Text
             position={[
               modelPositionThread.x + modelDimensionThread.x / 2,
@@ -182,10 +183,10 @@ const UploadModel = () => {
               modelPositionThread.z,
             ]}
             rotation={[0, -Math.PI / 2, 0]}
-            fontSize={3}
+            fontSize={1.2}
             color="#ff0000"
           >
-            {modelDimensionThread.x.toFixed(2)}
+            {"<-" + modelDimensionThread.x.toFixed(2) + "->"}
           </Text>
           <Text
             position={[
@@ -194,10 +195,10 @@ const UploadModel = () => {
               modelPositionThread.z,
             ]}
             rotation={[Math.PI / 2, 0, 0]}
-            fontSize={3}
+            fontSize={1.2}
             color="#ff0000"
           >
-            {modelDimensionThread.y.toFixed(2)}
+            {"<-" + modelDimensionThread.y.toFixed(2) + "->"}
           </Text>
           <Text
             position={[
@@ -206,10 +207,11 @@ const UploadModel = () => {
               modelPositionThread.z + modelDimensionThread.z / 2,
             ]}
             rotation={[0, 0, -Math.PI / 2]}
-            fontSize={2}
+            fontSize={0.8}
             color="#ff0000"
+            // font={firaCode}
           >
-            {modelDimensionThread.z.toFixed(2)}
+            {"<-" + modelDimensionThread.z.toFixed(2) + "->"}
           </Text>
         </>
       )
