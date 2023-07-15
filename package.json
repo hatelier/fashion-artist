@@ -28,6 +28,7 @@
     "@types/styled-components": "^5.1.26",
     "@types/three": "^0.151.0",
     "axios": "^1.4.0",
+    "draft-js": "^0.11.7",
     "leva": "^0.9.34",
     "localforage": "^1.10.0",
     "prettier": "^2.8.8",
