@@ -3807,6 +3807,7 @@ add-showroom-button-img {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  width: 100%;
 }
 .add-showroom-details-item {
   display: flex;
@@ -3814,6 +3815,7 @@ add-showroom-button-img {
   align-items: flex-start;
   padding: 0px;
   gap: 6px;
+  width: 100%;
 }
 
 .add-showroom-details-item label {
@@ -3834,7 +3836,7 @@ add-showroom-button-img {
   border: none;
   border-radius: 5px;
   height: 44px;
-  width: 412px;
+  width: 100%;
 }
 
 .add-showroom-layouts {
@@ -3871,14 +3873,15 @@ add-showroom-button-img {
   display: flex;
   align-items: center;
   padding: 9px 32px;
-  background: #E70A4E;
   border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn, #D31027);
   font-weight: 400;
   font-size: 16px;
   gap: 10px;
   height: 44px;
   line-height: 26px;
-  color: #FFFFFF;
+  color: #EAEAEA;
 }
 .layout-font-input {
   padding: 9px 15px;
