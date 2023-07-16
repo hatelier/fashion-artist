@@ -33,7 +33,6 @@ const toggleDisplay = () => {
                   <div className="templates-filter" onClick={toggleDisplay}><img className='sidenav-img' src={require('../assets/pngs/filter-icon.png')} alt="" /><span>Filter</span><img className='sidenav-img' src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
                   <div className="templates-filter-dropdown" style={{ display }}>
                     <div className="filter-dropdown-item">All</div>
-                    <div className="filter-dropdown-item">Lipsticks</div>
                     <div className="filter-dropdown-item">Gown</div>
                     <div className="filter-dropdown-item">Tshirts</div>
                     <div className="filter-dropdown-item">Hoodie</div>

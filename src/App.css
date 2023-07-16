@@ -3858,13 +3858,19 @@ add-showroom-button-img {
 
 .add-showroom-font-text {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 20px;
-  width: 50%;
+  width: 100%;
+  justify-content: space-between;
 }
 
+.add-showroom-layout-font-text {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+}
 .add-showroom-layout-font {
   width: 100%;
 }
@@ -3985,17 +3991,19 @@ add-showroom-button-img {
 
 .red-patch {
   padding: 6px;
+  display: flex;
   gap: 10px;
   background: var(--secondary-bgcolor);
   border: 1px solid var(--items-bgcolor);
   border-radius: 10px;
   width: 142px;
-  height: 53px;
+  height: 40px;
+  align-items: center;
 }
 
 .red-patch-inside {
   width: 130px;
-  height: 41px;
+  height: 30px;
   background: var(--items-bgcolor);
   border-radius: 8px;
 
@@ -4100,7 +4108,13 @@ add-showroom-button-img {
   border-radius: 10px;
   color: #ffffff;
 }
-
+.add-showroom-filter {
+  position: relative;
+}
+.add-showroom-dropdown {
+  position: absolute;
+  top: 250px;
+}
 .forgot-password {
   height: auto;
   width: auto;
