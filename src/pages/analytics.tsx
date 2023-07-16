@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
-import TokenVerification from '../components/auth';
+// import TokenVerification from '../components/auth';
 import axiosInstance from '../components/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -21,14 +21,14 @@ export const Analytics = () => {
     const [avgInteraction, setAvgInteraction] = useState(0);
     const [range, setRange] = useState('day');
     const [searchText, setSearchText] = useState('');
-    const [products, setProducts] = useState({ location: '', productName: '' });
+    // const [products, setProducts] = useState({ location: '', productName: '' });
   
     const handleSearch = useCallback(async () => {
       try {
         const response = await axiosInstance.get(`/analytics/product/search/${encodeURIComponent(searchText)}`);
         const data = response.data;
         console.log(data);
-        setProducts(data);
+        // setProducts(data);
       } catch (error) {
         console.error('Error searching products', error);
       }
@@ -45,7 +45,7 @@ export const Analytics = () => {
       if (searchText.trim() !== '') {
         handleSearch();
       } else {
-        setProducts({ location: '', productName: '' });
+        // setProducts({ location: '', productName: '' });
       }
     }, [selectedPeriod, searchText, handleSearch]);
 

@@ -138,6 +138,7 @@ export const AddShowroom = () => {
                                   <button className="credit-plus-button">+</button>
                                 </div>
                             </div>
+                            <div className='add-showroom-layout-font-text'>
                             <div className="add-showroom-layout-font">
                                 <label htmlFor="">Font Family</label>
                                 <input type="text" placeholder="Add Tag" className="layout-font-input" />
@@ -145,6 +146,7 @@ export const AddShowroom = () => {
                             <div className="add-showroom-layout-text">
                                 <label htmlFor="">Text Color</label>
                                 <div className="red-patch"><div className="red-patch-inside"></div></div>
+                            </div>
                             </div>
                         </div>
                     </div>
