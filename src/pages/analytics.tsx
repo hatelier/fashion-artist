@@ -290,7 +290,7 @@ export const Analytics = () => {
                           />
                           width={400} height={350}
                           <CartesianGrid stroke='#ccc' />
-                          />
+                          
                           {/* width={400} height={350} */}
                           <CartesianGrid stroke='#ccc' />
                           <Tooltip />
@@ -332,7 +332,7 @@ export const Analytics = () => {
                         )}
                         {/* <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/> */}
                         <div className='analytics-download-button analytics-product-report-btn'>Product Report</div>
-                        </div> */}
+                        </div>)}
                       </div>
                       <div className="analytics-ar-views">
                       <div className="period-selection">
@@ -343,7 +343,7 @@ export const Analytics = () => {
                           <option value="month">Month</option>
                         </select>
                       </div>
-                      <LineChart width={250} height={350} data={arViewCount}>
+                    
                       <LineChart width={250} height={350} data={arViewCount}>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
@@ -360,8 +360,6 @@ export const Analytics = () => {
                           <Legend wrapperStyle={{ display: 'none' }} />
                         </LineChart>
                         {/* <img src={require('../assets/pngs/totalARview.png')} alt="back" className='analytics-linechart' /> */}
-                        </LineChart>
-                        <img src={require('../assets/pngs/totalARview.png')} alt="back" className='analytics-linechart' />
                       </div>
                     </div>
                   </div>
