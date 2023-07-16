@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
-import TokenVerification from '../components/auth';
+// import TokenVerification from '../components/auth';
 import axiosInstance from '../components/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -21,14 +21,14 @@ export const Analytics = () => {
     const [avgInteraction, setAvgInteraction] = useState(0);
     const [range, setRange] = useState('day');
     const [searchText, setSearchText] = useState('');
-    const [products, setProducts] = useState({ location: '', productName: '' });
+    // const [products, setProducts] = useState({ location: '', productName: '' });
   
     const handleSearch = useCallback(async () => {
       try {
         const response = await axiosInstance.get(`/analytics/product/search/${encodeURIComponent(searchText)}`);
         const data = response.data;
         console.log(data);
-        setProducts(data);
+        // setProducts(data);
       } catch (error) {
         console.error('Error searching products', error);
       }
@@ -45,7 +45,7 @@ export const Analytics = () => {
       if (searchText.trim() !== '') {
         handleSearch();
       } else {
-        setProducts({ location: '', productName: '' });
+        // setProducts({ location: '', productName: '' });
       }
     }, [selectedPeriod, searchText, handleSearch]);
 
@@ -275,21 +275,21 @@ export const Analytics = () => {
                         </select>
                       </div>
                       <div className='analytics-linechart-container'>
-                        {/* <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
+                        <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
                             const options = { month: 'long', day: 'numeric' } as const;
                             return date.toLocaleString('en-US', options);  
                           }}
-                          /> */}
-                          {/* width={400} height={350} */}
-                          {/* <CartesianGrid stroke='#ccc' />
+                          />
+                          width={400} height={350}
+                          <CartesianGrid stroke='#ccc' />
                           <Tooltip />
                           <Legend />
                           <Line type='monotone' dataKey='count' stroke='blue' name='Views'/>
                           <YAxis />
-                        </LineChart> */}
+                        </LineChart>
                         {/* <img src={require('../assets/pngs/graph3dview.png')} alt="back" className='analytics-linechart' /> */}
                         </div>
                       </div>
@@ -313,13 +313,13 @@ export const Analytics = () => {
                     <div className="analytics-secondary-bottom">
                       <div className="analytics-most-viewed">
                       <div>Most viewed product</div>
-                      {/* {mostViewedProduct && (
+                      {mostViewedProduct && (
                         <img src={mostViewedProduct} style={{ marginTop: '10px', marginLeft: '5px' }} height={350} width={280} alt="Most Viewed Product" />
-                        )} */}
-                        <div className="analytics-most-viewed-img">
+                        )}
+                        {/* <div className="analytics-most-viewed-img">
                         <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/>
                         <div className='analytics-download-button analytics-product-report-btn'>Product Report</div>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="analytics-ar-views">
                       <div className="period-selection">
@@ -330,7 +330,7 @@ export const Analytics = () => {
                           <option value="month">Month</option>
                         </select>
                       </div>
-                      {/* <LineChart width={250} height={350} data={arViewCount}>
+                      <LineChart width={250} height={350} data={arViewCount}>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
@@ -344,7 +344,7 @@ export const Analytics = () => {
                           <Line type='monotone' dataKey='count' name='Views' stroke='blue'/>
                           <YAxis />
                           <Legend wrapperStyle={{ display: 'none' }} />
-                        </LineChart> */}
+                        </LineChart>
                         <img src={require('../assets/pngs/totalARview.png')} alt="back" className='analytics-linechart' />
                       </div>
                     </div>
