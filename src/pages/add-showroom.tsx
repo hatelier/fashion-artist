@@ -147,36 +147,6 @@ export const AddShowroom = () => {
                                 <div className="red-patch"><div className="red-patch-inside"></div></div>
                             </div>
                         </div>
-                        <div className="add-showroom-separator"></div>
-                        <div className="add-showroom-background">
-                            <div className="add-showroom-background-heading">Background</div>
-                            <div className="add-showroom-color-divider">
-                                <div className="add-showroom-background-item">
-                                    <label htmlFor="">Color</label>
-                                    <div className="red-patch"><div className="red-patch-inside"></div></div>
-                                </div>
-                                <div className="add-showroom-background-item">
-                                <label htmlFor="">Divider color</label>
-                                <div className="red-patch"><div className="red-patch-inside"></div></div>
-                                </div>
-                            </div>
-                            <div className="add-showroom-upload-style">
-                                <div className="add-showroom-background-item">
-                                <label htmlFor="">Upload image File</label>
-
-                                <button className="add-showroom-upload-button" onClick={()=>{
-                                  //Do something
-                                }}>
-                                  <img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span>
-                                </button>
-
-                                </div>
-                                <div className="add-showroom-background-item">
-                                <label htmlFor="">Image Style</label>
-                                    <div className="add-showroom-cover"><span>Cover</span> <img src={require('../assets/pngs/down.png')} alt="" /></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className="add-showroom-products">
