@@ -275,21 +275,21 @@ export const Analytics = () => {
                         </select>
                       </div>
                       <div className='analytics-linechart-container'>
-                        {/* <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
+                        <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
                             const options = { month: 'long', day: 'numeric' } as const;
                             return date.toLocaleString('en-US', options);  
                           }}
-                          /> */}
+                          />
                           {/* width={400} height={350} */}
-                          {/* <CartesianGrid stroke='#ccc' />
+                          <CartesianGrid stroke='#ccc' />
                           <Tooltip />
                           <Legend />
                           <Line type='monotone' dataKey='count' stroke='blue' name='Views'/>
                           <YAxis />
-                        </LineChart> */}
+                        </LineChart>
                         {/* <img src={require('../assets/pngs/graph3dview.png')} alt="back" className='analytics-linechart' /> */}
                         </div>
                       </div>
@@ -313,11 +313,11 @@ export const Analytics = () => {
                     <div className="analytics-secondary-bottom">
                       <div className="analytics-most-viewed">
                       <div>Most viewed product</div>
-                      {/* {mostViewedProduct && (
-                        <img src={mostViewedProduct} style={{ marginTop: '10px', marginLeft: '5px' }} height={350} width={280} alt="Most Viewed Product" />
-                        )} */}
                         <div className="analytics-most-viewed-img">
-                        <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/>
+                        {mostViewedProduct && (
+                        <img src={mostViewedProduct} style={{ marginTop: '10px', marginLeft: '5px' }} height={350} width={280} alt="Most Viewed Product" />
+                        )}
+                        {/* <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/> */}
                         <div className='analytics-download-button analytics-product-report-btn'>Product Report</div>
                         </div>
                       </div>
@@ -330,7 +330,7 @@ export const Analytics = () => {
                           <option value="month">Month</option>
                         </select>
                       </div>
-                      {/* <LineChart width={250} height={350} data={arViewCount}>
+                      <LineChart width={250} height={350} data={arViewCount}>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
@@ -344,8 +344,8 @@ export const Analytics = () => {
                           <Line type='monotone' dataKey='count' name='Views' stroke='blue'/>
                           <YAxis />
                           <Legend wrapperStyle={{ display: 'none' }} />
-                        </LineChart> */}
-                        <img src={require('../assets/pngs/totalARview.png')} alt="back" className='analytics-linechart' />
+                        </LineChart>
+                        {/* <img src={require('../assets/pngs/totalARview.png')} alt="back" className='analytics-linechart' /> */}
                       </div>
                     </div>
                   </div>
