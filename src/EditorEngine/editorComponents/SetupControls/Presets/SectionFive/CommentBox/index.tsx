@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   AiOutlineAlignCenter,
@@ -24,7 +24,14 @@ import { BsTypeUnderline } from "react-icons/bs";
 
 const CommentBox = () => {
   // use states for testing the editor
-
+  const [clickState, setClickState] = useState({
+    bold: false,
+    underline: false,
+    italic: false,
+    list: false,
+    heading: false,
+  });
+  const fileRef = useRef(null);
   const Link = (props) => {
     let { url } = props.contentState.getEntity(props.entityKey).getData();
     // if (!/^https?:\/\//i.test(url)) {
@@ -86,22 +93,45 @@ const CommentBox = () => {
   const _onBoldClick = (e) => {
     e.preventDefault();
     onChange(RichUtils.toggleInlineStyle(editorState, "BOLD"));
+    setClickState((state) => {
+      return {
+        ...state,
+        bold: !state.bold,
+      };
+    });
   };
 
   const _onItalicClick = (e) => {
     e.preventDefault();
     onChange(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
+    setClickState((state) => {
+      return {
+        ...state,
+        italic: !state.italic,
+      };
+    });
   };
 
   const _onHeadingClick = (e) => {
     e.preventDefault();
     onChange(RichUtils.toggleBlockType(editorState, "header-one"));
-    console.log("siueiurh iushiuehr iusiuehr isier");
+    setClickState((state) => {
+      return {
+        ...state,
+        heading: !state.heading,
+      };
+    });
   };
 
   const _onUnderlineClick = (e) => {
     e.preventDefault();
     onChange(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
+    setClickState((state) => {
+      return {
+        ...state,
+        underline: !state.underline,
+      };
+    });
   };
 
   const _onAddLink = (e) => {
@@ -132,6 +162,12 @@ const CommentBox = () => {
   const _onNumberedListClick = (e) => {
     e.preventDefault();
     onChange(RichUtils.toggleBlockType(editorState, "ordered-list-item"));
+    setClickState((state) => {
+      return {
+        ...state,
+        list: !state.list,
+      };
+    });
   };
 
   function myBlockStyleFn(contentBlock) {
@@ -142,18 +178,54 @@ const CommentBox = () => {
     }
   }
 
+  function attachmentRun() {
+    fileRef.current.click();
+  }
+
+  useEffect(() => {
+    if (editorState.getCurrentContent().getPlainText().trim() === "") {
+      setClickState({
+        bold: false,
+        underline: false,
+        italic: false,
+        list: false,
+        heading: false,
+      });
+    }
+  }, [editorState]);
   const OptionBox = () => {
     return (
       <div className={"iconControls"}>
-        <RxHeading onMouseDown={_onHeadingClick} />
-        <AiOutlineBold onMouseDown={_onBoldClick} />
-        <AiOutlineItalic onMouseDown={_onItalicClick} />
-        <BsTypeUnderline onMouseDown={_onUnderlineClick} />
+        <input
+          type={"file"}
+          multiple={true}
+          ref={fileRef}
+          style={{ display: "none" }}
+        />
+        <RxHeading
+          onMouseDown={_onHeadingClick}
+          style={{ color: clickState.heading ? "#bdbdbd" : "" }}
+        />
+        <AiOutlineBold
+          onMouseDown={_onBoldClick}
+          style={{ color: clickState.bold ? "#bdbdbd" : "" }}
+        />
+        <AiOutlineItalic
+          onMouseDown={_onItalicClick}
+          style={{ color: clickState.italic ? "#bdbdbd" : "" }}
+        />
+        <BsTypeUnderline
+          onMouseDown={_onUnderlineClick}
+          style={{ color: clickState.underline ? "#bdbdbd" : "" }}
+        />
         <AiOutlineAlignCenter />
         <AiOutlineAlignRight />
         <FiCode onMouseDown={_onAddLink} />
-        <GrAttachment />
-        <AiOutlineOrderedList onMouseDown={_onNumberedListClick} />
+        <GrAttachment onClick={attachmentRun} />
+        <AiOutlineOrderedList
+          onMouseDown={_onNumberedListClick}
+          style={{ color: clickState.list ? "#bdbdbd" : "" }}
+        />
         <AiOutlineUnorderedList />
       </div>
     );
