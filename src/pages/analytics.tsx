@@ -280,7 +280,6 @@ export const Analytics = () => {
                       </div>
                       <div className='analytics-linechart-container'>
                         <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
-                        <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
@@ -298,7 +297,7 @@ export const Analytics = () => {
                           <Line type='monotone' dataKey='count' stroke='blue' name='Views'/>
                           <YAxis />
                         </LineChart>
-                        </LineChart>
+                        
                         {/* <img src={require('../assets/pngs/graph3dview.png')} alt="back" className='analytics-linechart' /> */}
                         </div>
                       </div>
