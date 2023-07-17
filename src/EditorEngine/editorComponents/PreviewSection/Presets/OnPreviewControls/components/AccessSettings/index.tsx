@@ -121,7 +121,10 @@ const AccessSettings = () => {
         </div>
         {enviControl && (
           <>
-            <div className={""} style={{ marginTop: "10px" }}>
+            <div
+              className={""}
+              style={{ marginTop: "10px", animation: "fadeIn 0.5s" }}
+            >
               <p style={{ fontWeight: 450 }}>HDRI</p>
               <div
                 style={{
@@ -168,7 +171,7 @@ const AccessSettings = () => {
                 </div>
               )}
             </div>
-            <div>
+            <div style={{ animation: "fadeIn 1s" }}>
               {Object.keys(environState).map((key) => {
                 const setting = environState[key];
                 return (
@@ -281,6 +284,7 @@ const EnvironmentButton = styled("div")`
     justify-content: space-between;
     align-items: center;
     min-height: 32px;
+    cursor: pointer;
     .envHeader {
       font-weight: 500;
     }
