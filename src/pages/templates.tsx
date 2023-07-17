@@ -1,15 +1,37 @@
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import Card from '../components/Card';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axiosInstance from '../components/axiosInstance';
 
 
 export const Templates = () => {
   const [display, setDisplay] = useState<'none' | 'flex'>('none');
+  const [imageUrls, setImageUrls] = useState<string[]>([]);;
+  
+  const toggleDisplay = () => {
+    setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+  };
 
-const toggleDisplay = () => {
-  setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
-};
+  const fetchImageUrls = async (folderNames: string[]) => {
+    try {
+      const promises = folderNames.map((folderName) =>
+        axiosInstance.get(`/templates/image/${folderName}`)
+      );
+      const responses = await Promise.all(promises);
+      const data = responses.map((response) => response.data);
+  
+      // Update the image URLs state
+      setImageUrls(data);
+    } catch (error) {
+      console.error('Error fetching image URLs:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImageUrls(['Default-1', 'Default-2']);
+  },[]);
+
     return (
         <div className='home-container'>
   <section >
@@ -46,16 +68,29 @@ const toggleDisplay = () => {
                   </div>
             </div>
              <div className="templates-block">
-             <Card>
+             {imageUrls.map((imageUrl, index) => (
+              <Card key={index}>
+                <div className="card-img-container">
+                  <div className="card-img-box">
+                    <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
+                    <img className="card-img" src={imageUrl} alt="Preview" />
+                  </div>
+                </div>
+                <div className="card-name">Product Name</div>
+              </Card>
+              ))}
+             {/* <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
                 <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
-                <img className="card-img" src="dummy" alt="Preview" />
+                {imageUrls.map((imageUrl, index) => (
+                  <img key={index} className="card-img" src={imageUrl} alt="Preview" />
+                ))}
                 </div>
                </div>
                <div className="card-name">dummy</div>
                </Card>
-          <Card>
+            <Card>
                <div className="card-img-container">
                 <div className="card-img-box">
                   <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
@@ -81,7 +116,7 @@ const toggleDisplay = () => {
                 </div>
                </div>
                <div className="card-name">dummy</div>
-               </Card>
+               </Card> */}
                
              </div>
           </div>
