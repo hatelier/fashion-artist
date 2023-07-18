@@ -21,6 +21,7 @@ import ConfigVarients from "../../components/ConfigVarients";
 import {AiFillEdit} from "react-icons/ai";
 import ConfigEditor from "../../components/ConfigEditor";
 import MaterialSwap from "../../components/MaterialSwap";
+import {WhiteOnRed} from "../SectionFive/CommentBox";
 // color picker
 
 const SectionTwo = () => {
@@ -524,8 +525,13 @@ const SectionTwo = () => {
             </>
           );
         })}
-      <SaveConfig
-        className={"uploadAsset"}
+      <WhiteOnRed
+          style={{
+              width:"90%",
+              margin: "20px 15px"
+
+          }}
+        // className={"uploadAsset"}
         onClick={() => {
           axios
             .put("/manage/config", {
@@ -542,7 +548,7 @@ const SectionTwo = () => {
         }}
       >
         Save Configuration
-      </SaveConfig>
+      </WhiteOnRed>
     </div>
   );
 };

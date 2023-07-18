@@ -14,6 +14,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import {WhiteOnRed} from "../SectionFive/CommentBox";
+import CustomPopUp from "../../components/CustomPopUp";
+import MeshSelectPresets from "../../components/MeshSelectPresets";
 
 const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
@@ -139,6 +141,7 @@ const SectionThree = () => {
   }, [projectID, userID]);
   return (
     <div className={"sectionThreeDiv"}>
+        <CustomPopUp header={"Enter Preset Name"} placeholder={"Preset name"}/>
       <div
         style={{
           display: "flex",
@@ -173,6 +176,7 @@ const SectionThree = () => {
         />
       )}
       <div>
+          <MeshSelectPresets/>
         {(reqPreset ? reqPreset : presets).map((preset) => {
           return (
             <div className={"configBox"}>
@@ -212,7 +216,7 @@ const SectionThree = () => {
                         padding: "0 9px",
                       }}
                     >
-                      <p className={"confName"}>{matVal}</p>
+                      <p className={"confName midBoldclass"}>{matVal}</p>
                       <FontAwesomeIcon
                         icon={preset.visibility[matInx] ? faEye : faEyeSlash}
                         style={{ fontSize: "12px", color: "#000000" }}

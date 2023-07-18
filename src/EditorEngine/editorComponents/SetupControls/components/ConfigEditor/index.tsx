@@ -21,7 +21,7 @@ const ConfigEditor=()=>{
                 marginTop:"20px"
             }}>Name
             </p>
-            <input type={"text"} className={"configInput"} placeholder={"Configuration Name"}/>
+            <GreyInput type={"text"} placeholder={"Configuration Name"}/>
         </div>
         <div style={{marginTop:"15px"}}>
             <p className={"midBoldclass"}>Configuration Image</p>
@@ -78,7 +78,16 @@ const ConfigEditor=()=>{
 }
 export default ConfigEditor;
 
-
+export const GreyInput = styled.input`
+  height: 22px;
+  padding: 5px 9px 5px 10px;
+  border: none;
+  background: #EAEAEA;
+  outline: none;
+  font-size: 12px;
+  width: 100%;
+  margin-top: 5px;
+`
 const ConfigEditDiv = styled.div`
   position: fixed;
   right: 290px;
@@ -89,15 +98,5 @@ const ConfigEditDiv = styled.div`
   border-radius: 10px;
   .midBoldclass {
     font-weight: 430;
-  }
-  .configInput {
-    height: 22px;
-    padding: 5px 9px 5px 10px;
-    border: none;
-    background: #EAEAEA;
-    outline: none;
-    font-size: 13px;
-    width: 100%;
-    margin-top: 5px;
   }
 `
