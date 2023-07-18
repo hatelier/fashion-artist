@@ -72,21 +72,35 @@ export const Manage = () => {
             <div className="main-header">
              <div className='text'>
                <div className='dashboard'>
-                 <div className="analytics-header">
+                 <div className="analytics-header manage-text">
                     <span>View Showroom</span>
                     <button onClick={()=>{}} className="analytics-download-button">Share</button>
                  </div>
                </div>
              </div>
              </div>
-             <div className="subscription">
-               <div className="choose-plan">
+             <div className="manage">
+               <div className="choose-plan manage-text">
                  Junior's Showroom
                </div>
                <div className="manage-block">
-                 <div className="manage-row">
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -96,7 +110,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -106,7 +122,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -116,19 +134,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
-                        <div className="manage-item-details">
-                            <div className="manage-item-name">Product name</div>
-                            <div className="manage-item-id-date">
-                                <div className="manage-item-id">Product Id: user01_1274</div>
-                                <div className="manage-item-date">20/04/2023</div>
-                            </div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
                         </div>
-                    </div>
-                 </div>
-                 <div className="manage-row">
-                    <div className="manage-item">
-                        <div className="manage-item-img"></div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -138,7 +146,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -148,7 +158,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -158,7 +170,9 @@ export const Manage = () => {
                         </div>
                     </div>
                     <div className="manage-item">
-                        <div className="manage-item-img"></div>
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
                             <div className="manage-item-id-date">
@@ -167,7 +181,90 @@ export const Manage = () => {
                             </div>
                         </div>
                     </div>
-                 </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="manage-item">
+                        <div className="manage-item-img">
+                          <img src= {require('../assets/pngs/threeD.png')} alt="" />
+                        </div>
+                        <div className="manage-item-details">
+                            <div className="manage-item-name">Product name</div>
+                            <div className="manage-item-id-date">
+                                <div className="manage-item-id">Product Id: user01_1274</div>
+                                <div className="manage-item-date">20/04/2023</div>
+                            </div>
+                        </div>
+                    </div>
                </div>
             </div>
           </div>
