@@ -85,7 +85,7 @@ export const Assets = () => {
                         <div className="asset-row">
                             <div className="asset-row-header">
                                 <div className="asset-row-heading">Meshes</div>
-                                    <a href='' className="asset-see-all">See all</a>
+                                    <a href='/' className="asset-see-all">See all</a>
                                 </div>
                             <div className="asset-row-items">
 
@@ -275,7 +275,7 @@ export const Assets = () => {
                         <div className="asset-row">
                             <div className="asset-row-header">
                                 <div className="asset-row-heading">Materials</div>
-                                    <a href='' className="asset-see-all">See all</a>
+                                    <a href='/' className="asset-see-all">See all</a>
                                 </div>
                             <div className="asset-row-items">
 
@@ -466,7 +466,7 @@ export const Assets = () => {
                         <div className="asset-row">
                             <div className="asset-row-header">
                                 <div className="asset-row-heading">Shared Files</div>
-                                    <a href='' className="asset-see-all">See all</a>
+                                    <a href='/' className="asset-see-all">See all</a>
                                 </div>
                             <div className="asset-row-items">
 
