@@ -81,10 +81,10 @@ export const Teams = () => {
 const inviteMember = () => {
     toast(<InviteMemberPopup />, {
         position: "top-center",
-      autoClose: 3,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
       draggable: true,
       progress: undefined,
     //   theme : 'light',
@@ -107,17 +107,40 @@ const inviteMember = () => {
   const handleDeleteTeamPopup = () =>{
     toast(<DeletePopup />, {
       position: "top-center",
-    autoClose: 3,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     className :' team-delete-toast'
   }) 
   }
 
-
+  const DeleteMemberPopup = ()=>{
+    return(
+      <div className="team-delete-popup">
+        <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+        <div className='team-delete-popup-msg'>
+        <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
+        <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete this Member</p>
+        <button className="team-popup-btn" style={{"border":"none"}} onClick={handleDeleteTeamMember}>Proceed</button>
+        </div>
+      </div>
+    )
+  }
+  const handleDeleteMemberPopup = () =>{
+    toast(<DeleteMemberPopup />, {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    className :' team-delete-toast'
+  }) 
+  }
   const DeleteTeamMember = ()=>{
     return (<div className="invite-member-popup">
     <img src={require('../assets/pngs/tick1.png')} alt="" className='sidenav-img'/>
@@ -128,12 +151,12 @@ const inviteMember = () => {
   const handleDeleteTeamMember = ()=>{
     toast(<DeleteTeamMember/>, {
       position: "top-center",
-    autoClose: 3,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
   //   theme : 'light',
     className : 'invite-member-toast'
   }) 
@@ -226,7 +249,7 @@ const inviteMember = () => {
             >
               Cancel
             </button>
-            <button className="teammate-popup-create" style={{"gridColumn": "3/5"}}>Add Member</button>
+            <button className="teammate-popup-create" style={{"gridColumn": "3/5"}} onClick={inviteMember}>Add Member</button>
           </div>
           </div>
 
@@ -310,7 +333,7 @@ const inviteMember = () => {
                                     <div className='team-member-email'>member_1@gmail.com</div>
                                     </div>
                                     <div className='team-member-rank team-text-decoration'>Admin</div>
-                                    <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteTeamPopup}/></div>
+                                    <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteMemberPopup}/></div>
                                 </div>
                                 <div className="team-member-row">
                                   <div className='team-member-name-email'>
@@ -319,7 +342,7 @@ const inviteMember = () => {
                                     <div className='team-member-email'>member_1@gmail.com</div>
                                     </div>
                                     <div className='team-member-rank team-text-decoration'>Admin</div>
-                                    <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteTeamPopup}/></div>
+                                    <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteMemberPopup}/></div>
                                 </div>
                             </div>
                     </div>
