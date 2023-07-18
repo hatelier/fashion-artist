@@ -4225,9 +4225,8 @@ add-showroom-button-img {
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  gap: 20px;
+  gap: 15vh;
   width: 100%;
-  justify-content: space-between;
 }
 
 .add-showroom-layout-font-text {
@@ -4342,15 +4341,21 @@ add-showroom-button-img {
 
 .add-showroom-products-block {
   display: flex;
+  padding-bottom: 0px;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
+  gap: 15px;
+  align-self: stretch;
   width: 100%;
 }
 
 .add-showroom-products-input {
   width: 100%;
+}
+
+.add-showroom-block .templates-input-group {
+  width: 100%;
+  margin-top: 0px;
 }
 
 .red-patch {
@@ -4478,6 +4483,53 @@ add-showroom-button-img {
 .add-showroom-dropdown {
   position: absolute;
   top: 250px;
+}
+
+.add-showroom-products-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.add-showroom-product-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.add-showroom-product-item {
+  display: flex;
+  width: 73px;
+  height: 73px;
+  padding: 5px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--items-bgcolor);
+  box-shadow: 0px 8px 29px 0px rgba(0, 0, 0, 0.25);
+}
+
+.product-item-img-div {
+  width: 63px;
+  height: 63px;
+  background: var(--popup-color);
+  position: relative;
+}
+
+.product-item-checkbox {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background-color: var(--items-bgcolor);
+}
+
+.product-item-text {
+  color: var(--font-color);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .forgot-password {
   height: auto;
