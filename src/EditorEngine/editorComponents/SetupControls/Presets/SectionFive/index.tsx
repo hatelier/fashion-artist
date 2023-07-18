@@ -79,7 +79,7 @@ const SectionFive = () => {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <p
                       style={{
-                        background: "#fafafa",
+                        background: "rgba(227, 227, 227, 1)",
                         fontSize: "16px",
                         width: "35px",
                         height: "35px",
@@ -154,9 +154,9 @@ const SectionFive = () => {
   );
 };
 const AnnotationBox = styled.div`
-  border-radius: 5px;
-  background: #f4f4f4;
-  box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #F4F4F4;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 15px;
   padding: 10px 9px;
 `;

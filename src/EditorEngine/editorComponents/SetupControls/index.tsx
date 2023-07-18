@@ -18,6 +18,8 @@ import Image5 from "../../../assets/svgs/note.svg";
 import Image6 from "../../../assets/svgs/play-button-arrowhead 1.svg";
 import Image7 from "../../../assets/svgs/download.svg";
 import SectionFive from "./Presets/SectionFive";
+import SectionSix from "./Presets/SectionSix";
+import SectionSeven from "./Presets/SectionSeven";
 
 const SetupControls = (props: BasicControls) => {
   const currentTab = useSelector(
@@ -100,6 +102,18 @@ const SetupControls = (props: BasicControls) => {
             style={{ display: currentTab === 4 ? "" : "none" }}
           >
             <SectionFive />
+          </div>
+          <div
+            className={"SectionControl"}
+            style={{ display: currentTab === 5 ? "" : "none" }}
+          >
+            <SectionSix />
+          </div>
+          <div
+            className={"SectionControl"}
+            style={{ display: currentTab === 6 ? "" : "none" }}
+          >
+            <SectionSeven />
           </div>
         </>
       )}
