@@ -17,6 +17,10 @@ import { toast } from "react-hot-toast";
 import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 import styled from "styled-components";
+import ConfigVarients from "../../components/ConfigVarients";
+import {AiFillEdit} from "react-icons/ai";
+import ConfigEditor from "../../components/ConfigEditor";
+import MaterialSwap from "../../components/MaterialSwap";
 // color picker
 
 const SectionTwo = () => {
@@ -380,6 +384,9 @@ const SectionTwo = () => {
   const [materialPopData, setMaterialPopUpData] = useState(null);
   return (
     <div className={"sectionTwoDiv"}>
+      <ConfigVarients />
+        <ConfigEditor/>
+        <MaterialSwap/>
       {materialPopData && (
         <AddMaterialPopUp
           updateMode={true}
@@ -487,7 +494,10 @@ const SectionTwo = () => {
                     alignItems: "center",
                   }}
                 >
-                  <p className={"configHead"}>{vlss.name}</p>
+                  <div style={{display:"flex", alignItems:"center"}}>
+                      <p className={"configHead"}>{vlss.name}</p>&nbsp;
+                      <AiFillEdit size={14}/>
+                  </div>
                   {/*<button>Choose</button>*/}
                   <img
                     src={AddImage}

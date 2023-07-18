@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import {WhiteOnRed} from "../SectionFive/CommentBox";
 
 const SectionThree = () => {
   const { materialArray }: MaterialControlsProps = useSelector(
@@ -146,7 +147,7 @@ const SectionThree = () => {
           justifyContent: "space-between",
         }}
       >
-        <p className={"sectionThreeTitle"}>Preset controls</p>
+        <p className={"sectionThreeTitle"}>Preset</p>
         <img
           alt=""
           src={AddConfig}
@@ -245,8 +246,8 @@ const SectionThree = () => {
         })}
       </div>
       <div className={"DupDelDiv"}>
-        <button
-          className={"uploadAsset"}
+        <WhiteOnRed
+          // className={"uploadAsset"}
           style={{ width: "40%" }}
           onClick={() => {
             axios
@@ -264,10 +265,10 @@ const SectionThree = () => {
           }}
         >
           Save
-        </button>
-        <button className={"uploadAsset"} style={{ width: "60%" }}>
+        </WhiteOnRed>
+        <WhiteOnRed style={{ width: "60%" }}>
           Cancel
-        </button>
+        </WhiteOnRed>
       </div>
     </div>
   );
