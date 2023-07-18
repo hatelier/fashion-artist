@@ -18,7 +18,7 @@
     width: 38px;
     height: 30px;
     padding: 0;
-    background: #F7F7F7;
+    background: rgba(244, 244, 244, 0.90);
     border-radius: 5px;
     text-align: center;
     appearance: none;
@@ -32,11 +32,12 @@
     height: 27px;
     margin-top: 10px;
     width: 100%;
-    background: #F7F7F7;
-    border: 1px solid #D8D8D8;
+    background: rgba(244, 244, 244, 0.90);
     border-radius: 5px;
     padding-left: 10px;
     border: none;
+    cursor: pointer;
+    outline: none;
   }
 
   .prevImageDev {
@@ -52,12 +53,12 @@
   .productName {
     height: 27px;
     width: 100%;
-    background: #F7F7F7;
-    border: 1px solid #D8D8D8;
+    background: rgba(244, 244, 244, 0.90);
     border-radius: 5px;
     outline: none;
     margin-top: 10px;
     border: none;
+    font-size: 13px;
   }
 
   .prodNameTitle {
@@ -129,6 +130,6 @@
   .dimensionsDiv {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }

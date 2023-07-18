@@ -15,6 +15,8 @@ import {
   updateProjectId,
   updateUserId,
 } from "../../../../../redux/accountManagement";
+import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
+import { SketchPicker } from "react-color";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -74,6 +76,9 @@ const SectionOne = (props) => {
     }
   }, [id, dispatch]);
   // here is the model loading rate.
+  const [colorControl, setColorControl] = useState("#f0f0f0");
+  const [openModal, setOpenModal] = useState(false);
+  const [openBack, setOpenBack] = useState(false);
   return (
     <form
       className={"sectionOne"}
@@ -143,8 +148,12 @@ const SectionOne = (props) => {
           <option selected disabled>
             --Select--
           </option>
-          <option value="blender">Blender</option>
+          <option value="blender">Browzwear</option>
+          <option value="maya">Style3d</option>
+          <option value="maya">Blender</option>
           <option value="maya">Maya</option>
+          <option value="maya">3D Max</option>
+          <option value="maya">CLO3d</option>
         </select>
       </div>
 
@@ -162,11 +171,129 @@ const SectionOne = (props) => {
           <option selected disabled>
             --Select--
           </option>
-          <option value="blender">Blender</option>
-          <option value="maya">Maya</option>
+          <option value="blender">Shoe</option>
+          <option value="maya">Bag</option>
+          <option value="maya">Gown</option>
+          <option value="maya">Dress</option>
+          <option value="maya">Top</option>
+          <option value="maya">Jackets</option>
         </select>
       </div>
-
+      {/*Add background environment*/}
+      <div style={{ marginTop: "24px" }}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            setOpenBack((state) => !state);
+          }}
+        >
+          <p style={{ fontSize: "14px" }}>Background</p>
+          {openBack ? <PiCaretUpBold /> : <PiCaretDownBold />}
+        </div>
+        {openBack && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "18px",
+              }}
+            >
+              <p style={{ fontSize: "14px" }}>Color</p>
+              <div
+                style={{
+                  borderRadius: "10px",
+                  width: "139px",
+                  height: "33px",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <input
+                  type={"text"}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    fontSize: "14px",
+                  }}
+                  value={colorControl}
+                />
+                <div
+                  style={{
+                    background: `${colorControl}`,
+                    width: "27px",
+                    height: "100%",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                  }}
+                  onClick={() => {
+                    setOpenModal((state) => !state);
+                  }}
+                ></div>
+              </div>
+            </div>
+            {openModal && (
+              <div style={{ marginTop: "15px" }}>
+                <SketchPicker
+                  width={"85%"}
+                  color={colorControl}
+                  onChangeComplete={(color) => {
+                    setColorControl(color.hex);
+                  }}
+                />
+              </div>
+            )}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "18px",
+              }}
+            >
+              <p style={{ fontSize: "14px" }}>Image</p>
+              <div
+                style={{
+                  borderRadius: "10px",
+                  width: "139px",
+                  height: "33px",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <input
+                  type={"text"}
+                  style={{ width: "100%", height: "100%", border: "none" }}
+                />
+                <div
+                  style={{
+                    background: "#ffffff",
+                    width: "27px",
+                    height: "100%",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    fontSize: "24px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  +
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
       {/*  dimensions detection center*/}
       <div className={"dimensionsDiv"}>
         <p className={"prodNameTitle"} style={{ marginTop: 0 }}>

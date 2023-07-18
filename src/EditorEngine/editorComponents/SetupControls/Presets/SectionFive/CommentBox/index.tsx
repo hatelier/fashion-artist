@@ -19,7 +19,6 @@ import {
   RichUtils,
 } from "draft-js";
 import "./index.scss";
-import { RxHeading } from "react-icons/rx";
 import { BsTypeUnderline } from "react-icons/bs";
 
 const CommentBox = () => {
@@ -112,16 +111,16 @@ const CommentBox = () => {
     });
   };
 
-  const _onHeadingClick = (e) => {
-    e.preventDefault();
-    onChange(RichUtils.toggleBlockType(editorState, "header-one"));
-    setClickState((state) => {
-      return {
-        ...state,
-        heading: !state.heading,
-      };
-    });
-  };
+  // const _onHeadingClick = (e) => {
+  //   e.preventDefault();
+  //   onChange(RichUtils.toggleBlockType(editorState, "header-one"));
+  //   setClickState((state) => {
+  //     return {
+  //       ...state,
+  //       heading: !state.heading,
+  //     };
+  //   });
+  // };
 
   const _onUnderlineClick = (e) => {
     e.preventDefault();
@@ -202,10 +201,6 @@ const CommentBox = () => {
           ref={fileRef}
           style={{ display: "none" }}
         />
-        <RxHeading
-          onMouseDown={_onHeadingClick}
-          style={{ color: clickState.heading ? "#bdbdbd" : "" }}
-        />
         <AiOutlineBold
           onMouseDown={_onBoldClick}
           style={{ color: clickState.bold ? "#bdbdbd" : "" }}
@@ -234,7 +229,11 @@ const CommentBox = () => {
     <>
       <ComBox>
         <div className={"compDiv"}>
-          <p className={"header"}>Add new comment</p>
+          <p className={"header"} style={{
+            textAlign:"left",
+            marginLeft:"15px",
+            fontSize:"14px"
+          }}>Comment</p>
         </div>
         <OptionBox />
         <div className={"inputCompBox"}>
@@ -301,7 +300,7 @@ const ComBox = styled.div`
   .inputCompBox {
     width: 93%;
     min-height: 100px;
-    margin-top: 15px;
+    margin-top: 10px;
     border: 2px solid rgba(227, 227, 227, 1);
     background: rgba(244, 244, 244, 0.9);
     border-radius: 10px;
@@ -314,14 +313,16 @@ const ComBox = styled.div`
     width: 100%;
     justify-content: space-evenly;
     font-size: 16px;
-    margin-top: 10px;
+    margin-top: 3px;
+    background: rgba(227, 227, 227, 0.90);
+    padding: 7px 14px;
     & > * {
       cursor: pointer;
     }
   }
   .compDiv {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     width: 100%;
     .header {
       font-size: 16px;

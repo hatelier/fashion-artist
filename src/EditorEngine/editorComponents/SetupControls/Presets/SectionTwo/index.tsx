@@ -17,6 +17,11 @@ import { toast } from "react-hot-toast";
 import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 import styled from "styled-components";
+import ConfigVarients from "../../components/ConfigVarients";
+import {AiFillEdit} from "react-icons/ai";
+import ConfigEditor from "../../components/ConfigEditor";
+import MaterialSwap from "../../components/MaterialSwap";
+import {WhiteOnRed} from "../SectionFive/CommentBox";
 // color picker
 
 const SectionTwo = () => {
@@ -380,6 +385,9 @@ const SectionTwo = () => {
   const [materialPopData, setMaterialPopUpData] = useState(null);
   return (
     <div className={"sectionTwoDiv"}>
+      <ConfigVarients />
+        <ConfigEditor/>
+        <MaterialSwap/>
       {materialPopData && (
         <AddMaterialPopUp
           updateMode={true}
@@ -487,7 +495,10 @@ const SectionTwo = () => {
                     alignItems: "center",
                   }}
                 >
-                  <p className={"configHead"}>{vlss.name}</p>
+                  <div style={{display:"flex", alignItems:"center"}}>
+                      <p className={"configHead"}>{vlss.name}</p>&nbsp;
+                      <AiFillEdit size={14}/>
+                  </div>
                   {/*<button>Choose</button>*/}
                   <img
                     src={AddImage}
@@ -514,8 +525,13 @@ const SectionTwo = () => {
             </>
           );
         })}
-      <SaveConfig
-        className={"uploadAsset"}
+      <WhiteOnRed
+          style={{
+              width:"90%",
+              margin: "20px 15px"
+
+          }}
+        // className={"uploadAsset"}
         onClick={() => {
           axios
             .put("/manage/config", {
@@ -532,7 +548,7 @@ const SectionTwo = () => {
         }}
       >
         Save Configuration
-      </SaveConfig>
+      </WhiteOnRed>
     </div>
   );
 };

@@ -29,6 +29,7 @@ import AddMaterialPopUp from "./components/AddMaterialPopUp";
 // import AddMeshPopUp from "./components/AddMeshPopUp";
 import axios from "axios";
 import { updateCustomMaterial } from "../../../../../redux/accountManagement";
+import AddMeshPopUpMain from "../../components/AddMeshPopUpMain";
 // import { materialApplication } from "../../../../../redux/materialApplication";
 
 const SectionFour = () => {
@@ -84,30 +85,7 @@ const SectionFour = () => {
 
   return (
     <div className={"sectionFourDiv"}>
-      {/*  enable this code post */}
-      {/*<div className={"lightcontrols"}>*/}
-      {/*  <div>Ambient Occlusion lighting</div>*/}
-      {/*  <input*/}
-      {/*    type={"range"}*/}
-      {/*    min={0}*/}
-      {/*    max={10}*/}
-      {/*    value={ambientLight}*/}
-      {/*    onChange={(e) => {*/}
-      {/*      dispatch(updateAmbientLight(e.target.value));*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*  <div>Directional lighting</div>*/}
-      {/*  <input*/}
-      {/*    type={"range"}*/}
-      {/*    min={0}*/}
-      {/*    max={10}*/}
-      {/*    value={directionalLight}*/}
-      {/*    onChange={(e) => {*/}
-      {/*      dispatch(updateDirLight(e.target.value));*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*</div>*/}
-
+        <AddMeshPopUpMain/>
       {addMaterialState && (
         <AddMaterialPopUp
           setState={setAddMaterialState}
