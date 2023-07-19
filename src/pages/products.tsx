@@ -258,7 +258,7 @@ export const Products = () => {
                   <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
                   <img src={require('../assets/pngs/card-dots.png')} alt="" />
                   </div>
-                  </div>
+                </div>
                   </div>
             </div>
           </Card>
