@@ -78,11 +78,11 @@ export const Analytics = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    // const productPopup = () => {
-    //   setIsOpen(!isOpen);
-    // };
+    const reportPopup = () => {
+      setIsOpen(!isOpen);
+    };
 
-    const productPopupCancel = () => {
+    const reportPopupCancel = () => {
       setIsOpen(!isOpen);
     };
 
@@ -163,16 +163,31 @@ export const Analytics = () => {
     return ( 
     <div className='home-container'>
           {isOpen && (
-                  <div className="product-popup">
-                  <div className="product-popup-main">
-                  <label htmlFor="" className='product-popup-label'>Product Name</label>
-                  <input type="text" placeholder='New Product' className='product-popup-input'/>
-                  <div className='product-popup-configurable'><input type="checkbox" /> <span>Create Configurable Product</span></div>
-                  </div>
-                  <div className='product-popup-buttons'>
-                    <button className='product-popup-cancel' onClick={productPopupCancel}>Cancel</button>
-                    <button className='product-popup-create'>Create</button>
+                  <div className="report-popup">
+                    <div className='report-popup-header'>
+                      <div className='report-selected-product'><span>Selected Product:</span>Product Name.glb<span></span></div>
+                      <button className='report-popup-close' onClick={reportPopupCancel}>
+                          <img src={require('../assets/pngs/report-cross.png')} alt="" />
+                      </button>
                     </div>
+                      <div className='report-popup-main'>
+                        <div><img className='report-popup-img' src={require('../assets/pngs/mostviewproduct.png')} alt="" /></div>
+                        <div className='report-popup-details-download'>
+                          <div className='report-popup-details'>
+                            <div className='report-popup-details-item'><span>Folder:</span><span>Product Name</span></div>
+                            <div className='report-popup-details-item'><span>Total 3D views:</span><span>0</span></div>
+                            <div className='report-popup-details-item'><span>Total AR views:</span><span>0</span></div>
+                            <div className='report-popup-details-item'><span>User Engagement:</span><span>0%</span></div>
+                            <div className='report-popup-details-item'><span>Avg. Number of Interactions:</span><span>0</span></div>
+                            <div className='report-popup-details-item'><span>Pipeline:</span><span>Other</span></div>
+                            <div className='report-popup-details-item'><span>Tags:</span><span></span>None</div>
+                            <div className='report-popup-details-item'><span>Attributes:</span><span>None</span></div>
+                          </div>
+                          <button className='report-popup-download'>Download Individual Report</button>
+                        </div>
+                      
+                    </div>
+                    
                 </div> 
                 )}
       <section>
@@ -197,7 +212,7 @@ export const Analytics = () => {
                       <div className="analytics-report-header">
                           <div className="analytics-report-header-text">Report</div>
                           <div className="analytics-report-header-buttons">
-                              <button onClick={()=>{}}>Product Report</button>
+                              <button onClick={reportPopup}>Product Report</button>
                               <button onClick={()=>{}} style={{"backgroundColor":"transparent"}}>Reset</button>
                           </div>
                           </div>
@@ -330,7 +345,7 @@ export const Analytics = () => {
                         <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/>
                         )}
                         {/* <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/> */}
-                        <div className='analytics-download-button analytics-product-report-btn'>Product Report</div>
+                        <div className='analytics-download-button analytics-product-report-btn' onClick={reportPopup}>Product Report</div>
                         </div>)}
                       </div>
                       <div className="analytics-ar-views">
