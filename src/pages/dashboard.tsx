@@ -93,21 +93,29 @@ export const Dashboard = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
   };
 
-  const childRef1 = useRef<HTMLDivElement>(null);
+  // const childRef1 = useRef<HTMLDivElement>(null);
 
-  const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
-    if (childRef.current) {
-      const childElement = childRef.current as HTMLDivElement;
-      childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
-    }
-  };
+  // const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
+  //   if (childRef.current) {
+  //     const childElement = childRef.current as HTMLDivElement;
+  //     childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
+  //   }
+  // };
   // const [isElementVisible, setElementVisible] = useState(false);
 
   // const handleClick = () => {
   //   const element = document.querySelector('#sidenav') as HTMLElement;
   //   element.style.display = element.style.display === 'none' ? 'block' : 'none';
   // };
-
+  const toggleChildVisibility = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const parentElement = event.currentTarget;
+    const childElement = parentElement.querySelector('.child');
+  
+    if (childElement) {
+      // Toggle the "visible" class on the child element
+      childElement.classList.toggle('visible');
+    }
+  };
   const fetchProductCount = async () => {
     try {
       const response = await axiosInstance.get('/analytics/count')
@@ -270,14 +278,14 @@ export const Dashboard = () => {
               <div className="card-date">dd/mm/yy</div>
               <div className="card-buttons">
                 <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
-                <div className="card-dropup">
-                  <div ref={childRef1} className="card-dropup-content">
+                <div className="card-dropup" onClick={toggleChildVisibility}>
+                  <div className="card-dropup-content child" style={{display: 'flex', visibility: 'hidden'}}>
                   <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                   <img src={require('../assets/pngs/products-trash.png')} alt="" />
                   <img src={require('../assets/pngs/products-edit.png')} alt="" />
                   <img src={require('../assets/pngs/products-share.png')} alt="" />
                   </div>
-                  <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
+                  <div id="card-1">
                   <img src={require('../assets/pngs/card-dots.png')} alt="" />
                   </div>
                   </div>
