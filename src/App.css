@@ -1111,6 +1111,86 @@ header {
   cursor: pointer;
 }
 
+.report-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 40px;
+  position:absolute;
+  top: 40%;
+  left: 40%;
+  background: var(--popup-color);
+  color: var(--font-color);
+  z-index: 10;
+  border-radius: 15px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
+  width: 450px;
+  height: 350px;
+}
+
+.report-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.report-selected-product {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;  
+}
+
+.report-popup-main {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  align-self: stretch;
+  justify-content: space-evenly;
+}
+.report-popup-close {
+  all: unset;
+}
+
+.report-popup-img {
+  width: 100px;
+  height: 200px;
+}
+
+.report-popup-details-download {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.report-popup-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.report-popup-download {
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  background: var(--btn, #D31027);
+  display: flex;
+  padding: 8px 15px;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text, #EAEAEA);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 .info {
   align-items: center;
   position: relative;
