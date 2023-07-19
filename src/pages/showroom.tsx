@@ -1,22 +1,48 @@
 // import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
+import axiosInstance from '../components/axiosInstance';
+
+interface showroom {
+  _id: string;
+  name: string;
+  userId: string;
+  productCount: number;
+  status: string;
+  dateUpdated: string;
+  dateCreated: string;
+  logo: {
+    url: string;
+  };
+}
 
 export const Showroom = () => {
   // const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
   // const [cookies, setCookie] = useCookies(['access_token']);
   // const navigate = useNavigate();
+  const [showrooms, setShowrooms] = useState<showroom[]>([]);
+
+  const fetchShowRooms = useCallback((async () => {
+    try {
+      const response = await axiosInstance.get('/showroom/getshowroom');
+      const showroomsData = response.data.showrooms;
+      setShowrooms(showroomsData);
+    } catch (error) {
+      console.error(error);
+    }
+  }),[])
 
   useEffect(() => {
-    fetchUserData();
-  }, []);
+    // fetchUserData();
+    fetchShowRooms();
+  }, [fetchShowRooms]);
 
-  const fetchUserData = async () => {
+  // const fetchUserData = async () => {
     /*try {
     const userID = window.localStorage.getItem('userID');
     const response = await axios.get("/user/profile", { 
@@ -31,7 +57,7 @@ export const Showroom = () => {
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }*/
-  };
+  // };
 
   /*const logout = () => {
     setCookie('access_token');
@@ -95,13 +121,16 @@ export const Showroom = () => {
                   <div className="showroom-heading-cell">Actions</div>
                   <div className="showroom-heading-cell"><img src={require('../assets/pngs/dustbin.png')} alt="" /></div>
               </div>
-              {/* <div className='showroom-row'>
+              { showrooms.map((showroom) => (
+                <div className='showroom-row' key={showroom._id}>
                 <div className="showroom-cell"><div className="showroom-box"></div></div>
-                <div className="showroom-cell"><div className="showroom-logo"></div></div>
-                <div className="showroom-cell">Showroom Name</div>
-                <div className="showroom-cell">20/05/2023</div>
-                <div className="showroom-cell">20/05/2023</div>
-                <div className="showroom-cell">3</div>
+                <div className="showroom-cell"><div className="showroom-logo">
+                <img src={showroom.logo.url} alt='Logo' height={50} width={50}/>  
+                </div></div>
+                <div className="showroom-cell">{showroom.name}</div>
+                <div className="showroom-cell">{new Date(showroom.dateUpdated).toLocaleDateString('en-GB')}</div>
+                <div className="showroom-cell">{new Date(showroom.dateCreated).toLocaleDateString('en-GB')}</div>
+                <div className="showroom-cell">{showroom.productCount}</div>
                 <div className="showroom-cell"><a className='showroom-upload-status' href="/"><img src={require('../assets/pngs/upload.png')} alt="" /></a></div>
                 <div className="showroom-cell"><div>
                         <a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
@@ -110,7 +139,8 @@ export const Showroom = () => {
                     </div>
                     </div>
                     <div className="showroom-cell"><a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/dustbin.png')} alt="" /></a></div>
-              </div> */}
+              </div>
+              ))}
              </div>
                {/* <table className="showroom-block">
                 <tr className="showroom-heading-row">
@@ -194,8 +224,8 @@ export const Showroom = () => {
                         <a href="" className="showroom-action-buttons"><img src={require('../assets/pngs/dustbin.png')} alt="" /></a>
                     </div>
                   </td>
-                </tr> */}
-{/* 
+                </tr> 
+
               </table> */}
             </div>
           </div>

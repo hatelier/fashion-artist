@@ -256,36 +256,36 @@ export const Dashboard = () => {
                     New Product
                   </button></div>
                   </div>
-            {products.map((product) => (
-          <Card key={product._id}>
-            {product.previewImage && (
-              <div className="card-img-container">
-                <div className="card-img-box">
-                <img className="card-img" src={product.previewImage.location} alt="Preview" />
-                </div>
-              </div>
-            )}
-            <div className="card-name">{product.productName}</div>
-            <div className="card-bottom">
-              <div className="card-date">dd/mm/yy</div>
-              <div className="card-buttons">
-                <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
-                <div className="card-dropup">
-                  <div ref={childRef1} className="card-dropup-content">
-                  <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                  <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                  <img src={require('../assets/pngs/products-edit.png')} alt="" />
-                  <img src={require('../assets/pngs/products-share.png')} alt="" />
-                  </div>
-                  <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
-                  <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                  </div>
-                  </div>
-              </div>
-            </div>
-          </Card>
-        ))}
+                  {products.map((product) => (
+                   <Card key={product._id}>
+                    {product.previewImage && (
+                    <div className="card-img-container">
+                      <div className="card-img-box">
+                      <img className="card-img" src={product.previewImage.location} alt="Preview" />
+                      </div>
                     </div>
+                    )}
+                    <div className="card-name">{product.productName}</div>
+                    <div className="card-bottom">
+                      <div className="card-date">dd/mm/yy</div>
+                      <div className="card-buttons">
+                        <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
+                        <div className="card-dropup">
+                          <div ref={childRef1} className="card-dropup-content">
+                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                          <img src={require('../assets/pngs/products-edit.png')} alt="" />
+                          <img src={require('../assets/pngs/products-share.png')} alt="" />
+                          </div>
+                          <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
+                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+                  </Card>
+                  ))}
+                </div>
           </div>
         </div>
     </section>

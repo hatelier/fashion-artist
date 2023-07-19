@@ -1,23 +1,42 @@
 // import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
+import axiosInstance from '../components/axiosInstance';
 
+interface Product {
+  _id: string;
+  productName: string;
+  previewImage: {
+    location: string;
+  };
+}
 
 export const Manage = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
     // const navigate = useNavigate();
     // const [firstName, setFirstName] = useState("");
     // const [occupation, setOccupation] = useState("");
+    const [products, setProducts] = useState<Product[]>([]);
 
+    const fetchProducts = useCallback((async () => {
+      const showroomId = '64b75a2413d75d20a6497220';
+      try {
+        const response = await axiosInstance.post(`/showroom/${showroomId}/products`);
+        setProducts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }),[])
     useEffect(() => {
-      fetchUserData();
-    }, []);
+      // fetchUserData();
+      fetchProducts();
+    }, [fetchProducts]);
 
-    const fetchUserData = async () => {
+    // const fetchUserData = async () => {
       /*try {
       const userID = window.localStorage.getItem('userID');
       const response = await axios.get("/user/profile", { 
@@ -32,7 +51,7 @@ export const Manage = () => {
       } catch (error) {
         console.error("Error fetching user data: ", error);
       }*/
-    };
+    // };
 
     /*const logout = () => {
       setCookie('access_token',"");
@@ -80,12 +99,23 @@ export const Manage = () => {
              </div>
              </div>
              <div className="subscription">
-               <div className="choose-plan">
-                 Junior's Showroom
-               </div>
-               <div className="manage-block">
-                 <div className="manage-row">
-                    <div className="manage-item">
+             {products.map((product) => (
+                <div key={product._id} className="manage-item">
+                  <div className="manage-item-img">
+                    {/* Display product image here */}
+                  </div>
+                  <div className="manage-item-details">
+                    <div className="manage-item-name">{product.productName}</div>
+                    <div className="manage-item-id-date">
+                      <div className="manage-item-id">Product Id: {product._id}</div>
+                      <div className="manage-item-date">{product.previewImage?.location}</div>
+                    </div>
+                  </div>
+                </div>
+              ))} 
+              </div>
+                 {/* <div className="manage-row"> */}
+                    {/* <div className="manage-item">
                         <div className="manage-item-img"></div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
@@ -94,8 +124,8 @@ export const Manage = () => {
                                 <div className="manage-item-date">20/04/2023</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="manage-item">
+                    </div> */}
+                    {/* <div className="manage-item">
                         <div className="manage-item-img"></div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
@@ -104,8 +134,8 @@ export const Manage = () => {
                                 <div className="manage-item-date">20/04/2023</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="manage-item">
+                    </div> */}
+                    {/* <div className="manage-item">
                         <div className="manage-item-img"></div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
@@ -114,8 +144,8 @@ export const Manage = () => {
                                 <div className="manage-item-date">20/04/2023</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="manage-item">
+                    </div> */}
+                    {/* <div className="manage-item">
                         <div className="manage-item-img"></div>
                         <div className="manage-item-details">
                             <div className="manage-item-name">Product name</div>
@@ -124,52 +154,10 @@ export const Manage = () => {
                                 <div className="manage-item-date">20/04/2023</div>
                             </div>
                         </div>
-                    </div>
-                 </div>
-                 <div className="manage-row">
-                    <div className="manage-item">
-                        <div className="manage-item-img"></div>
-                        <div className="manage-item-details">
-                            <div className="manage-item-name">Product name</div>
-                            <div className="manage-item-id-date">
-                                <div className="manage-item-id">Product Id: user01_1274</div>
-                                <div className="manage-item-date">20/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="manage-item">
-                        <div className="manage-item-img"></div>
-                        <div className="manage-item-details">
-                            <div className="manage-item-name">Product name</div>
-                            <div className="manage-item-id-date">
-                                <div className="manage-item-id">Product Id: user01_1274</div>
-                                <div className="manage-item-date">20/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="manage-item">
-                        <div className="manage-item-img"></div>
-                        <div className="manage-item-details">
-                            <div className="manage-item-name">Product name</div>
-                            <div className="manage-item-id-date">
-                                <div className="manage-item-id">Product Id: user01_1274</div>
-                                <div className="manage-item-date">20/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="manage-item">
-                        <div className="manage-item-img"></div>
-                        <div className="manage-item-details">
-                            <div className="manage-item-name">Product name</div>
-                            <div className="manage-item-id-date">
-                                <div className="manage-item-id">Product Id: user01_1274</div>
-                                <div className="manage-item-date">20/04/2023</div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-               </div>
-            </div>
+                    </div> */}
+                 {/* </div> */}
+               {/* </div> */}
+            {/* </div> */}
           </div>
         </div>
       </section>
