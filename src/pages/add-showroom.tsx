@@ -144,22 +144,16 @@ export const AddShowroom = () => {
                                   <button className="credit-plus-button">+</button>
                                 </div>
                             </div>
-                            <div className='add-showroom-layout-font-text'>
-                            <div className="add-showroom-layout-font">
-                                <label htmlFor="">Font Family</label>
-                                <input type="text" placeholder="Add Tag" className="layout-font-input" />
-                            </div>
-                            <div className="add-showroom-layout-text">
+                             <div className="add-showroom-layout-text">
                                 <label htmlFor="">Text Color</label>
                                 <div className="red-patch"><div className="red-patch-inside"></div></div>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="add-showroom-products">
-                    <div className="add-showroom-heading">Products</div>
                     <div className="add-showroom-products-block">
+                    <div className="add-showroom-heading">Products</div>
                         <div className="templates-input-group">
                             <input type="text" className="templates-input" placeholder="Search Templates" />
                             <div className="templates-filter-block add-showoom-filter">
@@ -179,6 +173,78 @@ export const AddShowroom = () => {
                                 </div>
                           </div>
                         <div className="add-showroom-products-row">
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
+                          <div className="add-showroom-product-item-container">
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
+                                </div>
+                              </div>
+                              <div className="product-item-text">Product 01</div>
+                          </div>
                            <div>
                            </div>
                         </div>
