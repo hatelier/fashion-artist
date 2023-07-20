@@ -52,7 +52,7 @@ export const Assets = () => {
 
     const toggleChildVisibility = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         const parentElement = event.currentTarget;
-        const childElement = parentElement.querySelector('.child');
+        const childElement = parentElement.previousElementSibling;
       
         if (childElement) {
           // Toggle the "visible" class on the child element
@@ -105,13 +105,67 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}} >
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
+                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        <div className="card-dropup" style={{position: 'relative'}}>
+                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
+                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                                          </div>
+                                          <div id="card-1" onClick={toggleChildVisibility}>
+                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        <div className="card-dropup" style={{position: 'relative'}}>
+                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
+                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                                          </div>
+                                          <div id="card-1" onClick={toggleChildVisibility}>
+                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        <div className="card-dropup" style={{position: 'relative'}}>
+                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
+                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                                          </div>
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -135,19 +189,18 @@ export const Assets = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="asset-item">
+                            </div>                            <div className="asset-item">
                                 <div className="asset-item-img"></div>
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -159,13 +212,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -177,13 +230,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -195,49 +248,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -258,13 +275,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -276,13 +293,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -294,103 +311,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
-                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="asset-item">
-                                <div className="asset-item-img"></div>
-                                <div className="asset-item-details">
-                                    <div className="manage-item-name">Mesh</div>
-                                    <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
-                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
-                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
-                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
-                                          </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -412,13 +339,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -430,13 +357,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -448,13 +375,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -466,13 +393,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -484,13 +411,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -502,13 +429,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -520,13 +447,13 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
@@ -538,13 +465,31 @@ export const Assets = () => {
                                 <div className="asset-item-details">
                                     <div className="manage-item-name">Mesh</div>
                                     <div className="manage-item-id-date">
-                                        <div className="card-dropup" style={{position: 'relative'}} onClick={toggleChildVisibility}>
+                                        <div className="card-dropup" style={{position: 'relative'}}>
                                           <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
                                           <img src={require('../assets/pngs/arrow-left.png')} alt="" />
                                           <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                                           <img src={require('../assets/pngs/products-trash.png')} alt="" />
                                           </div>
-                                          <div id="card-1">
+                                          <div id="card-1" onClick={toggleChildVisibility}>
+                                          <img src={require('../assets/pngs/card-dots.png')} alt="" />
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="asset-item">
+                                <div className="asset-item-img"></div>
+                                <div className="asset-item-details">
+                                    <div className="manage-item-name">Mesh</div>
+                                    <div className="manage-item-id-date">
+                                        <div className="card-dropup" style={{position: 'relative'}}>
+                                          <div className="card-dropup-content child" style={{display: 'flex', position: 'absolute', visibility: 'hidden'}}>
+                                          <img src={require('../assets/pngs/arrow-left.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
+                                          <img src={require('../assets/pngs/products-trash.png')} alt="" />
+                                          </div>
+                                          <div id="card-1" onClick={toggleChildVisibility}>
                                           <img src={require('../assets/pngs/card-dots.png')} alt="" />
                                           </div>
                                         </div>
