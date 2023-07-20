@@ -14,6 +14,21 @@ const Banner = () => {
     </div>
   );
 };
+
+export const mediaDataJson = {
+  fov: { value: 0, type: "def", name: "Field of view" },
+  intHor: { value: 0, type: "def", name: "Initial horizontal angle" },
+  horRan: { value: [0, 30], type: "mul", name: "Horizontal range" },
+  initVangle: { value: 0, type: "def", name: "Initial vertical angle" },
+  vertAngle: { value: [0, 30], type: "mul", name: "Vertical range" },
+  rotSpeed: { value: 0, type: "def", name: "Rotation speed" },
+  rotInert: { value: 0, type: "def", name: "Rotation Inertia" },
+  autoRotSpeed: { value: 0, type: "def", name: "Auto rotation speed" },
+  initZoom: { value: 0, type: "def", name: "Initial zoom" },
+  zoomSpeed: { value: 0, type: "def", name: "Zoom speed" },
+  zoomRange: { value: [0, 30], type: "mul", name: "Zoom range" },
+};
+
 export const SettingsDataJson = [
   {
     name: "Upload Unit",

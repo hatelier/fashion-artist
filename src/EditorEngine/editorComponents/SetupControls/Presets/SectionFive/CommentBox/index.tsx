@@ -256,7 +256,7 @@ const CommentBox = () => {
           >
             Save
           </WhiteOnRed>
-          <WhiteOnRed>Reply</WhiteOnRed>
+          <WhiteOnRed>Share</WhiteOnRed>
         </div>
       </ComBox>
     </>
@@ -310,12 +310,13 @@ const ComBox = styled.div`
   }
   .iconControls {
     display: flex;
-    width: 100%;
+    width: 90%;
     justify-content: space-evenly;
     font-size: 16px;
-    margin-top: 3px;
     background: rgba(227, 227, 227, 0.90);
-    padding: 7px 14px;
+    padding: 7px 0px;
+    border-radius: 4px;
+    margin: 3px auto 0 auto;
     & > * {
       cursor: pointer;
     }
