@@ -244,7 +244,7 @@ export const Analytics = () => {
                           </div>
                           <div className='analytics-selections-element'>
                             <label htmlFor="product">By Product</label>
-                            <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                            <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder='Search by product name'/>
                           </div>
                         </div>
 
@@ -267,7 +267,11 @@ export const Analytics = () => {
                             <p>Product Name</p>
                           </div>
                       
-
+                          <div className="analytics-report-item">
+                            <input type='checkbox'/>
+                            <img src={require('../assets/pngs/rectangle.png')} alt="back" />
+                            <p>Product Name</p>
+                          </div>
                         </div>
                         <div className="analytics-report-pagination">
                             <img src={require('../assets/pngs/back.png')} alt="" className='sidenav-img'/>

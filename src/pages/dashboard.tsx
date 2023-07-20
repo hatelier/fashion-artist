@@ -321,7 +321,7 @@ export const Dashboard = () => {
                   <img src={require('../assets/pngs/products-edit.png')} alt="" />
                   <img src={require('../assets/pngs/products-share.png')} alt="" onClick={sharePopup} />
                   </div>
-                  <div id="card-1" onClick={toggleChildVisibility}>
+                  <div id="card-1" className="three-dot" onClick={toggleChildVisibility}>
                   <img src={require('../assets/pngs/card-dots.png')} alt="" />
                   </div>
                   </div>
