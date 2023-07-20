@@ -62,7 +62,7 @@ export const Showroom = () => {
   const DeleteShowroomPopup = ()=>{
     return(
       <div className="team-delete-popup">
-        <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+        <img src={require('../assets/pngs/warning.png')} alt="" />
         <div className='team-delete-popup-msg'>
         <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
         <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete this Showroom</p>
@@ -107,7 +107,7 @@ export const Showroom = () => {
   const DeleteShowroomAllPopup = ()=>{
     return(
       <div className="team-delete-popup">
-        <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+        <img src={require('../assets/pngs/warning.png')} alt="" />
         <div className='team-delete-popup-msg'>
         <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
         <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete all Showrooms</p>
@@ -223,7 +223,7 @@ export const Showroom = () => {
                   <div className="showroom-heading-cell">Products Counts</div>
                   <div className="showroom-heading-cell">Status</div>
                   <div className="showroom-heading-cell">Actions</div>
-                  <div className="showroom-heading-cell"><button className='showroom-delete-all' onClick={handleDeleteShowroomAllPopup}><img src={require('../assets/pngs/dustbin.png')} alt="" /></button></div>
+                  <div className="showroom-heading-cell"><button className='showroom-delete-all' onClick={handleDeleteShowroomAllPopup}><img className='sidenav-img' src={require('../assets/pngs/dustbin.png')} alt="" /></button></div>
               </div>
               <div className='showroom-row'>
                 <div className="showroom-cell"><div className="showroom-box"></div></div>
