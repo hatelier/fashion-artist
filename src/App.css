@@ -1442,7 +1442,8 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;  
+  justify-content: space-between;  
+  height: 10%;
 }
 .choose-plan {
   font-weight: 400;
@@ -1460,7 +1461,10 @@ header {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
+  margin: auto;
   margin-bottom: 10px;
+  width: 95%;
+  
   /* margin-left: 25px; */
 }
 .plans {
@@ -1468,12 +1472,13 @@ header {
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  margin: 20px;
+  margin: auto;
   gap: 25px;
-  justify-content: center;
+  justify-content: space-between;
   flex: none;
   order: 2;
   flex-grow: 0;
+  width: 95%;
 }
 
 .basic {
@@ -1500,21 +1505,30 @@ header {
   align-items: center;
   padding: 45px 31px;
   gap: 70px;
-  background-color: var(--primary-bgcolor);
+  background: none;
   border-radius: 15px;
+  border: 1px solid var(--items-bgcolor);
+  width: 32%;
+  height: 70vh;
+}
+
+.subscription-choose-plan {
+  width: 95%;
+  margin: auto;
+  margin-top: 25px;
 }
 
 .details {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 0px;
   gap: 20px;
-  width: 277px;
-  height: 480px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  height: 100%;
 }
 
 .plan-title {
@@ -1545,25 +1559,30 @@ header {
 }
 
 .line {
-  width: 264.5px;
+  width: 80%;
   height: 0px;
-  border: 1px solid #000000;
+  border: 1px solid var(--items-bgcolor);
 }
 
 .plan-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  height: 85%;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .plan-info-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   gap: 15px;
   color: var(--font-color);
+  height: 75%;
+  overflow-y: auto;
+  width: 90%;
 }
 .box{
   display: inline-block;
@@ -1571,9 +1590,9 @@ header {
 
   width: 16px;
   height: 16px;
-
-  border: 1px solid #000000;
-  margin-right: 5px;
+  border-radius: 27px;
+  background: var(--items-bgcolor);
+  margin-right: 4px;
   margin-bottom: -2px;
 }
 
@@ -1913,7 +1932,7 @@ header {
   background-color: var(--items-bgcolor);
   color: rgb(136, 134, 134);
   /* height: 33px; */
-  height: 5vh;
+  height: 40px;
   width: 100%;
   padding: 10px 5px;
   display: flex;
@@ -2057,8 +2076,10 @@ header {
   border-radius: 3px;
   background-color: var(--items-bgcolor);
   width: 48%;
-  height: 5vh;
+  height: 40px;
   font-size: 13px;
+  color: var(--font-color);
+  border: none;
 }
 
 
