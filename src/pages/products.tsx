@@ -116,12 +116,20 @@ export const Products = () => {
 
   const toggleChildVisibility = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     const parentElement = event.currentTarget;
-    const childElement = parentElement.querySelector('.child');
+    const childElement = parentElement.previousElementSibling;
   
     if (childElement) {
       // Toggle the "visible" class on the child element
       childElement.classList.toggle('visible');
     }
+  };
+  const [isSharing, setIsSharing] = useState(false);
+  const sharePopup = () => {
+    setIsSharing(!isSharing);
+  };
+
+  const sharePopupCancel = () => {
+    setIsSharing(!isSharing);
   };
   return (
     <div className="home-container">
@@ -169,6 +177,37 @@ export const Products = () => {
             >
               Create
             </button>
+          </div>
+        </div>
+      )}
+
+      {isSharing && (
+        <div className="sharing-popup">
+          <div className="sharing-close-container">
+            <img className="sharing-close-button" src={require('../assets/pngs/report-cross.png')} alt="" onClick={sharePopupCancel}/>
+          </div>
+          <div className="sharing-header">
+            <div className="sharing-heading">
+                Share
+            </div>
+            <div className="sharing-text">
+            Nulla quam suspendisse tincidunt odio. Neque leo egestas leo interdum cum porttitor sed.
+            </div>
+          </div>
+          <div className="sharing-link-copy">
+            <img src={require('../assets/pngs/attach.png')} alt="" />
+            <div className="sharing-link-text">https://www.momentumx.com/allproducts/</div>
+            <button className="sharing-copy">Copy</button>
+          </div>
+          <div className="share-via">
+            <div className="share-via-text">Share Via:</div>
+            <div className="share-via-icons">
+              <button className="share-via-button"><img src={require('../assets/pngs/whatsapp.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/instagram.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/linkedin.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/twitter.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/facebook.png')} alt="" /></button>
+            </div>
           </div>
         </div>
       )}
@@ -258,14 +297,14 @@ export const Products = () => {
               <div className="card-date">dd/mm/yy</div>
               <div className="card-buttons">
                 <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
-                <div className="card-dropup" onClick={toggleChildVisibility}>
+                <div className="card-dropup">
                   <div className="card-dropup-content child" style={{display: 'flex', visibility: 'hidden'}}>
                   <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                   <img src={require('../assets/pngs/products-trash.png')} alt="" />
                   <img src={require('../assets/pngs/products-edit.png')} alt="" />
-                  <img src={require('../assets/pngs/products-share.png')} alt="" />
+                  <img onClick={sharePopup} src={require('../assets/pngs/products-share.png')} alt="" />
                   </div>
-                  <div id="card-1">
+                  <div id="card-1" onClick={toggleChildVisibility}>
                   <img src={require('../assets/pngs/card-dots.png')} alt="" />
                   </div>
                 </div>
