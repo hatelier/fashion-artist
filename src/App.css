@@ -1932,7 +1932,7 @@ header {
   background-color: var(--items-bgcolor);
   color: rgb(136, 134, 134);
   /* height: 33px; */
-  height: 5vh;
+  height: 40px;
   width: 100%;
   padding: 10px 5px;
   display: flex;
@@ -2076,8 +2076,10 @@ header {
   border-radius: 3px;
   background-color: var(--items-bgcolor);
   width: 48%;
-  height: 5vh;
+  height: 40px;
   font-size: 13px;
+  color: var(--font-color);
+  border: none;
 }
 
 
