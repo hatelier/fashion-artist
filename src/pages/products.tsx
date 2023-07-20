@@ -145,9 +145,6 @@ export const Products = () => {
               className="product-popup-input"
               id={"productCreatePopUp"}
             />
-            <div className="product-popup-configurable">
-              <input type="checkbox" /> <span>Create Configurable Product</span>
-            </div>
           </div>
           <div className="product-popup-buttons">
             <button

@@ -178,9 +178,6 @@ export const Dashboard = () => {
               placeholder="New Product"
               className="product-popup-input"
             />
-            <div className="product-popup-configurable">
-              <input type="checkbox" /> <span>Create Configurable Product</span>
-            </div>
           </div>
           <div className="product-popup-buttons">
             <button
