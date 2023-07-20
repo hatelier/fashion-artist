@@ -248,13 +248,9 @@ export const Dashboard = () => {
                 <div className="info-value">{productCount}</div>
                 <div className="info-view">
                   <a className="info-view-link" href="/products">
-                    <span>See all Products</span>
-                    <img
-                      className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
-                      alt=""
-                    />
-                  </a>
+                    <span>See all products</span>
+                    <img className="sidenav-img info-img" src={require("../assets/pngs/Arrow_1.png")} alt=""/>
+                </a>
                 </div>
               </div>
               <div className="info">
@@ -265,7 +261,7 @@ export const Dashboard = () => {
                     <span>View analytics</span>
                     <img
                       className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
+                      src={require("../assets/pngs/Arrow_1.png")} 
                       alt=""
                     />
                   </a>
@@ -279,7 +275,7 @@ export const Dashboard = () => {
                     <span>View all Showroom</span>
                     <img
                       className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
+                      src={require("../assets/pngs/Arrow_1.png")} 
                       alt=""
                     />
                   </a>
