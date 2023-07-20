@@ -5294,6 +5294,7 @@ add-showroom-button-img {
 }
 
 
+
 /* Mobile view styles */
 @media (min-width: 300px) and (max-width: 480px) {
   /* Sign in page styles */
@@ -5601,32 +5602,68 @@ add-showroom-button-img {
     width: 100%;
   }
 
+  .insights{
+      width: 100%;
+      padding: 10px;
+      gap: 5px;
+     
+  }
+
   .info {
+    all: unset;
+    border-radius: 12px;
+    background: var(--primary-bgcolor);
+    color: var(--font-color);
+    padding: 20px;
+    flex: 1;
     box-sizing: border-box;
     height: 96px;
-    width: 30%;
     border-radius: 23px;
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 0px;
+    justify-content: center;
+    align-items: flex-start;
     gap: 6px;
+    padding-right: 5px;
+    
   }
 
   .info-name {
     font-size: 10px;
-    line-height: 136.3%;
+    /* line-height: 136.3%; */
   }
   .info-value {
     font-size: 18px;
-    line-height: 136.3%;
+    /* line-height: 136.3%; */
   }
 
   .info-view {
+    all: unset;
+    display: block;
+    /* position: relative; */
     font-size: 8px;
-    line-height: 136.3%;
+    /* line-height: 136.3%; */
+  }
+
+  .info-view-link{
+    all: unset;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    
+  }
+
+  .info-view-link div{
+    font-size: 8px;
+    /* display: inline; */
+    padding: 0px;
+    width: 90%;
+  }
+
+  .info-view-link img{
+    /* border: 2px solid hotpink; */
   }
   
   .dashboard {
@@ -5634,7 +5671,7 @@ add-showroom-button-img {
     font-size: 20px;
     line-height: 25px;
     margin-top: 15px;
-    
+  
   }
 
   .welcome {
@@ -6006,8 +6043,45 @@ add-showroom-button-img {
   height: 444px;
 }
 
+/* Dashboard and Products page styles  */
 
+.products-header{
 
+  padding: 0px;
+}
+
+.recent-products-heading{
+  display: none;
+}
+
+.products{
+}
+
+/* Templates page styles  */
+
+.templates-input-group{
+
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.templates-filter{
+  padding: 10px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.templates-filter span{
+  display:  none;
+}
+
+.templates-dropdown-img{
+  display: none;
+}
+
+.templates-block{
+  margin-top: 14px;
+}
 
 /* Credit and Billing History page  */
 
@@ -6579,7 +6653,6 @@ justify-content: space-between;
   width: 321px;
   display: block;
   margin: auto;
-  background-color: var(--popup-color) !important;
 }
 
 /* .team-member-rank {
