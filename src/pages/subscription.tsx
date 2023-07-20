@@ -96,7 +96,7 @@ export const Subscription = () => {
       </div>
       </div>
       <div className="subscription">
-      <div className="choose-plan">
+      <div className="choose-plan subscription-choose-plan">
         Choose your plan
         </div>
       <div className="monthly-billing">
@@ -116,12 +116,24 @@ export const Subscription = () => {
                 </div>
             <div className="line"></div>
             <div className="plan-info-list">
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
             </div>
             <a className="buy-button" href="/payment">Buy Plan</a>
             </div>
@@ -139,13 +151,24 @@ export const Subscription = () => {
                 </div>
                 <div className="line"></div>
                 <div className="plan-info-list">
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
                 </div>
             <a className="buy-button" href="/payment">Buy Plan</a>
             </div>
@@ -163,13 +186,24 @@ export const Subscription = () => {
                 </div>
                 <div className="line"></div>
                 <div className="plan-info-list">
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
-                    <div className="plan-info-item"><span className="box"></span>Create up to 50 products</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
+                <div className="plan-info-item"><span className="box"></span>Create up to 50 products Create up to</div>
                 </div>
 
             <a className="buy-button" href="/payment">Buy Plan</a>
