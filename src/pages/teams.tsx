@@ -95,7 +95,7 @@ const inviteMember = () => {
   const DeletePopup = ()=>{
     return(
       <div className="team-delete-popup">
-        <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+        <img src={require('../assets/pngs/warning.png')} alt="" />
         <div className='team-delete-popup-msg'>
         <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
         <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete this Team</p>
@@ -120,7 +120,7 @@ const inviteMember = () => {
   const DeleteMemberPopup = ()=>{
     return(
       <div className="team-delete-popup">
-        <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+        <img src={require('../assets/pngs/warning.png')} alt="" />
         <div className='team-delete-popup-msg'>
         <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
         <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete this Member</p>
@@ -167,7 +167,7 @@ const inviteMember = () => {
       <div className="edit-teamrole-popup">
         <div className="edit-teamrole-heading">
           <div className="edit-teamrole-heading-main">
-          <img className="sidenav-img" src={require('../assets/pngs/warning.png')} alt="" />
+          <img src={require('../assets/pngs/warning.png')} alt="" />
           <p>Confirm Action</p>
           </div>
           <div style={{"fontSize":"12px"}}>User role! Are you sure you want to change this user role to memeber</div>
