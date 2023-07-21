@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import AddPic from "../../../../../assets/svgs/sectionFour/addPic.svg";
@@ -10,6 +10,8 @@ const ConfigEditor = ({ onClose, current }) => {
   const materialList = useSelector(
     (state) => state.materialControl.materialArray
   );
+  const inputRef = useRef(null);
+  const pictureRef = useRef(null);
   const [defaultData, setDefaultData] = useState({
     name: "",
     position: { x: 0, y: 0, z: 0 },
@@ -66,14 +68,45 @@ const ConfigEditor = ({ onClose, current }) => {
       </div>
       <div style={{ marginTop: "15px" }}>
         <p className={"midBoldclass"}>Configuration Image</p>
-        <img
-          src={AddPic}
-          alt={""}
-          width={"126px"}
-          style={{
-            marginTop: "5px",
+        <input
+          accept="image/*"
+          type={"file"}
+          style={{ display: "none" }}
+          ref={inputRef}
+          onChange={(e) => {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+              pictureRef.current.src = reader.result;
+            };
+
+            if (file) {
+              reader.readAsDataURL(file);
+            }
           }}
         />
+        <div
+          style={{
+            width: "126px",
+            maxHeight: "126px",
+            overflow: "hidden",
+            borderRadius: "20px",
+          }}
+          onClick={() => {
+            inputRef.current.click();
+          }}
+        >
+          <img
+            src={AddPic}
+            alt={""}
+            ref={pictureRef}
+            width={"100%"}
+            style={{
+              marginTop: "5px",
+            }}
+          />
+        </div>
       </div>
       {/*Position*/}
       <div style={{ marginTop: "15px" }}>

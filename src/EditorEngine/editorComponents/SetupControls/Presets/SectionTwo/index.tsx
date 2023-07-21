@@ -11,7 +11,6 @@ import {
 } from "three";
 import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
-// import { accountManagement } from "../../../../../redux/accountManagement";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
@@ -22,25 +21,16 @@ import { AiFillEdit } from "react-icons/ai";
 import ConfigEditor from "../../components/ConfigEditor";
 import MaterialSwap from "../../components/MaterialSwap";
 import { WhiteOnRed } from "../SectionFive/CommentBox";
-// color picker
 
 const SectionTwo = () => {
-  //here is the material saved configs
-  // const materialConfigObject = useSelector(
-  //   (state) => state.savedConfigs.materialConfiguration
-  // );
   const materialList = useSelector(
     (state) => state.materialControl.materialArray
   );
-  //control the config pop up state
-  // const [configPopUp, setConfigPopUp] = useState(null);
-  //redux mechanism state
   const allCustomMaterials = useSelector(
     (state: any) => state.accountManagement.allCustomMaterials
   );
   // here is the main config login.
   const [appliedTextures, setAppliedTextures] = useState({});
-  const [selectedMesh, setSelectedMesh] = useState(null);
   const [newSELMesh, setNewSELMesh] = useState(null);
   const [currentConfig, setCurrentConfig] = useState(null);
   const [materialDataSwap, setMaterialDataSwap] = useState(null);
@@ -137,22 +127,6 @@ const SectionTwo = () => {
       });
   }, [projectID, userID]);
 
-  /*async function getConfig() {
-    axios
-      .get("/manage/config", {
-        params: {
-          userId: userID,
-          projectId: projectID,
-        },
-      })
-      .then((res) => {
-        setAppliedTextures(res.data);
-      })
-      .catch((err) => {
-        toast.error("Failed to retrieve config");
-      });
-  }*/
-
   useEffect(() => {
     if (projectID && userID) {
       getConfig();
@@ -166,7 +140,6 @@ const SectionTwo = () => {
     changeAppli,
     matSwap,
   }) => {
-    // const [toggleState, setToggleState] = useState(false);
     // here is the material fixtures
     function materialFixture(materialName) {
       let requi_material = allCustomMaterials.filter(
@@ -241,13 +214,7 @@ const SectionTwo = () => {
             margin: "0 15px 10px 15px",
             padding: "0 9px",
           }}
-          onClick={() => {
-            // indiMaterial.material = new MeshStandardMaterial({
-            //   color: vls,
-            //   side: THREE.DoubleSide,
-            //   name: `${indiMaterial.name}${vls}`,
-            // });
-          }}
+          onClick={() => {}}
         >
           <div
             style={{
@@ -399,6 +366,9 @@ const SectionTwo = () => {
     <div className={"sectionTwoDiv"}>
       {newSELMesh && (
         <ConfigVarients
+          allCustomMaterials={allCustomMaterials}
+          materialName={newSELMesh}
+          setAppliedTextures={setAppliedTextures}
           onClose={() => {
             setNewSELMesh(null);
           }}
@@ -444,73 +414,6 @@ const SectionTwo = () => {
         Object.keys(appliedTextures).length !== 0 &&
         appliedTextures &&
         status && <ApplyMaterials configData={appliedTextures} />}
-      {selectedMesh && (
-        <div
-          style={{
-            margin: "5px 20px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {allCustomMaterials &&
-            allCustomMaterials.map((vls, index) => {
-              return (
-                <label>
-                  <input
-                    type={"checkbox"}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setAppliedTextures((state) => {
-                          let status = false;
-                          if (state[`${selectedMesh}`]) {
-                            status = true;
-                          }
-                          return {
-                            ...state,
-                            [`${selectedMesh}`]: {
-                              selected: null,
-                              list: status
-                                ? [
-                                    ...state[`${selectedMesh}`].list,
-                                    vls.materialName,
-                                  ]
-                                : [vls.materialName],
-                            },
-                          };
-                        });
-                      } else {
-                        setAppliedTextures((state) => {
-                          let new_val = [];
-                          state[`${selectedMesh}`].list.forEach((value) => {
-                            if (value !== vls.materialName) {
-                              new_val.push(value);
-                            }
-                          });
-                          return {
-                            ...state,
-                            [`${selectedMesh}`]: {
-                              selected: null,
-                              list: new_val,
-                            },
-                          };
-                        });
-                      }
-                    }}
-                  />
-                  &nbsp; &nbsp;
-                  {vls.materialName}
-                </label>
-              );
-            })}
-          <button
-            onClick={() => {
-              setSelectedMesh(null);
-            }}
-          >
-            save
-          </button>
-        </div>
-      )}
       {materialList.length &&
         materialList.map((vlss, indexs) => {
           return (
@@ -540,7 +443,6 @@ const SectionTwo = () => {
                     src={AddImage}
                     style={{ width: "20px", height: "20px" }}
                     onClick={() => {
-                      setSelectedMesh(null);
                       setNewSELMesh(vlss.name);
                     }}
                     alt="Add"
@@ -561,7 +463,6 @@ const SectionTwo = () => {
                     );
                   })}
               </div>
-              {/*{configPopUp == indexs && <ConfigBox />}*/}
             </>
           );
         })}
