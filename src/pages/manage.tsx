@@ -6,6 +6,7 @@ import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
 import axiosInstance from '../components/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 interface Product {
   _id: string;
@@ -21,16 +22,17 @@ export const Manage = () => {
     // const [firstName, setFirstName] = useState("");
     // const [occupation, setOccupation] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
-
+    const showroomId = useParams();
     const fetchProducts = useCallback((async () => {
-      const showroomId = '64b75a2413d75d20a6497220';
+      
       try {
         const response = await axiosInstance.post(`/showroom/${showroomId}/products`);
         setProducts(response.data);
       } catch (error) {
         console.error(error);
       }
-    }),[])
+    }),[showroomId]);
+    
     useEffect(() => {
       // fetchUserData();
       fetchProducts();
