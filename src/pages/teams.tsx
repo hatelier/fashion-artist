@@ -49,7 +49,9 @@ export const Teams = () => {
 
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isTeammatePopUp, setisTeammatePopUp] = useState(false)
+  const [isTeammatePopUp, setisTeammatePopUp] = useState(false);
+  const [isEditTeam, setisEditTeam] = useState(false);
+  const [isEditRole, setisEditRole] = useState(false);
 
   const createTeamPopup = () => {
     setIsOpen(!isOpen);
@@ -68,8 +70,21 @@ export const Teams = () => {
     setisTeammatePopUp(!isTeammatePopUp);
   };
 
+  const editTeamPopup = () => {
+    setisEditTeam(!isEditTeam);
+  };
 
+  const canceleditTeamPopup = () => {
+    setisEditTeam(!isEditTeam);
+  };
 
+  const editRolePopup = () => {
+    setisEditRole(!isEditRole);
+  }
+
+  const canceleditRolePopup = () => {
+    setisEditRole(!isEditRole);
+  }
   const InviteMemberPopup = () => (
     <div className="invite-member-popup">
         <img src={require('../assets/pngs/tick1.png')} alt="" className='sidenav-img'/>
@@ -225,6 +240,52 @@ const inviteMember = () => {
 
         
       )}
+      {isEditTeam && (
+            <div className="addteam-popup">
+              <div className="addteam-popup-main">
+                <label htmlFor="" className="addteam-popup-label">
+                  Enter Team Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="New Product"
+                  className="addteam-popup-input"
+                />
+                
+              </div>
+              <div className="addteam-popup-buttons">
+                <button
+                  className="addteam-popup-cancel"
+                  onClick={canceleditTeamPopup}
+                >
+                  Cancel
+                </button>
+                <button className="addteam-popup-create">Change Name</button>
+              </div>
+            </div>
+      )}
+      {isEditRole && (
+            <div className="addteam-popup">
+              <div className="edit-role-header">
+                <div>Change Team Role</div>
+                <div onClick={canceleditRolePopup} className='edit-role-cross'><img src={require('../assets/pngs/report-cross.png')} alt="" /></div>
+              </div>
+               <select name="" id="" className='edit-role-select'>
+                <option value="">Owner</option>
+                <option value="">Admin</option>
+                <option value="">Member</option>
+               </select>
+              <div className="addteam-popup-buttons">
+                <button
+                  className="addteam-popup-cancel edit-role-cancel"
+                  onClick={canceleditTeamPopup}
+                >
+                  Cancel
+                </button>
+                <button className="addteam-popup-create change-name" onClick={handleEditTeamRole}>Change Name</button>
+              </div>
+            </div>
+      )}
       {isTeammatePopUp &&(
         <div className="teammate-popup">
           <div className="teammate-popup-main">
@@ -302,7 +363,7 @@ const inviteMember = () => {
                         <div className="team-header">
                             <span className="team-name-edit">
                                 <div className="team-name">MomentumX team</div>
-                                <img className="team-edit-button sidenav-img" src={require('../assets/pngs/edit.png')} alt="" onClick={handleEditTeamRole}/>
+                                <img className="team-edit-button sidenav-img" src={require('../assets/pngs/edit.png')} alt="" onClick={editTeamPopup}/>
                             </span>
                             <div className="team-add-delete">
 
@@ -324,7 +385,7 @@ const inviteMember = () => {
                                     <div className='team-member-name '>Member 1</div>
                                     <div className='team-member-email '>member_1@gmail.com</div>
                                     </div>
-                                    <div className='team-member-rank team-text-decoration'>Owner</div>
+                                    <div className='team-member-rank team-text-decoration' onClick={editRolePopup}>Owner</div>
                                     <div className='team-member-status'></div>
                                 </div>
                                 <div className="team-member-row">
@@ -332,7 +393,7 @@ const inviteMember = () => {
                                     <div className='team-member-name'>Member 2</div>
                                     <div className='team-member-email'>member_1@gmail.com</div>
                                     </div>
-                                    <div className='team-member-rank team-text-decoration'>Admin</div>
+                                    <div className='team-member-rank team-text-decoration' onClick={editRolePopup}>Admin</div>
                                     <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteMemberPopup}/></div>
                                 </div>
                                 <div className="team-member-row">
@@ -341,7 +402,7 @@ const inviteMember = () => {
                                     <p>pending invite</p></div>
                                     <div className='team-member-email'>member_1@gmail.com</div>
                                     </div>
-                                    <div className='team-member-rank team-text-decoration'>Admin</div>
+                                    <div className='team-member-rank team-text-decoration' onClick={editRolePopup}>Admin</div>
                                     <div className='team-member-status'><img className='team-member-status' src={require("../assets/pngs/block-white.png")} alt="" onClick={handleDeleteMemberPopup}/></div>
                                 </div>
                             </div>
