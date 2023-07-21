@@ -8,7 +8,6 @@ import axios from "axios";
 import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
 import {
-  materialApplication,
   updateCurrBack,
   updateModelUrl,
   updateTopBar,
