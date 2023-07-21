@@ -3967,7 +3967,7 @@ color: var(--font-color);
   padding: 0px;
   gap: 140px;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .addteam-popup-cancel {
@@ -4316,6 +4316,8 @@ color: var(--font-color);
 
 .team-text-decoration{
   border-bottom: 1px solid var((--items-bgcolor));
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .team-underline {
@@ -4332,6 +4334,72 @@ color: var(--font-color);
 .team-member-status img{
   filter: var(--invert-color);
 
+}
+
+.edit-role-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.edit-role-cross {
+  cursor: pointer;
+}
+
+.edit-role-select {
+  border-radius: 7px;
+  background: var(--items-bgcolor);
+  display: flex;
+  padding: 10px 11px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 159%;
+  color: var(--font-color);
+  width: 100%;
+  height: 40px;
+}
+
+.edit-role-select option{
+  border-radius: 7px;
+  background: var(--items-bgcolor);
+  display: flex;
+  padding: 4px 11px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 159%;
+  color: var(--font-color);
+  width: 100%;
+  height: 50px;
+}
+
+.change-name {
+  width: 100px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 0px;
+  line-height: normal;
+  height: 40px;
+}
+
+.edit-role-cancel {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .card {
   /* border: 1px solid #ccc;
