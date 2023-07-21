@@ -1,9 +1,10 @@
+// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import {BsEyeFill} from "react-icons/bs";
 import {WhiteOnRed} from "../../Presets/SectionFive/CommentBox";
-const ConfigVarients = () => {
+const ConfigVarients = ({onClose}) => {
     const test = ["alwin", "alwin2", "alwin3"]
   return (
     <ConfigStls>
@@ -15,7 +16,7 @@ const ConfigVarients = () => {
         }}
       >
         <p>Varient</p>
-        <GrClose size={10} />
+        <GrClose size={10} onClick={()=>onClose()}/>
       </div>
       <p style={{ fontSize: "15px", marginTop: "20px", fontWeight: "450" }}>
         Material
@@ -51,6 +52,7 @@ const ConfigStls = styled.div`
   background: #ffffff;
   padding: 15px 20px;
   border-radius: 10px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
   .labelBoxer {
     display: flex;
     width: 100%;

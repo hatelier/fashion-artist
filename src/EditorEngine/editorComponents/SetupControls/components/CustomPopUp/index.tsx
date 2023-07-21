@@ -21,8 +21,9 @@ const CustomPopUp=({header,placeholder})=>{
 export default CustomPopUp;
 const CustomPopUpDiv = styled.div`
   position: fixed;
-  bottom: 0;
-  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
   background: #FFFFFF;
   width: 308px;
   padding: 20px;

@@ -16,8 +16,12 @@ export const materialApplication = createSlice({
     modelMaterialReload: 0,
     textMeshArr: [],
     textTrigger: 0,
+    currentBackground: '#f0f0f0'
   },
   reducers: {
+    updateCurrBack: (state, action)=>{
+      state.currentBackground = action.payload;
+    },
     updateTextTrigger: (state) => {
       state.textTrigger = state.textTrigger + 1;
     },
@@ -50,5 +54,6 @@ export const {
   updateMaterialReqs,
   updateTopBar,
   updateMaterialReload,
+  updateCurrBack
 } = materialApplication.actions;
 export default materialApplication.reducer;

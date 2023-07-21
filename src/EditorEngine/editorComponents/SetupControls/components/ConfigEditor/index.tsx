@@ -1,10 +1,11 @@
+// @ts-nocheck
 import  React from "react";
 import styled from "styled-components";
 import {GrClose} from "react-icons/gr";
 import AddPic from "../../../../../assets/svgs/sectionFour/addPic.svg"
 import {LabelledInputMui} from "../../../PreviewSection/EditorControls/CameraControls";
 import {RedOnWhite, WhiteOnRed} from "../../Presets/SectionFive/CommentBox";
-const ConfigEditor=()=>{
+const ConfigEditor=({onClose})=>{
     return <ConfigEditDiv>
         <div
             style={{
@@ -14,7 +15,7 @@ const ConfigEditor=()=>{
             }}
         >
             <p className={"midBoldclass"}>Configuration</p>
-            <GrClose size={10} />
+            <GrClose size={10} onClick={()=>{onClose()}}/>
         </div>
         <div>
             <p className={"midBoldclass"} style={{
@@ -90,12 +91,13 @@ export const GreyInput = styled.input`
 `
 const ConfigEditDiv = styled.div`
   position: fixed;
-  right: 290px;
+  right: 0px;
   bottom: 0px;
   width: 302.4px;
   background: #FFFFFF;
   padding: 15px 20px;
   border-radius: 10px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
   .midBoldclass {
     font-weight: 430;
   }

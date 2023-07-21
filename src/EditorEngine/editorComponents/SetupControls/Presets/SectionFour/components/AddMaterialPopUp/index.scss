@@ -1,6 +1,6 @@
 .addMaterialPopUp {
   position: fixed;
-  left: 300px;
+  right: 0;
   bottom: 0;
   z-index: 2;
   width: 297.58px;
@@ -9,6 +9,7 @@
   background: #ffffff;
   border-radius: 10px;
   padding: 15px 20px 15px 20px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
   .bcolor {
   }
 }

@@ -272,7 +272,7 @@ export const RedOnWhite = styled.button`
 `;
 export const WhiteOnRed = styled.button`
   background: #d31027;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 5px 10px;
   border: 1px solid #d31027;
   color: #ffffff;
