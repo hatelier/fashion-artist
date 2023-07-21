@@ -325,7 +325,7 @@ export const Dashboard = () => {
             </div>
           </Card>
         ))}
-                    </div>
+                </div>
           </div>
         </div>
     </section>

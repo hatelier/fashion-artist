@@ -1,24 +1,112 @@
 // import axios from 'axios'; //Fetch
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
+import axiosInstance from '../components/axiosInstance';
+import Card from '../components/Card';
 
+
+interface Product {
+  _id: string;
+  userId: string;
+  folderName: string;
+  asset: {
+    originalName: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
+    location: string;
+    _id: string;
+  };
+  productName: string;
+  brandName: string;
+  previewImage: {
+    originalName: string;
+    fileName: string;
+    mimeType: string;
+    size: number;
+    location: string;
+    _id: string;
+  };
+  pipeline: string;
+  tags: string[];
+  productID: number;
+  customMaterials: string[];
+  __v: number;
+}
 
 export const AddShowroom = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
-  
-  useEffect(() => {
-    fetchUserData();
+  const [showroomName, setShowroomName] = useState('');
+  const [tags, setTags] = useState('');
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProductId, setSelectedProductId] = useState<string[]>([]);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setLogoFile((prevFile) => file || prevFile);
+  };
+
+  const handleUpload = useCallback(async () => {
+    const userId = window.localStorage.getItem('userID');
+    
+    if (logoFile) {
+      try {
+        const formData = new FormData();
+        formData.append('logoFile', logoFile);
+        formData.append('name', showroomName || '');
+        formData.append('tags', tags || '');
+        formData.append('userId', userId || '');
+        formData.append('productId', JSON.stringify(selectedProductId));
+
+        const response = await axiosInstance.post('/showroom/new', formData);
+        const showroomId = response.data.showroomId;
+        
+        navigate(`/manage/${showroomId}`);
+      } catch (error) {
+        // Handle the error appropriately (e.g., show error message)
+        console.error('Error creating showroom:', error);
+      }
+    } else {
+      // Handle the case when no file is selected or uploaded
+      console.error('No file selected or uploaded');
+    }
+  }, [logoFile, navigate, showroomName, tags, selectedProductId]);
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const response = await axiosInstance.get("/product/products");
+      const productData = response.data;
+      setProducts(productData);
+    } catch (error) {
+      console.error("Error fetching products");
+    }
   }, []);
 
-  const fetchUserData = async () => {
-    try {
+  const handleCheckboxChange = (productId: string) => {
+    setSelectedProductId((prevProductIds) => {
+      if (prevProductIds.includes(productId)) {
+        return prevProductIds.filter((id) => id !== productId);
+      } else {
+        return [...prevProductIds, productId];
+      }
+    });
+  };
+
+  useEffect(() => {
+    // fetchUserData();
+    fetchProducts();
+  }, [fetchProducts]);
+
+  // const fetchUserData = async () => {
+  //   try {
     // const userID = window.localStorage.getItem('userID');
 
     // const response = await axios.get("/user/profile", { 
@@ -30,10 +118,10 @@ export const AddShowroom = () => {
 
     // setFirstName(userData.firstname);
     // setOccupation(userData.occupation);
-    } catch (error) {
-      console.error("Error fetching user data: ", error);
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Error fetching user data: ", error);
+  //   }
+  // };
 
   /*const logout = () => {
     // setCookie('access_token',"")
@@ -83,17 +171,11 @@ export const AddShowroom = () => {
                 <div>Showroom</div>
                 <div className="add-showroom-create-cancel">
 
-                    <button className="add-showroom-create" onClick={()=>{
-                      console.log("Create a showroom");
-                      
-                    }}>
+                    <button className="add-showroom-create" onClick={handleUpload}>
                       <img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span>
                     </button>
 
-                    <button className="add-showroom-cancel" onClick={()=>{
-                      //Cancel showroom
-                      
-                    }}>
+                    <button className="add-showroom-cancel" onClick={() => navigate(-1)}>
                       <img className='add-showroom-button-img' src={require('../assets/pngs/cancel.png')} alt="" /><span className="add-showroom-cancel-text">Cancel</span>
                     </button>
                 </div>
@@ -112,21 +194,27 @@ export const AddShowroom = () => {
                           <div className='add-showroom-details-inputs'>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Showroom Name*</label>
-                            <input type="text" />
+                            <input type="text" value={showroomName} onChange={(e) => setShowroomName(e.target.value)}/>
                         </div>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Tags</label>
-                            <input type="text" />
+                            <input type="text" value={tags} onChange={(e) => setTags(e.target.value)}/>
                         </div>
                         </div>
                         <div className='add-showroom-details-buttons'>
                         <div className="add-showroom-details-item">
                             <label htmlFor="">Logo</label>
-
-                            <button className="add-showroom-upload-button" onClick={()=>{
-                              //Upload
-                            }}>
-                              <img src={require('../assets/pngs/upload-new.png')} alt="" /><span>Upload</span>
+                            <button className="add-showroom-upload-button">
+                            <label htmlFor="fileInput">
+                              <input
+                                type="file"
+                                id="fileInput"
+                                style={{ display: 'none' }}
+                                onChange={handleFileUpload}
+                              />
+                              <img src={require('../assets/pngs/upload-new.png')} alt="" />
+                              <span>Upload</span>
+                             </label>
                             </button>
                         </div>
                         </div>
@@ -245,7 +333,20 @@ export const AddShowroom = () => {
                               </div>
                               <div className="product-item-text">Product 01</div>
                           </div>
+                          
                            <div>
+                           {products.map((product) => (
+                            <Card key={product._id}>
+                             {product.previewImage && (
+                             <div className="card-img-container">
+                               <div className="card-img-box">
+                                <input type='checkbox' onChange={() => handleCheckboxChange(product._id)}/>
+                               <img className="card-img" src={product.previewImage.location} alt="Preview" />
+                               </div>
+                             </div>
+                             )}
+                            </Card>
+                            ))}
                            </div>
                         </div>
                     </div>
