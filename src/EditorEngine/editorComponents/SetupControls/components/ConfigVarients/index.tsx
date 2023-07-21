@@ -2,10 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
-import {BsEyeFill} from "react-icons/bs";
-import {WhiteOnRed} from "../../Presets/SectionFive/CommentBox";
-const ConfigVarients = ({onClose}) => {
-    const test = ["alwin", "alwin2", "alwin3"]
+import { BsEyeFill } from "react-icons/bs";
+import { WhiteOnRed } from "../../Presets/SectionFive/CommentBox";
+const ConfigVarients = ({
+  onClose,
+  allCustomMaterials,
+  materialName,
+  setAppliedTextures,
+}) => {
   return (
     <ConfigStls>
       <div
@@ -16,31 +20,89 @@ const ConfigVarients = ({onClose}) => {
         }}
       >
         <p>Varient</p>
-        <GrClose size={10} onClick={()=>onClose()}/>
+        <GrClose size={10} onClick={() => onClose()} />
       </div>
       <p style={{ fontSize: "15px", marginTop: "20px", fontWeight: "450" }}>
-        Material
+        {materialName}
       </p>
       {/*    here is the material options*/}
-        <div style={{background:"#F4F4F4", padding:"15px", borderRadius:"10px",marginTop:"10px"}}>
-            <p style={{fontWeight:"430"}}>Select Materials</p>
-            {
-                test.map((vls)=>{
-                    return <>
-                        <label className={"labelBoxer"}>
-                            <div style={{display:"flex",alignItems:"center"}}>
-                                <input type={"checkbox"}/>
-                                <p style={{marginLeft:"5px",display:"inline", fontWeight:400}}>{vls}</p>
-                            </div>
-                            <BsEyeFill size={14}/>
-                        </label>
-                    </>
-                })
-            }
-        </div>
-        <WhiteOnRed style={{width:"100%", marginTop:"20px"}}>
-            Add
-        </WhiteOnRed>
+      <div
+        style={{
+          background: "#F4F4F4",
+          padding: "15px",
+          borderRadius: "10px",
+          marginTop: "10px",
+        }}
+      >
+        <p style={{ fontWeight: "430" }}>Select Materials</p>
+        {allCustomMaterials.map((vls) => {
+          return (
+            <>
+              <label className={"labelBoxer"}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <input
+                    type={"checkbox"}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAppliedTextures((state) => {
+                          let status = false;
+                          if (state[`${materialName}`]) {
+                            status = true;
+                          }
+                          return {
+                            ...state,
+                            [`${materialName}`]: {
+                              selected: null,
+                              list: status
+                                ? [
+                                    ...state[`${materialName}`].list,
+                                    vls.materialName,
+                                  ]
+                                : [vls.materialName],
+                            },
+                          };
+                        });
+                      } else {
+                        setAppliedTextures((state) => {
+                          let new_val = [];
+                          state[`${materialName}`].list.forEach((value) => {
+                            if (value !== vls.materialName) {
+                              new_val.push(value);
+                            }
+                          });
+                          return {
+                            ...state,
+                            [`${materialName}`]: {
+                              selected: null,
+                              list: new_val,
+                            },
+                          };
+                        });
+                      }
+                    }}
+                  />
+                  <p
+                    style={{
+                      marginLeft: "5px",
+                      display: "inline",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {vls.materialName}
+                  </p>
+                </div>
+                <BsEyeFill size={14} />
+              </label>
+            </>
+          );
+        })}
+      </div>
+      <WhiteOnRed
+        style={{ width: "100%", marginTop: "20px" }}
+        onClick={() => onClose()}
+      >
+        Add
+      </WhiteOnRed>
     </ConfigStls>
   );
 };
@@ -52,7 +114,7 @@ const ConfigStls = styled.div`
   background: #ffffff;
   padding: 15px 20px;
   border-radius: 10px;
-  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.1);
   .labelBoxer {
     display: flex;
     width: 100%;
@@ -60,7 +122,7 @@ const ConfigStls = styled.div`
     align-items: center;
     padding: 10px 10px;
     height: 22px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 5px;
     margin-top: 12px;
   }
