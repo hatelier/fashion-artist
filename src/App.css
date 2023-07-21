@@ -4333,14 +4333,17 @@ color: var(--font-color);
   filter: var(--invert-color);
 
 }
-/* .card {
-  border: 1px solid #ccc;
+.card {
+  /* border: 1px solid #ccc;
   border-radius: 4px;
   padding: 16px;
   margin-bottom: 16px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  min-width: 215.8px;
+  min-height: 185px;
+
+}
 
 .card-content {
   display: flex;
@@ -5569,6 +5572,13 @@ add-showroom-button-img {
     height: 57px;
   }
 
+.header-left{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
   .sidemenu-toggle {
     display: block;
     cursor: pointer;
@@ -5576,22 +5586,60 @@ add-showroom-button-img {
 
   .mx-logo {
     all: unset;
-    width: 128px;
-    height: 17px;
+    /* width: 128px;
+    height: 17px; */
+  }
+
+  .header-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
   }
 
   .bell-icon {
     all: unset;
     width: 16px;
     height: 16px;
-    right: 50px;
+    /* right: 50px;
     top: 18px;
-    position: absolute;
+    position: absolute; */
+    border-left: 0.5px solid white;
   }
 
   .dropdown-top {
     margin: 0px;
   }
+
+  .header-profile-img{
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+
+
+  .header-down-white{
+    display: none;
+  }
+
+  .header-account-text{
+    display: none;
+  }
+
+  .dropdown-top-content{
+    all: unset;
+    display: none;
+    background-color: #292626;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 43px;
+    margin-left: 10px;
+    border-radius: 8px;
+  }
+
   .small-avatar-icon {
     all: unset;
     width: 25px;
@@ -6060,19 +6108,33 @@ add-showroom-button-img {
 /* Templates page styles  */
 
 .templates-input-group{
-
+  width: 100%;
   gap: 5px;
   margin-top: 15px;
 }
 
+.templates-input{
+  box-shadow: none;
+}
+
 .templates-filter{
-  padding: 10px 8px;
+  padding: 11px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
+  height: 100%;
+
+  /* border: 2px solid red; */
 }
 .templates-filter span{
   display:  none;
+}
+
+.templates-filter-dropdown{
+  top: 231px;
+  right: 0;
+  z-index: 1;
 }
 
 .templates-dropdown-img{
@@ -6082,6 +6144,55 @@ add-showroom-button-img {
 .templates-block{
   margin-top: 14px;
 }
+
+.templates-love{
+  height: 10px;
+  width: 10px;
+  object-fit: cover;
+}
+
+.card{
+  min-width: 167px;
+  height: 158px;
+}
+
+.card-content{
+  min-width: 166px;
+}
+
+.card-img{
+  all: unset;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-img-box{
+}
+
+.card-img-container{
+  min-width: 134px;
+  width: 100%;
+}
+
+.card-img-box{
+  min-width: 134px;
+  width: 100%;
+}
+
+.card-img{
+  height: 100%;
+  object-fit: cover;
+}
+
+.input-group{
+  padding-top: 0px;
+  gap: 10px;
+}
+
+
+
+
+
 
 /* Credit and Billing History page  */
 
