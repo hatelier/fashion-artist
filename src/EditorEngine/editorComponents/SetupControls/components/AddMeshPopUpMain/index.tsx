@@ -57,4 +57,5 @@ const AddPopUpDiv = styled.div`
   background: #FFFFFF;
   width: 224px;
   border-radius: 10px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
 `

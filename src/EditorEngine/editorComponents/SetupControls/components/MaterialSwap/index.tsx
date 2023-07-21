@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from "react"
 import styled from "styled-components";
 import {GrClose} from "react-icons/gr";
 import {PiCaretDownBold} from "react-icons/pi";
 import {MenuItem, Select} from "@mui/material";
 import {WhiteOnRed} from "../../Presets/SectionFive/CommentBox";
-const MaterialSwap=()=>{
+const MaterialSwap=({onClose})=>{
     return <MaterialSDiv>
         <div
             style={{
@@ -14,7 +15,7 @@ const MaterialSwap=()=>{
             }}
         >
             <p className={"midBoldclass"}>Configuration</p>
-            <GrClose size={10} />
+            <GrClose size={10} onClick={onClose}/>
         </div>
         <div>
             <p className={"midBoldclass"} style={{
@@ -55,10 +56,11 @@ const MaterialSDiv = styled.div`
   width: 273px;
   background: #FFFFFF;
   bottom: 0;
-  right: 600px;
+  right: 0;
   position: fixed;
   border-radius: 10px;
   padding: 15px 20px;
+  box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.10);
   .midBoldclass {
     font-weight: 430;
   }

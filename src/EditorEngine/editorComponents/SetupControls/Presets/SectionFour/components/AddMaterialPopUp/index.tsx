@@ -12,7 +12,6 @@ import {
   InvisibleFileUploader,
   LabelCentered,
   MedFontText11,
-  RedButtonClass,
   WhiteButtonClass,
 } from "../../../../../../StyledComponents";
 // import { TextureLoader } from "three";
@@ -25,6 +24,7 @@ import { SketchPicker } from "react-color";
 // import * as THREE from "three";
 // import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
 import { updateCustomMaterial } from "../../../../../../../redux/accountManagement";
+import {WhiteOnRed} from "../../../SectionFive/CommentBox";
 
 const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [imageStatus, setImageStatus] = useState({
@@ -521,7 +521,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           }}
         >
           {!loaderState ? (
-            <RedButtonClass type={"submit"}>Update material</RedButtonClass>
+            <WhiteOnRed type={"submit"}>Update material</WhiteOnRed>
           ) : (
             <Box sx={{ display: "flex" }}>
               <CircularProgress />
@@ -1024,7 +1024,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           justifyContent: "space-between",
         }}
       >
-        <RedButtonClass
+        <WhiteOnRed
           type={"submit"}
           // // this code for stripping the material out of parts.
           // ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
@@ -1075,7 +1075,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           // });
         >
           Create
-        </RedButtonClass>
+        </WhiteOnRed>
         <WhiteButtonClass>Remove</WhiteButtonClass>
       </div>
     </form>

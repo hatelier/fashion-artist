@@ -18,10 +18,10 @@ import { faPencil, faExchange } from "@fortawesome/free-solid-svg-icons";
 import AddMaterialPopUp from "../SectionFour/components/AddMaterialPopUp";
 import styled from "styled-components";
 import ConfigVarients from "../../components/ConfigVarients";
-import {AiFillEdit} from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import ConfigEditor from "../../components/ConfigEditor";
 import MaterialSwap from "../../components/MaterialSwap";
-import {WhiteOnRed} from "../SectionFive/CommentBox";
+import { WhiteOnRed } from "../SectionFive/CommentBox";
 // color picker
 
 const SectionTwo = () => {
@@ -41,6 +41,9 @@ const SectionTwo = () => {
   // here is the main config login.
   const [appliedTextures, setAppliedTextures] = useState({});
   const [selectedMesh, setSelectedMesh] = useState(null);
+  const [newSELMesh, setNewSELMesh] = useState(null);
+  const [currentConfig, setCurrentConfig] = useState(null);
+  const [materialDataSwap, setMaterialDataSwap] = useState(null);
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
@@ -156,7 +159,13 @@ const SectionTwo = () => {
     }
   }, [projectID, userID, getConfig]);
 
-  const IndiConfig = ({ indiMaterial, vls, appliDetails, changeAppli }) => {
+  const IndiConfig = ({
+    indiMaterial,
+    vls,
+    appliDetails,
+    changeAppli,
+    matSwap,
+  }) => {
     // const [toggleState, setToggleState] = useState(false);
     // here is the material fixtures
     function materialFixture(materialName) {
@@ -263,6 +272,9 @@ const SectionTwo = () => {
               style={{
                 color: "#000000",
                 fontSize: "10px",
+              }}
+              onClick={() => {
+                matSwap("test");
               }}
             />
             &nbsp;&nbsp;
@@ -385,9 +397,28 @@ const SectionTwo = () => {
   const [materialPopData, setMaterialPopUpData] = useState(null);
   return (
     <div className={"sectionTwoDiv"}>
-      <ConfigVarients />
-        <ConfigEditor/>
-        <MaterialSwap/>
+      {newSELMesh && (
+        <ConfigVarients
+          onClose={() => {
+            setNewSELMesh(null);
+          }}
+        />
+      )}
+      {currentConfig && (
+        <ConfigEditor
+          current={currentConfig}
+          onClose={() => {
+            setCurrentConfig(null);
+          }}
+        />
+      )}
+      {materialDataSwap && (
+        <MaterialSwap
+          onClose={() => {
+            setMaterialDataSwap(null);
+          }}
+        />
+      )}
       {materialPopData && (
         <AddMaterialPopUp
           updateMode={true}
@@ -495,16 +526,22 @@ const SectionTwo = () => {
                     alignItems: "center",
                   }}
                 >
-                  <div style={{display:"flex", alignItems:"center"}}>
-                      <p className={"configHead"}>{vlss.name}</p>&nbsp;
-                      <AiFillEdit size={14}/>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <p className={"configHead"}>{vlss.name}</p>&nbsp;
+                    <AiFillEdit
+                      size={14}
+                      onClick={() => {
+                        setCurrentConfig(vlss.name);
+                      }}
+                    />
                   </div>
                   {/*<button>Choose</button>*/}
                   <img
                     src={AddImage}
                     style={{ width: "20px", height: "20px" }}
                     onClick={() => {
-                      setSelectedMesh(vlss.name);
+                      setSelectedMesh(null);
+                      setNewSELMesh(vlss.name);
                     }}
                     alt="Add"
                   />
@@ -517,6 +554,9 @@ const SectionTwo = () => {
                         vls={matNames}
                         appliDetails={appliedTextures[vlss.name]}
                         changeAppli={setAppliedTextures}
+                        matSwap={(name) => {
+                          setMaterialDataSwap(name);
+                        }}
                       />
                     );
                   })}
@@ -526,11 +566,10 @@ const SectionTwo = () => {
           );
         })}
       <WhiteOnRed
-          style={{
-              width:"90%",
-              margin: "20px 15px"
-
-          }}
+        style={{
+          width: "90%",
+          margin: "20px 15px",
+        }}
         // className={"uploadAsset"}
         onClick={() => {
           axios

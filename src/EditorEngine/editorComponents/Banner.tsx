@@ -15,6 +15,23 @@ const Banner = () => {
   );
 };
 
+export const actionMenuData = [
+    "Enable Ready-player Me Download",
+    "Enable Virtual -Try on",
+    "Enable QR code",
+    "Hide Fullscreen Button",
+    "AR Filter",
+    "Virtual Measurements"
+]
+
+export const presetsMenuData = [
+    "All presets",
+    "Sleeve",
+    "Gowns",
+    "Necklines",
+    "Collars"
+]
+
 export const mediaDataJson = {
   fov: { value: 0, type: "def", name: "Field of view" },
   intHor: { value: 0, type: "def", name: "Initial horizontal angle" },

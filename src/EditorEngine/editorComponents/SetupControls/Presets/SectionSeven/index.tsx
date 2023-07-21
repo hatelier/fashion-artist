@@ -2,10 +2,14 @@ import styled from "styled-components";
 import React from "react";
 import {BiDotsVerticalRounded} from "react-icons/bi";
 import MediaExtension from "../../components/MediaExtension";
+import CodeGenerator from "../../components/CodeGenerator";
+import PublishProject from "../../components/PublishProject";
 
 const SectionSeven=()=>{
     return <SectionSevenDiv>
-        {/*mess*/}
+        <CodeGenerator/>
+        <PublishProject/>
+        {/*media*/}
         <MediaExtension/>
         <div
             style={{

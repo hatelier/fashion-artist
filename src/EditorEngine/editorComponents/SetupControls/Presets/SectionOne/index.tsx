@@ -8,6 +8,7 @@ import axios from "axios";
 import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
 import {
+  updateCurrBack,
   updateModelUrl,
   updateTopBar,
 } from "../../../../../redux/materialApplication";
@@ -17,6 +18,8 @@ import {
 } from "../../../../../redux/accountManagement";
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
 import { SketchPicker } from "react-color";
+import { OnOffSwitch } from "../../components/CodeGenerator";
+import styled from "styled-components";
 
 const SectionOne = (props) => {
   const dispatch = useDispatch();
@@ -33,6 +36,7 @@ const SectionOne = (props) => {
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
   const [showUpdate, setShowUpdate] = useState(true);
+  const [createConfigState, setCreateConfigState] = useState(false);
   const { id, stage } = useParams();
   const baseReactUrl = window.location.origin.toString();
 
@@ -76,7 +80,9 @@ const SectionOne = (props) => {
     }
   }, [id, dispatch]);
   // here is the model loading rate.
-  const [colorControl, setColorControl] = useState("#f0f0f0");
+  const colorControl = useSelector(
+    (state) => state.materialApplication.currentBackground
+  );
   const [openModal, setOpenModal] = useState(false);
   const [openBack, setOpenBack] = useState(false);
   return (
@@ -246,7 +252,7 @@ const SectionOne = (props) => {
                   width={"85%"}
                   color={colorControl}
                   onChangeComplete={(color) => {
-                    setColorControl(color.hex);
+                    dispatch(updateCurrBack(color.hex));
                   }}
                 />
               </div>
@@ -294,6 +300,15 @@ const SectionOne = (props) => {
           </>
         )}
       </div>
+      <ConfigSwitch>
+        <OnOffSwitch
+          checked={createConfigState}
+          label={"Create Configuration"}
+          onClick={(state) => {
+            setCreateConfigState(state);
+          }}
+        />
+      </ConfigSwitch>
       {/*  dimensions detection center*/}
       <div className={"dimensionsDiv"}>
         <p className={"prodNameTitle"} style={{ marginTop: 0 }}>
@@ -403,3 +418,9 @@ const SectionOne = (props) => {
   );
 };
 export default SectionOne;
+const ConfigSwitch = styled.div`
+  margin-top: 24px;
+  p {
+    font-size: 14px;
+  }
+`;

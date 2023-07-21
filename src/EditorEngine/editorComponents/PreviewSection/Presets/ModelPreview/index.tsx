@@ -58,9 +58,13 @@ const ModelPreview = (props) => {
     const toggleLights = useSelector(
       (state: any) => state.settingsPanel.toggleLights
     );
+    const colorControl = useSelector(
+      (state) => state.materialApplication.currentBackground
+    );
+
     return (
       <>
-        <color attach="background" args={["#f0f0f0"]} />
+        <color attach="background" args={[colorControl]} />
         <ambientLight intensity={1} />
         <directionalLight
           position={[10, 10, 10]}

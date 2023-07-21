@@ -16,11 +16,7 @@ const CreateBanner = () => {
     <div className={"createBanner"}>
       <p></p>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <PreviewButton>
-          <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
-        </PreviewButton>
-        <button
-          className={"publishButton"}
+        <PreviewButton
           onClick={() => {
             window.open(
               `${baseReactUrl}/view/${userID}/${projectID}/${id}`,
@@ -28,8 +24,9 @@ const CreateBanner = () => {
             );
           }}
         >
-          Publish
-        </button>
+          <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
+        </PreviewButton>
+        <button className={"publishButton"}>Publish</button>
         <SendButton>
           <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
         </SendButton>
