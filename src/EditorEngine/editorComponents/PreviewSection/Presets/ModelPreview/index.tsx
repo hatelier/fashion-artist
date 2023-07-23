@@ -1,6 +1,6 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls, PerformanceMonitor } from "@react-three/drei";
@@ -13,6 +13,7 @@ import Text3d from "../TextControls/Text3d";
 import styled from "styled-components";
 import MtumxLoaderLogo from "../../../../../assets/svgs/MtumxLogoLoader.svg";
 import { Perf } from "r3f-perf";
+import { DoubleSide, TextureLoader } from "three";
 
 const ModelPreview = (props) => {
   const { file } = useContext(props.context);
@@ -73,6 +74,35 @@ const ModelPreview = (props) => {
       </>
     );
   };
+
+  function Skybox() {
+    const [texture, setTexture] = useState(null);
+    const currBackgroundImage = useSelector(
+      (state) => state.materialApplication.currentBackgroundImage
+    );
+    useEffect(() => {
+      if (currBackgroundImage) {
+        const loader = new TextureLoader();
+        loader.load(currBackgroundImage, setTexture);
+      } else {
+        setTexture(null);
+      }
+    }, [currBackgroundImage]);
+
+    if (texture) {
+      return (
+        <mesh>
+          <sphereBufferGeometry attach="geometry" args={[500, 60, 40]} />
+          <meshBasicMaterial
+            attach="material"
+            map={texture}
+            side={DoubleSide}
+          />
+        </mesh>
+      );
+    }
+  }
+
   return (
     <div
       className={"canvas-container"}
@@ -113,6 +143,7 @@ const ModelPreview = (props) => {
             </Html>
           }
         >
+          <Skybox />
           {modelURL && <UploadModel model={file} settings={props.settings} />}
           <OrbitalController />
           <PolyCountController />

@@ -9,6 +9,7 @@ import prevImageDef from "../../../../../assets/svgs/previewBack.svg";
 import { useParams } from "react-router-dom";
 import {
   updateCurrBack,
+  updateCurrBackImage,
   updateModelUrl,
   updateTopBar,
 } from "../../../../../redux/materialApplication";
@@ -48,6 +49,9 @@ const SectionOne = (props) => {
     pipeLine: null,
     tags: null,
   });
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
   useEffect(() => {
     if (id !== "new") {
       // const toastId = toast.loading("Loading content!");
@@ -71,6 +75,18 @@ const SectionOne = (props) => {
           dispatch(updateUserId(res.data.userId));
           dispatch(updateProjectId(res.data.productID));
           dispatch(updateModelUrl(res.data.asset.location));
+          axios
+            .get("/product/addbck", {
+              params: {
+                userId: "64676633c6ad11d84b234b1d",
+                productId: res.data.productID,
+              },
+            })
+            .then((res) => {
+              if (res.data.background) {
+                dispatch(updateCurrBackImage(res.data.background));
+              }
+            });
           // toast.success("Project loaded!");
           // toast.update(toastId, { isLoading: false });
         })
@@ -85,6 +101,11 @@ const SectionOne = (props) => {
   );
   const [openModal, setOpenModal] = useState(false);
   const [openBack, setOpenBack] = useState(false);
+  const [backgroundImageSet, setBackgroundImageSet] = useState(null);
+  const inputRef = useRef(null);
+  const currBackgroundImage = useSelector(
+    (state) => state.materialApplication.currentBackgroundImage
+  );
   return (
     <form
       className={"sectionOne"}
@@ -201,7 +222,7 @@ const SectionOne = (props) => {
           <p style={{ fontSize: "14px" }}>Background</p>
           {openBack ? <PiCaretUpBold /> : <PiCaretDownBold />}
         </div>
-        {openBack && (
+        {openBack && userID && (
           <>
             <div
               style={{
@@ -276,6 +297,58 @@ const SectionOne = (props) => {
                 }}
               >
                 <input
+                  type={"file"}
+                  accept={"image/*"}
+                  style={{
+                    display: "none",
+                  }}
+                  ref={inputRef}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
+                    const uploadForm = new FormData();
+                    uploadForm.append("bckimg", file);
+                    uploadForm.append("userId", userID);
+                    uploadForm.append("productId", projectID);
+
+                    axios
+                      .post("/product/addBck", uploadForm)
+                      .then((res) => {
+                        dispatch(updateCurrBackImage(res.data.background));
+                        toast.success("Background Image set");
+                      })
+                      .catch((err) => {
+                        toast.error("Failed to upload the image");
+                      });
+
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setBackgroundImageSet(reader.result);
+                    };
+                    if (file) {
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+                <div
+                  onClick={() => {
+                    inputRef.current.click();
+                  }}
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    backgroundImage: `url(${
+                      currBackgroundImage
+                        ? currBackgroundImage
+                        : backgroundImageSet
+                    })`,
+                    position: "absolute",
+                    zIndex: 1,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <input
                   type={"text"}
                   style={{ width: "100%", height: "100%", border: "none" }}
                 />
@@ -320,7 +393,11 @@ const SectionOne = (props) => {
           placeholder={"W"}
           className={"dimenClass"}
           style={{ fontSize: "15px" }}
-          value={materialData ? Math.floor(materialData.x * 10) / 10 : 0}
+          value={
+            materialData && materialData.x
+              ? Math.floor(materialData.x * 10) / 10
+              : 0
+          }
         />
         &nbsp;x&nbsp;
         <input
@@ -328,7 +405,11 @@ const SectionOne = (props) => {
           placeholder={"L"}
           className={"dimenClass"}
           style={{ fontSize: "15px" }}
-          value={materialData ? Math.floor(materialData.y * 10) / 10 : 0}
+          value={
+            materialData && materialData.y
+              ? Math.floor(materialData.y * 10) / 10
+              : 0
+          }
         />
         &nbsp;x&nbsp;
         <input
@@ -336,7 +417,11 @@ const SectionOne = (props) => {
           placeholder={"H"}
           className={"dimenClass"}
           style={{ fontSize: "15px" }}
-          value={materialData ? Math.floor(materialData.z * 10) / 10 : 0}
+          value={
+            materialData && materialData.z
+              ? Math.floor(materialData.z * 10) / 10
+              : 0
+          }
         />
         &nbsp;
       </div>
@@ -380,6 +465,7 @@ const SectionOne = (props) => {
               formData.append("pipeline", pipelineRef.current.value);
               formData.append("tags", tagsRef.current.value);
               formData.append("asset", inputClicker.current.files[0]);
+              formData.append("enablePreset", createConfigState);
               formData.append(
                 "previewImage",
                 prevImageClicker.current.files[0]
