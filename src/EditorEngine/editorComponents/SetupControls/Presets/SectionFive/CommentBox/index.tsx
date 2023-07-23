@@ -9,10 +9,10 @@ import {
   AiOutlineOrderedList,
   AiOutlineUnorderedList,
 } from "react-icons/ai";
-import { FiCode } from "react-icons/fi";
 import { GrAttachment } from "react-icons/gr";
 import {
   CompositeDecorator,
+  convertFromRaw,
   convertToRaw,
   Editor,
   EditorState,
@@ -20,6 +20,14 @@ import {
 } from "draft-js";
 import "./index.scss";
 import { BsTypeUnderline } from "react-icons/bs";
+import { BiLink } from "react-icons/bi";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { AnnotationBox } from "../index";
+import CustomPopUp from "../../../components/CustomPopUp";
 
 const CommentBox = () => {
   // use states for testing the editor
@@ -44,11 +52,8 @@ const CommentBox = () => {
           textDecoration: "underline",
           cursor: "pointer",
         }}
-        onClick={(e) => {
-          e.stopPropagation();
-          console.log(url);
-          window.open(url, "_blank");
-        }}
+        rel="noreferrer"
+        target={"_blank"}
       >
         {props.children}
       </a>
@@ -75,6 +80,7 @@ const CommentBox = () => {
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty(linkDecorator)
   );
+  const [modalState, setModalState] = useState(false);
   const onChange = useCallback(
     (editorState) => setEditorState(editorState),
     []
@@ -135,27 +141,7 @@ const CommentBox = () => {
 
   const _onAddLink = (e) => {
     e.preventDefault();
-    const link = window.prompt("Paste the link -");
-    if (!link) {
-      return;
-    }
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      "LINK",
-      "MUTABLE",
-      { url: link }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity,
-    });
-    onChange(
-      RichUtils.toggleLink(
-        newEditorState,
-        newEditorState.getSelection(),
-        entityKey
-      )
-    );
+    setModalState(true);
   };
 
   const _onNumberedListClick = (e) => {
@@ -215,7 +201,7 @@ const CommentBox = () => {
         />
         <AiOutlineAlignCenter />
         <AiOutlineAlignRight />
-        <FiCode onMouseDown={_onAddLink} />
+        <BiLink onMouseDown={_onAddLink} />
         <GrAttachment onClick={attachmentRun} />
         <AiOutlineOrderedList
           onMouseDown={_onNumberedListClick}
@@ -225,15 +211,71 @@ const CommentBox = () => {
       </div>
     );
   };
+  const { userID, projectID } = useSelector(
+    (state: any) => state.accountManagement
+  );
+  const [currentCommentList, setCurrentCommentList] = useState([]);
+  const getAllComments = useCallback(async () => {
+    axios
+      .get("/manage/comment", {
+        params: {
+          userId: userID,
+          projectId: projectID,
+        },
+      })
+      .then((res) => {
+        setCurrentCommentList(res.data.data);
+      });
+  }, [projectID, userID]);
+  useEffect(() => {
+    getAllComments();
+  }, [getAllComments]);
   return (
     <>
+      {modalState && (
+        <CustomPopUp
+          header={"Enter the link."}
+          placeholder={"Paste the URL for linking"}
+          onCancel={() => {
+            setModalState(false);
+          }}
+          onSubmit={(link) => {
+            if (!link) {
+              return;
+            }
+            const contentState = editorState.getCurrentContent();
+            const contentStateWithEntity = contentState.createEntity(
+              "LINK",
+              "MUTABLE",
+              { url: link }
+            );
+            const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+            const newEditorState = EditorState.set(editorState, {
+              currentContent: contentStateWithEntity,
+            });
+            onChange(
+              RichUtils.toggleLink(
+                newEditorState,
+                newEditorState.getSelection(),
+                entityKey
+              )
+            );
+            setModalState(false);
+          }}
+        />
+      )}
       <ComBox>
         <div className={"compDiv"}>
-          <p className={"header"} style={{
-            textAlign:"left",
-            marginLeft:"15px",
-            fontSize:"14px"
-          }}>Comment</p>
+          <p
+            className={"header"}
+            style={{
+              textAlign: "left",
+              marginLeft: "15px",
+              fontSize: "14px",
+            }}
+          >
+            Comment
+          </p>
         </div>
         <OptionBox />
         <div className={"inputCompBox"}>
@@ -251,7 +293,20 @@ const CommentBox = () => {
               const contentState = editorState.getCurrentContent();
               const raw = convertToRaw(contentState);
               const json = JSON.stringify(raw);
-              console.log(json);
+              axios
+                .post("/manage/comment", {
+                  userId: userID,
+                  projectId: projectID,
+                  stringContent: json,
+                })
+                .then((res) => {
+                  toast.success("Comment saved!");
+                  getAllComments();
+                  setEditorState(EditorState.createEmpty(linkDecorator));
+                })
+                .catch((err) => {
+                  toast.error("Couldn't add the comment!");
+                });
             }}
           >
             Save
@@ -259,6 +314,108 @@ const CommentBox = () => {
           <WhiteOnRed>Share</WhiteOnRed>
         </div>
       </ComBox>
+      {currentCommentList && (
+        <>
+          {currentCommentList
+            .map((comm) => {
+              const jsonDataComm = JSON.parse(comm.stringContent);
+              const contentState = convertFromRaw(jsonDataComm);
+              const editorState = EditorState.createWithContent(
+                contentState,
+                linkDecorator
+              );
+              return (
+                <AnnotationBox style={{ marginTop: "10px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <p
+                        style={{
+                          background: "rgba(227, 227, 227, 1)",
+                          fontSize: "16px",
+                          width: "30px",
+                          height: "30px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          display: "flex",
+                          padding: "14px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        {comm.author[0]}
+                      </p>
+                      <div
+                        style={{
+                          marginLeft: "10px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "2px",
+                        }}
+                      >
+                        <p style={{ fontSize: "14px", fontWeight: "500" }}>
+                          {comm.author}
+                        </p>
+                        <p
+                          style={{
+                            color: "#757575",
+                            fontSize: "9px",
+                          }}
+                        >
+                          {comm.time}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        marginRight: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          axios
+                            .delete("/manage/comment", {
+                              params: {
+                                userId: userID,
+                                projectId: projectID,
+                                commentId: comm.commentId,
+                              },
+                            })
+                            .then(() => {
+                              getAllComments();
+                              toast.success("Issue has been closed.");
+                            })
+                            .catch((err) => {
+                              toast.error("Failed to delete");
+                            });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{ marginTop: "12.5px", padding: "0 5px 8px 5px" }}
+                  >
+                    <Editor
+                      editorState={editorState}
+                      blockStyleFn={myBlockStyleFn}
+                      onChange={() => {}}
+                      readOnly={true}
+                    />
+                  </div>
+                </AnnotationBox>
+              );
+            })
+            .reverse()}
+        </>
+      )}
     </>
   );
 };
@@ -313,7 +470,7 @@ const ComBox = styled.div`
     width: 90%;
     justify-content: space-evenly;
     font-size: 16px;
-    background: rgba(227, 227, 227, 0.90);
+    background: rgba(227, 227, 227, 0.9);
     padding: 7px 0px;
     border-radius: 4px;
     margin: 3px auto 0 auto;
