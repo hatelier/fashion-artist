@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const materialApplication = createSlice({
   name: "materialApplication",
-  initialState:{
+  initialState: {
     materialReqs: {
       map: null,
       aoMap: null,
@@ -16,10 +16,14 @@ export const materialApplication = createSlice({
     modelMaterialReload: 0,
     textMeshArr: [],
     textTrigger: 0,
-    currentBackground: '#f0f0f0'
+    currentBackground: "#f0f0f0",
+    currentBackgroundImage: null,
   },
   reducers: {
-    updateCurrBack: (state, action)=>{
+    updateCurrBackImage: (state, action) => {
+      state.currentBackgroundImage = action.payload;
+    },
+    updateCurrBack: (state, action) => {
       state.currentBackground = action.payload;
     },
     updateTextTrigger: (state) => {
@@ -47,6 +51,7 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateCurrBackImage,
   updateTextTrigger,
   updateTextMesh,
   updateModelLoadRate,
@@ -54,6 +59,6 @@ export const {
   updateMaterialReqs,
   updateTopBar,
   updateMaterialReload,
-  updateCurrBack
+  updateCurrBack,
 } = materialApplication.actions;
 export default materialApplication.reducer;
