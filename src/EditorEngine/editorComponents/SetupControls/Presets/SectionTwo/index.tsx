@@ -39,7 +39,35 @@ const SectionTwo = () => {
   );
   // the coolest function. For applying the materials.
   const [status, setStatus] = useState(true);
-  function ApplyMaterials({ configData }) {
+  const [updatedName, setUpdatedNames] = useState({});
+  const [repsData, setRepsData] = useState([]);
+  function ApplyMaterials({ configData, resData }) {
+    // a filter for materialList,
+    materialList.filter((materss) =>
+      resData.some((cnfData) => {
+        if (cnfData.defaultName === materss.name) {
+          setUpdatedNames((state) => {
+            return {
+              ...state,
+              [materss.name]: cnfData.name,
+            };
+          });
+          materss.position.set(
+            cnfData.position.x,
+            cnfData.position.y,
+            cnfData.position.z
+          );
+          materss.rotation.set(
+            cnfData.rotation.x,
+            cnfData.rotation.y,
+            cnfData.rotation.z
+          );
+          materss.scale.set(cnfData.scale.x, cnfData.scale.y, cnfData.scale.z);
+        }
+        return 0;
+      })
+    );
+
     for (let i = 0; i < materialList.length; i++) {
       if (configData.hasOwnProperty(materialList[i].name)) {
         if (configData[materialList[i].name].selected !== null) {
@@ -120,7 +148,17 @@ const SectionTwo = () => {
         },
       })
       .then((res) => {
-        setAppliedTextures(res.data);
+        axios
+          .get("/manage/meshConfig", {
+            params: {
+              userId: userID,
+              productId: projectID,
+            },
+          })
+          .then((ress) => {
+            setRepsData(ress.data.data);
+            setAppliedTextures(res.data);
+          });
       })
       .catch((err) => {
         toast.error("Failed to retrieve config");
@@ -413,7 +451,9 @@ const SectionTwo = () => {
       {allCustomMaterials &&
         Object.keys(appliedTextures).length !== 0 &&
         appliedTextures &&
-        status && <ApplyMaterials configData={appliedTextures} />}
+        status && (
+          <ApplyMaterials configData={appliedTextures} resData={repsData} />
+        )}
       {materialList.length &&
         materialList.map((vlss, indexs) => {
           return (
@@ -430,7 +470,12 @@ const SectionTwo = () => {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <p className={"configHead"}>{vlss.name}</p>&nbsp;
+                    <p className={"configHead"}>
+                      {updatedName[`${vlss.name}`]
+                        ? updatedName[`${vlss.name}`]
+                        : vlss.name}
+                    </p>
+                    &nbsp;
                     <AiFillEdit
                       size={14}
                       onClick={() => {
