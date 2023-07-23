@@ -81,8 +81,8 @@ const SectionFive = () => {
                       style={{
                         background: "rgba(227, 227, 227, 1)",
                         fontSize: "16px",
-                        width: "35px",
-                        height: "35px",
+                        width: "30px",
+                        height: "30px",
                         alignItems: "center",
                         justifyContent: "center",
                         display: "flex",
@@ -101,15 +101,15 @@ const SectionFive = () => {
                       }}
                     >
                       <p style={{ fontSize: "14px", fontWeight: "500" }}>
-                        Myumx
+                        {comment.name}
                       </p>
                       <p
                         style={{
                           color: "#757575",
-                          fontSize: "10px",
+                          fontSize: "9px",
                         }}
                       >
-                        Jul 6, 2023 8:34 PM
+                        {comment.time}
                       </p>
                     </div>
                   </div>
@@ -155,7 +155,7 @@ const SectionFive = () => {
 };
 const AnnotationBox = styled.div`
   border-radius: 10px;
-  background: #F4F4F4;
+  background: #f4f4f4;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 15px;
   padding: 10px 9px;

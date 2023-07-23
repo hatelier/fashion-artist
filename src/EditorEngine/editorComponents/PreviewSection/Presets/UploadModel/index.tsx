@@ -126,7 +126,7 @@ const UploadModel = () => {
   const triggerDelete = useSelector(
     (state) => state.commentsRedux.triggerDelete
   );
-
+  const [userName, setUserName] = useState(null);
   const loadTicks = useCallback(() => {
     axios
       .get("/product/tick", {
@@ -136,19 +136,22 @@ const UploadModel = () => {
         },
       })
       .then((res) => {
-        if (res.data.tickPoints) {
-          const localComments = res.data.tickPoints.map((comment) => {
-            let vector = new Vector3(
-              comment.position.x,
-              comment.position.y - 1,
-              comment.position.z
-            );
-            let localPoint = groupRef.worldToLocal(vector);
-            return {
-              ...comment,
-              position: localPoint,
-            };
-          });
+        if (res.data.tickPoints.tickPoints) {
+          setUserName(res.data.name);
+          const localComments = res.data.tickPoints.tickPoints.map(
+            (comment) => {
+              let vector = new Vector3(
+                comment.position.x,
+                comment.position.y - 1,
+                comment.position.z
+              );
+              let localPoint = groupRef.worldToLocal(vector);
+              return {
+                ...comment,
+                position: localPoint,
+              };
+            }
+          );
           setPredefinedComments(localComments);
           dispatch(updateAnnotationList(localComments));
         }
@@ -315,6 +318,16 @@ const UploadModel = () => {
                             align: localPoint.x > 0 ? "left" : "right",
                           },
                         ]);
+                        const date = new Date();
+                        let options = {
+                          timeZone: "America/New_York",
+                          hour: "numeric",
+                          minute: "numeric",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour12: true,
+                        };
                         dispatch(
                           updateAnnotationList([
                             ...predefinedComments,
@@ -322,6 +335,11 @@ const UploadModel = () => {
                               text: commentText,
                               position: localPoint,
                               align: localPoint.x > 0 ? "left" : "right",
+                              name: userName,
+                              time: new Intl.DateTimeFormat(
+                                "en-US",
+                                options
+                              ).format(date),
                             },
                           ])
                         );
