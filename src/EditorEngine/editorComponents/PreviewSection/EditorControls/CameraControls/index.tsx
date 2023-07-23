@@ -7,8 +7,6 @@ import { faAngleDown, faAngleUp, faX } from "@fortawesome/free-solid-svg-icons";
 import Draggable from "react-draggable";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import onChange = toast.onChange;
 // import { materialControl } from "../../../../../redux/materialControl";
 
 const HybridLists = () => {
@@ -366,7 +364,7 @@ export const ExaNumberLabelledInputMui = React.forwardRef(
     },
     ref
   ) => {
-    const { label, width, value, required } = props;
+    const { label, width, value, required, onChange } = props;
     return (
       <TextField
         label={`${label}`}
@@ -376,7 +374,7 @@ export const ExaNumberLabelledInputMui = React.forwardRef(
         variant="outlined"
         size="small"
         ref={ref}
-        value={value}
+        defaultValue={value}
         name={`${label}`}
         style={{ width: `${width}` }}
         onChange={(e) => onChange(e)}
