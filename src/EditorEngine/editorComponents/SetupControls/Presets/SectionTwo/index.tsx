@@ -279,7 +279,7 @@ const SectionTwo = () => {
                 fontSize: "10px",
               }}
               onClick={() => {
-                matSwap("test");
+                matSwap(vls);
               }}
             />
             &nbsp;&nbsp;
@@ -422,6 +422,8 @@ const SectionTwo = () => {
       )}
       {materialDataSwap && (
         <MaterialSwap
+          selectedMat={materialDataSwap}
+          allCustomMaterials={allCustomMaterials}
           onClose={() => {
             setMaterialDataSwap(null);
           }}
