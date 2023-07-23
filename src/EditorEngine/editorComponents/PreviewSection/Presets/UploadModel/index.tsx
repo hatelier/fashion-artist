@@ -105,7 +105,11 @@ const UploadModel = () => {
     const intersects = raycaster.intersectObjects(scene.children, true); // add the second parameter as true to check against the children of the group as well.
     if (intersects.length > 0) {
       const [first] = intersects;
-      setModalPosition(first.point);
+      // console.log(first.point);
+      // console.log(new Vector3(first.point.x, first.point.y, first.point.z));
+      setModalPosition(
+        new Vector3(first.point.x, first.point.y + 1, first.point.z)
+      );
       setShowModal(true);
     }
   };
@@ -122,7 +126,7 @@ const UploadModel = () => {
   const triggerDelete = useSelector(
     (state) => state.commentsRedux.triggerDelete
   );
-
+  const [userName, setUserName] = useState(null);
   const loadTicks = useCallback(() => {
     axios
       .get("/product/tick", {
@@ -132,19 +136,22 @@ const UploadModel = () => {
         },
       })
       .then((res) => {
-        if (res.data.tickPoints) {
-          const localComments = res.data.tickPoints.map((comment) => {
-            let vector = new Vector3(
-              comment.position.x,
-              comment.position.y,
-              comment.position.z
-            );
-            let localPoint = groupRef.worldToLocal(vector);
-            return {
-              ...comment,
-              position: localPoint,
-            };
-          });
+        if (res.data.tickPoints.tickPoints) {
+          setUserName(res.data.name);
+          const localComments = res.data.tickPoints.tickPoints.map(
+            (comment) => {
+              let vector = new Vector3(
+                comment.position.x,
+                comment.position.y - 1,
+                comment.position.z
+              );
+              let localPoint = groupRef.worldToLocal(vector);
+              return {
+                ...comment,
+                position: localPoint,
+              };
+            }
+          );
           setPredefinedComments(localComments);
           dispatch(updateAnnotationList(localComments));
         }
@@ -286,6 +293,12 @@ const UploadModel = () => {
                       document.getElementById("comment").value;
 
                     let localPoint = groupRef.worldToLocal(modalPosition);
+                    console.log("world pointset", localPoint);
+                    localPoint = new Vector3(
+                      localPoint.x,
+                      localPoint.y - 1,
+                      localPoint.z
+                    );
                     axios
                       .post("/product/tick", {
                         userId: userID,
@@ -305,6 +318,16 @@ const UploadModel = () => {
                             align: localPoint.x > 0 ? "left" : "right",
                           },
                         ]);
+                        const date = new Date();
+                        let options = {
+                          timeZone: "America/New_York",
+                          hour: "numeric",
+                          minute: "numeric",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour12: true,
+                        };
                         dispatch(
                           updateAnnotationList([
                             ...predefinedComments,
@@ -312,6 +335,11 @@ const UploadModel = () => {
                               text: commentText,
                               position: localPoint,
                               align: localPoint.x > 0 ? "left" : "right",
+                              name: userName,
+                              time: new Intl.DateTimeFormat(
+                                "en-US",
+                                options
+                              ).format(date),
                             },
                           ])
                         );
@@ -336,7 +364,6 @@ const UploadModel = () => {
               <Html position={comment.position} center={true}>
                 <div
                   onClick={(es) => {
-                    console.log("sdfsdfsdf");
                     onCircleClick(es, index);
                   }}
                   style={{

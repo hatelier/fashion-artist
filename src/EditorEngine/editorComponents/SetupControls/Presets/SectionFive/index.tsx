@@ -66,96 +66,102 @@ const SectionFive = () => {
       <div style={{ marginTop: "10px" }}>
         {!enableComments && <CommentBox />}
         {enableComments &&
-          annotationList.map((comment, index) => {
-            return (
-              <AnnotationBox>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <p
-                      style={{
-                        background: "rgba(227, 227, 227, 1)",
-                        fontSize: "16px",
-                        width: "35px",
-                        height: "35px",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        display: "flex",
-                        padding: "14px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      {index + 1}
-                    </p>
-                    <div
-                      style={{
-                        marginLeft: "10px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "2px",
-                      }}
-                    >
-                      <p style={{ fontSize: "14px", fontWeight: "500" }}>
-                        Myumx
-                      </p>
+          annotationList
+            .map((comment, index) => {
+              return (
+                <AnnotationBox>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
                       <p
                         style={{
-                          color: "#757575",
-                          fontSize: "10px",
+                          background: "rgba(227, 227, 227, 1)",
+                          fontSize: "16px",
+                          width: "30px",
+                          height: "30px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          display: "flex",
+                          padding: "14px",
+                          borderRadius: "50%",
                         }}
                       >
-                        Jul 6, 2023 8:34 PM
+                        {index + 1}
                       </p>
+                      <div
+                        style={{
+                          marginLeft: "10px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "2px",
+                        }}
+                      >
+                        <p style={{ fontSize: "14px", fontWeight: "500" }}>
+                          {comment.name}
+                        </p>
+                        <p
+                          style={{
+                            color: "#757575",
+                            fontSize: "9px",
+                          }}
+                        >
+                          {comment.time}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        marginRight: "10px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <BiShareAlt style={{ fontSize: "19px" }} />
+                      &nbsp; &nbsp;
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        onClick={() => {
+                          axios
+                            .delete("/product/tick", {
+                              params: {
+                                userId: userID,
+                                productId: projectID,
+                                tickId: comment.id,
+                              },
+                            })
+                            .then((res) => {
+                              dispatch(updateTriggerDelete());
+                            })
+                            .catch((err) => {
+                              toast.error(
+                                "Something went wrong while deleting."
+                              );
+                            });
+                        }}
+                      />
                     </div>
                   </div>
                   <div
-                    style={{
-                      marginRight: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
+                    style={{ marginTop: "12.5px", padding: "0 5px 8px 5px" }}
                   >
-                    <BiShareAlt style={{ fontSize: "19px" }} />
-                    &nbsp; &nbsp;
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      onClick={() => {
-                        axios
-                          .delete("/product/tick", {
-                            params: {
-                              userId: userID,
-                              productId: projectID,
-                              tickId: comment.id,
-                            },
-                          })
-                          .then((res) => {
-                            dispatch(updateTriggerDelete());
-                          })
-                          .catch((err) => {
-                            toast.error("Something went wrong while deleting.");
-                          });
-                      }}
-                    />
+                    <p>{comment.text}</p>
                   </div>
-                </div>
-                <div style={{ marginTop: "12.5px", padding: "0 5px 8px 5px" }}>
-                  <p>{comment.text}</p>
-                </div>
-              </AnnotationBox>
-            );
-          })}
+                </AnnotationBox>
+              );
+            })
+            .reverse()}
       </div>
     </div>
   );
 };
-const AnnotationBox = styled.div`
+export const AnnotationBox = styled.div`
   border-radius: 10px;
-  background: #F4F4F4;
+  background: #f4f4f4;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 15px;
   padding: 10px 9px;

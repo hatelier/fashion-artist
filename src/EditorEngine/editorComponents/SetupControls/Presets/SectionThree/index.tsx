@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import {WhiteOnRed} from "../SectionFive/CommentBox";
+import { WhiteOnRed } from "../SectionFive/CommentBox";
 import CustomPopUp from "../../components/CustomPopUp";
 import MeshSelectPresets from "../../components/MeshSelectPresets";
 
@@ -57,70 +57,11 @@ const SectionThree = () => {
     }
   }, [firstLoad, materialArray, dispatch]);
 
-  const MaterialSelection = ({ unSelectedObjects, current }) => {
-    const [updatedList, setUpdatedList] = useState([]);
-    return (
-      <div style={{ border: "1px solid black" }}>
-        <h3>{current}</h3>
-        {unSelectedObjects.map((objectConfig) => {
-          return (
-            <label style={{ display: "flex", gap: "5px", margin: "3px" }}>
-              <input
-                type={"checkbox"}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setUpdatedList((upState) => {
-                      return [...upState, objectConfig];
-                    });
-                  } else {
-                    setUpdatedList((upState) => {
-                      let retArray = upState.filter((v) => v !== objectConfig);
-                      return [...retArray];
-                    });
-                  }
-                }}
-              />
-              <p>{objectConfig}</p>
-            </label>
-          );
-        })}
-        <button
-          onClick={() => {
-            //selected the objects of the preset
-            let presetObject = reqPreset.map((prVakl) => {
-              if (prVakl.name === current) {
-                return {
-                  ...prVakl,
-                  materialList: [...prVakl.materialList, ...updatedList],
-                  visibility: [
-                    ...prVakl.visibility,
-                    ...Array(updatedList.length).fill(true),
-                  ],
-                };
-              }
-              return prVakl;
-            });
-            dispatch(
-              updateUnUsedObjects(
-                unSelectedObjects.filter(
-                  (cuvls) => !updatedList.includes(cuvls)
-                )
-              )
-            );
-            setReqPreset(presetObject);
-            setToggleAdd((state) => !state);
-          }}
-        >
-          Save
-        </button>
-        ;
-      </div>
-    );
-  };
   //here are the states of the of the userID and projectID
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
+  const [presetState, setPresetState] = useState(false);
   // check whether the preset already exists
   useEffect(() => {
     if (projectID) {
@@ -141,7 +82,26 @@ const SectionThree = () => {
   }, [projectID, userID]);
   return (
     <div className={"sectionThreeDiv"}>
-        <CustomPopUp header={"Enter Preset Name"} placeholder={"Preset name"}/>
+      {presetState && (
+        <CustomPopUp
+          header={"Enter Preset Name"}
+          placeholder={"Preset name"}
+          onCancel={() => {
+            setPresetState(false);
+          }}
+          onSubmit={(name) => {
+            let innerObject = {
+              name,
+              materialList: [],
+              visibility: [],
+            };
+            setCurrentPreset(name);
+            setReqPreset((stateReq) => [...stateReq, innerObject]);
+            setToggleAdd((state) => !state);
+            setPresetState(false);
+          }}
+        />
+      )}
       <div
         style={{
           display: "flex",
@@ -155,28 +115,22 @@ const SectionThree = () => {
           alt=""
           src={AddConfig}
           onClick={() => {
-            let name = window.prompt("Enter the name of the project");
-            let innerObject = {
-              name,
-              materialList: [],
-              visibility: [],
-            };
-            setCurrentPreset(name);
-            setReqPreset((stateReq) => [...stateReq, innerObject]);
-            setToggleAdd((state) => !state);
+            setPresetState(true);
           }}
           style={{ width: "21.35px" }}
         />
       </div>
       {/*here is the material selection section*/}
       {toggleAdd && (
-        <MaterialSelection
+        <MeshSelectPresets
           unSelectedObjects={unUsedObjects}
           current={currentPreset}
+          setReqPreset={setReqPreset}
+          reqPreset={reqPreset}
+          setToggleAdd={setToggleAdd}
         />
       )}
       <div>
-          <MeshSelectPresets/>
         {(reqPreset ? reqPreset : presets).map((preset) => {
           return (
             <div className={"configBox"}>
@@ -270,9 +224,7 @@ const SectionThree = () => {
         >
           Save
         </WhiteOnRed>
-        <WhiteOnRed style={{ width: "60%" }}>
-          Cancel
-        </WhiteOnRed>
+        <WhiteOnRed style={{ width: "60%" }}>Cancel</WhiteOnRed>
       </div>
     </div>
   );
