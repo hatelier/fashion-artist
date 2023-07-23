@@ -105,7 +105,11 @@ const UploadModel = () => {
     const intersects = raycaster.intersectObjects(scene.children, true); // add the second parameter as true to check against the children of the group as well.
     if (intersects.length > 0) {
       const [first] = intersects;
-      setModalPosition(first.point);
+      // console.log(first.point);
+      // console.log(new Vector3(first.point.x, first.point.y, first.point.z));
+      setModalPosition(
+        new Vector3(first.point.x, first.point.y + 1, first.point.z)
+      );
       setShowModal(true);
     }
   };
@@ -136,7 +140,7 @@ const UploadModel = () => {
           const localComments = res.data.tickPoints.map((comment) => {
             let vector = new Vector3(
               comment.position.x,
-              comment.position.y,
+              comment.position.y - 1,
               comment.position.z
             );
             let localPoint = groupRef.worldToLocal(vector);
@@ -286,6 +290,12 @@ const UploadModel = () => {
                       document.getElementById("comment").value;
 
                     let localPoint = groupRef.worldToLocal(modalPosition);
+                    console.log("world pointset", localPoint);
+                    localPoint = new Vector3(
+                      localPoint.x,
+                      localPoint.y - 1,
+                      localPoint.z
+                    );
                     axios
                       .post("/product/tick", {
                         userId: userID,
@@ -336,7 +346,6 @@ const UploadModel = () => {
               <Html position={comment.position} center={true}>
                 <div
                   onClick={(es) => {
-                    console.log("sdfsdfsdf");
                     onCircleClick(es, index);
                   }}
                   style={{
