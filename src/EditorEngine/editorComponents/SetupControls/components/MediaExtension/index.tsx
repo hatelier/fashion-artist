@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import { WhiteOnRed } from "../../Presets/SectionFive/CommentBox";
-import { Slider } from "@mui/material";
+import { Slider, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateCameraState,
   updateResetCameraState,
 } from "../../../../../redux/savedCameraControls";
+import { updateTriggerHD } from "../../../../../redux/materialApplication";
 
 const MediaExtension = () => {
   const cameraProps = useSelector(
@@ -19,6 +20,7 @@ const MediaExtension = () => {
   const [mediaDropState, setMediaDropState] = useState(false);
   const [optDropState, setOptDropState] = useState({
     camera: false,
+    render: false,
   });
   const dispatch = useDispatch();
   return (
@@ -190,6 +192,121 @@ const MediaExtension = () => {
           )}
         </div>
       )}
+      {mediaDropState && (
+        <div className={"HdRenderClass"}>
+          <div
+            className={"cameraHeader"}
+            onClick={() => {
+              setOptDropState((state) => {
+                return {
+                  ...state,
+                  render: !state.camera,
+                };
+              });
+            }}
+          >
+            <p
+              className={"midBoldclass"}
+              style={{
+                fontSize: "12px",
+              }}
+            >
+              HD Render
+            </p>
+            {optDropState.render && <GrClose size={12} />}
+          </div>
+          <form
+            style={{
+              width: "100%",
+              marginTop: "15px",
+            }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(
+                updateTriggerHD({
+                  height: e.target.height.value,
+                  width: e.target.width.value,
+                })
+              );
+            }}
+          >
+            <p>Resolution</p>
+            <div
+              style={{
+                marginTop: "8px",
+                display: "flex",
+                gap: "10px",
+              }}
+            >
+              <TextField
+                variant="outlined"
+                size="small"
+                id="filled-size-small"
+                label={"Height"}
+                name={"height"}
+                required={true}
+                type={"number"}
+                defaultValue={1080}
+                style={{
+                  width: "45%",
+                }}
+                inputProps={{
+                  style: {
+                    fontSize: "11px",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontSize: "11px",
+                  },
+                }}
+              />
+              <TextField
+                variant="outlined"
+                size="small"
+                id="filled-size-small"
+                label={"width"}
+                name={"width"}
+                required={true}
+                defaultValue={1920}
+                type={"number"}
+                style={{
+                  width: "45%",
+                }}
+                inputProps={{
+                  style: {
+                    fontSize: "11px",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontSize: "11px",
+                  },
+                }}
+              />
+            </div>
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                marginTop: "10px",
+              }}
+            >
+              <input type={"checkbox"} />
+              <p className={"midBoldclass"}>No shadow</p>
+            </label>
+            <WhiteOnRed
+              style={{
+                width: "100%",
+                marginTop: "10px",
+              }}
+            >
+              Download HD render
+            </WhiteOnRed>
+          </form>
+        </div>
+      )}
     </MediaCss>
   );
 };
@@ -199,6 +316,23 @@ const MediaCss = styled.div`
   background: #f4f4f4;
   border-radius: 10px;
   .cameraClass {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0px auto 10px auto;
+    align-items: center;
+    padding: 8px;
+    background: var(--text, #eaeaea);
+    border-radius: 5px;
+    .cameraHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+  .HdRenderClass {
     display: flex;
     flex-direction: column;
     width: 90%;

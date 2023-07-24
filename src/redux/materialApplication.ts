@@ -19,8 +19,12 @@ export const materialApplication = createSlice({
     textTrigger: 0,
     currentBackground: "#f0f0f0",
     currentBackgroundImage: null,
+    triggerHDRender: false,
   },
   reducers: {
+    updateTriggerHD: (state, action) => {
+      state.triggerHDRender = action.payload;
+    },
     updateCurrBackImage: (state, action) => {
       state.currentBackgroundImage = action.payload;
     },
@@ -52,6 +56,7 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateTriggerHD,
   updateCurrBackImage,
   updateTextTrigger,
   updateTextMesh,
