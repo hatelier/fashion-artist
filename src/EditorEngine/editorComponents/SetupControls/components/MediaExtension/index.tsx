@@ -200,7 +200,7 @@ const MediaExtension = () => {
               setOptDropState((state) => {
                 return {
                   ...state,
-                  render: !state.camera,
+                  render: !state.render,
                 };
               });
             }}
@@ -215,96 +215,100 @@ const MediaExtension = () => {
             </p>
             {optDropState.render && <GrClose size={12} />}
           </div>
-          <form
-            style={{
-              width: "100%",
-              marginTop: "15px",
-            }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(
-                updateTriggerHD({
-                  height: e.target.height.value,
-                  width: e.target.width.value,
-                })
-              );
-            }}
-          >
-            <p>Resolution</p>
-            <div
-              style={{
-                marginTop: "8px",
-                display: "flex",
-                gap: "10px",
-              }}
-            >
-              <TextField
-                variant="outlined"
-                size="small"
-                id="filled-size-small"
-                label={"Height"}
-                name={"height"}
-                required={true}
-                type={"number"}
-                defaultValue={1080}
+          {optDropState.render && (
+            <>
+              <form
                 style={{
-                  width: "45%",
+                  width: "100%",
+                  marginTop: "15px",
                 }}
-                inputProps={{
-                  style: {
-                    fontSize: "11px",
-                  },
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  dispatch(
+                    updateTriggerHD({
+                      height: e.target.height.value,
+                      width: e.target.width.value,
+                    })
+                  );
                 }}
-                InputLabelProps={{
-                  style: {
-                    fontSize: "11px",
-                  },
-                }}
-              />
-              <TextField
-                variant="outlined"
-                size="small"
-                id="filled-size-small"
-                label={"width"}
-                name={"width"}
-                required={true}
-                defaultValue={1920}
-                type={"number"}
-                style={{
-                  width: "45%",
-                }}
-                inputProps={{
-                  style: {
-                    fontSize: "11px",
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontSize: "11px",
-                  },
-                }}
-              />
-            </div>
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                marginTop: "10px",
-              }}
-            >
-              <input type={"checkbox"} />
-              <p className={"midBoldclass"}>No shadow</p>
-            </label>
-            <WhiteOnRed
-              style={{
-                width: "100%",
-                marginTop: "10px",
-              }}
-            >
-              Download HD render
-            </WhiteOnRed>
-          </form>
+              >
+                <p>Resolution</p>
+                <div
+                  style={{
+                    marginTop: "8px",
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    id="filled-size-small"
+                    label={"Height"}
+                    name={"height"}
+                    required={true}
+                    type={"number"}
+                    defaultValue={1080}
+                    style={{
+                      width: "45%",
+                    }}
+                    inputProps={{
+                      style: {
+                        fontSize: "11px",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontSize: "11px",
+                      },
+                    }}
+                  />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    id="filled-size-small"
+                    label={"width"}
+                    name={"width"}
+                    required={true}
+                    defaultValue={1920}
+                    type={"number"}
+                    style={{
+                      width: "45%",
+                    }}
+                    inputProps={{
+                      style: {
+                        fontSize: "11px",
+                      },
+                    }}
+                    InputLabelProps={{
+                      style: {
+                        fontSize: "11px",
+                      },
+                    }}
+                  />
+                </div>
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    marginTop: "10px",
+                  }}
+                >
+                  <input type={"checkbox"} />
+                  <p className={"midBoldclass"}>No shadow</p>
+                </label>
+                <WhiteOnRed
+                  style={{
+                    width: "100%",
+                    marginTop: "10px",
+                  }}
+                >
+                  Download HD render
+                </WhiteOnRed>
+              </form>
+            </>
+          )}
         </div>
       )}
     </MediaCss>
