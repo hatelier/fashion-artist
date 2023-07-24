@@ -1,6 +1,12 @@
 // @ts-nocheck
 //modelPreview/index.tsx
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./index.scss";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls, PerformanceMonitor } from "@react-three/drei";
@@ -17,27 +23,47 @@ import { DoubleSide, TextureLoader } from "three";
 
 const ModelPreview = (props) => {
   const { file } = useContext(props.context);
-  // const ref = useRef();
   const OrbitalController = () => {
-    const { camera } = useThree();
-    //here are the controllable camera properties
-    const { x, y, z } = useSelector(
-      (state) => state.savedCameraControls.cameraProps
+    const { camera: threeCamera } = useThree();
+    const camera = useRef(threeCamera);
+    console.log(
+      "loggseiri",
+      useSelector((state) => state.savedCameraControls.cameraStatus)
     );
-    camera.fov = 50;
-    console.log("first load", x, y, z);
-    camera.position.set(x, y, z);
-    camera.zoom = 2;
-    camera.updateProjectionMatrix();
+    const { fov, rotSpeed, zoomSpeed, horRan, vertAngle, rotInert, zoomRange } =
+      useSelector((state) => state.savedCameraControls.cameraStatus);
+    useEffect(() => {
+      camera.current.fov = fov.value;
+      camera.current.zoom = 2;
+      camera.current.updateProjectionMatrix();
+    }, [camera, fov]);
     return (
       <OrbitControls
         enableZoom={true}
         enablePan={false}
-        zoomSpeed={0.8}
+        zoomSpeed={zoomSpeed.value}
         panSpeed={1}
-        camera={camera}
+        camera={camera.current}
+        rotateSpeed={rotSpeed.value}
+        enableDamping={true}
+        minAzimuthAngle={(horRan.value[0] * Math.PI) / 180}
+        maxAzimuthAngle={(horRan.value[1] * Math.PI) / 180}
+        minPolarAngle={(vertAngle.value[0] * Math.PI) / 180}
+        maxPolarAngle={(vertAngle.value[1] * Math.PI) / 180}
+        dampingFactor={rotInert.value / 1000}
+        minZoom={zoomRange.value[0] / 100}
+        maxZoom={zoomRange.value[1] / 100}
       />
     );
+  };
+  const OrbitalControllerPos = () => {
+    const { camera: threeCamera } = useThree();
+    const camera = useRef(threeCamera);
+    const { x, y, z } = useSelector(
+      (state) => state.savedCameraControls.cameraProps
+    );
+    camera.current.position.set(x, y, z);
+    return <OrbitControls camera={camera.current} />;
   };
   const modelURL = useSelector(
     (state: any) => state.materialApplication.modelUrl
@@ -145,6 +171,7 @@ const ModelPreview = (props) => {
         >
           <Skybox />
           {modelURL && <UploadModel model={file} settings={props.settings} />}
+          <OrbitalControllerPos />
           <OrbitalController />
           <PolyCountController />
         </Suspense>
