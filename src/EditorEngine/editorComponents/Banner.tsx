@@ -36,7 +36,7 @@ export const mediaDataJson = {
   fov: { value: 50, type: "def", name: "Field of view" },
   // intHor: { value: 0, type: "def", name: "Initial horizontal angle" },
   horRan: {
-    value: [10, 360],
+    value: [10, 340],
     type: "mul",
     name: "Horizontal range",
   },
