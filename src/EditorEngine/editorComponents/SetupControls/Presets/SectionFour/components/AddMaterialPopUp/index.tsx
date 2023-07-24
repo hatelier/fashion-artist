@@ -24,7 +24,7 @@ import { SketchPicker } from "react-color";
 // import * as THREE from "three";
 // import { updateMaterialReload } from "../../../../../../../redux/materialApplication";
 import { updateCustomMaterial } from "../../../../../../../redux/accountManagement";
-import {WhiteOnRed} from "../../../SectionFive/CommentBox";
+import { WhiteOnRed } from "../../../SectionFive/CommentBox";
 
 const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [imageStatus, setImageStatus] = useState({
@@ -32,83 +32,53 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
     roughnessMap: addPic,
     normalMap: addPic,
     aoMap: addPic,
+    metalnessMap: addPic,
+    emissionMap: addPic,
   });
-
-  /*const [materialStatus, setMaterialStatus] = useState({
-    map: null,
-    roughnessMap: null,
-    normalMap: null,
-    aoMap: null,
-  });*/
-
-  // here is the function that creates the preview.
-  /*const materialArray = useSelector(
-    (state) => state.materialControl.materialArray
-  );*/
 
   const FileToURL = (e) => {
     const file = e.target.files[0];
-    setCollectiveData((state) => {
-      return {
-        ...state,
-        [`${e.target.name}`]: file,
-      };
-    });
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      // const textured = new TextureLoader().load(reader.result as string);
-      // setMaterialStatus((state) => {
-      //   return {
-      //     ...state,
-      //     [`${e.target.name}`]: textured,
-      //   };
-      // });
-      setImageStatus((state) => {
-        return {
-          ...state,
-          [`${e.target.name}`]: reader.result,
+    let fileData = new FormData();
+    fileData.append("file", e.target.files[0]);
+    fileData.append("userId", userID);
+    fileData.append("productId", projectID);
+    fileData.append("folderName", "materialsAPDL");
+    axios
+      .post("/product/uploadAndGetPath", fileData)
+      .then((res) => {
+        toast.success("File upload successfull.");
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          setImageStatus((state) => {
+            return {
+              ...state,
+              [`${e.target.name}`]: reader.result,
+            };
+          });
         };
+        setFileUploadLocs((state) => {
+          return {
+            ...state,
+            [`${e.target.name}`]: res.data.fullPath,
+          };
+        });
+      })
+      .catch((err) => {
+        toast.error("Failed to upload files.");
+        setImageStatus((state) => {
+          return {
+            ...state,
+            [`${e.target.name}`]: addPic,
+          };
+        });
       });
-    };
   };
-
-  /*function getImageDataURL(image) {
-    let canvas = document.createElement("canvas");
-    canvas.width = image.width;
-    canvas.height = image.height;
-
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(image, 0, 0);
-
-    return canvas.toDataURL();
-  }*/
-
-  /*function dataURLtoBlob(dataurl) {
-    let arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], { type: mime });
-  }*/
 
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
   );
 
-  const [collectiveData, setCollectiveData] = useState({
-    clearcoat: false,
-    ior: false,
-    materialName: "",
-    transform: false,
-    transmission: false,
-    offU: 0,
-    offV: 0,
-  });
   const tillingX = useRef();
   const tillingY = useRef();
   const tillingRotation = useRef();
@@ -117,6 +87,14 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   const [defaultColorUpa, setDefaultColorUpa] = useState(null);
   const dispatch = useDispatch();
   const [loaderState, setLoaderState] = useState(false);
+  const [fileUploadLocs, setFileUploadLocs] = useState({
+    map: null,
+    roughnessMap: null,
+    normalMap: null,
+    aoMap: null,
+    metalnessMap: null,
+    emissionMap: null,
+  });
   if (updateMode === true) {
     //this component is used if the mode is set to Update Mode.
     return (
@@ -220,14 +198,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             type={"text"}
             defaultValue={updateData.materialName}
             disabled={true}
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  materialName: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => {}}
             name={"materialNameJsx"}
             style={{
               border: "1px solid #000000",
@@ -373,14 +344,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               className={"enableior"}
               name={"enableior"}
               defaultChecked={updateData.ior === 2.33}
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    ior: e.target.checked,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
             Enable IOR
           </LabelCentered>
@@ -390,14 +354,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               className={"enableclearcoat"}
               name={"enableclearcoat"}
               defaultChecked={updateData.clearcoat === 1}
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    clearcoat: e.target.checked,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
             Enable Clearcoat
           </LabelCentered>
@@ -407,14 +364,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               className={"enabletransmission"}
               name={"enabletransmission"}
               defaultChecked={updateData.transmission === 1}
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    transmission: e.target.checked,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
             Enable Transmission
           </LabelCentered>
@@ -422,14 +372,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             <input
               type={"checkbox"}
               className={"enabletransform"}
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    transform: e.target.checked,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
             Enable Transform
           </LabelCentered>
@@ -467,14 +410,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               aria-label="Small"
               name={"offsetU"}
               valueLabelDisplay="auto"
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    offU: e.target.value,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
           </div>
 
@@ -486,14 +422,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               aria-label="Small"
               name={"offsetV"}
               valueLabelDisplay="auto"
-              onChange={(e) => {
-                setCollectiveData((state) => {
-                  return {
-                    ...state,
-                    offV: e.target.value,
-                  };
-                });
-              }}
+              onChange={(e) => {}}
             />
           </div>
         </div>
@@ -538,20 +467,6 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       className={"addMaterialPopUp"}
       onSubmit={(e) => {
         e.preventDefault();
-        const formData = new FormData();
-
-        formData.append("files", collectiveData.aoMap, "ao-map.png");
-        formData.append("files", collectiveData.map, "map-map.png");
-        formData.append(
-          "files",
-          collectiveData.normalMap,
-          "normal-map-map.png"
-        );
-        formData.append(
-          "files",
-          collectiveData.roughnessMap,
-          "roughness-map-map.png"
-        );
 
         // here is the updated axios object
         const objData = {
@@ -561,26 +476,32 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           baseMap: {
             imgName: "map-map.png",
             useTransparent: e.target.useTransparent.checked,
+            path: fileUploadLocs.map,
           },
           metalMap: {
             imgName: "metal-map.png",
             factor: Number(e.target.metalRange.value) / 100,
+            path: fileUploadLocs.metalnessMap,
           },
           roughnessMap: {
             imgName: "roughness-map-map.png",
             factor: Number(e.target.roughnessRange.value) / 100,
+            path: fileUploadLocs.roughnessMap,
           },
           normalMap: {
             imgName: "normal-map-map.png",
             factor: Number(e.target.normalRange.value) / 100,
+            path: fileUploadLocs.normalMap,
           },
           emissionMap: {
             imgName: "emission-map.jpg",
             factor: Number(e.target.emissionRange.value) / 100,
+            path: fileUploadLocs.emissionMap,
           },
           occlusionMap: {
             imgName: "ao-map.png",
             factor: Number(e.target.occlusionRange.value) / 100,
+            path: fileUploadLocs.aoMap,
           },
           ior: e.target.enableior.checked ? 2.33 : 1.5,
           clearcoat: e.target.enableclearcoat.checked ? 1 : 0,
@@ -601,23 +522,14 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         };
 
         // this is the Axios image upload part.
+
         axios
-          .post(
-            `/materials/upload?userID=${userID}&folderName=${collectiveData.materialName}&productID=${projectID}`,
-            formData
-          )
-          .then(async (response) => {
-            axios
-              .post("/materials/add", objData)
-              .then((response) => {
-                loadAPI();
-              })
-              .catch((error) => {
-                toast.error(error);
-              });
+          .post("/materials/add", objData)
+          .then((response) => {
+            loadAPI();
           })
           .catch((error) => {
-            toast.error("Error uploading");
+            toast.error(error);
           });
       }}
     >
@@ -627,28 +539,36 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         name={"map"}
         className={"map"}
         onChange={FileToURL}
-        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"roughnessMap"}
         className={"roughnessMap"}
         onChange={FileToURL}
-        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"normalMap"}
         className={"normalMap"}
         onChange={FileToURL}
-        required={true}
       />
       <InvisibleFileUploader
         type={"file"}
         name={"aoMap"}
         className={"aoMap"}
         onChange={FileToURL}
-        required={true}
+      />
+      <InvisibleFileUploader
+        type={"file"}
+        name={"metalnessMap"}
+        className={"metalnessMap"}
+        onChange={FileToURL}
+      />
+      <InvisibleFileUploader
+        type={"file"}
+        name={"emissionMap"}
+        className={"emissionMap"}
+        onChange={FileToURL}
       />
 
       <div
@@ -676,14 +596,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
         <input
           required={true}
           type={"text"}
-          onChange={(e) => {
-            setCollectiveData((state) => {
-              return {
-                ...state,
-                materialName: e.target.value,
-              };
-            });
-          }}
+          onChange={(e) => {}}
           name={"materialNameJsx"}
           style={{
             border: "1px solid #000000",
@@ -707,6 +620,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               // background: "lightgrey",
               borderRadius: "10px",
               background: `url(${imageStatus.map}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             onClick={() => {
               document.querySelector(".map").click();
@@ -746,7 +661,20 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Metalness Map</p>
         <div style={{ display: "flex", marginTop: "5px" }}>
-          <img src={addPic} alt="addPic" />
+          <div
+            style={{
+              width: "46px",
+              height: "46px",
+              // background: "lightgrey",
+              borderRadius: "10px",
+              background: `url(${imageStatus.metalnessMap}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            onClick={() => {
+              document.querySelector(".metalnessMap").click();
+            }}
+          ></div>
           <div style={{ marginLeft: "10px", width: "139px" }}>
             <p>Metalness factor</p>
             <Slider
@@ -771,6 +699,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               // background: "lightgrey",
               borderRadius: "10px",
               background: `url(${imageStatus.roughnessMap}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             onClick={() => {
               document.querySelector(".roughnessMap").click();
@@ -800,6 +730,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               // background: "lightgrey",
               borderRadius: "10px",
               background: `url(${imageStatus.normalMap}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             onClick={() => {
               document.querySelector(".normalMap").click();
@@ -822,7 +754,19 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
       <div style={{ marginTop: "10px" }}>
         <p style={{ fontSize: "11px", fontWeight: 600 }}>Emission Map</p>
         <div style={{ display: "flex", marginTop: "5px" }}>
-          <img src={addPic} alt="addPic" />
+          <div
+            style={{
+              width: "46px",
+              height: "46px",
+              borderRadius: "10px",
+              background: `url(${imageStatus.emissionMap}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            onClick={() => {
+              document.querySelector(".emissionMap").click();
+            }}
+          ></div>
           <div style={{ marginLeft: "10px", width: "139px" }}>
             <p>emission factor</p>
             <Slider
@@ -847,6 +791,8 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
               // background: "lightgrey",
               borderRadius: "10px",
               background: `url(${imageStatus.aoMap}`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             onClick={() => {
               document.querySelector(".aoMap").click();
@@ -871,7 +817,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           display: "flex",
           flexDirection: "column",
           gap: "15px",
-          marginTop: "11p",
+          marginTop: "11px",
         }}
       >
         <LabelCentered>
@@ -879,14 +825,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             type={"checkbox"}
             className={"enableior"}
             name={"enableior"}
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  ior: e.target.checked,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
           Enable IOR
         </LabelCentered>
@@ -895,14 +834,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             type={"checkbox"}
             className={"enableclearcoat"}
             name={"enableclearcoat"}
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  clearcoat: e.target.checked,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
           Enable Clearcoat
         </LabelCentered>
@@ -911,14 +843,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             type={"checkbox"}
             className={"enabletransmission"}
             name={"enabletransmission"}
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  transmission: e.target.checked,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
           Enable Transmission
         </LabelCentered>
@@ -926,14 +851,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           <input
             type={"checkbox"}
             className={"enabletransform"}
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  transform: e.target.checked,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
           Enable Transform
         </LabelCentered>
@@ -971,14 +889,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             aria-label="Small"
             name={"offsetU"}
             valueLabelDisplay="auto"
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  offU: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
         </div>
 
@@ -990,14 +901,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
             aria-label="Small"
             name={"offsetV"}
             valueLabelDisplay="auto"
-            onChange={(e) => {
-              setCollectiveData((state) => {
-                return {
-                  ...state,
-                  offV: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => {}}
           />
         </div>
       </div>
@@ -1024,58 +928,7 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
           justifyContent: "space-between",
         }}
       >
-        <WhiteOnRed
-          type={"submit"}
-          // // this code for stripping the material out of parts.
-          // ["normalMap", "aoMap", "map", "roughnessMap"].map((vls) => {
-          //   if (materialArray[4].material[`${vls}`]) {
-          //     console.log(materialArray[4].material[`${vls}`].image);
-          //     const normalMapDataURL = getImageDataURL(
-          //       materialArray[4].material[`${vls}`].image
-          //     );
-          //     const blob = dataURLtoBlob(normalMapDataURL);
-          //     formData.append("files", blob, `${vls}-map.png`);
-          //   }
-          //   return 0;
-          // });
-
-          // materialStatus.map.repeat.set(30, 30);
-          // materialStatus.normalMap.repeat.set(30, 30);
-          // materialStatus.roughnessMap.repeat.set(30, 30);
-          // materialStatus.aoMap.repeat.set(30, 30);
-          //
-          // //offset test
-          // //ranges from 0 to 1, along U and V
-          // materialStatus.normalMap.offset.set(0, 0);
-          // materialStatus.normalMap.rotation = 0 * (Math.PI / 180);
-          //
-          // //   material wrapping
-          // materialStatus.map.wrapS =
-          //   materialStatus.map.wrapT =
-          //   materialStatus.normalMap.wrapS =
-          //   materialStatus.normalMap.wrapT =
-          //   materialStatus.roughnessMap.wrapS =
-          //   materialStatus.roughnessMap.wrapT =
-          //   materialStatus.aoMap.wrapS =
-          //   materialStatus.aoMap.wrapT =
-          //     THREE.RepeatWrapping;
-          //
-          // materialArray[4].material = new MeshPhysicalMaterial({
-          //   ...materialStatus,
-          //   side: THREE.DoubleSide,
-          //   //other paramters
-          //   aoMapIntensity: 1,
-          //   roughness: 1,
-          //   metalness: 0,
-          //   color: "",
-          //   name: "New Material",
-          //   clearcoat: 0, //float
-          //   ior: 1.5, //this value ranges from 1 to 2.33 def is 1.5,
-          //   transmission: 0, //float
-          // });
-        >
-          Create
-        </WhiteOnRed>
+        <WhiteOnRed type={"submit"}>Create</WhiteOnRed>
         <WhiteButtonClass>Remove</WhiteButtonClass>
       </div>
     </form>
@@ -1083,39 +936,3 @@ const AddMaterialPopUp = ({ setState, loadAPI, updateMode, updateData }) => {
   );
 };
 export default AddMaterialPopUp;
-//redundent code
-// adding a color picker here
-// <div style={{
-//   borderRadius: "10px",
-//       width: "45px",
-//       height: "45px",
-//       overflow: "hidden"
-// }}
-// onClick={() => {
-//   document.querySelector(".map").click();
-// }}
-// >
-// <ReactImageMagnify
-// {...{
-//   smallImage: {
-//     alt: 'Wristwatch by Ted Baker London',
-//         // isFluidWidth: true,
-//         src: imageStatus.map,
-//         width: 45,
-//         height: 45
-//   },
-//   largeImage: {
-//     src: imageStatus.map,
-//         width: 1000,
-//         height: 1000,
-//         zindex: 3
-//   },
-//   enlargedImageContainerDimensions: {
-//     width: '600%',
-//         height: '600%'
-//   },
-//   style: {
-//     borderRadius: "10px"
-//   }
-// }} />
-// </div>
