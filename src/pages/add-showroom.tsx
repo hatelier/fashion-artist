@@ -197,12 +197,23 @@ export const AddShowroom = () => {
                             <input type="text" value={showroomName} onChange={(e) => setShowroomName(e.target.value)}/>
                         </div>
                         <div className="add-showroom-details-item">
-                            <label htmlFor="">Tags</label>
+                            <label htmlFor="">Seasons</label>
                             <input type="text" value={tags} onChange={(e) => setTags(e.target.value)}/>
                         </div>
                         </div>
                         <div className='add-showroom-details-buttons'>
+                        </div>
+                        </div>  
                         <div className="add-showroom-details-item">
+                            <label htmlFor="">Tags</label>
+                            <input type="text" value={tags} onChange={(e) => setTags(e.target.value)}/>
+                        </div>
+                </div>
+                <div className="add-showroom-layouts">
+                    <div className="add-showroom-heading">Showroom Layout</div>
+                    <div className="add-showroom-layouts-block">
+                        <div className="add-showroom-font-text">
+                            <div className="add-showroom-layout-products">
                             <label htmlFor="">Logo</label>
                             <button className="add-showroom-upload-button">
                             <label htmlFor="fileInput">
@@ -216,21 +227,6 @@ export const AddShowroom = () => {
                               <span>Upload</span>
                              </label>
                             </button>
-                        </div>
-                        </div>
-                        </div>  
-                </div>
-                <div className="add-showroom-layouts">
-                    <div className="add-showroom-heading">Showroom Layout</div>
-                    <div className="add-showroom-layouts-block">
-                        <div className="add-showroom-font-text">
-                            <div className="add-showroom-layout-products">
-                                <label htmlFor="">#Products per row</label>
-                                <div className="credit-unit-buttons">
-                                  <button className="credit-minus-button">-</button>
-                                  <button className="credit-current-button">9</button>
-                                  <button className="credit-plus-button">+</button>
-                                </div>
                             </div>
                              <div className="add-showroom-layout-text">
                                 <label htmlFor="">Text Color</label>

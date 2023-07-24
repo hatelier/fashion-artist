@@ -343,7 +343,7 @@ export const Analytics = () => {
                       {mostViewedProduct && (
                         <div className="analytics-most-viewed-img">
                         {mostViewedProduct && (
-                        <img src={mostViewedProduct} style={{ marginTop: '10px', marginLeft: '5px' }} height={350} width={280} alt="Most Viewed Product" />
+                        <img src={mostViewedProduct}  alt="Most Viewed Product" className='analytics-most-viewed-img-main'/>
                         )}
                         {/* <div className="analytics-most-viewed-img">
                         <img src={require('../assets/pngs/mostviewproduct.png')} alt="back" className='analytics-linechart' style={{"height":"100%"}}/>

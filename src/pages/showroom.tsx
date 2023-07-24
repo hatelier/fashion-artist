@@ -174,6 +174,36 @@ export const Showroom = () => {
     className : 'invite-member-toast'
   }) 
   }
+
+
+  const ShowRoomRowPhone = () =>{
+    return(
+      <div className="showroom-row-phone">
+      <input type="checkbox" />
+      <div className="showroom-row-content">
+        <div className="showroom-row-top">
+        <img src={require('../assets/pngs/rectangle.png')} alt="" className='sidenav-img'/>
+        <div>ShowRoom Name</div>
+        </div>
+        <div className="showroom-row-bottom">
+          <div className="showroom-row-bottom-1">
+            <span>Last modified date</span>
+            <span>Products Counts</span>
+          </div>
+          <div className="showroom-row-bottom-2">
+            <span>20/04/2023</span>
+            <span>8</span>
+          </div>
+        </div>
+      </div>
+      <div className='showroom-row-phone-threedot'>
+        <img src={require('../assets/pngs/card-dots.png')} alt="" className='sidenav-img'/>
+      </div>
+
+  </div>
+    )
+  }
+
     return ( 
     <div className='home-container'>
           {isOpen && (
@@ -231,12 +261,15 @@ export const Showroom = () => {
                </div>
              </div>
              </div>
-             < div className="subscription">
+             <div className="subscription">
              <div className="templates-input-group">
                 <input type="text" className="templates-input" placeholder="search by showroom"/>
                 <a href="/add-showroom" className="add-product">
                     <img src={require('../assets/pngs/add.png')} alt="add new showroom" />
                     Show room
+                </a>
+                <a href="/add-showroom" className='add-product-phone'>
+                    <img src={require('../assets/pngs/AddTeammate.png')} alt="add new showroom" />
                 </a>
              </div>
              <div className='showroom'>
@@ -325,12 +358,21 @@ export const Showroom = () => {
                     </div>
                     <div className="showroom-cell"><button className="showroom-action-buttons" onClick={handleDeleteShowroomPopup}><img src={require('../assets/pngs/dustbin.png')} alt="" /></button></div>
                     <div className="showroom-cell"><a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/dustbin.png')} alt="" /></a></div>
-                    </div>
-              ))}
               </div>
-             
-             </div> 
-             
+              ))}
+
+              <div className="showroom-heading-phone">
+                <input type="checkbox" />
+                <div>Select all</div>
+              </div>
+              <ShowRoomRowPhone/>
+              <ShowRoomRowPhone/>
+              <ShowRoomRowPhone/>
+              <ShowRoomRowPhone/>
+              <ShowRoomRowPhone/>
+              <ShowRoomRowPhone/>
+
+             </div>
                {/* <table className="showroom-block">
                 <tr className="showroom-heading-row">
                   <th className="showroom-heading-cell"><div className="showroom-heading-box"></div></th>
@@ -419,6 +461,7 @@ export const Showroom = () => {
             </div>
           </div>
         </div>
+      </div>
       </section>
       <TokenVerification />
     </div>
