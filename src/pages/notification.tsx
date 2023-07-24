@@ -4,7 +4,7 @@ import { Header } from '../components/header';
 
 import { Sidenav } from '../components/sidenav';
 
-
+ 
 const NotificationItem = ()=>{
 
     const Msg = () => (
@@ -29,6 +29,33 @@ const NotificationItem = ()=>{
         }) 
       }
 
+      const DeletePopup = ()=>{
+        return(
+          <div className="team-delete-popup">
+            <img src={require('../assets/pngs/warning.png')} alt="" />
+            <div className='team-delete-popup-msg'>
+            <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
+            <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete this notification</p>
+            <button className="team-popup-btn" style={{"border":"none"}} onClick={deleteSingleNotification }>Proceed</button>
+            </div>
+          </div>
+        )
+      }
+      const handleDeleteTeamPopup = () =>{
+        toast(<DeletePopup />, {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        className :' team-delete-toast'
+      }) 
+      }
+
+
+
     return(
         <div className="notification-container">
             <div className="notification-check-box">
@@ -44,11 +71,13 @@ const NotificationItem = ()=>{
             </div>
             <div className="notification-delete">
 
-                <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img' onClick={deleteSingleNotification}/>
+                <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img' onClick={handleDeleteTeamPopup}/>
             </div>
         </div>
     )
 }
+
+
 
 export const Notification = () => {
 
@@ -74,6 +103,31 @@ export const Notification = () => {
           className : 'delete-notification-toast'
         }) 
       }
+
+      const DeletePopup = ()=>{
+        return(
+          <div className="team-delete-popup">
+            <img src={require('../assets/pngs/warning.png')} alt="" />
+            <div className='team-delete-popup-msg'>
+            <p style={{"fontSize":"20px", "color" : "var(--font-color"}}>Confirmation Action</p>
+            <p style={{"fontSize":"12px", "color" : "var(--font-color"}}>Delete! Are you sure want to delete All notification</p>
+            <button className="team-popup-btn" style={{"border":"none"}} onClick={deleteAllNotification }>Proceed</button>
+            </div>
+          </div>
+        )
+      }
+      const handleDeleteTeamPopup = () =>{
+        toast(<DeletePopup />, {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        className :' team-delete-toast'
+      }) 
+      }
       
 
     return ( 
@@ -96,7 +150,7 @@ export const Notification = () => {
                             <div>Latest Notification</div>
                             <div style={{"color": "rgb(136, 134, 134)"}}>(2)</div>
                         </div>
-                        <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img' onClick={deleteAllNotification}/>
+                        <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img' onClick={handleDeleteTeamPopup}/>
                     </div>
                     <div className="notifications">
                         <NotificationItem/>
