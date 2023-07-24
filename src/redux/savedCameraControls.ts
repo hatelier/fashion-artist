@@ -1,4 +1,6 @@
+// @ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
+import { mediaDataJson } from "../EditorEngine/editorComponents/Banner";
 
 const savedCameraControls = createSlice({
   name: "savedCameraControls",
@@ -16,8 +18,16 @@ const savedCameraControls = createSlice({
       tz: 0,
       zoom: 4,
     },
+    cameraStatus: mediaDataJson,
   },
   reducers: {
+    updateResetCameraState: (state, action) => {
+      state.cameraStatus = mediaDataJson;
+    },
+    updateCameraState: (state, action) => {
+      state.cameraStatus[action.payload.key].value =
+        action.payload[action.payload.key].value;
+    },
     updateCameraProps: (state, action) => {
       state.cameraProps = {
         ...state.cameraProps,
@@ -33,6 +43,11 @@ const savedCameraControls = createSlice({
   },
 });
 
-export const { updateCameraProps, updateDirLight, updateAmbientLight } =
-  savedCameraControls.actions;
+export const {
+  updateCameraState,
+  updateCameraProps,
+  updateResetCameraState,
+  updateDirLight,
+  updateAmbientLight,
+} = savedCameraControls.actions;
 export default savedCameraControls.reducer;

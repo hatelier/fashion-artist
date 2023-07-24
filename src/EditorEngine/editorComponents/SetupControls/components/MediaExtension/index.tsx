@@ -4,15 +4,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import { WhiteOnRed } from "../../Presets/SectionFive/CommentBox";
-import { mediaDataJson } from "../../../Banner";
 import { Slider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateCameraState,
+  updateResetCameraState,
+} from "../../../../../redux/savedCameraControls";
 
 const MediaExtension = () => {
-  const [cameraProps, setCameraProps] = useState(mediaDataJson);
+  const cameraProps = useSelector(
+    (state) => state.savedCameraControls.cameraStatus
+  );
+  // const [cameraProps, setCameraProps] = useState(cameraPropsData);
   const [mediaDropState, setMediaDropState] = useState(false);
   const [optDropState, setOptDropState] = useState({
     camera: false,
   });
+  const dispatch = useDispatch();
   return (
     <MediaCss>
       <div
@@ -91,15 +99,15 @@ const MediaExtension = () => {
                               aria-label="Small"
                               max={100}
                               onChange={(e) => {
-                                setCameraProps((state) => {
-                                  return {
-                                    ...state,
+                                dispatch(
+                                  updateCameraState({
                                     [key]: {
-                                      ...state[key],
+                                      ...cameraProps[key],
                                       value: e.target.value,
                                     },
-                                  };
-                                });
+                                    key: key,
+                                  })
+                                );
                               }}
                               sx={{
                                 color: "#000000",
@@ -137,17 +145,17 @@ const MediaExtension = () => {
                             value={prop.value}
                             size="small"
                             aria-label="Small"
-                            max={100}
+                            max={360}
                             onChange={(e) => {
-                              setCameraProps((state) => {
-                                return {
-                                  ...state,
+                              dispatch(
+                                updateCameraState({
                                   [key]: {
-                                    ...state[key],
+                                    ...cameraProps[key],
                                     value: e.target.value,
                                   },
-                                };
-                              });
+                                  key: key,
+                                })
+                              );
                             }}
                             sx={{
                               color: "#000000",
@@ -172,6 +180,9 @@ const MediaExtension = () => {
               })}
               <WhiteOnRed
                 style={{ width: "100%", fontSize: "14px", marginTop: "15px" }}
+                onClick={() => {
+                  dispatch(updateResetCameraState());
+                }}
               >
                 Reset to default values
               </WhiteOnRed>
