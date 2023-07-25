@@ -72,7 +72,6 @@ export const Templates = () => {
               <Card key={index}>
                 <div className="card-img-container">
                   <div className="card-img-box">
-                    <img className='templates-love' src={require('../assets/pngs/love-icon.png')} alt="" />
                     <img className="card-img" src={imageUrl} alt="Preview" />
                   </div>
                 </div>
