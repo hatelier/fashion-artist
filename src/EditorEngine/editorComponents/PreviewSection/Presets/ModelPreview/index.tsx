@@ -28,12 +28,8 @@ const ModelPreview = (props) => {
   const OrbitalController = () => {
     const { camera: threeCamera } = useThree();
     const camera = useRef(threeCamera);
-    console.log(
-      "loggseiri",
-      useSelector((state) => state.savedCameraControls.cameraStatus)
-    );
     const { fov, rotSpeed, zoomSpeed, horRan, vertAngle, rotInert, zoomRange } =
-      useSelector((state) => state.savedCameraControls.cameraStatus);
+      useSelector((state) => state.cameraRedux.cameraStatus);
     useEffect(() => {
       camera.current.fov = fov.value;
       camera.current.zoom = 2;

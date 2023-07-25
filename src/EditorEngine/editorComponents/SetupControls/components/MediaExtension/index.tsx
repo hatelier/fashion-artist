@@ -9,13 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateCameraState,
   updateResetCameraState,
-} from "../../../../../redux/savedCameraControls";
+} from "../../../../../redux/cameraRedux";
 import { updateTriggerHD } from "../../../../../redux/materialApplication";
 
 const MediaExtension = () => {
-  const cameraProps = useSelector(
-    (state) => state.savedCameraControls.cameraStatus
-  );
+  const cameraProps = useSelector((state) => state.cameraRedux.cameraStatus);
   // const [cameraProps, setCameraProps] = useState(cameraPropsData);
   const [mediaDropState, setMediaDropState] = useState(false);
   const [optDropState, setOptDropState] = useState({

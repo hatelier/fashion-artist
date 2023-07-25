@@ -51,10 +51,17 @@ const SectionTwo = () => {
           let main_mat = requi_material[0];
           let openMaterial = {};
 
-          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
-            (mater) => {
+          [
+            "baseMap",
+            "metalMap",
+            "roughnessMap",
+            "normalMap",
+            "emissionMap",
+            "occlusionMap",
+          ].forEach((mater) => {
+            if (main_mat[`${mater}`].path !== null) {
               const texture = new TextureLoader().load(
-                main_mat[`${mater}`].imgName
+                main_mat[`${mater}`].path
               );
               if (mater === "occlusionMap") {
                 mater = "aoMap";
@@ -66,30 +73,24 @@ const SectionTwo = () => {
                 [`${mater}`]: texture,
               };
             }
-          );
-
-          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
-            openMaterial[materr].repeat.set(
-              main_mat.tiling[0],
-              main_mat.tiling[1]
-            );
-            openMaterial[materr].offset.set(
-              main_mat.tilingOffset[0],
-              main_mat.tilingOffset[1]
-            );
-            openMaterial[materr].rotation =
-              main_mat.tilingRotation * (Math.PI / 180);
           });
 
-          openMaterial.map.wrapS =
-            openMaterial.map.wrapT =
-            openMaterial.normalMap.wrapS =
-            openMaterial.normalMap.wrapT =
-            openMaterial.roughnessMap.wrapS =
-            openMaterial.roughnessMap.wrapT =
-            openMaterial.aoMap.wrapS =
-            openMaterial.aoMap.wrapT =
-              THREE.RepeatWrapping;
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
+            if (openMaterial[materr] !== undefined) {
+              openMaterial[materr].repeat.set(
+                main_mat.tiling[0],
+                main_mat.tiling[1]
+              );
+              openMaterial[materr].offset.set(
+                main_mat.tilingOffset[0],
+                main_mat.tilingOffset[1]
+              );
+              openMaterial[materr].rotation =
+                main_mat.tilingRotation * (Math.PI / 180);
+              openMaterial[materr].wrapS = openMaterial[materr].wrapT =
+                THREE.RepeatWrapping;
+            }
+          });
 
           materialList[i].material = new MeshPhysicalMaterial({
             ...openMaterial,
@@ -184,7 +185,6 @@ const SectionTwo = () => {
     changeAppli,
     matSwap,
   }) => {
-    console.log("appidate", appliDetails);
     function materialFixture(materialName) {
       let requi_material = allCustomMaterials.filter(
         (query) => query.materialName === materialName
@@ -347,10 +347,17 @@ const SectionTwo = () => {
           );
           let main_mat = requi_material[0];
           let openMaterial = {};
-          ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
-            (mater) => {
+          [
+            "baseMap",
+            "metalMap",
+            "roughnessMap",
+            "normalMap",
+            "emissionMap",
+            "occlusionMap",
+          ].forEach((mater) => {
+            if (main_mat[`${mater}`].path !== null) {
               const texture = new TextureLoader().load(
-                main_mat[`${mater}`].imgName
+                main_mat[`${mater}`].path
               );
               if (mater === "occlusionMap") {
                 mater = "aoMap";
@@ -362,28 +369,25 @@ const SectionTwo = () => {
                 [`${mater}`]: texture,
               };
             }
-          );
-          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
-            openMaterial[materr].repeat.set(
-              main_mat.tiling[0],
-              main_mat.tiling[1]
-            );
-            openMaterial[materr].offset.set(
-              main_mat.tilingOffset[0],
-              main_mat.tilingOffset[1]
-            );
-            openMaterial[materr].rotation =
-              main_mat.tilingRotation * (Math.PI / 180);
           });
-          openMaterial.map.wrapS =
-            openMaterial.map.wrapT =
-            openMaterial.normalMap.wrapS =
-            openMaterial.normalMap.wrapT =
-            openMaterial.roughnessMap.wrapS =
-            openMaterial.roughnessMap.wrapT =
-            openMaterial.aoMap.wrapS =
-            openMaterial.aoMap.wrapT =
-              THREE.RepeatWrapping;
+
+          ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
+            if (openMaterial[materr] !== undefined) {
+              openMaterial[materr].repeat.set(
+                main_mat.tiling[0],
+                main_mat.tiling[1]
+              );
+              openMaterial[materr].offset.set(
+                main_mat.tilingOffset[0],
+                main_mat.tilingOffset[1]
+              );
+              openMaterial[materr].rotation =
+                main_mat.tilingRotation * (Math.PI / 180);
+              openMaterial[materr].wrapS = openMaterial[materr].wrapT =
+                THREE.RepeatWrapping;
+            }
+          });
+
           // materialList[4].position.set(0, 0, 0);
           materialList[i].material = new MeshPhysicalMaterial({
             ...openMaterial,
