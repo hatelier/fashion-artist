@@ -19,6 +19,8 @@ import previewRedux from "./previewRedux";
 import * as localforage from "localforage";
 import commentsRedux from "./commentsRedux";
 import settingsPanel from "./settingsPanel";
+import cameraRedux from "./cameraRedux";
+
 const reducers = combineReducers({
   routeManagement,
   editorManagement,
@@ -32,6 +34,7 @@ const reducers = combineReducers({
   previewRedux,
   commentsRedux,
   settingsPanel,
+  cameraRedux,
 });
 
 // a middleware to save binary files.
@@ -63,7 +66,7 @@ const reducers = combineReducers({
 const persistConfig: PersistConfig<any> = {
   key: "root",
   storage: localforage,
-  whitelist: ["editorManagement", "savedCameraControls"],
+  whitelist: ["editorManagement", "savedCameraControls", "cameraRedux"],
   timeout: null,
 };
 
