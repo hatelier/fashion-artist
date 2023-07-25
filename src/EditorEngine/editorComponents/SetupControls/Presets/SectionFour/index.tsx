@@ -15,7 +15,7 @@ import // AmbientLight,
 import "./index.scss";
 //image imports
 import ObjectPng from "../../../../../assets/pngs/objectLogo.gif";
-import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
+// import MaterialPreview from "../../../../../assets/pngs/MaterialPrev.png";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
 import {
   updateProdMatState,
@@ -29,6 +29,7 @@ import AddMaterialPopUp from "./components/AddMaterialPopUp";
 import axios from "axios";
 import { updateCustomMaterial } from "../../../../../redux/accountManagement";
 import AddMeshPopUpMain from "../../components/AddMeshPopUpMain";
+import { WhiteOnRed } from "../SectionFive/CommentBox";
 // import { materialApplication } from "../../../../../redux/materialApplication";
 
 const SectionFour = () => {
@@ -119,9 +120,29 @@ const SectionFour = () => {
       </div>
     );
   };
+  const [controlMesh, setControlMesh] = useState(false);
+  const MeshButton = () => {
+    return (
+      <WhiteOnRed
+        // className={"uploadAsset"}
+        style={{ width: "100%", marginTop: "10px" }}
+        onClick={() => {
+          setControlMesh(true);
+        }}
+      >
+        + Mesh
+      </WhiteOnRed>
+    );
+  };
   return (
     <div className={"sectionFourDiv"}>
-      <AddMeshPopUpMain />
+      {controlMesh && (
+        <AddMeshPopUpMain
+          onClose={() => {
+            setControlMesh(false);
+          }}
+        />
+      )}
       {addMaterialState && (
         <AddMaterialPopUp
           setState={setAddMaterialState}
@@ -186,9 +207,7 @@ const SectionFour = () => {
                 return <ObjectComp mesh={mesh} index={index} />;
               })}
             </div>
-            <button className={"uploadAsset"} style={{ width: "100%" }}>
-              + Mesh
-            </button>
+            <MeshButton />
           </>
         )}
       </div>
@@ -214,36 +233,26 @@ const SectionFour = () => {
                 marginTop: "10px",
               }}
             >
-              {materialArray.map((mesh, index) => {
-                return <HoverRender mesh={mesh} />;
-              })}
+              {/*{materialArray.map((mesh, index) => {*/}
+              {/*  return <HoverRender mesh={mesh} />;*/}
+              {/*})}*/}
               {appliedMaterial &&
                 appliedMaterial.map((mesh, index) => {
                   return <CustomMaterialRender mesh={mesh} />;
                 })}
             </div>
-            <button
-              className={"uploadAsset"}
-              style={{ width: "100%" }}
+            <WhiteOnRed
+              // className={"uploadAsset"}
+              style={{ width: "100%", marginTop: "10px" }}
               onClick={() => {
                 setAddMaterialState(true);
               }}
             >
               + Material
-            </button>
+            </WhiteOnRed>
           </>
         )}
       </div>
-
-      {/*  here is the product textures section*/}
-      {/*<div>*/}
-      {/*  <div className={"productMeshes"}>*/}
-      {/*    <p>Product Textures</p>*/}
-      {/*    <FontAwesomeIcon icon={faEye} className={"fimg"} />*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      {/*/!*    here is the button control*!/*/}
-      {/*<div className={"DupDelDiv"}></div>*/}
     </div>
   );
 };
@@ -277,62 +286,65 @@ const SectionFour = () => {
   return dataURL;
 };*/
 
-const HoverRender = ({ mesh }) => {
-  // const renderer = new WebGLRenderer();
-  const [hoverState /*, setHoverState*/] = useState(false);
-  const [renderImage /*, setRenderImage*/] = useState(null);
-
-  return (
-    <div className="meshPreview">
-      <img
-        src={renderImage ? renderImage : !hoverState ? MaterialPreview : ""}
-        alt={mesh.name}
-        style={{
-          width: "31px",
-          height: "31px",
-        }}
-        onClick={() => {
-          console.log(mesh.material);
-        }}
-        // onMouseEnter={(e) => {
-        //   setHoverState(true);
-        //   if (!renderImage) {
-        //     let renderSource = createMaterialThumbnail(renderer, mesh.material);
-        //     e.target.src = renderSource;
-        //     setRenderImage(renderSource);
-        //   }
-        // }}
-        // onMouseLeave={() => {
-        //   setHoverState(false);
-        // }}
-      />
-      <div>
-        <p
-          style={{
-            width: "20px",
-            overflow: "hidden",
-          }}
-          className={"matNameMesh"}
-        >
-          {mesh.material.name.substring(0, 4)}
-        </p>
-        <p>⋮</p>
-      </div>
-    </div>
-  );
-};
+// const HoverRender = ({ mesh }) => {
+//   // const renderer = new WebGLRenderer();
+//   const [hoverState /*, setHoverState*/] = useState(false);
+//   const [renderImage /*, setRenderImage*/] = useState(null);
+//
+//   return (
+//     <div className="meshPreview">
+//       <img
+//         src={renderImage ? renderImage : !hoverState ? MaterialPreview : ""}
+//         alt={mesh.name}
+//         style={{
+//           width: "31px",
+//           height: "31px",
+//         }}
+//         onClick={() => {
+//           console.log(mesh.material);
+//         }}
+//       />
+//       <div
+//         style={{
+//           width: "100px",
+//           height: "100px",
+//         }}
+//       ></div>
+//       <div>
+//         <p
+//           style={{
+//             width: "20px",
+//             overflow: "hidden",
+//           }}
+//           className={"matNameMesh"}
+//         >
+//           {mesh.material.name.substring(0, 4)}
+//         </p>
+//         <p>⋮</p>
+//       </div>
+//     </div>
+//   );
+// };
 
 const CustomMaterialRender = ({ mesh }) => {
   return (
     <div className="meshPreview">
-      <img
-        src={MaterialPreview}
-        alt={mesh.materialName}
+      {/*<img*/}
+      {/*  src={MaterialPreview}*/}
+      {/*  alt={mesh.materialName}*/}
+      {/*  style={{*/}
+      {/*    width: "31px",*/}
+      {/*    height: "31px",*/}
+      {/*  }}*/}
+      {/*/>*/}
+      <div
         style={{
-          width: "31px",
-          height: "31px",
+          width: "25px",
+          height: "25px",
+          borderRadius: "50%",
+          background: `${mesh.color}`,
         }}
-      />
+      ></div>
       <div>
         <p
           style={{
