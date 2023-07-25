@@ -262,7 +262,7 @@ export const Showroom = () => {
              </div>
              </div>
              <div className="subscription">
-             <div className="templates-input-group">
+             <div className="showroom templates-input-group">
                 <input type="text" className="templates-input" placeholder="search by showroom"/>
                 <a href="/add-showroom" className="add-product">
                     <img src={require('../assets/pngs/add.png')} alt="add new showroom" />
