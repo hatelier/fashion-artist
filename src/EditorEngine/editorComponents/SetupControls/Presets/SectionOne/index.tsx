@@ -11,6 +11,7 @@ import {
   updateCurrBack,
   updateCurrBackImage,
   updateModelUrl,
+  updatePresetState,
   updateTopBar,
   updateVersionTrigger,
 } from "../../../../../redux/materialApplication";
@@ -38,7 +39,7 @@ const SectionOne = (props) => {
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
   const [showUpdate, setShowUpdate] = useState(true);
-  const [createConfigState, setCreateConfigState] = useState(false);
+  const [createConfigState, setCreateConfigState] = useState(true);
   const { id, stage } = useParams();
   const baseReactUrl = window.location.origin.toString();
 
@@ -49,6 +50,7 @@ const SectionOne = (props) => {
     previewImage: null,
     pipeLine: null,
     tags: null,
+    enablePreset: null,
   });
   const { userID, projectID } = useSelector(
     (state: any) => state.accountManagement
@@ -70,7 +72,10 @@ const SectionOne = (props) => {
             previewImage: res.data.previewImage.location,
             pipeLine: res.data.pipeline,
             tags: res.data.tags[0],
+            enablePreset: res.data.enablePreset,
           });
+          setCreateConfigState(res.data.enablePreset);
+          dispatch(updatePresetState(res.data.enablePreset));
           setShowUpdate(false);
           dispatch(updateTopBar());
           dispatch(updateUserId(res.data.userId));
@@ -391,6 +396,17 @@ const SectionOne = (props) => {
           label={"Create Configuration"}
           onClick={(state) => {
             setCreateConfigState(state);
+            if (jsonData.enablePreset !== null) {
+              axios
+                .post("/product/configpres", {
+                  userId: userID,
+                  projectId: projectID,
+                  presState: state,
+                })
+                .then(() => {
+                  dispatch(updatePresetState(state));
+                });
+            }
           }}
         />
       </ConfigSwitch>

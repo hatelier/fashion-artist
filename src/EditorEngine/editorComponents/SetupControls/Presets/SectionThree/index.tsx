@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MaterialControlsProps } from "../../../../PropsControls";
 import "./index.scss";
 import AddImage from "../../../../../assets/svgs/add-image (1) 1.svg";
 import AddConfig from "../../../../../assets/svgs/AddConfig.svg";
@@ -18,8 +17,8 @@ import CustomPopUp from "../../components/CustomPopUp";
 import MeshSelectPresets from "../../components/MeshSelectPresets";
 
 const SectionThree = () => {
-  const { materialArray }: MaterialControlsProps = useSelector(
-    (state: any) => state.materialControl
+  const materialArray = useSelector(
+    (state: any) => state.materialControl.materialArray
   );
   const { presets, unUsedObjects, firstLoad } = useSelector(
     (state) => state.savedConfigs
@@ -62,9 +61,12 @@ const SectionThree = () => {
     (state: any) => state.accountManagement
   );
   const [presetState, setPresetState] = useState(false);
+  const presetStateConfig = useSelector(
+    (state) => state.materialApplication.presetState
+  );
   // check whether the preset already exists
   useEffect(() => {
-    if (projectID) {
+    if (projectID && presetStateConfig) {
       axios
         .get("/materials/getpreset", {
           params: {
@@ -79,8 +81,36 @@ const SectionThree = () => {
           toast.error(err);
         });
     }
-  }, [projectID, userID]);
-  return (
+  }, [projectID, userID, presetStateConfig]);
+
+  const StopPreset = () => {
+    useEffect(() => {
+      materialArray.forEach((modMaterial, modIndex) => {
+        modMaterial.visible = true;
+      });
+    }, []);
+    return (
+      <div
+        style={{
+          marginTop: "25px",
+          display: "flex",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "15px",
+          }}
+          className={"midBoldclass"}
+        >
+          Enable Preset configuration
+        </p>
+      </div>
+    );
+  };
+
+  return presetStateConfig ? (
     <div className={"sectionThreeDiv"}>
       {presetState && (
         <CustomPopUp
@@ -227,6 +257,8 @@ const SectionThree = () => {
         <WhiteOnRed style={{ width: "60%" }}>Cancel</WhiteOnRed>
       </div>
     </div>
+  ) : (
+    <StopPreset />
   );
 };
 export default SectionThree;
