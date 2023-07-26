@@ -20,12 +20,17 @@ import Image7 from "../../../assets/svgs/download.svg";
 import SectionFive from "./Presets/SectionFive";
 import SectionSix from "./Presets/SectionSix";
 import SectionSeven from "./Presets/SectionSeven";
+import CodeGenerator from "./components/CodeGenerator";
+import { updateCtrlPublishModal } from "../../../redux/materialApplication";
 
 const SetupControls = (props: BasicControls) => {
   const currentTab = useSelector(
     (state: any) => state.routeManagement.currConfigTab
   );
   const dispatch = useDispatch();
+  const controlPublishModal = useSelector(
+    (state) => state.materialApplication.controlPublishModal
+  );
   const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
   const modelLoadRate = useSelector(
     (state: any) => state.materialApplication.modelLoadRate
@@ -77,6 +82,13 @@ const SetupControls = (props: BasicControls) => {
       >
         <SectionOne context={props.context} settings={props.settings} />
       </div>
+      {controlPublishModal && (
+        <CodeGenerator
+          onClose={() => {
+            dispatch(updateCtrlPublishModal(false));
+          }}
+        />
+      )}
       {modelLoadRate === 100 && (
         <>
           <div

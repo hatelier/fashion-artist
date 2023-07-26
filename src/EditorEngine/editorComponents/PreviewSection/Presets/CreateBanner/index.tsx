@@ -1,10 +1,12 @@
+// @ts-nocheck
 import React from "react";
 import "./index.scss";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { updateCtrlPublishModal } from "../../../../../redux/materialApplication";
 
 const CreateBanner = () => {
   const { id } = useParams();
@@ -12,6 +14,10 @@ const CreateBanner = () => {
     (state: any) => state.accountManagement
   );
   const baseReactUrl = window.location.origin.toString();
+  const dispatch = useDispatch();
+  const currentPublishState = useSelector(
+    (state) => state.materialApplication.currentPublishState
+  );
   return (
     <div className={"createBanner"}>
       <p></p>
@@ -26,7 +32,14 @@ const CreateBanner = () => {
         >
           <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
         </PreviewButton>
-        <button className={"publishButton"}>Publish</button>
+        <button
+          className={"publishButton"}
+          onClick={() => {
+            dispatch(updateCtrlPublishModal(true));
+          }}
+        >
+          {currentPublishState ? "Update" : "Publish"}
+        </button>
         <SendButton>
           <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
         </SendButton>
