@@ -300,7 +300,9 @@ justify-content: center;
 color: #000000;
 padding: 10px 40px 10px 40px;
 width: 35vw;
+padding-top: 30px;
 }
+
 .signup .title {
   margin-bottom: 10px;
   font-weight: 400;
@@ -1873,13 +1875,13 @@ header {
 }
 
 .profile-container{
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   /* justify-content: flex-start; */
   justify-content:  space-evenly;
   align-items: flex-start;
   width: 60%;
+  min-height: 75vh;
 }
 
 
@@ -4764,13 +4766,15 @@ color: var(--font-color);
   align-items: flex-start;
   margin: auto;
   margin-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 5vh;
   width: 90%;
   background: var(--secondary-bgcolor);
   border-radius: 20px;
   border: 1px solid var(--items-bgcolor);
   color: var(--font-color);
   padding: 30px;
+  min-height: 65vh;
+  justify-content: space-around;
 }
 
 add-showroom-button-img {
@@ -5199,6 +5203,7 @@ add-showroom-button-img {
 .add-showroom-popup-button {
   margin: auto;
 }
+
 .add-showroom-popup-view {
   display: flex;
   padding: 9px 22px;
@@ -5582,6 +5587,8 @@ add-showroom-button-img {
   }
   .input {
     margin-bottom: 20px;
+    height: 35px;
+    color: #000000;
   }
   .forgot {
     all: unset;
@@ -5708,6 +5715,7 @@ add-showroom-button-img {
     background: #FFFFFF;
     border: 1px solid #EAEAEA;
     border-radius: 5px;
+    color: #000000;
   }
 
   .signup-agreements {

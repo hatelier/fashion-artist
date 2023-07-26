@@ -358,7 +358,7 @@ export const AddShowroom = () => {
                               <div className="product-item-text">Product 01</div>
                           </div>
                           
-                           <div>
+                           {/* <div>
                            {products.map((product) => (
                             <Card key={product._id}>
                              {product.previewImage && (
@@ -371,7 +371,7 @@ export const AddShowroom = () => {
                              )}
                             </Card>
                             ))}
-                           </div>
+                           </div> */}
                         </div>
                     </div>
                 </div>
