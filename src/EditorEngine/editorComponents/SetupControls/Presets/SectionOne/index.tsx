@@ -12,6 +12,7 @@ import {
   updateCurrBackImage,
   updateModelUrl,
   updateTopBar,
+  updateVersionTrigger,
 } from "../../../../../redux/materialApplication";
 import {
   updateProjectId,
@@ -75,6 +76,17 @@ const SectionOne = (props) => {
           dispatch(updateUserId(res.data.userId));
           dispatch(updateProjectId(res.data.productID));
           dispatch(updateModelUrl(res.data.asset.location));
+          axios
+            .post("/product/verctrl", {
+              userId: "64676633c6ad11d84b234b1d",
+              projectId: res.data.productID,
+            })
+            .then((vdata) => {
+              dispatch(updateVersionTrigger(vdata.data.data));
+            })
+            .catch(() => {
+              toast.error("Failed to load versions");
+            });
           axios
             .get("/product/addbck", {
               params: {
