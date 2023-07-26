@@ -4764,13 +4764,15 @@ color: var(--font-color);
   align-items: flex-start;
   margin: auto;
   margin-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 5vh;
   width: 90%;
   background: var(--secondary-bgcolor);
   border-radius: 20px;
   border: 1px solid var(--items-bgcolor);
   color: var(--font-color);
   padding: 30px;
+  min-height: 65vh;
+  justify-content: space-around;
 }
 
 add-showroom-button-img {
