@@ -300,7 +300,9 @@ justify-content: center;
 color: #000000;
 padding: 10px 40px 10px 40px;
 width: 35vw;
+padding-top: 30px;
 }
+
 .signup .title {
   margin-bottom: 10px;
   font-weight: 400;
@@ -5585,6 +5587,8 @@ add-showroom-button-img {
   }
   .input {
     margin-bottom: 20px;
+    height: 35px;
+    color: #000000;
   }
   .forgot {
     all: unset;
@@ -5711,6 +5715,7 @@ add-showroom-button-img {
     background: #FFFFFF;
     border: 1px solid #EAEAEA;
     border-radius: 5px;
+    color: #000000;
   }
 
   .signup-agreements {
