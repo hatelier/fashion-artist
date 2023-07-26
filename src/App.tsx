@@ -31,6 +31,7 @@ import XRengine from "./EditorEngine/editorComponents/XRengine";
 import {BillingHistory} from "./pages/billing-history"
 import {CreditHistory} from "./pages/credit-history"
 import { Notification } from "./pages/notification";
+import { EditShowroom } from "./pages/edit-showroom";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/showroom" element={<Showroom />} />
           <Route path="/3d-fashion-lab" element={<FashionLab />} />
           <Route path="/manage/:showroomId" element={<Manage />} />
+          <Route path="/edit-showroom/:showroomID" element={<EditShowroom />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
