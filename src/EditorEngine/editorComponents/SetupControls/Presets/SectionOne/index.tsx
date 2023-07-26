@@ -12,6 +12,7 @@ import {
   updateCurrBackImage,
   updateModelUrl,
   updatePresetState,
+  updateSetPublishState,
   updateTopBar,
   updateVersionTrigger,
 } from "../../../../../redux/materialApplication";
@@ -74,6 +75,9 @@ const SectionOne = (props) => {
             tags: res.data.tags[0],
             enablePreset: res.data.enablePreset,
           });
+          if (res.data.publish.state) {
+            dispatch(updateSetPublishState(true));
+          }
           setCreateConfigState(res.data.enablePreset);
           dispatch(updatePresetState(res.data.enablePreset));
           setShowUpdate(false);

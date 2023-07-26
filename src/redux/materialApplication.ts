@@ -22,8 +22,16 @@ export const materialApplication = createSlice({
     triggerHDRender: false,
     versionTrigger: [],
     presetState: false,
+    controlPublishModal: false,
+    currentPublishState: false,
   },
   reducers: {
+    updateSetPublishState: (state, action) => {
+      state.currentPublishState = action.payload;
+    },
+    updateCtrlPublishModal: (state, action) => {
+      state.controlPublishModal = action.payload;
+    },
     updatePresetState: (state, action) => {
       state.presetState = action.payload;
     },
@@ -64,6 +72,8 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateSetPublishState,
+  updateCtrlPublishModal,
   updatePresetState,
   updateVersionTrigger,
   updateTriggerHD,

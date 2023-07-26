@@ -3,15 +3,43 @@ import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import React, { useState } from "react";
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
-import { actionMenuData, presetsMenuData } from "../../../Banner";
-import {WhiteOnRed} from "../../Presets/SectionFive/CommentBox";
+import /*actionMenuData, presetsMenuData*/ "../../../Banner";
+import { WhiteOnRed } from "../../Presets/SectionFive/CommentBox";
+import PublishProject from "../PublishProject";
 
-const CodeGenerator = () => {
+const CodeGenerator = ({ onClose }) => {
   const [actionTab, setActionTab] = useState(false);
-  const [presTab, setPresTab] = useState(false);
+  const [generateData, setGenerateData] = useState(null);
   const [swtState, setSwtState] = useState(false);
+  const [checkState, setCheckState] = useState({
+    readyplay: {
+      name: "Enable Ready-player Me Download",
+      value: false,
+    },
+    virtualtry: {
+      name: "Enable Virtual -Try on",
+      value: false,
+    },
+    qrcode: {
+      name: "Enable QR code",
+      value: false,
+    },
+    hidebutton: {
+      name: "Hide Fullscreen Button",
+      value: false,
+    },
+    arfilter: {
+      name: "AR Filter",
+      value: false,
+    },
+    virtualmes: {
+      name: "Virtual Measurements",
+      value: false,
+    },
+  });
   return (
     <CodeDiv>
+      {generateData && <PublishProject generateData={generateData} />}
       <div
         style={{
           display: "flex",
@@ -20,7 +48,7 @@ const CodeGenerator = () => {
         }}
       >
         <p className={"midBoldclass"}>Generate Code</p>
-        <GrClose size={10} />
+        <GrClose size={10} onClick={onClose} />
       </div>
       <div
         className={"checkDropDown"}
@@ -33,42 +61,55 @@ const CodeGenerator = () => {
       </div>
       {actionTab && (
         <>
-          {actionMenuData.map((acts) => {
+          {Object.keys(checkState).map((acts) => {
             return (
               <label className={"customDropCheck"}>
-                <input type={"checkbox"} />
-                &nbsp;
-                &nbsp;
-                <p>{acts}</p>
+                <input
+                  type={"checkbox"}
+                  value={checkState[acts].value}
+                  onChange={(e) => {
+                    setCheckState((state) => {
+                      return {
+                        ...state,
+                        [acts]: {
+                          ...state[acts],
+                          value: e.target.checked,
+                        },
+                      };
+                    });
+                  }}
+                />
+                &nbsp; &nbsp;
+                <p>{checkState[acts].name}</p>
               </label>
             );
           })}
         </>
       )}
-      <div
-        className={"checkDropDown"}
-        onClick={() => {
-          setPresTab((state) => !state);
-        }}
-      >
-        <p className={"midBoldclass"}>Presets</p>
-        {presTab ? <PiCaretUpBold /> : <PiCaretDownBold />}
-      </div>
-      {presTab && (
-        <>
-          {presetsMenuData.map((acts) => {
-            return (
-              <label className={"customDropCheck"}>
-                <input type={"checkbox"} />
-                &nbsp;
-                &nbsp;
-                <p>{acts}</p>
-              </label>
-            );
-          })}
-        </>
-      )}
-        <div style={{marginBottom:"10px"}}></div>
+      {/*<div*/}
+      {/*  className={"checkDropDown"}*/}
+      {/*  onClick={() => {*/}
+      {/*    setPresTab((state) => !state);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <p className={"midBoldclass"}>Presets</p>*/}
+      {/*  {presTab ? <PiCaretUpBold /> : <PiCaretDownBold />}*/}
+      {/*</div>*/}
+      {/*{presTab && (*/}
+      {/*  <>*/}
+      {/*    {presetsMenuData.map((acts) => {*/}
+      {/*      return (*/}
+      {/*        <label className={"customDropCheck"}>*/}
+      {/*          <input type={"checkbox"} />*/}
+      {/*          &nbsp;*/}
+      {/*          &nbsp;*/}
+      {/*          <p>{acts}</p>*/}
+      {/*        </label>*/}
+      {/*      );*/}
+      {/*    })}*/}
+      {/*  </>*/}
+      {/*)}*/}
+      <div style={{ marginBottom: "10px" }}></div>
       <OnOffSwitch
         label={"3D Background Text"}
         checked={swtState}
@@ -76,19 +117,32 @@ const CodeGenerator = () => {
           setSwtState(vls);
         }}
       />
-        <div style={{
-            width:"100%",
-            display:"flex",
-            justifyContent:"space-between",
-            marginTop:"15px"
-        }}>
-            <WhiteOnRed>
-                Save
-            </WhiteOnRed>
-            <WhiteOnRed>
-                Publish
-            </WhiteOnRed>
-        </div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "15px",
+        }}
+      >
+        <WhiteOnRed
+          style={{
+            visibility: "hidden",
+          }}
+        >
+          Save
+        </WhiteOnRed>
+        <WhiteOnRed
+          onClick={() => {
+            setGenerateData({
+              checkstate: checkState,
+              swtstate: swtState,
+            });
+          }}
+        >
+          Publish
+        </WhiteOnRed>
+      </div>
     </CodeDiv>
   );
 };
@@ -113,7 +167,7 @@ export const OnOffSwitch = ({ label, onClick, checked }) => {
             filter: `invert(${!checked ? 0.11 : 0})`,
           }}
         >
-            <p>OFF</p>
+          <p>OFF</p>
         </div>
       </div>
     </OffSwtichDiv>
@@ -132,7 +186,7 @@ const OffSwtichDiv = styled.div`
       width: 47px;
       border-radius: 7px 0 0 7px;
       p {
-        margin-left: 3px;      
+        margin-left: 3px;
       }
     }
     .off {
