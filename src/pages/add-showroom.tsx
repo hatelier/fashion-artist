@@ -144,6 +144,16 @@ export const AddShowroom = () => {
   const toggleDisplay = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
   };
+
+  const [isCreated, setIsCreated] = useState(false);
+  const createdPopup = () => {
+    setIsCreated(!isCreated);
+  };
+  
+  const createdPopupCancel = () => {
+    setIsCreated(!isCreated);
+  };
+
     return ( 
     <div className='home-container'>
           {isOpen && (
@@ -159,6 +169,24 @@ export const AddShowroom = () => {
                     </div>
                 </div> 
                 )}
+                {isCreated && (
+        <div className="sharing-popup">
+          <div className="sharing-close-container">
+            <img className="sharing-close-button" src={require('../assets/pngs/report-cross.png')} alt="" onClick={createdPopupCancel}/>
+          </div>
+          <div className="sharing-header">
+            <div className="sharing-heading add-showroom-popup-heading">
+            ‘Showroom Name’ Showroom has been updated Successfully !
+            </div>
+            <div className="add-showroom-popup-text">
+            Now you can view ‘Showroom Name’
+            </div>
+          </div>
+          <div className='add-showroom-popup-button'>
+            <a href="/manage" className='add-showroom-popup-view'>View</a>
+          </div>
+        </div>
+      )}
     <section >
     <Header />
       <div className='content'>
@@ -172,7 +200,7 @@ export const AddShowroom = () => {
                 <div className="add-showroom-create-cancel">
 
                     <button className="add-showroom-create" onClick={handleUpload}>
-                      <img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span>
+                      <div onClick={createdPopup}><img className='add-showroom-button-img' src={require('../assets/pngs/tab 1.png')} alt="" /><span className="add-showroom-create-text">Create</span></div>
                     </button>
 
                     <button className="add-showroom-cancel" onClick={() => navigate(-1)}>
