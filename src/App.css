@@ -3402,13 +3402,31 @@ border: 2px solid var(--items-bgcolor);
 color: var(--font-color);
 }
 
+.analytics-report-search {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  border-radius: 10px;
+  background: var(--items-bgcolor);
+  box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.13);
+  padding-left: 10px;
+  padding-right: 10px ;
+}
+
+.analytics-report-search input {
+  all: unset;
+  width: 80%;
+}
+
 .analytics-report-3{
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 35%;
-  padding-top: 5px;
+  height: 30%;
 }
 
 .analytics-report-item{

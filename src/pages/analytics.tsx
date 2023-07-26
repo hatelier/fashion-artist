@@ -244,7 +244,10 @@ export const Analytics = () => {
                           </div>
                           <div className='analytics-selections-element'>
                             <label htmlFor="product">By Product</label>
+                            <div className='analytics-report-search'>
                             <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder='Search by product name'/>
+                            <img className='sidenav-img' src={require('../assets/pngs/ana;ytics-search.png')} alt="" />
+                            </div>
                           </div>
                         </div>
 
