@@ -20,8 +20,12 @@ export const materialApplication = createSlice({
     currentBackground: "#f0f0f0",
     currentBackgroundImage: null,
     triggerHDRender: false,
+    versionTrigger: [],
   },
   reducers: {
+    updateVersionTrigger: (state, action) => {
+      state.versionTrigger = action.payload;
+    },
     updateTriggerHD: (state, action) => {
       state.triggerHDRender = action.payload;
     },
@@ -56,6 +60,7 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateVersionTrigger,
   updateTriggerHD,
   updateCurrBackImage,
   updateTextTrigger,
