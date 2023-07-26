@@ -44,7 +44,13 @@ const PublishProject = ({ generateData }) => {
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
         <p className={"pubHeader"}>Publish Project</p>
-        <p style={{ textAlign: "center", color: "#757575" }}>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#757575",
+            wordWrap: "break-word",
+          }}
+        >
           Website url: &nbsp;
           <span
             style={{
