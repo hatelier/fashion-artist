@@ -3560,7 +3560,7 @@ color: var(--font-color);
 }
 
 .analytics-most-viewed {
-  width: 40%;
+  width: 55%;
   /* height: 382px; */
   height: 100%;
   min-height: 35vh;
@@ -3595,7 +3595,7 @@ color: var(--font-color);
 .analytics-product-report-btn{
   align-self: flex-end;
   display: inline-flex;
-  padding: 9px 16px;
+  /* padding: 9px 16px; */
   justify-content: center;
   align-items: center;
   gap: 4px;
@@ -3603,6 +3603,7 @@ color: var(--font-color);
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  width: 145px;
 }
 
 .analytics-product-report{
