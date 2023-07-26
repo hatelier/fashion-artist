@@ -3587,8 +3587,8 @@ color: var(--font-color);
 }
 
 .analytics-most-viewed-img-main{
-  height: 90%;
-  width: 60%;
+  height: 80%;
+  width: 80%;
   object-fit: cover;
 }
 
