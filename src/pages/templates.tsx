@@ -48,7 +48,7 @@ export const Templates = () => {
              </div>
            </div>
            </div>
-           <div className="subscription">
+           <div className="products">
             <div className="templates-input-group">
               <input type="text" className="templates-input" placeholder="Search Templates" />
               <div className="templates-filter-block">
@@ -66,7 +66,7 @@ export const Templates = () => {
                     <div className="filter-dropdown-item">Makeups</div>
                   </div>
                   </div>
-            </div>
+            </div> 
              <div className="templates-block">
              {imageUrls.map((imageUrl, index) => (
               <Card key={index}>
