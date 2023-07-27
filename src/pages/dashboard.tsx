@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
@@ -91,27 +91,44 @@ export const Dashboard = () => {
     setIsOpen(!isOpen);
   };
 
+  const [isSharing, setIsSharing] = useState(false);
+  const sharePopup = () => {
+    setIsSharing(!isSharing);
+  };
+
+  const sharePopupCancel = () => {
+    setIsSharing(!isSharing);
+  };
+
   const [display, setDisplay] = useState<'none' | 'flex'>('none');
 
   const toggleDisplay = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
   };
 
-  const childRef1 = useRef<HTMLDivElement>(null);
+  // const childRef1 = useRef<HTMLDivElement>(null);
 
-  const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
-    if (childRef.current) {
-      const childElement = childRef.current as HTMLDivElement;
-      childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
-    }
-  };
+  // const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
+  //   if (childRef.current) {
+  //     const childElement = childRef.current as HTMLDivElement;
+  //     childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
+  //   }
+  // };
   // const [isElementVisible, setElementVisible] = useState(false);
 
   // const handleClick = () => {
   //   const element = document.querySelector('#sidenav') as HTMLElement;
   //   element.style.display = element.style.display === 'none' ? 'block' : 'none';
   // };
+  const toggleChildVisibility = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const parentElement = event.currentTarget;
+    const childElement = parentElement.previousElementSibling;
 
+    if (childElement) {
+      // Toggle the "visible" class on the child element
+      childElement.classList.toggle('visible');
+    }
+  };
   const fetchProductCount = async () => {
     try {
       const response = await axiosInstance.get('/analytics/count')
@@ -166,9 +183,6 @@ export const Dashboard = () => {
               className="product-popup-input"
               id={"productCreatePopUp"}
             />
-            <div className="product-popup-configurable">
-              <input type="checkbox" /> <span>Create Configurable Product</span>
-            </div>
           </div>
           <div className="product-popup-buttons">
             <button
@@ -195,6 +209,36 @@ export const Dashboard = () => {
                       }
                     }}
             >Create</button>
+          </div>
+        </div>
+      )}
+            {isSharing && (
+        <div className="sharing-popup">
+          <div className="sharing-close-container">
+            <img className="sharing-close-button" src={require('../assets/pngs/report-cross.png')} alt="" onClick={sharePopupCancel}/>
+          </div>
+          <div className="sharing-header">
+            <div className="sharing-heading">
+                Share
+            </div>
+            <div className="sharing-text">
+            Nulla quam suspendisse tincidunt odio. Neque leo egestas leo interdum cum porttitor sed.
+            </div>
+          </div>
+          <div className="sharing-link-copy">
+            <img src={require('../assets/pngs/attach.png')} alt="" />
+            <div className="sharing-link-text">https://www.momentumx.com/allproducts/</div>
+            <button className="sharing-copy">Copy</button>
+          </div>
+          <div className="share-via">
+            <div className="share-via-text">Share Via:</div>
+            <div className="share-via-icons">
+              <button className="share-via-button"><img src={require('../assets/pngs/whatsapp.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/instagram.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/linkedin.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/twitter.png')} alt="" /></button>
+              <button className="share-via-button"><img src={require('../assets/pngs/facebook.png')} alt="" /></button>
+            </div>
           </div>
         </div>
       )}
@@ -226,13 +270,9 @@ export const Dashboard = () => {
                 <div className="info-value">{productCount}</div>
                 <div className="info-view">
                   <a className="info-view-link" href="/products">
-                    <span>See all Products</span>
-                    <img
-                      className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
-                      alt=""
-                    />
-                  </a>
+                    <span>See all products</span>
+                    <img className="sidenav-img info-img" src={require("../assets/pngs/Arrow_1.png")} alt=""/>
+                </a>
                 </div>
               </div>
               <div className="info">
@@ -243,7 +283,7 @@ export const Dashboard = () => {
                     <span>View analytics</span>
                     <img
                       className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
+                      src={require("../assets/pngs/Arrow_1.png")}
                       alt=""
                     />
                   </a>
@@ -257,7 +297,7 @@ export const Dashboard = () => {
                     <span>View all Showroom</span>
                     <img
                       className="sidenav-img info-img"
-                      src={require("../assets/pngs/arrow.png")}
+                      src={require("../assets/pngs/Arrow_1.png")}
                       alt=""
                     />
                   </a>
@@ -302,13 +342,13 @@ export const Dashboard = () => {
                   product.publish.state ? <div><FiUpload size={14}/></div> :   <div><BsPencil size={14}/></div>
                 }
                 <div className="card-dropup">
-                  <div ref={childRef1} className="card-dropup-content">
+                  <div className="card-dropup-content child" style={{display: 'flex', visibility: 'hidden'}}>
                   <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
                   <img src={require('../assets/pngs/products-trash.png')} alt="" />
                   <img src={require('../assets/pngs/products-edit.png')} alt="" />
-                  <img src={require('../assets/pngs/products-share.png')} alt="" />
+                  <img src={require('../assets/pngs/products-share.png')} alt="" onClick={sharePopup} />
                   </div>
-                  <div onClick={() => toggleDisplay2(childRef1)} id="card-1">
+                  <div id="card-1" className="three-dot" onClick={toggleChildVisibility}>
                   <img src={require('../assets/pngs/card-dots.png')} alt="" />
                   </div>
                   </div>

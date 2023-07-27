@@ -187,7 +187,7 @@ const NotificationDropDown  = () => {
 
     return ( 
       <header className="header">
-        <div>
+        <div className='header-left'>
         <img className='sidemenu-toggle' src={require('../assets/pngs/sidenav-toggle.png')} onClick={handleClick} alt="" />
         <a href="/">
         <img
@@ -211,14 +211,14 @@ const NotificationDropDown  = () => {
       <div className="dropdown-top">
       <div className='header-account dropbtn'>
         <div>
-          <img src={require('../assets/pngs/Profile photo.png')} alt="" />
+          <img src={require('../assets/pngs/Profile photo.png')} alt="" className='header-profile-img'/>
         </div>
         <div className='header-account-text'>
           <div className='header-account-username'>{firstName}</div>
           <div className='header-account-occupation'>{occupation}</div>
         </div>
         <div>
-            <img src={require('../assets/pngs/down-white.png')} alt="" />
+            <img src={require('../assets/pngs/down-white.png')} alt="" className='header-down-white'/>
         </div>
       </div>
        <div className="dropdown-top-content">

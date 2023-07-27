@@ -150,9 +150,7 @@ export const Account = () => {
                 <div className="account-buy-credit">
                   <div className= "account-buy-credit-heading" >Quantity</div>
                   <div className="account-buy-credit-details">
-                    <div className="account-credit-quantity">
-                      1
-                    </div>
+                    <input type="text" name="" id="" className='account-credit-quantity' />
                     <a className="account-buy-button" href="/credit">Buy More</a>
                   </div>
                 </div>
