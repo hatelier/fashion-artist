@@ -8,6 +8,8 @@ import { Sidenav } from "../components/sidenav";
 import TokenVerification from "../components/auth";
 import axiosInstance from '../components/axiosInstance';
 import Card from '../components/Card';
+import {FiUpload} from "react-icons/fi";
+import {BsPencil} from "react-icons/bs";
 
 interface Product {
   _id: string;
@@ -35,6 +37,8 @@ interface Product {
   tags: string[];
   productID: number;
   customMaterials: string[];
+  createdAt: string;
+  publish: any;
   __v: number;
 }
 
@@ -88,7 +92,7 @@ export const Dashboard = () => {
   };
 
   const [display, setDisplay] = useState<'none' | 'flex'>('none');
-  
+
   const toggleDisplay = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
   };
@@ -130,7 +134,7 @@ export const Dashboard = () => {
 
   const fetchthreeDViewCount = async () => {
     try {
-      const response = await axiosInstance.get('/analytics/threeDViewCount'); 
+      const response = await axiosInstance.get('/analytics/threeDViewCount');
       const count = response.data;
       setThreeDViewCount(count);
     } catch (error) {
@@ -140,14 +144,14 @@ export const Dashboard = () => {
 
   const fetcharViewCount = async () => {
     try {
-      const response = await axiosInstance.get('/analytics/arViewCount'); 
+      const response = await axiosInstance.get('/analytics/arViewCount');
       const count = response.data;
       setArViewCount(count);
     } catch (error) {
       console.error(error);
     }
   };
-
+  const baseReactUrl = window.location.origin.toString();
   return (
     <div className="home-container">
       {isOpen && (
@@ -160,6 +164,7 @@ export const Dashboard = () => {
               type="text"
               placeholder="New Product"
               className="product-popup-input"
+              id={"productCreatePopUp"}
             />
             <div className="product-popup-configurable">
               <input type="checkbox" /> <span>Create Configurable Product</span>
@@ -172,7 +177,24 @@ export const Dashboard = () => {
             >
               Cancel
             </button>
-            <button className="product-popup-create">Create</button>
+            <button className="product-popup-create"
+                    onClick={() => {
+                      let documentName: any =
+                          document.getElementById("productCreatePopUp");
+                      if (documentName.value) {
+                        const baseReactUrl = window.location.origin.toString();
+                        window.open(
+                            `${baseReactUrl}/editor/new/${documentName.value.replace(
+                                / /g,
+                                "_"
+                            )}`,
+                            "_self"
+                        );
+                      } else {
+                        window.alert("Product name cant be blank");
+                      }
+                    }}
+            >Create</button>
           </div>
         </div>
       )}
@@ -196,7 +218,7 @@ export const Dashboard = () => {
                 <div>Today</div>
                 <div>This Week</div>
                 <div>This Month</div>
-                </div>  
+                </div>
             </div>
             <div className="insights">
               <div className="info">
@@ -242,7 +264,7 @@ export const Dashboard = () => {
                 </div>
               </div>
             </div>
-           
+
             <div className="products">
               <div className="recent-products">
                 <div className="recent-products-header"><div>Recent Products </div>                  <button
@@ -259,7 +281,14 @@ export const Dashboard = () => {
             {products.map((product) => (
           <Card key={product._id}>
             {product.previewImage && (
-              <div className="card-img-container">
+              <div className="card-img-container"
+                   onClick={() => {
+                     window.open(
+                         `${baseReactUrl}/editor/${product.productName}/main`,
+                         "_self"
+                     );
+                   }}
+              >
                 <div className="card-img-box">
                 <img className="card-img" src={product.previewImage.location} alt="Preview" />
                 </div>
@@ -267,9 +296,11 @@ export const Dashboard = () => {
             )}
             <div className="card-name">{product.productName}</div>
             <div className="card-bottom">
-              <div className="card-date">dd/mm/yy</div>
+              <div className="card-date">{product.createdAt}</div>
               <div className="card-buttons">
-                <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
+                {
+                  product.publish.state ? <div><FiUpload size={14}/></div> :   <div><BsPencil size={14}/></div>
+                }
                 <div className="card-dropup">
                   <div ref={childRef1} className="card-dropup-content">
                   <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
@@ -284,7 +315,7 @@ export const Dashboard = () => {
               </div>
             </div>
           </Card>
-        ))}
+        )).reverse()}
                     </div>
           </div>
         </div>

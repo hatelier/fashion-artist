@@ -11,6 +11,8 @@ import Card from "../components/Card";
 import { Header } from "../components/header";
 import { Sidenav } from "../components/sidenav";
 import TokenVerification from '../components/auth';
+import {FiUpload} from "react-icons/fi";
+import {BsPencil} from "react-icons/bs";
 
 interface Product {
   _id: string;
@@ -38,6 +40,8 @@ interface Product {
   tags: string[];
   productID: number;
   customMaterials: string[];
+  createdAt: string;
+  publish: any;
   __v: number;
 }
 
@@ -113,6 +117,7 @@ export const Products = () => {
       childElement.style.display = childElement.style.display === 'none' ? 'flex' : 'none';
     }
   };
+  const baseReactUrl = window.location.origin.toString();
   return (
     <div className="home-container">
       {isOpen && (
@@ -234,10 +239,17 @@ export const Products = () => {
                   </button>
                 </div>
               </div>
-              {products.map((product) => (
+        {products.map((product) => (
           <Card key={product._id}>
             {product.previewImage && (
-              <div className="card-img-container">
+              <div className="card-img-container"
+                   onClick={() => {
+                     window.open(
+                         `${baseReactUrl}/editor/${product.productName}/main`,
+                         "_self"
+                     );
+                   }}
+              >
                 <div className="card-img-box">
                 <img className="card-img" src={product.previewImage.location} alt="Preview" />
                 </div>
@@ -245,9 +257,11 @@ export const Products = () => {
             )}
             <div className="card-name">{product.productName}</div>
             <div className="card-bottom">
-              <div className="card-date">dd/mm/yy</div>
+              <div className="card-date">{product.createdAt}</div>
               <div className="card-buttons">
-                <div><img src={require('../assets/pngs/card-upload.png')} alt="" /></div>
+                {
+                  product.publish.state ? <div><FiUpload size={14}/></div> :   <div><BsPencil size={14}/></div>
+                }
                 <div className="card-dropup">
                   <div ref={childRef1} className="card-dropup-content">
                   <img src={require('../assets/pngs/products-duplicate.png')} alt="" />
@@ -262,7 +276,7 @@ export const Products = () => {
                   </div>
             </div>
           </Card>
-        ))}
+        )).reverse()}
             </div>
           </div>
         </div>
