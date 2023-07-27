@@ -317,47 +317,6 @@ export const AddShowroom = () => {
                               </div>
                               <div className="product-item-text">Product 01</div>
                           </div>
-                          <div className="add-showroom-product-item-container">
-                              <div className="add-showroom-product-item">
-                                <div className="product-item-img-div">
-                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
-                                </div>
-                              </div>
-                              <div className="product-item-text">Product 01</div>
-                          </div>
-                          <div className="add-showroom-product-item-container">
-                              <div className="add-showroom-product-item">
-                                <div className="product-item-img-div">
-                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
-                                </div>
-                              </div>
-                              <div className="product-item-text">Product 01</div>
-                          </div>
-                          <div className="add-showroom-product-item-container">
-                              <div className="add-showroom-product-item">
-                                <div className="product-item-img-div">
-                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
-                                </div>
-                              </div>
-                              <div className="product-item-text">Product 01</div>
-                          </div>
-                          <div className="add-showroom-product-item-container">
-                              <div className="add-showroom-product-item">
-                                <div className="product-item-img-div">
-                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
-                                </div>
-                              </div>
-                              <div className="product-item-text">Product 01</div>
-                          </div>
-                          <div className="add-showroom-product-item-container">
-                              <div className="add-showroom-product-item">
-                                <div className="product-item-img-div">
-                                  <input type="checkbox" name="" id="" className='product-item-checkbox'/>
-                                </div>
-                              </div>
-                              <div className="product-item-text">Product 01</div>
-                          </div>
-                          
                            <div>
                            {products.map((product) => (
                             <Card key={product._id}>

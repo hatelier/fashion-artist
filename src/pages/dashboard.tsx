@@ -318,6 +318,7 @@ export const Dashboard = () => {
                     New Product
                   </button></div>
                   </div>
+                  <div className="templates-block">
             {products.map((product) => (
           <Card key={product._id}>
             {product.previewImage && (
@@ -356,6 +357,7 @@ export const Dashboard = () => {
             </div>
           </Card>
         )).reverse()}
+        </div>
                     </div>
           </div>
         </div>
