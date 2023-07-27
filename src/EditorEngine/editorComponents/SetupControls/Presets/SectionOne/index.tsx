@@ -36,6 +36,7 @@ const SectionOne = (props) => {
   const brandRef = useRef();
   const pipelineRef = useRef();
   const tagsRef = useRef();
+  const [uploadedFileConfig, setUploadedFileConfig] = useState(null);
 
   // background Image
   const [currPrevImage, setCurrPrevImage] = useState(prevImageDef);
@@ -170,6 +171,7 @@ const SectionOne = (props) => {
           className={"previewImageFile"}
           ref={prevImageClicker}
           style={{ display: "none" }}
+          accept=".png, .jpeg, .jpg"
           onChange={(e) => {
             setCurrPrevImage(URL.createObjectURL(e.target.files[0]));
           }}
@@ -465,20 +467,26 @@ const SectionOne = (props) => {
               inputClicker.current.click();
             }}
           >
-            <img
-              src={UploadImage}
-              style={{
-                width: "30px",
-              }}
-              alt={"UploadImage"}
-            />
-            <p>Select an asset or drop here</p>
+            {
+              !uploadedFileConfig ? <>
+                <img
+                    src={UploadImage}
+                    style={{
+                      width: "30px",
+                    }}
+                    alt={"UploadImage"}
+                />
+                <p>Select an asset or drop here</p>
+              </> : <p className={"midBoldclass"}>{uploadedFileConfig}</p>
+            }
           </div>
           <input
             type={"file"}
             ref={inputClicker}
             style={{ display: "none" }}
-            onChange={() => {
+            accept=".glb"
+            onChange={(e) => {
+              setUploadedFileConfig(e.target.files[0].name)
               toast.success("File uploaded.");
             }}
             required={true}
