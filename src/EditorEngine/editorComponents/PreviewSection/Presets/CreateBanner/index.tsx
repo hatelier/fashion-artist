@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { updateCtrlPublishModal } from "../../../../../redux/materialApplication";
+import {
+  updateCtrlPublishModal,
+  updateCurrentShareState,
+} from "../../../../../redux/materialApplication";
+import { FaTelegramPlane } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 const CreateBanner = () => {
   const { id } = useParams();
@@ -40,8 +45,16 @@ const CreateBanner = () => {
         >
           {currentPublishState ? "Update" : "Publish"}
         </button>
-        <SendButton>
-          <FontAwesomeIcon icon={faPlay} style={{ color: "#ffffff" }} />
+        <SendButton
+          onClick={() => {
+            if (!currentPublishState) {
+              toast.error("Please publish before sharing.");
+            } else {
+              dispatch(updateCurrentShareState(true));
+            }
+          }}
+        >
+          <FaTelegramPlane color={"#ffffff"} size={17} />
         </SendButton>
       </div>
     </div>
@@ -59,5 +72,8 @@ const PreviewButton = styled.button`
 `;
 const SendButton = styled(PreviewButton)`
   border-radius: 0 9px 9px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export default CreateBanner;

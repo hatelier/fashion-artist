@@ -30,6 +30,7 @@ import axios from "axios";
 import { updateCustomMaterial } from "../../../../../redux/accountManagement";
 import AddMeshPopUpMain from "../../components/AddMeshPopUpMain";
 import { WhiteOnRed } from "../SectionFive/CommentBox";
+import {useNavigate} from "react-router-dom";
 // import { materialApplication } from "../../../../../redux/materialApplication";
 
 const SectionFour = () => {
@@ -82,6 +83,7 @@ const SectionFour = () => {
       loadMaterialFunc();
     }
   }, [userID, projectID, loadMaterialFunc]);
+  const navigate = useNavigate();
   const ObjectComp = ({ mesh, index }) => {
     const [picState, setPicState] = useState(null);
     axios
@@ -160,7 +162,9 @@ const SectionFour = () => {
         }}
       >
         <p className={"sectionFourTitle"}>Assets</p>
-        <img src={AssetImage} style={{ width: "21.35px" }} alt="" />
+        <img src={AssetImage} style={{ width: "21.35px" }} alt="" onClick={()=>{
+            navigate("/assets")
+        }}/>
       </div>
 
       <div
@@ -172,7 +176,9 @@ const SectionFour = () => {
         }}
       >
         <p className={"sectionFourTitle"}>Products</p>
-        <img src={AddConfig} style={{ width: "21.35px" }} alt="" />
+        <img src={AddConfig} style={{ width: "21.35px" }} alt="" onClick={()=>{
+            navigate("/products")
+        }}/>
       </div>
 
       {/*input section to search for the required material*/}
