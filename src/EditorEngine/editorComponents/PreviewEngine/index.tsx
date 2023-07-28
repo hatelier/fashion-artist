@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import {
   updateCurrentModel,
   updateEnableAR,
+  updatePresetState,
 } from "../../../redux/previewRedux";
 import { MeshPhysicalMaterial, TextureLoader } from "three";
 import * as THREE from "three";
@@ -132,6 +133,9 @@ const SideMenu = () => {
   const materialList = useSelector(
     (state: any) => state.previewRedux.materialList
   );
+  const presetState = useSelector(
+    (state: any) => state.previewRedux.presetState
+  );
   const arModel = useSelector((state: any) => state.previewRedux.arModel);
   const enableAR = useSelector((state: any) => state.previewRedux.enableAR);
   const { userID, projectID, name } = useParams();
@@ -144,11 +148,46 @@ const SideMenu = () => {
         },
       })
       .then((res) => {
+        dispatch(updatePresetState(res.data.enablePreset));
         dispatch(updateCurrentModel(res.data.asset.location));
       });
   }, [name, userID, dispatch]);
   useEffect(() => {
     if (materialList && materialList.length > 1) {
+      axios
+        .get("/manage/meshConfig", {
+          params: {
+            userId: userID,
+            productId: projectID,
+          },
+        })
+        .then((ress) => {
+          if (ress.data.data.length) {
+            let resData = ress.data.data;
+            materialList.filter((materss) =>
+              resData.some((cnfData) => {
+                if (cnfData.defaultName === materss.name) {
+                  materss.position.set(
+                    cnfData.position.x,
+                    cnfData.position.y,
+                    cnfData.position.z
+                  );
+                  materss.rotation.set(
+                    cnfData.rotation.x,
+                    cnfData.rotation.y,
+                    cnfData.rotation.z
+                  );
+                  materss.scale.set(
+                    cnfData.scale.x,
+                    cnfData.scale.y,
+                    cnfData.scale.z
+                  );
+                }
+                return 0;
+              })
+            );
+          }
+        });
       axios
         .get("/materials/getpreset", {
           params: {
@@ -157,26 +196,31 @@ const SideMenu = () => {
           },
         })
         .then((res) => {
-          setPresetData(res.data.preset.configuration.preset);
-          const reqPreset = res.data.preset.configuration.preset;
-          let entire_list = [];
-          reqPreset.forEach((prVal, index) => {
-            // entire_list
-            entire_list = entire_list.concat(prVal.materialList);
-            prVal.materialList.forEach((matName, matIndex) => {
-              //now toggle the visibility
-              materialList.forEach((modMaterial, modIndex) => {
-                if (modMaterial.name === matName) {
-                  modMaterial.visible = prVal.visibility[matIndex];
-                }
+          if (
+            presetState &&
+            res.data.preset.configuration.preset.length !== 0
+          ) {
+            setPresetData(res.data.preset.configuration.preset);
+            const reqPreset = res.data.preset.configuration.preset;
+            let entire_list = [];
+            reqPreset.forEach((prVal, index) => {
+              // entire_list
+              entire_list = entire_list.concat(prVal.materialList);
+              prVal.materialList.forEach((matName, matIndex) => {
+                //now toggle the visibility
+                materialList.forEach((modMaterial, modIndex) => {
+                  if (modMaterial.name === matName) {
+                    modMaterial.visible = prVal.visibility[matIndex];
+                  }
+                });
               });
             });
-          });
-          materialList.forEach((materValue) => {
-            if (!entire_list.includes(materValue.name)) {
-              materValue.visible = false;
-            }
-          });
+            materialList.forEach((materValue) => {
+              if (!entire_list.includes(materValue.name)) {
+                materValue.visible = false;
+              }
+            });
+          }
         })
         .catch((err) => {
           toast.error("Failed to load the configs.");
@@ -214,48 +258,47 @@ const SideMenu = () => {
                     let openMaterial = {};
                     [
                       "baseMap",
+                      "metalMap",
                       "roughnessMap",
                       "normalMap",
+                      "emissionMap",
                       "occlusionMap",
-                    ].forEach((mater, index) => {
-                      const texture = new TextureLoader().load(
-                        main_mat[`${mater}`].imgName
-                      );
-                      if (mater === "occlusionMap") {
-                        mater = "aoMap";
-                      } else if (mater === "baseMap") {
-                        mater = "map";
+                    ].forEach((mater) => {
+                      if (main_mat[`${mater}`].path !== null) {
+                        const texture = new TextureLoader().load(
+                          main_mat[`${mater}`].path
+                        );
+                        if (mater === "occlusionMap") {
+                          mater = "aoMap";
+                        } else if (mater === "baseMap") {
+                          mater = "map";
+                        }
+                        openMaterial = {
+                          ...openMaterial,
+                          [`${mater}`]: texture,
+                        };
                       }
-                      openMaterial = {
-                        ...openMaterial,
-                        [`${mater}`]: texture,
-                      };
                     });
 
                     ["map", "roughnessMap", "normalMap", "aoMap"].forEach(
                       (materr) => {
-                        openMaterial[materr].repeat.set(
-                          main_mat.tiling[0],
-                          main_mat.tiling[1]
-                        );
-                        openMaterial[materr].offset.set(
-                          main_mat.tilingOffset[0],
-                          main_mat.tilingOffset[1]
-                        );
-                        openMaterial[materr].rotation =
-                          main_mat.tilingRotation * (Math.PI / 180);
+                        if (openMaterial[materr] !== undefined) {
+                          openMaterial[materr].repeat.set(
+                            main_mat.tiling[0],
+                            main_mat.tiling[1]
+                          );
+                          openMaterial[materr].offset.set(
+                            main_mat.tilingOffset[0],
+                            main_mat.tilingOffset[1]
+                          );
+                          openMaterial[materr].rotation =
+                            main_mat.tilingRotation * (Math.PI / 180);
+                          openMaterial[materr].wrapS = openMaterial[
+                            materr
+                          ].wrapT = THREE.RepeatWrapping;
+                        }
                       }
                     );
-
-                    openMaterial.map.wrapS =
-                      openMaterial.map.wrapT =
-                      openMaterial.normalMap.wrapS =
-                      openMaterial.normalMap.wrapT =
-                      openMaterial.roughnessMap.wrapS =
-                      openMaterial.roughnessMap.wrapT =
-                      openMaterial.aoMap.wrapS =
-                      openMaterial.aoMap.wrapT =
-                        THREE.RepeatWrapping;
 
                     materialList[i].material = new MeshPhysicalMaterial({
                       ...openMaterial,
@@ -278,7 +321,7 @@ const SideMenu = () => {
           toast.error("Failed to load the configs");
         });
     }
-  }, [materialList, projectID, userID]);
+  }, [materialList, projectID, userID, presetState]);
 
   // material transform function.
   function materialFixture(materialName, indiMaterial) {
@@ -287,9 +330,16 @@ const SideMenu = () => {
     );
     let main_mat = requi_material[0];
     let openMaterial = {};
-    ["baseMap", "roughnessMap", "normalMap", "occlusionMap"].forEach(
-      (mater) => {
-        const texture = new TextureLoader().load(main_mat[`${mater}`].imgName);
+    [
+      "baseMap",
+      "metalMap",
+      "roughnessMap",
+      "normalMap",
+      "emissionMap",
+      "occlusionMap",
+    ].forEach((mater) => {
+      if (main_mat[`${mater}`].path !== null) {
+        const texture = new TextureLoader().load(main_mat[`${mater}`].path);
         if (mater === "occlusionMap") {
           mater = "aoMap";
         } else if (mater === "baseMap") {
@@ -300,26 +350,21 @@ const SideMenu = () => {
           [`${mater}`]: texture,
         };
       }
-    );
-
-    ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
-      openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
-      openMaterial[materr].offset.set(
-        main_mat.tilingOffset[0],
-        main_mat.tilingOffset[1]
-      );
-      openMaterial[materr].rotation = main_mat.tilingRotation * (Math.PI / 180);
     });
 
-    openMaterial.map.wrapS =
-      openMaterial.map.wrapT =
-      openMaterial.normalMap.wrapS =
-      openMaterial.normalMap.wrapT =
-      openMaterial.roughnessMap.wrapS =
-      openMaterial.roughnessMap.wrapT =
-      openMaterial.aoMap.wrapS =
-      openMaterial.aoMap.wrapT =
-        THREE.RepeatWrapping;
+    ["map", "roughnessMap", "normalMap", "aoMap"].forEach((materr) => {
+      if (openMaterial[materr] !== undefined) {
+        openMaterial[materr].repeat.set(main_mat.tiling[0], main_mat.tiling[1]);
+        openMaterial[materr].offset.set(
+          main_mat.tilingOffset[0],
+          main_mat.tilingOffset[1]
+        );
+        openMaterial[materr].rotation =
+          main_mat.tilingRotation * (Math.PI / 180);
+        openMaterial[materr].wrapS = openMaterial[materr].wrapT =
+          THREE.RepeatWrapping;
+      }
+    });
 
     indiMaterial.material = new MeshPhysicalMaterial({
       ...openMaterial,

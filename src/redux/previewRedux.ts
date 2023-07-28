@@ -5,11 +5,15 @@ export const previewRedux = createSlice({
     materialList: null,
     currentModel: null,
     arModel: null,
-    enableAR: false
+    enableAR: false,
+    presetState: false,
   },
   reducers: {
-    updateEnableAR: (state)=>{
-      state.enableAR = !state.enableAR
+    updatePresetState: (state, action) => {
+      state.presetState = action.payload;
+    },
+    updateEnableAR: (state) => {
+      state.enableAR = !state.enableAR;
     },
     updateArModel: (state, action) => {
       state.arModel = action.payload;
@@ -23,6 +27,11 @@ export const previewRedux = createSlice({
   },
 });
 
-export const { updateEnableAR,updateArModel, updateCurrentModel, updateMaterialListPreview } =
-  previewRedux.actions;
+export const {
+  updatePresetState,
+  updateEnableAR,
+  updateArModel,
+  updateCurrentModel,
+  updateMaterialListPreview,
+} = previewRedux.actions;
 export default previewRedux.reducer;
