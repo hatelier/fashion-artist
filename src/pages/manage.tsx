@@ -22,12 +22,16 @@ export const Manage = () => {
     // const [firstName, setFirstName] = useState("");
     // const [occupation, setOccupation] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
-    const showroomId = useParams();
+    const {showroomId} = useParams();
+    const [showroomName, setShowroomName] = useState('');
+    
     const fetchProducts = useCallback((async () => {
       
       try {
         const response = await axiosInstance.post(`/showroom/${showroomId}/products`);
-        setProducts(response.data);
+        setProducts(response.data.products);
+        setShowroomName(response.data.showroomName);
+        console.log(setShowroomName);
       } catch (error) {
         console.error(error);
       }
@@ -119,7 +123,7 @@ export const Manage = () => {
              <div className='text'>
                <div className='dashboard'>
                  <div className="analytics-header manage-text">
-                    <span>View Showroom</span>
+                    <span>{showroomName}'s Showroom</span>
                     <button onClick={sharePopup} className="analytics-download-button">Share</button>
                  </div>
                </div>
@@ -129,13 +133,13 @@ export const Manage = () => {
              {products.map((product) => (
                 <div key={product._id} className="manage-item">
                   <div className="manage-item-img">
-                    {/* Display product image here */}
+                  <img src={product.previewImage.location} alt={product.productName} height={50} width={50}/>
                   </div>
                   <div className="manage-item-details">
                     <div className="manage-item-name">{product.productName}</div>
                     <div className="manage-item-id-date">
                       <div className="manage-item-id">Product Id: {product._id}</div>
-                      <div className="manage-item-date">{product.previewImage?.location}</div>
+                      <div className="manage-item-date"></div>
                     </div>
                     </div>
                     </div>

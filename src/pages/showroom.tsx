@@ -27,6 +27,8 @@ export const Showroom = () => {
   // const [cookies, setCookie] = useCookies(['access_token']);
   // const navigate = useNavigate();
   const [showrooms, setShowrooms] = useState<showroom[]>([]);
+  const [showDeleteShowRoomPopup, setShowDeleteShowRoomPop] = useState(false);
+  const [showroomIdToDelete, setShowroomIdToDelete] = useState('');
 
   const fetchShowRooms = useCallback((async () => {
     try {
@@ -36,7 +38,23 @@ export const Showroom = () => {
     } catch (error) {
       console.error(error);
     }
-  }),[])
+  }),[]);
+
+  const handleShowroomDeleteClick = (showroomId: string) => {
+    setShowDeleteShowRoomPop(true);
+    setShowroomIdToDelete(showroomId);
+  }
+
+  const handleShowroomDelete = useCallback((async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    try {
+      await axiosInstance.delete(`/showroom/delete/${showroomIdToDelete}`);
+      setShowDeleteShowRoomPop(false);
+    } catch (error) {
+      console.error('Error deleting showroom', error);
+      setShowDeleteShowRoomPop(false);
+    }
+  }), [showroomIdToDelete]);
 
   useEffect(() => {
     // fetchUserData();
@@ -52,7 +70,7 @@ export const Showroom = () => {
       },
     });
     const userData = response.data;
-
+, 
     setFirstName(userData.firstname);
     setOccupation(userData.occupation);
     } catch (error) {
@@ -351,13 +369,17 @@ export const Showroom = () => {
                 <div className="showroom-cell">{showroom.productCount}</div>
                 <div className="showroom-cell"><a className='showroom-upload-status' href="/"><img src={require('../assets/pngs/upload.png')} alt="" /></a></div>
                 <div className="showroom-cell"><div>
-                        <a href="/add-showroom" className="showroom-action-buttons"><img src={require('../assets/pngs/edit.png')} alt="" /></a>
-                        <button className="showroom-action-buttons" onClick={sharePopup}><img src={require('../assets/pngs/showroom-share.png')} alt="" /></button>
+                        <a href={`/edit-showroom/${showroom._id}`} className="showroom-action-buttons">
+                          <img src={require('../assets/pngs/edit.png')} alt="" />
+                        </a>
+                        <a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/group.png')} alt="" /></a>
                         
                     </div>
                     </div>
                     <div className="showroom-cell"><button className="showroom-action-buttons" onClick={handleDeleteShowroomPopup}><img src={require('../assets/pngs/dustbin.png')} alt="" /></button></div>
-                    <div className="showroom-cell"><a href="/" className="showroom-action-buttons"><img src={require('../assets/pngs/dustbin.png')} alt="" /></a></div>
+                    <div className="showroom-cell">
+                        <button onClick={() => handleShowroomDeleteClick(showroom._id)} />     
+                    </div>
               </div>
               ))}
 
@@ -373,6 +395,19 @@ export const Showroom = () => {
               <ShowRoomRowPhone/>
 
              </div>
+             {
+              showDeleteShowRoomPopup && (
+                <div className="modal">
+                <div className="modal-content">
+                  <h3>Confirm Deletion</h3>
+                  <p>Are you sure you want to delete this showroom?</p>
+                  <div className="modal-actions">
+                    <button onClick={handleShowroomDelete}>Delete</button>
+                  </div>
+                </div>
+                </div>
+              )
+             }
                {/* <table className="showroom-block">
                 <tr className="showroom-heading-row">
                   <th className="showroom-heading-cell"><div className="showroom-heading-box"></div></th>
