@@ -22,7 +22,7 @@ const ModelPreview = () => {
       <Canvas dpr={[1, 2]} shadows frameloop={"always"}>
         <color attach="background" args={["#FCFBFB"]} />
         <ambientLight intensity={1} />
-        <directionalLight position={[10, 10, 10]} intensity={1} />
+        <directionalLight position={[10, 10, 10]} intensity={5} />
         {enableAR && <ObjectUrlCreator />}
         <Suspense
           fallback={
@@ -35,7 +35,7 @@ const ModelPreview = () => {
               }}
             >
               {/*<h1>{modelLoadRate}%</h1>*/}
-              <img src={MtumxLoadGif} width={"120px"} alt=""/>
+              <img src={MtumxLoadGif} width={"120px"} alt="" />
             </Html>
           }
         >
@@ -82,7 +82,7 @@ const UploadModelEngine = () => {
 const OrbitalController = () => {
   const { camera } = useThree();
   camera.fov = 50;
-  camera.zoom = 1.8;
+  camera.zoom = 1.4;
   camera.position.set(0, 0, 12);
   camera.updateProjectionMatrix();
   return (
