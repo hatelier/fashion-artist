@@ -5,6 +5,7 @@ import { AiOutlineLink } from "react-icons/ai";
 import { WhiteOnRed } from "../../Presets/SectionFive/CommentBox";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // logo list
 import Logo1 from "../../../../../assets/svgs/logos/frames1.svg";
@@ -12,14 +13,16 @@ import Logo2 from "../../../../../assets/svgs/logos/frames2.svg";
 import Logo3 from "../../../../../assets/svgs/logos/frames3.svg";
 import Logo4 from "../../../../../assets/svgs/logos/frames4.svg";
 import Logo5 from "../../../../../assets/svgs/logos/frames5.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import {
   updateCtrlPublishModal,
+  updateCurrentShareState,
   updateSetPublishState,
 } from "../../../../../redux/materialApplication";
+import { toast } from "react-hot-toast";
 
-const PublishProject = ({ generateData }) => {
+const PublishProject = ({ generateData, publishStateENV }) => {
   const logoList = [Logo1, Logo2, Logo3, Logo4, Logo5];
   const { id } = useParams();
   const { userID, projectID } = useSelector(
@@ -27,7 +30,8 @@ const PublishProject = ({ generateData }) => {
   );
   const dispatch = useDispatch();
   const baseReactUrl = window.location.origin.toString();
-  const [publishState, setPublishState] = useState(false);
+  const [publishState, setPublishState] = useState(publishStateENV);
+  const copyButtonRef = useRef(null);
   return !publishState ? (
     <PublishDiv>
       <div
@@ -140,6 +144,7 @@ const PublishProject = ({ generateData }) => {
           size={12}
           onClick={() => {
             dispatch(updateCtrlPublishModal(false));
+            dispatch(updateCurrentShareState(false));
           }}
         />
       </div>
@@ -160,19 +165,28 @@ const PublishProject = ({ generateData }) => {
             justifyContent: "flex-end",
           }}
         >
-          <button
-            style={{
-              padding: "2px 8px",
-              height: "30px",
-              background: "#ffffff",
-              borderRadius: "5px",
-              border: "none",
-              marginBottom: "10px",
-              cursor: "pointer",
+          <CopyToClipboard
+            text={`${baseReactUrl}/view/${userID}/${projectID}/${id}`}
+            onCopy={() => {
+              toast.success("Copied to clipboard.");
             }}
           >
-            Copy Embed
-          </button>
+            <button
+              style={{
+                padding: "2px 8px",
+                height: "30px",
+                background: "#ffffff",
+                borderRadius: "5px",
+                border: "none",
+                marginBottom: "10px",
+                cursor: "pointer",
+              }}
+              ref={copyButtonRef}
+              onClick={() => {}}
+            >
+              Copy Embed
+            </button>
+          </CopyToClipboard>
           <button
             style={{
               padding: "2px 8px",
@@ -195,6 +209,12 @@ const PublishProject = ({ generateData }) => {
               border: "none",
               marginBottom: "10px",
               cursor: "pointer",
+            }}
+            onClick={() => {
+              window.open(
+                `${baseReactUrl}/view/${userID}/${projectID}/${id}`,
+                "_blank"
+              );
             }}
           >
             Open Link

@@ -24,8 +24,12 @@ export const materialApplication = createSlice({
     presetState: false,
     controlPublishModal: false,
     currentPublishState: false,
+    currentShareState: false,
   },
   reducers: {
+    updateCurrentShareState: (state, action) => {
+      state.currentShareState = action.payload;
+    },
     updateSetPublishState: (state, action) => {
       state.currentPublishState = action.payload;
     },
@@ -72,6 +76,7 @@ export const materialApplication = createSlice({
 });
 
 export const {
+  updateCurrentShareState,
   updateSetPublishState,
   updateCtrlPublishModal,
   updatePresetState,

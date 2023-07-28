@@ -39,7 +39,9 @@ const CodeGenerator = ({ onClose }) => {
   });
   return (
     <CodeDiv>
-      {generateData && <PublishProject generateData={generateData} />}
+      {generateData && (
+        <PublishProject generateData={generateData} publishStateENV={false} />
+      )}
       <div
         style={{
           display: "flex",

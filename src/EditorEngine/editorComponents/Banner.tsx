@@ -1,7 +1,9 @@
 import React from "react";
 import "../index.scss";
 import MtumxLogo from "../../assets/pngs/mxlogo-2.png";
+import {useNavigate} from "react-router-dom";
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div className={"bannerDiv"}>
       <img
@@ -10,6 +12,9 @@ const Banner = () => {
           width: "35px",
         }}
         alt={"mtumxMain"}
+        onClick={()=>{
+          navigate("/")
+        }}
       />
     </div>
   );

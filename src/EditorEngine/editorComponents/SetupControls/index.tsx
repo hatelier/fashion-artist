@@ -22,6 +22,7 @@ import SectionSix from "./Presets/SectionSix";
 import SectionSeven from "./Presets/SectionSeven";
 import CodeGenerator from "./components/CodeGenerator";
 import { updateCtrlPublishModal } from "../../../redux/materialApplication";
+import PublishProject from "./components/PublishProject";
 
 const SetupControls = (props: BasicControls) => {
   const currentTab = useSelector(
@@ -30,6 +31,9 @@ const SetupControls = (props: BasicControls) => {
   const dispatch = useDispatch();
   const controlPublishModal = useSelector(
     (state) => state.materialApplication.controlPublishModal
+  );
+  const currentShareState = useSelector(
+    (state) => state.materialApplication.currentShareState
   );
   const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
   const modelLoadRate = useSelector(
@@ -88,6 +92,9 @@ const SetupControls = (props: BasicControls) => {
             dispatch(updateCtrlPublishModal(false));
           }}
         />
+      )}
+      {currentShareState && (
+        <PublishProject generateData={null} publishStateENV={true} />
       )}
       {modelLoadRate === 100 && (
         <>
