@@ -7,8 +7,12 @@ export const previewRedux = createSlice({
     arModel: null,
     enableAR: false,
     presetState: false,
+    publishState: false,
   },
   reducers: {
+    updatePublishState: (state, action) => {
+      state.publishState = action.payload;
+    },
     updatePresetState: (state, action) => {
       state.presetState = action.payload;
     },
@@ -28,6 +32,7 @@ export const previewRedux = createSlice({
 });
 
 export const {
+  updatePublishState,
   updatePresetState,
   updateEnableAR,
   updateArModel,

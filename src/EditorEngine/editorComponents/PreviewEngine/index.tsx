@@ -13,6 +13,7 @@ import {
   updateCurrentModel,
   updateEnableAR,
   updatePresetState,
+  updatePublishState,
 } from "../../../redux/previewRedux";
 import { MeshPhysicalMaterial, TextureLoader } from "three";
 import * as THREE from "three";
@@ -20,6 +21,7 @@ import XRengine from "../XRengine";
 
 const PreviewEngine = () => {
   const dispatch = useDispatch();
+  const publishState = useSelector((state) => state.previewRedux.publishState);
   return (
     <div>
       <div className="preview-page">
@@ -30,14 +32,16 @@ const PreviewEngine = () => {
               alt=""
               className="preview-mtum-logo"
             />
-            <div
-              className="preview-view-ar"
-              onClick={() => {
-                dispatch(updateEnableAR());
-              }}
-            >
-              View in AR
-            </div>
+            {publishState && (
+              <div
+                className="preview-view-ar"
+                onClick={() => {
+                  dispatch(updateEnableAR());
+                }}
+              >
+                View in AR
+              </div>
+            )}
             <SideMenu />
             <div className="preview-area" style={{ width: "100%" }}>
               <ModelPreview />
@@ -45,6 +49,10 @@ const PreviewEngine = () => {
             <div className="preview-options">
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -57,6 +65,10 @@ const PreviewEngine = () => {
               </div>
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -69,6 +81,10 @@ const PreviewEngine = () => {
               </div>
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -81,6 +97,10 @@ const PreviewEngine = () => {
               </div>
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -93,6 +113,10 @@ const PreviewEngine = () => {
               </div>
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -105,6 +129,10 @@ const PreviewEngine = () => {
               </div>
               <div>
                 <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
                   onClick={() => {
                     //window.open("");
                   }}
@@ -149,6 +177,7 @@ const SideMenu = () => {
       })
       .then((res) => {
         dispatch(updatePresetState(res.data.enablePreset));
+        dispatch(updatePublishState(res.data.publish.state));
         dispatch(updateCurrentModel(res.data.asset.location));
       });
   }, [name, userID, dispatch]);
@@ -379,7 +408,45 @@ const SideMenu = () => {
       transmission: main_mat.transmission, //float
     });
   }
-
+  const ImageGenerator = ({ name }) => {
+    const [imageState, setImageState] = useState(null);
+    useEffect(() => {
+      axios
+        .get("/manage/meshConfigIndi", {
+          params: {
+            userId: userID,
+            productId: projectID,
+            materialName: name,
+          },
+        })
+        .then((res) => {
+          setImageState(res.data.fullImageSrc);
+        });
+    }, [name]);
+    return (
+      <>
+        {imageState ? (
+          <div
+            style={{
+              minHeight: "50px",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <img src={imageState} width={"50px"} alt={""} />
+          </div>
+        ) : (
+          <FontAwesomeIcon
+            icon={faCube}
+            style={{
+              fontSize: "50px",
+            }}
+          />
+        )}
+      </>
+    );
+  };
   return (
     <>
       {enableAR && arModel && (
@@ -463,12 +530,7 @@ const SideMenu = () => {
                               setPresetData(presetData);
                             }}
                           />
-                          <FontAwesomeIcon
-                            icon={faCube}
-                            style={{
-                              fontSize: "50px",
-                            }}
-                          />
+                          <ImageGenerator name={mateList} />
                           <p
                             style={{
                               fontSize: "12px",
