@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-// import { useCookies } from 'react-cookie';
+import { useCallback, useEffect, useState } from "react";
+import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
 import { Header } from "../components/header";
@@ -43,26 +43,20 @@ interface Product {
 }
 
 export const Dashboard = () => {
-  // const [cookies, setCookie] = useCookies(['access_token']);
   // const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
   const [productCount, setProductCount] = useState(0);
-  const [threeDViewCount, setThreeDViewCount] = useState(0);
-  const [arViewCount, setArViewCount] = useState(0);
+  const [threeDViewCount, setThreeDViewCount] = useState([{ _id: '', count: 0, date: new Date() }]);
+  const [arViewCount, setArViewCount] = useState([{ _id: '', count: 0, date: new Date() }]);
   const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetchUserData();
-    fetchProductCount();
-    fetchProducts();
-    fetchthreeDViewCount();
-    fetcharViewCount();
-  }, []);
-
-  const fetchUserData = async () => {
+  const [cookies] = useCookies(["userId"]);
+  const userId = cookies.userId;
+  const [selectedPeriod, setSelectedPeriod] = useState("day");
+  
+  const fetchUserData = useCallback(async () => {
     try {
-      const userID = window.localStorage.getItem("userID");
+      const userID = cookies.userId;
       const response = await axiosInstance.get("/user/profile", {
         params: {
           userID: userID,
@@ -75,7 +69,8 @@ export const Dashboard = () => {
     } catch (error) {
       console.error("Error fetching user data: ", error);
     }
-  };
+  },[cookies.userId]);
+  
   // const logout = () => {
   //   setCookie('access_token',"");
   //   window.localStorage.removeItem("userID");
@@ -106,6 +101,7 @@ export const Dashboard = () => {
     setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
   };
 
+  
   // const childRef1 = useRef<HTMLDivElement>(null);
 
   // const toggleDisplay2 = (childRef: React.RefObject<HTMLDivElement>) => {
@@ -139,35 +135,48 @@ export const Dashboard = () => {
     }
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async (userId: string) => {
     try {
-      const response = await axiosInstance.get('/product/products');
+      const response = await axiosInstance.get(`/product/products?userId=${userId}`);
       const productData = response.data;
       setProducts(productData);
     } catch (error) {
       console.error('Error fetching products');
     }
-  };
+  }, []);
 
-  const fetchthreeDViewCount = async () => {
+  const fetchthreeDViewCount = useCallback(async (period: string) => {
     try {
-      const response = await axiosInstance.get('/analytics/threeDViewCount');
+      const response = await axiosInstance.get(`/analytics/threeDViewCount/${period}`);
       const count = response.data;
       setThreeDViewCount(count);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
 
-  const fetcharViewCount = async () => {
+  const fetcharViewCount = useCallback(async (period: string) => {
     try {
-      const response = await axiosInstance.get('/analytics/arViewCount');
+      const response = await axiosInstance.get(`/analytics/arViewCount/${period}`);
       const count = response.data;
       setArViewCount(count);
     } catch (error) {
       console.error(error);
     }
+  },[]);
+
+  const handlePeriodChange = (period: string) => {
+    setSelectedPeriod(period);
   };
+
+  useEffect(() => {
+    fetchUserData();
+    fetchProductCount();
+    fetchProducts(userId);
+    fetchthreeDViewCount(selectedPeriod);
+    fetcharViewCount(selectedPeriod);
+  }, [fetchProducts, fetchUserData, fetcharViewCount, fetchthreeDViewCount, selectedPeriod, userId]);
+
   const baseReactUrl = window.location.origin.toString();
   return (
     <div className="home-container">
@@ -259,10 +268,10 @@ export const Dashboard = () => {
             <div className="dashboard-filter-container">
               <div className="dashboard-date-filter" onClick={toggleDisplay}><span>This Week</span> <img className="sidenav-img" src={require('../assets/pngs/Dropdown.png')} alt="" /></div>
               <div className="dashboard-filter-dropdown" style={{ display }} id="dashboard-filter-dropdown">
-                <div>Today</div>
-                <div>This Week</div>
-                <div>This Month</div>
-                </div>
+                <div onClick={() => handlePeriodChange("day")}>Today</div>
+                <div onClick={() => handlePeriodChange("week")}>This Week</div>
+                <div onClick={() => handlePeriodChange("month")}>This Month</div>
+              </div>
             </div>
             <div className="insights">
               <div className="info">
@@ -277,7 +286,15 @@ export const Dashboard = () => {
               </div>
               <div className="info">
                 <div className="info-name">Total 3D view</div>
-                <div className="info-value">{threeDViewCount}</div>
+                {threeDViewCount.length > 0 ? (
+                // If the array is not empty, display the sum of counts
+                <div className="info-value">
+                  {threeDViewCount.reduce((total, entry) => total + entry.count, 0)}
+                </div>
+                ) : (
+                  // If the array is empty, display 0
+                  <div className="info-value">0</div>
+                )}
                 <div className="info-view">
                   <a className="info-view-link" href="/analytics">
                     <span>View analytics</span>
@@ -291,8 +308,16 @@ export const Dashboard = () => {
               </div>
               <div className="info">
                 <div className="info-name">Total AR view</div>
-                <div className="info-value">{arViewCount}</div>
-                <div className="info-view">
+                {arViewCount.length > 0 ? (
+                  // If the array is not empty, display the sum of counts
+                  <div className="info-value">
+                    {arViewCount.reduce((total, entry) => total + entry.count, 0)}
+                  </div>
+                ) : (
+                  // If the array is empty, display 0
+                  <div className="info-value">0</div>
+                )}                
+                  <div className="info-view">
                   <a className="info-view-link" href="/manage">
                     <span>View all Showroom</span>
                     <img

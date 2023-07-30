@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
@@ -24,15 +24,16 @@ interface showroom {
 export const Showroom = () => {
   // const [firstName, setFirstName] = useState("");
   // const [occupation, setOccupation] = useState("");
-  // const [cookies, setCookie] = useCookies(['access_token']);
+  const [cookies] = useCookies(['userId']);
+  const userId = cookies.userId;
   // const navigate = useNavigate();
   const [showrooms, setShowrooms] = useState<showroom[]>([]);
   const [showDeleteShowRoomPopup, setShowDeleteShowRoomPop] = useState(false);
   const [showroomIdToDelete, setShowroomIdToDelete] = useState('');
 
-  const fetchShowRooms = useCallback((async () => {
+  const fetchShowRooms = useCallback((async (userId: string) => {
     try {
-      const response = await axiosInstance.get('/showroom/getshowroom');
+      const response = await axiosInstance.get(`/showroom/getshowroom?userId=${userId}`);
       const showroomsData = response.data.showrooms;
       setShowrooms(showroomsData);
     } catch (error) {
@@ -58,8 +59,8 @@ export const Showroom = () => {
 
   useEffect(() => {
     // fetchUserData();
-    fetchShowRooms();
-  }, [fetchShowRooms]);
+    fetchShowRooms(userId);
+  }, [fetchShowRooms, userId]);
 
   // const fetchUserData = async () => {
     /*try {
