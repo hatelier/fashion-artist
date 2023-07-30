@@ -14,6 +14,7 @@ interface Product {
   previewImage: {
     location: string;
   };
+  previewImageLocation: string;
 }
 
 export const Manage = () => {
@@ -31,7 +32,7 @@ export const Manage = () => {
         const response = await axiosInstance.post(`/showroom/${showroomId}/products`);
         setProducts(response.data.products);
         setShowroomName(response.data.showroomName);
-        console.log(setShowroomName);
+        // console.log(setShowroomName);
       } catch (error) {
         console.error(error);
       }
@@ -42,6 +43,8 @@ export const Manage = () => {
       fetchProducts();
     }, [fetchProducts]);
 
+    
+ 
     // const fetchUserData = async () => {
       /*try {
       const userID = window.localStorage.getItem('userID');
@@ -130,20 +133,21 @@ export const Manage = () => {
              </div>
              </div>
              <div className="subscription">
-             {products.map((product) => (
-                <div key={product._id} className="manage-item">
-                  <div className="manage-item-img">
-                  <img src={product.previewImage.location} alt={product.productName} height={50} width={50}/>
-                  </div>
-                  <div className="manage-item-details">
-                    <div className="manage-item-name">{product.productName}</div>
-                    <div className="manage-item-id-date">
-                      <div className="manage-item-id">Product Id: {product._id}</div>
-                      <div className="manage-item-date"></div>
-                    </div>
-                    </div>
-                    </div>
-                      ))}
+             {/* {products && products.map((product) => (
+    <div key={product._id} className="manage-item">
+      <div className="manage-item-img">
+        <img src={product.previewImageLocation} alt={product.productName} height={50} width={50} />
+      </div>
+      <div className="manage-item-details">
+        <div className="manage-item-name">{product.productName}</div>
+        <div className="manage-item-id-date">
+          <div className="manage-item-id">Product Id: {product._id}</div>
+          <div className="manage-item-date"></div>
+        </div>
+      </div>
+    </div>
+))} */}
+
               </div>
              <div className="manage">
                <div className="choose-plan manage-text">
@@ -235,6 +239,20 @@ export const Manage = () => {
                             </div>
                         </div>
                     </div>
+                    {products && products.map((product) => (
+    <div key={product._id} className="manage-item">
+      <div className="manage-item-img">
+        <img src={product.previewImageLocation} alt={product.productName} height={50} width={50} />
+      </div>
+      <div className="manage-item-details">
+        <div className="manage-item-name">{product.productName}</div>
+        <div className="manage-item-id-date">
+          <div className="manage-item-id">Product Id: {product._id}</div>
+          <div className="manage-item-date"></div>
+        </div>
+      </div>
+    </div>
+))}
                   </div>
                 </div>
 

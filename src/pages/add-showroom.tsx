@@ -6,7 +6,7 @@ import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
 import axiosInstance from '../components/axiosInstance';
-import Card from '../components/Card';
+// import Card from '../components/Card';
 
 
 interface Product {
@@ -285,7 +285,7 @@ export const AddShowroom = () => {
                                 </div>
                           </div>
                         <div className="add-showroom-products-row">
-                          <div className="add-showroom-product-item-container">
+                          {/* <div className="add-showroom-product-item-container">
                               <div className="add-showroom-product-item">
                                 <div className="product-item-img-div">
                                   <input type="checkbox" name="" id="" className='product-item-checkbox'/>
@@ -316,9 +316,22 @@ export const AddShowroom = () => {
                                 </div>
                               </div>
                               <div className="product-item-text">Product 01</div>
-                          </div>
+                          </div> */}
+                          {products.map((product) => (
+                            <div className="add-showroom-product-item-container" key={product._id}>
+                              <div className="add-showroom-product-item">
+                                <div className="product-item-img-div">
+                                  <input type="checkbox" onChange={() => handleCheckboxChange(product._id)} className='product-item-checkbox' />
+                                  {product.previewImage && (
+                                    <img className="product-item-img" src={product.previewImage.location} alt="Preview" height={66} width={60}/>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="product-item-text">{product.productName}</div>
+                            </div>
+                          ))}
                            <div>
-                           {products.map((product) => (
+                           {/* {products.map((product) => (
                             <Card key={product._id}>
                              {product.previewImage && (
                              <div className="card-img-container">
@@ -329,7 +342,7 @@ export const AddShowroom = () => {
                              </div>
                              )}
                             </Card>
-                            ))}
+                            ))} */}
                            </div>
                         </div>
                     </div>

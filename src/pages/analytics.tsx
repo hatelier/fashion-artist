@@ -9,12 +9,18 @@ import { Sidenav } from '../components/sidenav';
 import axiosInstance from '../components/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
+interface ProductData {
+  location: string;
+  productName: string;
+}
+
 export const Analytics = () => {
     // const [cookies, setCookie] = useCookies(['access_token']);
     // const navigate = useNavigate();
     // const [firstName, setFirstName] = useState("");
     // const [occupation, setOccupation] = useState("");
-    const [selectedPeriod, setSelectedPeriod] = useState('month');
+    const [threeDSelectedPeriod, setThreeDSelectedPeriod] = useState('day');
+    const [arSelectedPeriod, setArSelectedPeriod] = useState('day');
     const [threeDViewCount, setthreeDViewCount] = useState([]);
     const [arViewCount, setArViewCount] = useState([]);
     const [mostViewedProduct, setMostViewedProduct] = useState(null);
@@ -22,6 +28,8 @@ export const Analytics = () => {
     const [avgInteraction, setAvgInteraction] = useState(0);
     const [range, setRange] = useState('day');
     const [searchText, setSearchText] = useState('');
+    const [searchedProduct, setSearchedProduct] = useState<ProductData | null>(null);
+
     // const [products, setProducts] = useState({ location: '', productName: '' });
     // const [products, setProducts] = useState({ location: '', productName: '' });
   
@@ -29,9 +37,7 @@ export const Analytics = () => {
       try {
         const response = await axiosInstance.get(`/analytics/product/search/${encodeURIComponent(searchText)}`);
         const data = response.data;
-        console.log(data);
-        // setProducts(data);
-        // setProducts(data);
+        setSearchedProduct(data);
       } catch (error) {
         console.error('Error searching products', error);
       }
@@ -39,8 +45,8 @@ export const Analytics = () => {
     
     useEffect(() => {
       // fetchUserData();
-      fetchThreeDViewCounts(selectedPeriod);
-      fetchARViewCount(selectedPeriod);
+      fetchThreeDViewCounts(threeDSelectedPeriod);
+      fetchARViewCount(arSelectedPeriod);
       fetchMostViewedProduct();
       fetchEngagementPercentage();
       fetchAvgInteraction();
@@ -48,10 +54,11 @@ export const Analytics = () => {
       if (searchText.trim() !== '') {
         handleSearch();
       } else {
+        setSearchedProduct(null);
         // setProducts({ location: '', productName: '' });
         // setProducts({ location: '', productName: '' });
       }
-    }, [selectedPeriod, searchText, handleSearch]);
+    }, [searchText, handleSearch, threeDSelectedPeriod, arSelectedPeriod]);
 
     // const fetchUserData = async () => {
       /*try {
@@ -108,13 +115,13 @@ export const Analytics = () => {
 
     const handlePeriodChange = (event: ChangeEvent<HTMLSelectElement>) => {
       const period = event.target.value;
-      setSelectedPeriod(period);
+      setThreeDSelectedPeriod(period);
       fetchThreeDViewCounts(period);
     };
 
     const handleARPeriodChange = (event: ChangeEvent<HTMLSelectElement>) => {
       const period = event.target.value;
-      setSelectedPeriod(period);
+      setArSelectedPeriod(period);
       fetchARViewCount(period);
     };
 
@@ -250,18 +257,16 @@ export const Analytics = () => {
 
                         <div className="analytics-report-3">
                           <div className="analytics-report-item">
-                            <input type='checkbox'/>
-                            <img src={require('../assets/pngs/rectangle.png')} alt="back" />
-                            <p>Product Name</p>
+                            
+                            {searchedProduct && (
+                              <>
+                                <img src={searchedProduct.location} alt="Product" height={50} width={50}/>
+                                <p>{searchedProduct.productName}</p> 
+                              </>
+                            )}
                           </div>
 
-                          <div className="analytics-report-item">
-                            <input type='checkbox'/>
-                            <img src={require('../assets/pngs/rectangle.png')} alt="" />
-                            <p>Product Name</p> 
-                          </div>
-
-                          <div className="analytics-report-item">
+                           {/*<div className="analytics-report-item">
                             <input type='checkbox'/>
                             <img src={require('../assets/pngs/rectangle.png')} alt="back" />
                             <p>Product Name</p>
@@ -271,7 +276,7 @@ export const Analytics = () => {
                             <input type='checkbox'/>
                             <img src={require('../assets/pngs/rectangle.png')} alt="back" />
                             <p>Product Name</p>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="analytics-report-pagination">
                             <img src={require('../assets/pngs/back.png')} alt="" className='sidenav-img'/>
@@ -291,14 +296,14 @@ export const Analytics = () => {
                       <div className="analytics-3d-views">
                       <div className="period-selection">
                         <p>Total 3D view</p>
-                        <select value={selectedPeriod} onChange={handlePeriodChange}>
+                        <select value={threeDSelectedPeriod} onChange={handlePeriodChange}>
                           <option value="day">Day</option>
                           <option value="week">Week</option>
                           <option value="month">Month</option>
                         </select>
                       </div>
                       <div className='analytics-linechart-container'>
-                        <LineChart width={250} height={350} data={threeDViewCount} className='analytics-linechart'>
+                        <LineChart width={410} height={350} data={threeDViewCount} className='analytics-linechart'>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);
@@ -325,14 +330,14 @@ export const Analytics = () => {
                               <div className="analytics-stats-heading">All User Engagement</div>
                               <div className='analytics-stats-main'>
                                   <img src={require('../assets/pngs/analytics-img.png')} alt="" className='sidenav-img'/>
-                                  <span className='analytics-stats-number'>{engagementPercentage} %</span>
+                                  <span className='analytics-stats-number'>{engagementPercentage.toFixed(2)} %</span>
                               </div>
                           </div>
                           <div className="analytics-average-interaction">
                               <div className="analytics-stats-heading">No. of Average Interaction</div>
                               <div className='analytics-stats-main'>
                                   <img src="" alt="" />
-                                  <span className='analytics-stats-number'>{avgInteraction}</span>
+                                  <span className='analytics-stats-number'>{avgInteraction.toFixed(2)}</span>
                               </div>
                           </div>
                       </div>
@@ -355,14 +360,14 @@ export const Analytics = () => {
                       <div className="analytics-ar-views">
                       <div className="period-selection">
                         <p>Total AR views</p>
-                        <select value={selectedPeriod} onChange={handleARPeriodChange}>
+                        <select value={arSelectedPeriod} onChange={handleARPeriodChange}>
                           <option value="day">Day</option>
                           <option value="week">Week</option>
                           <option value="month">Month</option>
                         </select>
                       </div>
                     
-                      <LineChart width={250} height={350} data={arViewCount}>
+                      <LineChart width={400} height={350} data={arViewCount}>
                           <XAxis dataKey="date" 
                           tickFormatter={(dateStr) => {
                             const date = new Date(dateStr);

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
 import axiosInstance from "../components/axiosInstance";
+import { useCookies } from "react-cookie";
 
 interface FormProps {
     email: string;
@@ -36,7 +37,9 @@ export const Auth = () => {
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [, setCookie] = useCookies(['access_token', 'userId']);
+
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -50,8 +53,8 @@ const Login = () => {
                 toast.error("Username or Password incorrect!");
             } else {
                 const token = response.data.token;
-                localStorage.setItem('access_token', token);
-                localStorage.setItem('userID', response.data.userID);
+                setCookie('access_token', token, { path: "/" });
+                setCookie('userId', response.data.userID, { path: "/" });
                 navigate("/");
             }
 
