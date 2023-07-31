@@ -213,7 +213,7 @@ const PublishProject = ({ generateData, publishStateENV }) => {
             onClick={() => {
               window.open(
                 `${baseReactUrl}/view/${userID}/${projectID}/${id}`,
-                "_blank"
+                "_self"
               );
             }}
           >

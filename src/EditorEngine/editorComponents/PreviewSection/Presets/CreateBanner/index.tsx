@@ -31,7 +31,7 @@ const CreateBanner = () => {
           onClick={() => {
             window.open(
               `${baseReactUrl}/view/${userID}/${projectID}/${id}`,
-              "_blank"
+              "_self"
             );
           }}
         >
