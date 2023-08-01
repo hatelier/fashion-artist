@@ -12,14 +12,8 @@ import * as React from 'react';
 // import Typography from '@mui/material/Typography';
 import DarkMode from '../components/darkmode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import axiosInstance from './axiosInstance';
+import {axiosInstance} from './axiosInstance';
 
-interface UserData {
-  firstname: string;
-  currentDate: string;
-  loginTime: string;
-  notificationId: string;
-}
 
 export const Header = () => {
     const [cookies, , removeCookie] = useCookies(["access_token", "userId"]);    
@@ -27,6 +21,7 @@ export const Header = () => {
     const [firstName, setFirstName] = useState("");
     const [occupation, setOccupation] = useState("");
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    
     
 
     const handleBellClick = () => {
@@ -55,21 +50,21 @@ export const Header = () => {
     }, [cookies.userId]);
 
     const logout = () => {
-      localStorage.removeItem("apiCalled");
       removeCookie("access_token");
       removeCookie("userId");
       navigate("/auth");
     }
 
+    useEffect(() => {
+      fetchUserData();
+    }, [fetchUserData]);
     // const [isElementVisible, setElementVisible] = useState(false);
 
     const handleClick = () => {
       const element = document.querySelector('#sidenav') as HTMLElement;
       element.style.display = element.style.display === 'none' ? 'block' : 'none';
     };
-    useEffect(() => {
-      fetchUserData();
-    }, [fetchUserData]);
+    
     /*const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       width: 62,
       height: 34,
@@ -138,29 +133,17 @@ export const Header = () => {
       // Dropdown component  starts
 
       
-const NotificationItem: React.FC<UserData> = ({firstname, currentDate, loginTime, notificationId})=>{
-  const handleDeleteNotification = useCallback(async () => {
-    try {
-      // Call the delete API with the notificationId
-      await axiosInstance.delete(`/notifications/delete/${notificationId}`);
-
-      // Handle successful deletion (e.g., show a success message, update the UI, etc.)
-      console.log('Notification deleted successfully');
-    } catch (error) {
-      // Handle errors
-      console.error('Error deleting notification:', error);
-    }
-  },[notificationId]);
+  const NotificationItem = ()=>{
 
   return(
       <div className='notification-dropdown-item'>
           <div className='notification-dropdown-item-1'>
-              <div>Hello {firstname}</div>
-              <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img' onClick={handleDeleteNotification}/>
-          </div>
+          <div>Congrats! your project is published</div>
+              <img src={require('../assets/pngs/dustbin.png')} alt="delete" className='sidenav-img'/>
+            </div>
           <div className='notification-dropdown-timestamp'>
-              <p>{currentDate}</p>
-              <p>{loginTime}</p>
+              <p>04/07/2023</p>
+              <p>02:00 PM</p>
           </div>
       </div>
   )
@@ -169,31 +152,6 @@ const NotificationItem: React.FC<UserData> = ({firstname, currentDate, loginTime
 
 
 const NotificationDropDown  = () => {
-  console.log('NotificationDropDown rendered');
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [cookies] = useCookies(['userId']);
-  const [isFetched, setIsFetched] = useState(false);
-
-  const fetchNotification = useCallback(async () => {
-    try {
-      const response = await axiosInstance.get('/notifications/get', {
-        params: {
-          userId: cookies.userId,
-        }
-      });
-      setUserData(response.data);
-      setIsFetched(true);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [cookies.userId]);
-
-  useEffect(() => {
-    if (!isFetched) {
-      // If the notifications are not fetched yet, fetch them
-      fetchNotification();
-    }
-  }, [isFetched, fetchNotification]);
 
   return(
       <div className='notification-dropdown'>
@@ -202,20 +160,10 @@ const NotificationDropDown  = () => {
               <div><img src={require('../assets/pngs/cancel.png')} alt="" className='sidenav-img' onClick={ handleDialogClose }/></div>
           </div>
           <div className="notification-dropdown-content">
-                    {userData ? (
-                <NotificationItem
-                  firstname={userData.firstname}
-                  currentDate={userData.currentDate}
-                  loginTime={userData.loginTime}
-                  notificationId={userData.notificationId}
-                />
-              ) : (
-                <p></p>
-              )}
-              {/* <NotificationItem/>
               <NotificationItem/>
               <NotificationItem/>
-              <NotificationItem/> */}
+              <NotificationItem/>
+              <NotificationItem/>
           </div>
           <div className="notification-dropdown-action">
               <div className='notification-dropdown-buttons'>

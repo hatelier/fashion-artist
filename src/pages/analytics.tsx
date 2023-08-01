@@ -6,7 +6,7 @@ import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 // import TokenVerification from '../components/auth';
 // import TokenVerification from '../components/auth';
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 interface ProductData {
