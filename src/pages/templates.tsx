@@ -2,7 +2,7 @@ import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import Card from '../components/Card';
 import { useEffect, useState } from "react";
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 
 
 export const Templates = () => {

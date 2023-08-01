@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 import { useParams } from 'react-router-dom';
 
 interface Product {

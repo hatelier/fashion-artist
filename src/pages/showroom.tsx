@@ -6,7 +6,7 @@ import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
 import { toast } from 'react-toastify';
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 
 interface showroom {
   _id: string;

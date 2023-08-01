@@ -6,7 +6,7 @@ import { Header } from "../components/header";
 // import { toast } from "react-toastify";
 import { Sidenav } from "../components/sidenav";
 import TokenVerification from "../components/auth";
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 import Card from '../components/Card';
 import {FiUpload} from "react-icons/fi";
 import {BsPencil} from "react-icons/bs";

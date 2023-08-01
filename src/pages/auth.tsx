@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
-import axiosInstance from "../components/axiosInstance";
+import { axiosInstance, setAuthorizationHeader } from "../components/axiosInstance";
 import { useCookies } from "react-cookie";
 
 interface FormProps {
@@ -38,10 +38,9 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
-    const [, setCookie] = useCookies(['access_token', 'userId']);
-
-
-    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    const [, setCookie] = useCookies(["access_token", "userId"]);
+    
+    const OnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/auth/login', {email, password});
@@ -53,8 +52,13 @@ const Login = () => {
                 toast.error("Username or Password incorrect!");
             } else {
                 const token = response.data.token;
-                setCookie('access_token', token, { path: "/" });
-                setCookie('userId', response.data.userID, { path: "/" });
+                const userId = response.data.userID;
+                // Set the access token and userId in cookies using the `react-cookie` library
+                setCookie("access_token", token, { path: "/" });
+                setCookie("userId", userId, { path: "/" });
+
+                // Set the authorization header globally for Axios requests
+                setAuthorizationHeader(token);
                 navigate("/");
             }
 
@@ -63,7 +67,7 @@ const Login = () => {
         }
     }
 
-    return <Form email={email} setEmail={setEmail} password={password} setPassword={setPassword} label="Login" onSubmit={onSubmit}/>;
+    return <Form email={email} setEmail={setEmail} password={password} setPassword={setPassword} label="Login" onSubmit={OnSubmit}/>;
 
 };
 

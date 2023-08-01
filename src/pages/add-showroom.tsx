@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
-import axiosInstance from '../components/axiosInstance';
+import {axiosInstance} from '../components/axiosInstance';
 // import Card from '../components/Card';
 
 
