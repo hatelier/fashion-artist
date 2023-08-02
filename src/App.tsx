@@ -57,7 +57,6 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/templates" element={<Templates />} />
-          {/* <Route path="/products/upload/" element={<UploadPage />} /> */}
           <Route path="/assets" element={<Assets />} />
           <Route path="/add-showroom" element={<AddShowroom />} />
           <Route path="/password/reset" element={<NewPasswordToken />} />

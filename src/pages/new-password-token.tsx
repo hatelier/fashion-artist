@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import axios from "axios";
 import { Link, /*useNavigate,*/ useLocation } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
+import { axiosInstance } from "../components/axiosInstance";
 
 interface FormProps {
     password: string;
@@ -78,7 +78,7 @@ const NewPasswordForm = () => {
         }
 
         try {
-            await axios.post("/password/resettoken", {email, token, password});
+            await axiosInstance.post("/password/resettoken", {email, token, password});
             displayMsg();
         } catch (error) {
             console.error(error);

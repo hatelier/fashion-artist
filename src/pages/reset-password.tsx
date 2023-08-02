@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from 'react';
 import { toast } from "react-toastify";
+import { axiosInstance } from "../components/axiosInstance";
 
 interface FormProps {
     otp: string[];
@@ -65,7 +65,7 @@ const Register = () => {
         event.preventDefault();
         try {
             const otpValue = otp.join("");
-            const response = await axios.post("/password/validate-otp", {otp: otpValue});
+            const response = await axiosInstance.post("/password/validate-otp", {otp: otpValue});
             if(response.data.valid) {
                 navigate('/new-password');
             } else if(response.data.message === 'Invalid or expired OTP') {
@@ -78,7 +78,7 @@ const Register = () => {
 
     const onResend = async () => {
         try {
-            await axios.post("/password/forgot/resend");
+            await axiosInstance.post("/password/forgot/resend");
             displayMsg()
         } catch (error) {
             console.error(error);
@@ -87,7 +87,7 @@ const Register = () => {
 
     const fetchEmail = async () => {
         try {
-            const response = await axios.get("/password/email");
+            const response = await axiosInstance.get("/password/email");
             setEmail(response.data);
             // console.log(response.data);
         } catch (error) {
