@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState} from "react";
 // import { useCookies } from 'react-cookie';
 // import { useNavigate } from 'react-router-dom';
@@ -13,6 +12,7 @@ import { Sidenav } from "../components/sidenav";
 import TokenVerification from '../components/auth';
 import {FiUpload} from "react-icons/fi";
 import {BsPencil} from "react-icons/bs";
+import { axiosInstance } from "../components/axiosInstance";
 
 interface Product {
   _id: string;
@@ -59,7 +59,7 @@ export const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("/product/products");
+      const response = await axiosInstance.get("/product/products");
       const productData = response.data;
       setProducts(productData);
     } catch (error) {

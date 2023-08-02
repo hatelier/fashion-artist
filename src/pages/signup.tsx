@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, ChangeEvent } from 'react';
 import { toast } from "react-toastify";
+import { axiosInstance } from "../components/axiosInstance";
 
 interface FormProps {
     firstname: string;
@@ -84,7 +84,7 @@ const Register = () => {
                 toast.error("Please agree to the Terms of Use and Privacy Policy");
                 return;
             }
-            await axios.post('/auth/register', {
+            await axiosInstance.post('/auth/register', {
                 firstname, lastname, email, occupation, companyname, password, updates,
             });
             toast.success("Registration Completed")

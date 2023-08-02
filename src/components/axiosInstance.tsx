@@ -7,9 +7,15 @@ const axiosInstance = axios.create({
 let authToken: string | null = null; // Provide a type for authToken
 
 // Function to set the authorization header with the token
-const setAuthorizationHeader = (token: string | null) => {
+const setAuthorizationHeader = (token: string | null, userId: string | null) => {
   authToken = token;
   axiosInstance.defaults.headers.common["Authorization"] = token ? `Bearer ${token}` : "";
+
+  if (userId) {
+    axiosInstance.defaults.headers.common["X-User-Id"] = userId;
+  } else {
+    delete axiosInstance.defaults.headers.common["X-User-Id"];
+  }
 };
 
 axiosInstance.interceptors.request.use((config) => {

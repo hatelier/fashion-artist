@@ -1,10 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
 // import { Link } from "react-router-dom";
 import { FormEvent/*, ChangeEvent*/ } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TokenVerification from "../components/auth";
+import { axiosInstance } from "../components/axiosInstance";
 
 interface FormProps {
     email: string;
@@ -63,7 +63,7 @@ const Register = () => {
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post("/password/forgot", {email});
+            const response = await axiosInstance.post("/password/forgot", {email});
             // setMessage(response.data.message);
             if(response.data.message === "User not found") {
                 toast.error("User not found");

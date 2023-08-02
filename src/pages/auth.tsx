@@ -44,7 +44,6 @@ const Login = () => {
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/auth/login', {email, password});
-            console.log(response);
 
             if(response.data.message === 'User not found!') {
                 toast.error("User not found!");
@@ -58,7 +57,7 @@ const Login = () => {
                 setCookie("userId", userId, { path: "/" });
 
                 // Set the authorization header globally for Axios requests
-                setAuthorizationHeader(token);
+                setAuthorizationHeader(token, userId);
                 navigate("/");
             }
 
