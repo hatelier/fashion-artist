@@ -1,6 +1,4 @@
-// import axios from 'axios'; //Fetch
 import { useCallback, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
@@ -39,11 +37,8 @@ interface Product {
 }
 
 export const EditShowroom = () => {
-  // const [cookies, setCookie] = useCookies(['access_token']);
   const {showroomID} = useParams();
   const navigate = useNavigate();
-  // const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
   const [showroomName, setShowroomName] = useState('');
   const [tags, setTags] = useState('');
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -84,7 +79,7 @@ export const EditShowroom = () => {
       }
     
       // Check if tags are provided and add them to formData
-      if (tags.length > 0) {
+      if (tags && tags.length > 0) {
         formData.append('tags', JSON.stringify(tags));
       }
     
@@ -142,31 +137,6 @@ export const EditShowroom = () => {
       console.error('Showroom ID not found in URL');
     }
   }, [fetchShowroomDetails, showroomID]);
-
-
-  // const fetchUserData = async () => {
-  //   try {
-    // const userID = window.localStorage.getItem('userID');
-
-    // const response = await axios.get("/user/profile", { 
-    //   params: {
-    //     userID: userID
-    //   },
-    // });
-    // const userData = response.data;
-
-    // setFirstName(userData.firstname);
-    // setOccupation(userData.occupation);
-  //   } catch (error) {
-  //     console.error("Error fetching user data: ", error);
-  //   }
-  // };
-
-  /*const logout = () => {
-    // setCookie('access_token',"")
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }*/
 
   const [isOpen, setIsOpen] = useState(false);
 

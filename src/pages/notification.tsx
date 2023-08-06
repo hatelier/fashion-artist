@@ -1,11 +1,6 @@
 import { toast } from "react-toastify";
 import { Header } from '../components/header';
-
-
 import { Sidenav } from '../components/sidenav';
-// import { useCallback, useEffect, useState } from "react";
-// import axiosInstance from "../components/axiosInstance";
-// import { useCookies } from "react-cookie";
 
 interface UserData {
   firstname: string;
@@ -15,18 +10,6 @@ interface UserData {
 }
  
 const NotificationItem: React.FC<UserData> = ({ firstname, currentDate, loginTime, notificationId}) => {
-  // const handleDeleteNotification = useCallback(async () => {
-  //   try {
-  //     // Call the delete API with the notificationId
-  //     await axiosInstance.delete(`/notifications/delete/${notificationId}`);
-
-  //     // Handle successful deletion (e.g., show a success message, update the UI, etc.)
-  //     console.log('Notification deleted successfully');
-  //   } catch (error) {
-  //     // Handle errors
-  //     console.error('Error deleting notification:', error);
-  //   }
-  // },[notificationId]);
 
     const Msg = () => (
         <div className = "delete-notification-msg">
@@ -100,30 +83,6 @@ const NotificationItem: React.FC<UserData> = ({ firstname, currentDate, loginTim
 
 
 export const Notification = () => {
-    // const [userData, setUserData] = useState<UserData | null>(null);
-    // const [cookies] = useCookies(['userId']);
-    // const [showNotification, setShowNotification] = useState(false);
-
-    // const fetchNotification = useCallback(async () => {
-    //   try {
-    //     const response = await axiosInstance.get('/notifications/get', {
-    //       params: {
-    //         userId: cookies.userId,
-    //       }
-    //     });
-    //     setUserData(response.data);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }, [cookies.userId]);
-
-    // useEffect(() => {
-    //   const isApiCalled = localStorage.getItem("apiCalled");
-    //   if (!isApiCalled) {
-    //     fetchNotification();
-    //     localStorage.setItem("apiCalled", "true");
-    //   }
-    // }, [fetchNotification]);
 
     const Msg = () => (
         <div className = "delete-notification-msg">

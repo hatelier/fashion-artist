@@ -1,7 +1,4 @@
-// import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
@@ -18,10 +15,6 @@ interface Product {
 }
 
 export const Manage = () => {
-  // const [cookies, setCookie] = useCookies(['access_token']);
-    // const navigate = useNavigate();
-    // const [firstName, setFirstName] = useState("");
-    // const [occupation, setOccupation] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
     const {showroomId} = useParams();
     const [showroomName, setShowroomName] = useState('');
@@ -32,41 +25,14 @@ export const Manage = () => {
         const response = await axiosInstance.post(`/showroom/${showroomId}/products`);
         setProducts(response.data.products);
         setShowroomName(response.data.showroomName);
-        // console.log(setShowroomName);
       } catch (error) {
         console.error(error);
       }
     }),[showroomId]);
     
     useEffect(() => {
-      // fetchUserData();
       fetchProducts();
     }, [fetchProducts]);
-
-    
- 
-    // const fetchUserData = async () => {
-      /*try {
-      const userID = window.localStorage.getItem('userID');
-      const response = await axios.get("/user/profile", { 
-        params: {
-          userID: userID
-        },
-      });
-      const userData = response.data;
-
-      setFirstName(userData.firstname);
-      setOccupation(userData.occupation);
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
-      }*/
-    // };
-
-    /*const logout = () => {
-      setCookie('access_token',"");
-      window.localStorage.removeItem("userID");
-      navigate("/auth");
-    }*/
 
     // const [isOpen, setIsOpen] = useState(false);
 

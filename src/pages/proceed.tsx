@@ -1,6 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
-import { FormEvent/*, ChangeEvent*/ } from 'react';
+import { FormEvent } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TokenVerification from "../components/auth";

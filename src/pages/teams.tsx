@@ -1,7 +1,4 @@
-// import axios from 'axios';
-import { useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
@@ -9,45 +6,7 @@ import { toast } from 'react-toastify';
 
 
 export const Teams = () => {
-  // const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
-  // const [cookies, setCookie] = useCookies(['access_token']);
-  // const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  const fetchUserData = async () => {
-    try {
-    
-      //This part //Token from cookies
-    // const userID = window.localStorage.getItem('userID');
-
-    /*const response = await axios.get("/user/profile", { 
-      params: {
-        userID: userID
-      },
-    });*/
-
-    // const userData = response.data;
-
-    // setFirstName(userData.firstname);
-    // setOccupation(userData.occupation);
-    } catch (error) {
-      console.error("Error fetching user data: ", error);
-    }
-  };
-
-
-  /*const logout = () => {
-    setCookie('access_token');
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }*/
-
-
-
+  
   const [isOpen, setIsOpen] = useState(false);
   const [isTeammatePopUp, setisTeammatePopUp] = useState(false);
   const [isEditTeam, setisEditTeam] = useState(false);

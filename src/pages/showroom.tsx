@@ -1,7 +1,5 @@
-// import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
@@ -22,18 +20,15 @@ interface showroom {
 }
 
 export const Showroom = () => {
-  // const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
   const [cookies] = useCookies(['userId']);
   const userId = cookies.userId;
-  // const navigate = useNavigate();
   const [showrooms, setShowrooms] = useState<showroom[]>([]);
   const [showDeleteShowRoomPopup, setShowDeleteShowRoomPop] = useState(false);
   const [showroomIdToDelete, setShowroomIdToDelete] = useState('');
 
   const fetchShowRooms = useCallback((async (userId: string) => {
     try {
-      const response = await axiosInstance.get(`/showroom/getshowroom?userId=${userId}`);
+      const response = await axiosInstance.get(`/showroom/getshowroom/${userId}`);
       const showroomsData = response.data.showrooms;
       setShowrooms(showroomsData);
     } catch (error) {
@@ -58,32 +53,8 @@ export const Showroom = () => {
   }), [showroomIdToDelete]);
 
   useEffect(() => {
-    // fetchUserData();
     fetchShowRooms(userId);
   }, [fetchShowRooms, userId]);
-
-  // const fetchUserData = async () => {
-    /*try {
-    const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", { 
-      params: {
-        userID: userID
-      },
-    });
-    const userData = response.data;
-, 
-    setFirstName(userData.firstname);
-    setOccupation(userData.occupation);
-    } catch (error) {
-      console.error("Error fetching user data: ", error);
-    }*/
-  // };
-
-  /*const logout = () => {
-    setCookie('access_token');
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }*/
 
   const [isOpen, setIsOpen] = useState(false);
   
@@ -352,7 +323,8 @@ export const Showroom = () => {
                     <div className="showroom-cell"><button className="showroom-action-buttons" onClick={handleDeleteShowroomPopup}><img src={require('../assets/pngs/dustbin.png')} alt="" /></button></div>
               </div>
               <div className='showroom-row'>
-              { showrooms.map((showroom) => (
+              {showrooms && showrooms.length > 0 ? (
+               showrooms.map((showroom) => (
                 <div className='showroom-row' key={showroom._id}>
                 <div className="showroom-cell"><div className="showroom-box"></div></div>
                 <div className="showroom-cell"><div className="showroom-logo"></div></div>
@@ -382,7 +354,9 @@ export const Showroom = () => {
                         <button onClick={() => handleShowroomDeleteClick(showroom._id)} />     
                     </div>
               </div>
-              ))}
+              ))) : (
+                <p></p>
+              )}
 
               <div className="showroom-heading-phone">
                 <input type="checkbox" />

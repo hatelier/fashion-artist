@@ -1,35 +1,8 @@
-// import axios from 'axios';
-import { useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import TokenVerification from '../components/auth';
 
 export const PreviewProduct = () => {
-    // const [cookies, setCookie] = useCookies(['access_token']);
-    // const navigate = useNavigate();
-    // const [firstName, setFirstName] = useState("");
-    // const [occupation, setOccupation] = useState("");
-
-    useEffect(() => {
-      fetchUserData();
-    }, []);
-
-    const fetchUserData = async () => {
-      /*try {
-      const userID = window.localStorage.getItem('userID');
-      const response = await axios.get("/user/profile", { 
-        params: {
-          userID: userID
-        },
-      });
-      const userData = response.data;
-
-      setFirstName(userData.firstname);
-      setOccupation(userData.occupation);
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
-      }*/
-    };
+    
     
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
@@ -55,12 +28,6 @@ export const PreviewProduct = () => {
     const toggleDropdown6 = () => {
       setIsOpen6(!isOpen6);
     };
-
-    /*const logout = () => {
-      setCookie('access_token',"")
-      window.localStorage.removeItem("userID");
-      navigate("/auth");
-    }*/
 
     return ( 
     <div>
