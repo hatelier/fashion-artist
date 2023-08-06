@@ -1,13 +1,9 @@
-// import axios from 'axios'; //Fetch
 import { useCallback, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
 import {axiosInstance} from '../components/axiosInstance';
-// import Card from '../components/Card';
-
 
 interface Product {
   _id: string;
@@ -39,10 +35,7 @@ interface Product {
 }
 
 export const AddShowroom = () => {
-  // const [cookies, setCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
-  // const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
   const [showroomName, setShowroomName] = useState('');
   const [tags, setTags] = useState('');
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -71,11 +64,9 @@ export const AddShowroom = () => {
         
         navigate(`/manage/${showroomId}`);
       } catch (error) {
-        // Handle the error appropriately (e.g., show error message)
         console.error('Error creating showroom:', error);
       }
     } else {
-      // Handle the case when no file is selected or uploaded
       console.error('No file selected or uploaded');
     }
   }, [logoFile, navigate, showroomName, tags, selectedProductId]);
@@ -101,33 +92,8 @@ export const AddShowroom = () => {
   };
 
   useEffect(() => {
-    // fetchUserData();
     fetchProducts();
   }, [fetchProducts]);
-
-  // const fetchUserData = async () => {
-  //   try {
-    // const userID = window.localStorage.getItem('userID');
-
-    // const response = await axios.get("/user/profile", { 
-    //   params: {
-    //     userID: userID
-    //   },
-    // });
-    // const userData = response.data;
-
-    // setFirstName(userData.firstname);
-    // setOccupation(userData.occupation);
-  //   } catch (error) {
-  //     console.error("Error fetching user data: ", error);
-  //   }
-  // };
-
-  /*const logout = () => {
-    // setCookie('access_token',"")
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }*/
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -331,18 +297,6 @@ export const AddShowroom = () => {
                             </div>
                           ))}
                            <div>
-                           {/* {products.map((product) => (
-                            <Card key={product._id}>
-                             {product.previewImage && (
-                             <div className="card-img-container">
-                               <div className="card-img-box">
-                                <input type='checkbox' onChange={() => handleCheckboxChange(product._id)}/>
-                               <img className="card-img" src={product.previewImage.location} alt="Preview" />
-                               </div>
-                             </div>
-                             )}
-                            </Card>
-                            ))} */}
                            </div>
                         </div>
                     </div>

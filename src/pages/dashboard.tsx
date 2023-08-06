@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
-// import axios from "axios";
 import { Header } from "../components/header";
 // import { toast } from "react-toastify";
 import { Sidenav } from "../components/sidenav";
@@ -43,9 +41,7 @@ interface Product {
 }
 
 export const Dashboard = () => {
-  // const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
   const [productCount, setProductCount] = useState(0);
   const [threeDViewCount, setThreeDViewCount] = useState([{ _id: '', count: 0, date: new Date() }]);
   const [arViewCount, setArViewCount] = useState([{ _id: '', count: 0, date: new Date() }]);
@@ -71,11 +67,6 @@ export const Dashboard = () => {
     }
   },[cookies.userId]);
   
-  // const logout = () => {
-  //   setCookie('access_token',"");
-  //   window.localStorage.removeItem("userID");
-  //   navigate("/auth");
-  // }
   const [isOpen, setIsOpen] = useState(false);
 
   const productPopup = () => {
@@ -318,7 +309,7 @@ export const Dashboard = () => {
                   <div className="info-value">0</div>
                 )}                
                   <div className="info-view">
-                  <a className="info-view-link" href="/manage">
+                  <a className="info-view-link" href="/showroom">
                     <span>View all Showroom</span>
                     <img
                       className="sidenav-img info-img"

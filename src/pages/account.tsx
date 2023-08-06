@@ -1,32 +1,29 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
-
 // import { toast } from "react-toastify";
 import { Sidenav } from '../components/sidenav';
 import TokenVerification from '../components/auth';
+import { useCookies } from 'react-cookie';
+import { axiosInstance } from '../components/axiosInstance';
 
 export const Account = () => {
-    // const [cookies, setCookie] = useCookies(['access_token']);
-    // const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [occupation, setOccupation] = useState("");
     const [companyname, setCompanyName] = useState("");
+    const [cookies] = useCookies(["userId"]);
+    const userId = cookies.userId;
 
     useEffect(() => {
-      fetchUserData();
-    }, []);
+      fetchUserData(userId);
+    }, [userId]);
 
-    const fetchUserData = async () => {
+    const fetchUserData = async (userId: string) => {
       try {
-      const userID = window.localStorage.getItem('userID');
-      const response = await axios.get("/user/profile", { 
+      const response = await axiosInstance.get("/user/profile", { 
         params: {
-          userID: userID
+          userID: userId
         },
       });
       const userData = response.data;
@@ -40,12 +37,6 @@ export const Account = () => {
         console.error("Error fetching user data: ", error);
       }
     };
-
-    /*const logout = () => {
-      setCookie('access_token',"")
-      window.localStorage.removeItem("userID");
-      navigate("/auth");
-    }*/
 
     const [isOpen, setIsOpen] = useState(false);
 

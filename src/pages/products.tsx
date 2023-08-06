@@ -1,6 +1,4 @@
 import { useEffect, useState} from "react";
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
 // import * as React from "react";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -46,14 +44,9 @@ interface Product {
 }
 
 export const Products = () => {
-  // const [firstName, setFirstName] = useState("");
-  // const [occupation, setOccupation] = useState("");
-  // const [cookies, setCookie] = useCookies(['access_token']);
-  // const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetchUserData();
     fetchProducts();
   }, []);
 
@@ -66,29 +59,6 @@ export const Products = () => {
       console.error("Error fetching products");
     }
   };
-
-  const fetchUserData = async () => {
-    /* try {
-    const userID = window.localStorage.getItem('userID');
-    const response = await axios.get("/user/profile", {
-      params: {
-        userID: userID
-      },
-    });
-    const userData = response.data;
-
-    setFirstName(userData.firstname);
-    setOccupation(userData.occupation);
-    } catch (error) {
-      console.error("Error fetching user data: ", error);
-    }*/
-  };
-
-  /*const logout = () => {
-    setCookie('access_token',"")
-    window.localStorage.removeItem("userID");
-    navigate("/auth");
-  }*/
 
   const [isOpen, setIsOpen] = useState(false);
   const productPopup = () => {

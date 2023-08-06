@@ -1,13 +1,9 @@
-// import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
-// import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { Sidenav } from '../components/sidenav';
-// import TokenVerification from '../components/auth';
-// import TokenVerification from '../components/auth';
 import {axiosInstance} from '../components/axiosInstance';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import TokenVerification from '../components/auth';
 
 interface ProductData {
   location: string;
@@ -15,10 +11,6 @@ interface ProductData {
 }
 
 export const Analytics = () => {
-    // const [cookies, setCookie] = useCookies(['access_token']);
-    // const navigate = useNavigate();
-    // const [firstName, setFirstName] = useState("");
-    // const [occupation, setOccupation] = useState("");
     const [threeDSelectedPeriod, setThreeDSelectedPeriod] = useState('day');
     const [arSelectedPeriod, setArSelectedPeriod] = useState('day');
     const [threeDViewCount, setthreeDViewCount] = useState([]);
@@ -29,9 +21,6 @@ export const Analytics = () => {
     const [range, setRange] = useState('day');
     const [searchText, setSearchText] = useState('');
     const [searchedProduct, setSearchedProduct] = useState<ProductData | null>(null);
-
-    // const [products, setProducts] = useState({ location: '', productName: '' });
-    // const [products, setProducts] = useState({ location: '', productName: '' });
   
     const handleSearch = useCallback(async () => {
       try {
@@ -44,7 +33,6 @@ export const Analytics = () => {
     }, [searchText]);
     
     useEffect(() => {
-      // fetchUserData();
       fetchThreeDViewCounts(threeDSelectedPeriod);
       fetchARViewCount(arSelectedPeriod);
       fetchMostViewedProduct();
@@ -55,33 +43,8 @@ export const Analytics = () => {
         handleSearch();
       } else {
         setSearchedProduct(null);
-        // setProducts({ location: '', productName: '' });
-        // setProducts({ location: '', productName: '' });
       }
     }, [searchText, handleSearch, threeDSelectedPeriod, arSelectedPeriod]);
-
-    // const fetchUserData = async () => {
-      /*try {
-      const userID = window.localStorage.getItem('userID');
-      const response = await axios.get("/user/profile", { 
-        params: {
-          userID: userID
-        },
-      });
-      const userData = response.data;
-
-      setFirstName(userData.firstname);
-      setOccupation(userData.occupation);
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
-      }*/
-    // };
-
-    /*const logout = () => {
-      setCookie('access_token',"")
-      window.localStorage.removeItem("userID");
-      navigate("/auth");
-    }*/
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -235,7 +198,7 @@ export const Analytics = () => {
                           </div>
                           <div className='analytics-selections-element'>
                           <label htmlFor="teams">By Teams</label>
-                            <select value={range}>
+                            <select>
                               <option value="">Day</option>
                               <option value="">Week</option>
                               <option value="">Month</option>
@@ -243,7 +206,7 @@ export const Analytics = () => {
                           </div>
                           <div className='analytics-selections-element'>
                           <label htmlFor="showroom">By Showroom</label>
-                            <select value={range}>
+                            <select>
                               <option value="">Day</option>
                               <option value="">Week</option>
                               <option value="">Month</option>
@@ -391,6 +354,7 @@ export const Analytics = () => {
             </div>
           </div>
         </section>
+        <TokenVerification />
     </div>
 );
 };
