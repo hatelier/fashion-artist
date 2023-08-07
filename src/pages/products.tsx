@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useCallback, useEffect, useState} from "react";
 // import * as React from "react";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -11,6 +11,7 @@ import TokenVerification from '../components/auth';
 import {FiUpload} from "react-icons/fi";
 import {BsPencil} from "react-icons/bs";
 import { axiosInstance } from "../components/axiosInstance";
+import { useCookies } from "react-cookie";
 
 interface Product {
   _id: string;
@@ -45,20 +46,22 @@ interface Product {
 
 export const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
+  const [cookies] = useCookies(["userId"]);
+  const userId = cookies.userId;
+  
+  const fetchProducts = useCallback(async (userId: string) => {
     try {
-      const response = await axiosInstance.get("/product/products");
+      const response = await axiosInstance.get(`/product/products?userId=${userId}`);
       const productData = response.data;
       setProducts(productData);
     } catch (error) {
-      console.error("Error fetching products");
+      console.error('Error fetching products');
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchProducts(userId);
+  }, [fetchProducts, userId]);
 
   const [isOpen, setIsOpen] = useState(false);
   const productPopup = () => {
