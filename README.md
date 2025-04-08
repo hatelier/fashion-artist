@@ -44,3 +44,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Check our "code of conduct" to see the community guidelines, check out the [Code of conduct](https://github.com/hatelier/fashion-artist/blob/staging/CODE_OF_CONDUCT.md).
